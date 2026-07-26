@@ -1,4 +1,12 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>北宜高鐵，值得嗎？</title>
+<meta name="description" content="一班還沒開的列車，正在狂噴你的納稅錢。跟這班車從南港開到宜蘭，看 3,521 億怎麼燒、換到了什麼。">
+<meta property="og:title" content="北宜高鐵，值得嗎？">
+<meta property="og:description" content="一班還沒開的列車，正在狂噴你的納稅錢。滑完這頁，你會知道答案。">
 <style>
 :root{
   --bg:#161D25; --bg2:#1C242E; --panel:#242E39; --panel2:#2B3642;
@@ -21,11 +29,16 @@ p{text-wrap:pretty}
 #scene{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 
 /* ---------- 儀表 ---------- */
-.hud{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;pointer-events:none;background:linear-gradient(rgba(22,29,37,.9),rgba(22,29,37,0))}
+.hud{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;pointer-events:none;background:linear-gradient(rgba(22,29,37,.9),rgba(22,29,37,0))}
 .hud .brand{font-size:13px;font-weight:800;letter-spacing:.05em;color:var(--muted)}
+.hud .right{display:flex;align-items:center;gap:10px}
 .hud .burn{text-align:right;font-family:var(--mono)}
 .hud .burn b{display:block;font-size:20px;color:var(--gold);font-weight:800;font-variant-numeric:tabular-nums;line-height:1.2}
+.hud .burn b.pp{animation:pulse .45s ease}
+@keyframes pulse{0%{transform:scale(1)}35%{transform:scale(1.16)}100%{transform:scale(1)}}
 .hud .burn span{font-size:10.5px;color:var(--muted);font-weight:600}
+#sndBtn{pointer-events:auto;background:rgba(36,46,57,.85);border:1px solid rgba(255,255,255,.14);color:var(--ink);width:38px;height:38px;border-radius:50%;font-size:16px;cursor:pointer;line-height:1;flex:none}
+#sndBtn:active{transform:translateY(1px)}
 
 /* ---------- 捲動內容 ---------- */
 main{position:relative;z-index:10}
@@ -42,10 +55,19 @@ main{position:relative;z-index:10}
 .card .src{font-size:11px;color:var(--faint);line-height:1.7;font-weight:500;margin-top:12px}
 .card .vsrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 4px}
 .card .vs{border-radius:14px;padding:12px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
-.card .vs .l{font-size:11.5px;color:var(--muted);font-weight:700}
+.card .vs .l{font-size:11.5px;color:var(--muted);font-weight:700;display:block}
 .card .vs .v{font-family:var(--mono);font-size:1.3rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.4}
+.card .vs .v small{font-size:.55em;color:var(--muted);font-family:var(--sans)}
 .card .vs.bad .v{color:var(--danger)}
 .card .vs.good .v{color:var(--ok)}
+
+/* 時間軸 */
+.tlist{margin:12px 0 4px;border-left:2px solid rgba(255,197,61,.35);padding-left:14px}
+.trow{display:flex;gap:10px;align-items:baseline;padding:4.5px 0;position:relative}
+.trow::before{content:"";position:absolute;left:-18.5px;top:13px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.trow.red::before{background:var(--danger)}
+.trow .td{font-family:var(--mono);font-size:11.5px;color:var(--gold);font-weight:800;flex:none;width:74px;font-variant-numeric:tabular-nums}
+.trow .tx{font-size:13.5px;color:#C9D2DA;font-weight:500;line-height:1.6}
 
 /* ---------- Hero ---------- */
 .hero{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 22px;position:relative}
@@ -63,6 +85,12 @@ main{position:relative;z-index:10}
 .alt{background:var(--panel);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:22px;margin:18px 0}
 .alt h3{margin:0 0 8px;font-size:17px;font-weight:900;color:var(--ok)}
 .alt p{margin:0;font-size:14.5px;color:#C9D2DA}
+.track{list-style:none;margin:10px 0 0;padding:0}
+.track li{display:flex;align-items:baseline;gap:10px;padding:7px 0;border-bottom:1px dashed rgba(255,255,255,.08);font-size:14px;color:#C9D2DA;font-weight:500}
+.track li:last-child{border-bottom:none}
+.track .st{flex:none;font-size:10.5px;font-weight:800;padding:2px 9px;border-radius:999px;letter-spacing:.03em}
+.track .st.no{background:rgba(255,107,87,.16);color:var(--danger)}
+.track .st.half{background:rgba(255,197,61,.14);color:var(--gold)}
 .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
 .btn{flex:1 1 150px;text-align:center;font-weight:900;font-size:15px;padding:14px 18px;border-radius:999px;text-decoration:none;border:none;cursor:pointer;font-family:var(--sans)}
 .btn.gold{background:var(--gold);color:#14171A}
@@ -75,14 +103,20 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
   .card{opacity:1;transform:none;transition:none}
+  .hud .burn b.pp{animation:none}
 }
 </style>
+</head>
+<body>
 
 <canvas id="scene" aria-hidden="true"></canvas>
 
 <div class="hud">
   <span class="brand">北宜高鐵，值得嗎？</span>
-  <div class="burn"><b id="burnNum">NT$ 0 億</b><span id="burnCap">往下滑，看錢怎麼燒</span></div>
+  <div class="right">
+    <div class="burn"><b id="burnNum">NT$ 0 億</b><span id="burnCap">往下滑，看錢怎麼燒</span></div>
+    <button id="sndBtn" aria-label="開關音效" title="音效">🔇</button>
+  </div>
 </div>
 
 <main>
@@ -97,9 +131,9 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     <div class="card">
       <div class="kick">第一站・這是什麼計畫</div>
       <h2>高鐵延伸宜蘭</h2>
-      <p>南港到宜蘭，新建 <b class="nb">59.6 公里</b>，時速 300 公里。因為要鑽過雪山山脈，全線 <b>98% 以上是橋梁和隧道</b>：10 座山岳隧道、12 座橋。最快 2029 年動工，2036 到 2037 年通車。</p>
+      <p>南港到宜蘭，新建 <b class="nb">59.6 公里</b>，時速 300 公里。因為要鑽過雪山山脈，全線 <b>98% 以上是橋梁和隧道</b>：10 座山岳隧道、12 座橋，光土方就要挖出約 <b class="nb">961 萬立方公尺</b>。最快 2029 年動工，2036 到 2037 年通車。</p>
       <p>也就是說：今年出生的孩子，要念到小學四年級才搭得到。但錢，現在就要開始花。</p>
-      <p class="src">來源：鐵道局計畫專區、中央社與公視 2026.07.23 報導。通車年官方說法有 2036 與 2037 兩版本。</p>
+      <p class="src">來源：鐵道局計畫專區、中央社與公視 2026.07.23 報導、宜蘭高鐵政策查核頁（土方彙整自環評書件）。通車年官方說法有 2036 與 2037 兩版本。</p>
     </div>
   </section>
 
@@ -128,6 +162,23 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     </div>
   </section>
 
+  <section class="step">
+    <div class="card">
+      <div class="kick">被冷凍的對照組</div>
+      <h2>同一條走廊，兩張報價單</h2>
+      <div class="vsrow">
+        <div class="vs bad"><span class="l">高鐵・建造成本</span><span class="v">3,521.8<small> 億（核定）</small></span></div>
+        <div class="vs good"><span class="l">直鐵・建造成本</span><span class="v">1,321.1<small> 億（環評口徑）</small></span></div>
+        <div class="vs bad"><span class="l">高鐵・30 年營運成本</span><span class="v">約 1,735<small> 億</small></span></div>
+        <div class="vs good"><span class="l">直鐵・30 年營運成本</span><span class="v">約 170<small> 億</small></span></div>
+        <div class="vs bad"><span class="l">高鐵・土地衝擊</span><span class="v" style="font-size:1.02rem">140 棟＋420 公頃<small>特定區</small></span></div>
+        <div class="vs good"><span class="l">直鐵・土地衝擊</span><span class="v" style="font-size:1.02rem">約 18 棟<small>（南港富康街）</small></span></div>
+      </div>
+      <p>同一條北宜走廊，直鐵的造價與 30 年營運成本都遠低於高鐵，卻在 2019 年被同一份顧問契約「評估掉」。直鐵造價另有含物價調整的 <b class="nb">2,220 億</b>估算（中央社 2026.01 整理）；兩案數字口徑不同，本頁一律標明出處。</p>
+      <p class="src">來源：宜蘭高鐵政策查核頁（環評書口徑彙整：直鐵建造 1,321.12 億、30 年營運約 170.2 億）、監察院 2026.05 調查報告（高鐵 30 年營運約 1,735 億）、中央社 2026.01.13、時代力量官網 2026.06.11（140 棟、420 公頃）。</p>
+    </div>
+  </section>
+
   <section class="step tall">
     <div class="card">
       <div class="kick">看不見的代價</div>
@@ -139,14 +190,32 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     </div>
   </section>
 
+  <section class="step tall">
+    <div class="card">
+      <div class="kick">七年快轉</div>
+      <h2>從「評估直鐵」，<br>一路改到「核定高鐵」</h2>
+      <div class="tlist">
+        <div class="trow"><span class="td">2019.04</span><span class="tx">交通部指示改評估高鐵</span></div>
+        <div class="trow"><span class="td">2019.11</span><span class="tx">直鐵顧問契約「加入」高鐵工作，此後同約修改 9 次</span></div>
+        <div class="trow"><span class="td">2023.12</span><span class="tx">賴清德競選承諾推動</span></div>
+        <div class="trow"><span class="td">2024 上半</span><span class="tx">特定區 190 → 420 公頃；政委陳金德主持會議設定時程加速</span></div>
+        <div class="trow"><span class="td">2025.08</span><span class="tx">二階環評通過。高鐵與特定區拆成兩案分開環評</span></div>
+        <div class="trow"><span class="td">2026.01</span><span class="tx">宜蘭縣府先談容積：要求提高約 200%</span></div>
+        <div class="trow red"><span class="td">2026.04–05</span><span class="tx">監察院公布調查報告，糾正多項違失</span></div>
+        <div class="trow red"><span class="td">2026.07.23</span><span class="tx">行政院核定。距監院報告，約兩個月</span></div>
+      </div>
+      <p class="src">來源：宜蘭高鐵政策查核頁大事紀（彙整自監察院調查報告、鐵道局計畫大事紀、中央社 2023.12.21）。</p>
+    </div>
+  </section>
+
   <section class="step">
     <div class="card">
       <div class="kick">誰來還這筆錢</div>
       <h2>考卷沒寫完，就先蓋章了</h2>
       <p>監察院 2026 年 5 月才點出五大違失：沒做完整可行性研究就跳綜合規劃（<b>可行性報告只有 17 頁</b>）、委外採購有角色衝突疑慮、社會對話不足。兩個月後，行政院核定。</p>
-      <p>更妙的是顧問契約：同一份契約從「評估北宜直鐵」一路改成「評估高鐵延伸」，<b>修改 9 次、追加金額達原約 60%</b>。同一個團隊，先寫直鐵不行，再寫高鐵可以。</p>
+      <p>更妙的是顧問契約：同一份契約從「評估北宜直鐵」一路改成「評估高鐵延伸」，<b>修改 9 次、追加金額達原約 60%</b>。同一個團隊，先寫直鐵不行，再寫高鐵可以。監察院還點出：環評和綜合規劃平行趕工、高鐵與 420 公頃特定區分開環評，<b>整體衝擊從頭到尾沒被一次評估過</b>。</p>
       <p>財務面：公民團體質疑自償率僅 6.8%，官方至今沒公布核定版數字。前例是桃園捷運綠線：當年官方說自償率 41.77%，監察院後來認定實際只有 2.53%。差額誰付？全民。</p>
-      <p class="src">來源：聯合報 2026.05.13（監察院五大違失）、ETtoday 2026.07.22（劉仲書引監院報告：契約修改 9 次追加 60%）、Newtalk 2026.07.22（自償率 6.8% 質疑、桃捷綠線對照）、ETtoday 2026.07.23（監督聯盟「考卷沒寫完就核定」）。</p>
+      <p class="src">來源：聯合報 2026.05.13（監察院五大違失）、ETtoday 2026.07.22（劉仲書引監院報告：契約修改 9 次追加 60%）、Newtalk 2026.07.22（自償率 6.8% 質疑、桃捷綠線對照）、ETtoday 2026.07.23（監督聯盟「考卷沒寫完就核定」）、宜蘭高鐵政策查核頁（監院問題彙整）。</p>
     </div>
   </section>
 </main>
@@ -156,8 +225,8 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     <h2>宜蘭人要的是<em>更快回家</em>，<br>不是更貴的煙火</h2>
     <p style="color:var(--muted);font-size:15px">民團委託的民調顯示：宜蘭人往返雙北的日常通勤，其實偏好台鐵直鐵方案。偏好高鐵的，是往返桃園以南的長途旅次。這條 3,521 億的路，到底為誰而蓋？</p>
     <div class="alt">
-      <h3>被冷凍的對照組：台鐵北宜直鐵</h3>
-      <p>約 36 公里、行車 56 至 64 分鐘、估算經費約 <b class="nb">2,220 億</b>（中央社整理）vs 高鐵 60.6 公里、<b class="nb">3,521.8 億</b>。而評估這兩案的，是同一份改了 9 次的顧問契約。公民團體的訴求很簡單：<b>把三個方案（高鐵、直鐵、台鐵提速）的對照評估攤開來，讓宜蘭人在完整資訊下重新選擇</b>。</p>
+      <h3>公民團體的訴求很簡單</h3>
+      <p>把三個方案（高鐵、直鐵、台鐵提速）的對照評估攤開來，公開全生命週期帳本、補足公民參與程序，<b>讓宜蘭人在完整資訊下重新選擇</b>。台灣前進陣線（時代力量×台灣綠黨×台灣基進×小民參政歐巴桑聯盟）2026.07.22 提出；宜蘭在地 7 個具名團體持續監督。</p>
     </div>
     <div class="alt" style="border-color:rgba(255,107,87,.3)">
       <h3 style="color:var(--danger)">不是只有反對黨這樣說</h3>
@@ -165,7 +234,17 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
       <p style="margin-bottom:10px">「選前強推，是想杜絕民意的參與。」<br><span style="color:var(--faint);font-size:12.5px">前交通部長賀陳旦，2026.07.24</span></p>
       <p>「未先完成可行性研究即進行綜合規劃」等五大違失。<br><span style="color:var(--faint);font-size:12.5px">監察院調查報告，2026.05.13</span></p>
     </div>
-    <p style="color:var(--muted);font-size:14px">台灣前進陣線（時代力量×台灣綠黨×台灣基進×小民參政歐巴桑聯盟）三大訴求：公開全生命週期帳本、公開三方案對照評估、補足公民參與程序。</p>
+    <div class="alt" style="border-color:rgba(255,197,61,.3)">
+      <h3 style="color:var(--gold)">帳本還沒攤開：持續追蹤五件事</h3>
+      <ul class="track">
+        <li><span class="st no">待公開</span>核定本全文、附帶條件，與對監察院的回應</li>
+        <li><span class="st half">部分公開</span>高鐵、直鐵同基準的完整比較</li>
+        <li><span class="st no">未公開</span>全生命週期財務總帳（含營運補貼）</li>
+        <li><span class="st no">未公開</span>陳金德加速會議的紀錄與簡報</li>
+        <li><span class="st half">部分公開</span>420 公頃的需求論證與環境累積影響</li>
+      </ul>
+      <p style="margin-top:12px;font-size:13px;color:var(--muted)">逐項查核、20 位交通／財務／土地／環境專業者意見名錄：<a href="https://yilan-hsr-ledger.lys730.chatgpt.site/" target="_blank" rel="noopener" style="color:var(--gold)">宜蘭高鐵政策查核頁</a>。監督全民帳本，不等於反對宜蘭交通改善。</p>
+    </div>
     <div class="actions">
       <button class="btn gold" id="shareBtn">把這頁傳出去</button>
       <a class="btn line" href="#top" id="replayBtn">再看一次</a>
@@ -178,7 +257,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     <b style="color:var(--muted)">關於本頁</b><br>
     整理高鐵延伸宜蘭計畫的公開資訊與公民團體質疑。所有數字均附來源；官方與批評方數字不一致處（如總成本「3,521 億 vs 近 6,000 億」為不同計算口徑，鐵道局不同意累加算法）均並列呈現。<br><br>
     <b style="color:var(--muted)">主要資料來源</b><br>
-    監察院調查報告（2026.05）｜中央社、公視、自由時報、聯合報、ETtoday、Newtalk（2026.05 至 07）｜環境資訊中心（2023 至 2025 環評紀錄）｜眼底城事・公民幫推試算（2025.08）｜鐵道局計畫專區 hsr2yilan.com｜時代力量官網（2026.06.11）。<br><br>
+    監察院調查報告（2026.05）｜中央社、公視、自由時報、聯合報、ETtoday、Newtalk（2026.05 至 07）｜環境資訊中心（2023 至 2025 環評紀錄）｜眼底城事・公民幫推試算（2025.08）｜鐵道局計畫專區 hsr2yilan.com｜時代力量官網（2026.06.11）｜<a href="https://yilan-hsr-ledger.lys730.chatgpt.site/" target="_blank" rel="noopener">宜蘭高鐵政策查核頁</a>（比較表、大事紀與監院問題彙整）。<br><br>
     論述整理自台灣前進陣線 2026.07.22 記者會與高鐵延伸宜蘭監督聯盟公開發言；各團體立場以其官方公告為準。
   </div>
 </footer>
@@ -188,7 +267,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
 "use strict";
 var reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/* ====== 資料（由研究結果填入）====== */
+/* ====== 資料 ====== */
 var TOTAL_BUDGET=3521; /* 億：行政院 2026-07-23 核定綜合規劃總經費 3,521.75 億（中央社） */
 
 /* ====== 場景 ====== */
@@ -202,30 +281,22 @@ function resize(){
 }
 resize();window.addEventListener("resize",resize);
 
-/* 進度：0~1，用 rAF 取樣 scrollY，不掛 scroll listener */
 function progress(){
   var doc=document.documentElement;
   var max=doc.scrollHeight-window.innerHeight;
   return max>0?Math.min(1,Math.max(0,window.scrollY/max)):0;
 }
 
-/* 路線世界座標：track 沿 y 軸展開，總長 = 頁面滾動長的視覺映射 */
-var TRACK_LEN=9000; /* 世界單位 */
-var TRAIN_Y=0.38;   /* 車頭固定在視窗高度的 38% */
+var TRACK_LEN=9000;
+var TRAIN_Y=0.38;
 
-/* 地景元素（世界座標，type 決定畫法） */
 var FEATURES=[];
 (function(){
   var rnd=function(seed){return function(){seed=(seed*9301+49297)%233280;return seed/233280}}(42);
-  /* 台北市區 0~1200：建築方塊 */
   for(var i=0;i<70;i++){FEATURES.push({t:"bld",y:rnd()*1300,x:rnd(),w:26+rnd()*40,h:20+rnd()*34,g:rnd()});}
-  /* 山區 1300~5200：山丘 */
   for(i=0;i<90;i++){FEATURES.push({t:"hill",y:1300+rnd()*3900,x:rnd(),r:40+rnd()*90,g:rnd()});}
-  /* 翡翠水庫 2600~3400：水面 */
   FEATURES.push({t:"lake",y:3000,x:0.72,r:210});
-  /* 蘭陽平原 5400~8600：田格 */
   for(i=0;i<80;i++){FEATURES.push({t:"field",y:5400+rnd()*3300,x:rnd(),w:44+rnd()*50,h:30+rnd()*34,g:rnd()});}
-  /* 海 右側帶 6000+ */
 })();
 var LANDMARKS=[
   {y:180,label:"南港"},
@@ -234,11 +305,62 @@ var LANDMARKS=[
   {y:7000,label:"蘭陽平原"},
   {y:8700,label:"宜蘭"}
 ];
-/* 雪隧段：列車進入隧道（半透明遮罩） */
 var TUNNEL={a:3800,b:5100};
 
-/* 鈔票粒子 */
+/* ====== 音效（WebAudio 合成，預設關閉，按 🔇 開啟） ====== */
+var AC=null,sndOn=false,master=null,rumbleGain=null,lastClink=0;
+function initAudio(){
+  if(AC)return;
+  var Ctor=window.AudioContext||window.webkitAudioContext;
+  if(!Ctor)return;
+  AC=new Ctor();
+  master=AC.createGain();master.gain.value=0.9;master.connect(AC.destination);
+  var len=AC.sampleRate*2,buf=AC.createBuffer(1,len,AC.sampleRate),d=buf.getChannelData(0),last=0;
+  for(var i=0;i<len;i++){var w=Math.random()*2-1;last=(last+0.02*w)/1.02;d[i]=last*3.5;}
+  var src=AC.createBufferSource();src.buffer=buf;src.loop=true;
+  var lp=AC.createBiquadFilter();lp.type="lowpass";lp.frequency.value=200;
+  rumbleGain=AC.createGain();rumbleGain.gain.value=0;
+  src.connect(lp);lp.connect(rumbleGain);rumbleGain.connect(master);
+  src.start();
+}
+function clink(){
+  if(!AC||!sndOn)return;
+  var t=AC.currentTime;
+  var o=AC.createOscillator(),g=AC.createGain();
+  o.type="sine";
+  var f=1900+Math.random()*1700;
+  o.frequency.setValueAtTime(f,t);
+  o.frequency.exponentialRampToValueAtTime(f*0.8,t+0.09);
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.exponentialRampToValueAtTime(0.1,t+0.008);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+0.13);
+  o.connect(g);g.connect(master);o.start(t);o.stop(t+0.14);
+}
+function kaching(){
+  if(!AC||!sndOn)return;
+  [[1318.5,0],[1760,0.08]].forEach(function(nf){
+    var t=AC.currentTime+nf[1];
+    var o=AC.createOscillator(),g=AC.createGain();
+    o.type="triangle";o.frequency.value=nf[0];
+    g.gain.setValueAtTime(0.0001,t);
+    g.gain.exponentialRampToValueAtTime(0.16,t+0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+0.35);
+    o.connect(g);g.connect(master);o.start(t);o.stop(t+0.4);
+  });
+}
+var sndBtn=document.getElementById("sndBtn");
+sndBtn.addEventListener("click",function(){
+  initAudio();
+  if(!AC)return;
+  if(AC.state==="suspended")AC.resume();
+  sndOn=!sndOn;
+  sndBtn.textContent=sndOn?"🔊":"🔇";
+  if(!sndOn&&rumbleGain)rumbleGain.gain.value=0;
+});
+
+/* ====== 鈔票與金光粒子 ====== */
 var bills=[],MAXB=reduced?0:110;
+var sparks=[],MAXS=reduced?0:40;
 function spawnBill(cx,cy,speed){
   if(bills.length>=MAXB)return;
   var side=Math.random()<0.5?-1:1;
@@ -246,41 +368,75 @@ function spawnBill(cx,cy,speed){
     x:cx+side*(8+Math.random()*6), y:cy-10-Math.random()*30,
     vx:side*(0.6+Math.random()*1.6), vy:-(1.2+speed*2.2+Math.random()*1.5),
     rot:Math.random()*Math.PI, vr:(Math.random()-0.5)*0.18,
+    ph:Math.random()*6.28,
     life:1, s:1
   });
+  if(Math.random()<0.3&&sparks.length<MAXS){
+    sparks.push({x:cx+side*(6+Math.random()*20),y:cy-Math.random()*40,life:1,r:1.5+Math.random()*2});
+  }
 }
-function drawBill(b){
+function burst(cx,cy,n){
+  for(var i=0;i<n;i++){
+    if(bills.length>=MAXB+30)break;
+    var a=Math.random()*6.28,sp=1.5+Math.random()*3;
+    bills.push({x:cx,y:cy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-1.5,
+      rot:Math.random()*3.14,vr:(Math.random()-0.5)*0.3,ph:Math.random()*6.28,life:1.15,s:1});
+  }
+}
+function drawBill(b,t){
   ctx.save();
-  ctx.translate(b.x,b.y);ctx.rotate(b.rot);ctx.scale(b.s,b.s);
-  ctx.globalAlpha=Math.max(0,b.life);
-  ctx.fillStyle="#4A6FA5";
-  ctx.fillRect(-11,-6,22,12);
+  ctx.translate(b.x,b.y);ctx.rotate(b.rot);
+  var flut=0.75+0.25*Math.sin(t/120+b.ph);
+  ctx.scale(b.s*flut,b.s);
+  ctx.globalAlpha=Math.max(0,Math.min(1,b.life));
+  ctx.fillStyle="#3E5F94";
+  rr(-12,-6.8,24,13.6,2);ctx.fill();
+  ctx.fillStyle="#5C82BC";
+  rr(-10.3,-5.2,20.6,10.4,1.5);ctx.fill();
   ctx.fillStyle="#7FA3D7";
-  ctx.fillRect(-9,-4,18,8);
-  ctx.fillStyle="#DCE7F5";
-  ctx.font="700 6px "+"ui-monospace,monospace";
-  ctx.textAlign="center";ctx.textBaseline="middle";
-  ctx.fillText("1000",0,0.5);
+  ctx.beginPath();ctx.arc(0,0,3.4,0,7);ctx.fill();
+  ctx.strokeStyle="rgba(230,240,255,.8)";ctx.lineWidth=0.7;ctx.stroke();
+  ctx.fillStyle="#EAF1FB";
+  ctx.font="800 4.6px ui-monospace,monospace";
+  ctx.textAlign="left";ctx.textBaseline="top";ctx.fillText("1000",-9.4,-4.6);
+  ctx.textAlign="right";ctx.textBaseline="bottom";ctx.fillText("1000",9.4,4.6);
+  ctx.restore();
+}
+function drawSpark(s){
+  ctx.save();
+  ctx.globalAlpha=Math.max(0,s.life)*0.9;
+  ctx.strokeStyle="#FFE9A8";ctx.lineWidth=1.2;ctx.lineCap="round";
+  var r=s.r*(1.4-s.life*0.4);
+  ctx.beginPath();
+  ctx.moveTo(s.x-r,s.y);ctx.lineTo(s.x+r,s.y);
+  ctx.moveTo(s.x,s.y-r);ctx.lineTo(s.x,s.y+r);
+  ctx.stroke();
   ctx.restore();
 }
 
-/* 列車（俯視 700T 編組：長鼻頭車＋中間車＋尾車） */
-function drawTrain(cx,cy,sway,speed){
+/* ====== 列車 ====== */
+function drawTrain(cx,cy,sway,speed,t,inTunnel){
   ctx.save();
   ctx.translate(cx+sway,cy);
-  ctx.scale(1,-1);  /* 翻轉：鼻頭朝下＝前進方向（畫面往下捲＝往宜蘭前進） */
+  ctx.scale(1,-1);
   var Wc=26,HB=Wc/2;
-  /* 頭燈光束（夜間行駛） */
   if(!reduced&&speed>0.02){
-    var beam=ctx.createLinearGradient(0,-130,0,-44);
+    var bl=inTunnel?200:130, ba=inTunnel?0.3:0.18;
+    var beam=ctx.createLinearGradient(0,-bl,0,-44);
     beam.addColorStop(0,"rgba(255,238,180,0)");
-    beam.addColorStop(1,"rgba(255,238,180,.18)");
+    beam.addColorStop(1,"rgba(255,238,180,"+ba+")");
     ctx.fillStyle=beam;
     ctx.beginPath();
-    ctx.moveTo(-9,-46);ctx.lineTo(-30,-130);ctx.lineTo(30,-130);ctx.lineTo(9,-46);
+    ctx.moveTo(-9,-46);ctx.lineTo(-34,-bl);ctx.lineTo(34,-bl);ctx.lineTo(9,-46);
     ctx.closePath();ctx.fill();
   }
-  /* 速度線 */
+  if(!reduced&&speed>0.45){
+    ctx.save();
+    ctx.globalAlpha=Math.min(0.16,(speed-0.45)*0.12);
+    ctx.fillStyle="#F6F3EA";
+    rr(-HB,-46+speed*10,Wc,236,10);ctx.fill();
+    ctx.restore();
+  }
   if(!reduced&&speed>0.25){
     ctx.strokeStyle="rgba(255,255,255,"+Math.min(0.22,0.06+speed*0.05)+")";
     ctx.lineWidth=1.5;ctx.lineCap="round";
@@ -289,15 +445,12 @@ function drawTrain(cx,cy,sway,speed){
       ctx.beginPath();ctx.moveTo(lx,ly);ctx.lineTo(lx,ly+22+speed*8);ctx.stroke();
     }
   }
-  /* 影 */
   ctx.fillStyle="rgba(0,0,0,.4)";
   rr(-HB+5,-44,Wc,238,12);ctx.fill();
-  /* 車頂漸層（圓筒感） */
   var roof=ctx.createLinearGradient(-HB,0,HB,0);
   roof.addColorStop(0,"#D8D1BF");roof.addColorStop(0.26,"#F6F3EA");
   roof.addColorStop(0.5,"#FFFEF7");roof.addColorStop(0.74,"#F6F3EA");roof.addColorStop(1,"#D8D1BF");
 
-  /* 車頭：長鼻 */
   ctx.fillStyle=roof;
   ctx.beginPath();
   ctx.moveTo(-HB,2);
@@ -307,7 +460,8 @@ function drawTrain(cx,cy,sway,speed){
   ctx.quadraticCurveTo(HB,-38,HB,-16);
   ctx.lineTo(HB,2);
   ctx.closePath();ctx.fill();
-  /* 鼻端橘色弧帶 */
+  ctx.strokeStyle="rgba(120,110,90,.22)";ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(0,-49.5);ctx.lineTo(0,0);ctx.stroke();
   ctx.strokeStyle="#E8752A";ctx.lineWidth=3.5;ctx.lineCap="round";
   ctx.beginPath();
   ctx.moveTo(-HB+2.5,-20);
@@ -315,7 +469,6 @@ function drawTrain(cx,cy,sway,speed){
   ctx.moveTo(HB-2.5,-20);
   ctx.quadraticCurveTo(HB-3,-36,4,-46.5);
   ctx.stroke();
-  /* 擋風玻璃 */
   ctx.fillStyle="#28313B";
   ctx.beginPath();
   ctx.moveTo(-6.5,-38);ctx.quadraticCurveTo(0,-43,6.5,-38);
@@ -323,7 +476,14 @@ function drawTrain(cx,cy,sway,speed){
   ctx.closePath();ctx.fill();
   ctx.strokeStyle="rgba(255,255,255,.25)";ctx.lineWidth=1;
   ctx.beginPath();ctx.moveTo(-5.5,-36.5);ctx.quadraticCurveTo(0,-40.5,5.5,-36.5);ctx.stroke();
-  /* 頭燈 */
+  if(!reduced&&speed>0.05){
+    var gl=((t/900)%1.4)-0.2;
+    ctx.save();
+    ctx.globalAlpha=0.18;
+    ctx.strokeStyle="#FFFFFF";ctx.lineWidth=1.6;
+    ctx.beginPath();ctx.moveTo(-5+gl*10,-37.5);ctx.quadraticCurveTo(0,-41,5+gl*4,-37);ctx.stroke();
+    ctx.restore();
+  }
   ctx.save();
   if(!reduced&&speed>0.02){ctx.shadowColor="rgba(255,240,190,.9)";ctx.shadowBlur=6;}
   ctx.fillStyle="#FFE9A8";
@@ -333,6 +493,10 @@ function drawTrain(cx,cy,sway,speed){
   function car(yTop,h,panto){
     ctx.fillStyle=roof;
     rr(-HB,yTop,Wc,h,3);ctx.fill();
+    ctx.strokeStyle="rgba(120,110,90,.14)";ctx.lineWidth=0.8;
+    for(var ry=yTop+8;ry<yTop+h-6;ry+=9){
+      ctx.beginPath();ctx.moveTo(-HB+4,ry);ctx.lineTo(HB-4,ry);ctx.stroke();
+    }
     ctx.fillStyle="#E8752A";
     ctx.fillRect(-HB,yTop+2,2.6,h-4);
     ctx.fillRect(HB-2.6,yTop+2,2.6,h-4);
@@ -343,6 +507,12 @@ function drawTrain(cx,cy,sway,speed){
     rr(-4.5,yTop+h-17,9,9,2);ctx.fill();
     ctx.strokeStyle="rgba(90,84,70,.3)";ctx.lineWidth=0.8;
     ctx.strokeRect(-4.5,yTop+6,9,10);
+    ctx.strokeRect(-4.5,yTop+h-17,9,9);
+    ctx.strokeStyle="rgba(90,84,70,.22)";ctx.lineWidth=0.6;
+    ctx.beginPath();
+    ctx.moveTo(-3,yTop+9);ctx.lineTo(3,yTop+9);
+    ctx.moveTo(-3,yTop+12);ctx.lineTo(3,yTop+12);
+    ctx.stroke();
     if(panto){
       ctx.strokeStyle="#39424C";ctx.lineWidth=1.8;ctx.lineCap="round";
       var py=yTop+h/2;
@@ -352,6 +522,13 @@ function drawTrain(cx,cy,sway,speed){
       ctx.stroke();
       ctx.strokeStyle="#4E5964";ctx.lineWidth=2.6;
       ctx.beginPath();ctx.moveTo(-10,py-8.5);ctx.lineTo(10,py-8.5);ctx.stroke();
+      if(!reduced&&speed>0.35&&Math.random()<0.08){
+        ctx.save();
+        ctx.shadowColor="rgba(160,210,255,.95)";ctx.shadowBlur=8;
+        ctx.fillStyle="#CFE6FF";
+        ctx.beginPath();ctx.arc((Math.random()-0.5)*16,py-9.5,1.4+Math.random()*1.2,0,7);ctx.fill();
+        ctx.restore();
+      }
     }
   }
   car(2,52,false);
@@ -359,7 +536,6 @@ function drawTrain(cx,cy,sway,speed){
   car(60,52,true);
   ctx.fillStyle="#222932";ctx.fillRect(-HB+3,113,Wc-6,4);
   car(118,40,false);
-  /* 尾鼻（反向錐）＋尾燈 */
   ctx.fillStyle=roof;
   ctx.beginPath();
   ctx.moveTo(-HB,158);
@@ -385,31 +561,29 @@ function rr(x,y,w,h,r){
   ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();
 }
 
-var lastP=0,lastT=0,burnEl=document.getElementById("burnNum"),capEl=document.getElementById("burnCap");
+var lastP=0,lastCamY=0,burnEl=document.getElementById("burnNum"),capEl=document.getElementById("burnCap");
+var lastHundred=0,finaleDone=false;
 function frame(t){
   var p=progress();
   var speed=Math.min(3,Math.abs(p-lastP)*3000);
-  var camY=p*TRACK_LEN;           /* 相機（=車頭）世界 y */
+  var camY=p*TRACK_LEN;
   var trainPx=H*TRAIN_Y;
 
   ctx.clearRect(0,0,W,H);
 
-  /* 底色地表 */
   var inPlain=camY>5300;
   ctx.fillStyle=inPlain?"#212D24":"#1D2530";
   ctx.fillRect(0,0,W,H);
 
-  /* 海（平原段右側） */
   if(camY>5000){
     var seaW=Math.min(1,(camY-5000)/1500)*W*0.22;
     ctx.fillStyle="#183141";
     ctx.fillRect(W-seaW,0,seaW,H);
   }
 
-  /* 地景 */
   for(var i=0;i<FEATURES.length;i++){
     var f=FEATURES[i];
-    var sy=trainPx+(f.y-camY)*0.9;          /* 世界→螢幕 */
+    var sy=trainPx+(f.y-camY)*0.9;
     if(sy<-160||sy>H+160)continue;
     var sx=f.x*W;
     if(f.t==="bld"){
@@ -439,42 +613,82 @@ function frame(t){
   ctx.fillStyle="#39434F";
   var tie0=-((camY*0.9)%22);
   for(var ty=tie0;ty<H;ty+=22){ctx.fillRect(tx-14,ty,28,5);}
+  /* 電化架空線與電桿 */
+  ctx.strokeStyle="rgba(200,214,228,.12)";ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(tx-0.5,0);ctx.lineTo(tx-0.5,H);ctx.stroke();
+  var POLE=260, p0=Math.floor((camY-trainPx/0.9)/POLE)*POLE;
+  for(var pw=p0;pw<camY+(H/0.9);pw+=POLE){
+    var py2=trainPx+(pw-camY)*0.9;
+    if(py2<-30||py2>H+30)continue;
+    ctx.strokeStyle="rgba(140,155,170,.5)";ctx.lineWidth=2.5;ctx.lineCap="round";
+    ctx.beginPath();
+    ctx.moveTo(tx-27,py2);ctx.lineTo(tx-18,py2);
+    ctx.moveTo(tx+27,py2);ctx.lineTo(tx+18,py2);
+    ctx.stroke();
+    ctx.fillStyle="rgba(140,155,170,.55)";
+    ctx.beginPath();ctx.arc(tx-27,py2,2.4,0,7);ctx.arc(tx+27,py2,2.4,0,7);ctx.fill();
+  }
 
-  /* 地標 */
+  /* 地標＋通過音效 */
   ctx.font="700 12px "+getComputedStyle(document.body).fontFamily;
   ctx.textAlign="left";
   for(i=0;i<LANDMARKS.length;i++){
     var lm=LANDMARKS[i],ly=trainPx+(lm.y-camY)*0.9;
-    if(ly<-40||ly>H+40)continue;
-    ctx.fillStyle="rgba(255,197,61,.9)";
-    ctx.beginPath();ctx.arc(tx+26,ly,3.5,0,7);ctx.fill();
-    ctx.fillStyle="rgba(242,239,230,.85)";
-    ctx.fillText(lm.label,tx+36,ly+4);
+    if(ly>=-40&&ly<=H+40){
+      ctx.fillStyle="rgba(255,197,61,.9)";
+      ctx.beginPath();ctx.arc(tx+26,ly,3.5,0,7);ctx.fill();
+      ctx.fillStyle="rgba(242,239,230,.85)";
+      ctx.fillText(lm.label,tx+36,ly+4);
+    }
+    if(lastCamY<lm.y&&camY>=lm.y&&camY-lastCamY<600){
+      kaching();
+      burnEl.classList.remove("pp");void burnEl.offsetWidth;burnEl.classList.add("pp");
+    }
   }
 
   /* 鈔票：從車尾噴出 */
   if(!reduced){
-    var rate=speed>0.02?3:1;   /* 移動時狂噴，停下小漏 */
-    for(i=0;i<rate;i++)if(Math.random()<0.8)spawnBill(tx,trainPx-150,speed); /* 從車尾（上方）往後拋 */
+    var rate=speed>0.02?3:1;
+    for(i=0;i<rate;i++)if(Math.random()<0.8)spawnBill(tx,trainPx-150,speed);
+    if(sndOn&&speed>0.05&&t-lastClink>150){clink();lastClink=t;}
     for(i=bills.length-1;i>=0;i--){
       var b=bills[i];
+      b.vx+=Math.sin(t/95+b.ph)*0.045;
       b.x+=b.vx;b.y+=b.vy-speed*1.2;b.rot+=b.vr;
-      b.life-=0.008+speed*0.002;b.s=0.6+b.life*0.4;
-      if(b.life<=0||b.y<-30){bills.splice(i,1);continue;}
-      drawBill(b);
+      b.life-=0.008+speed*0.002;b.s=0.6+Math.min(1,b.life)*0.4;
+      if(b.life<=0||b.y<-40){bills.splice(i,1);continue;}
+      drawBill(b,t);
+    }
+    for(i=sparks.length-1;i>=0;i--){
+      var sp=sparks[i];
+      sp.y-=0.8+speed;sp.life-=0.03;
+      if(sp.life<=0){sparks.splice(i,1);continue;}
+      drawSpark(sp);
     }
   }
 
-  /* 隧道遮罩（雪隧段：山蓋在車上） */
+  /* 隧道遮罩 */
   var tA=trainPx+(TUNNEL.a-camY)*0.9, tB=trainPx+(TUNNEL.b-camY)*0.9;
   var inTunnel=camY>TUNNEL.a&&camY<TUNNEL.b;
 
-  drawTrain(tx,trainPx+40,reduced?0:Math.sin(t/300)*1.2,speed);
+  drawTrain(tx,trainPx+40,reduced?0:Math.sin(t/300)*1.2,speed,t,inTunnel);
 
   if(tB>0&&tA<H){
     ctx.fillStyle="rgba(22,31,26,.8)";
     ctx.fillRect(0,Math.max(-10,tA),W,Math.max(0,Math.min(H+10,tB)-Math.max(-10,tA)));
     if(inTunnel){
+      if(!reduced){
+        var TL=130,l0=Math.floor((camY-trainPx/0.9)/TL)*TL;
+        for(var lw=l0;lw<camY+(H/0.9);lw+=TL){
+          var lyy=trainPx+(lw-camY)*0.9;
+          if(lyy<-10||lyy>H+10)continue;
+          ctx.save();
+          ctx.shadowColor="rgba(255,220,140,.8)";ctx.shadowBlur=7;
+          ctx.fillStyle="rgba(255,224,150,.75)";
+          ctx.beginPath();ctx.arc(tx-24,lyy,2,0,7);ctx.arc(tx+24,lyy,2,0,7);ctx.fill();
+          ctx.restore();
+        }
+      }
       ctx.strokeStyle="rgba(255,255,255,.16)";ctx.lineWidth=2;ctx.setLineDash([8,7]);
       ctx.strokeRect(tx-15,trainPx-155,30,250);ctx.setLineDash([]);
       ctx.fillStyle="rgba(242,239,230,.6)";
@@ -483,12 +697,30 @@ function frame(t){
     }
   }
 
+  /* 終點宜蘭：鈔票大噴發（一次） */
+  if(!finaleDone&&p>0.965&&!reduced){
+    finaleDone=true;
+    burst(tx,trainPx,34);
+    kaching();
+  }
+
   /* 儀表 */
   var burn=Math.round(p*TOTAL_BUDGET);
   burnEl.textContent="NT$ "+burn.toLocaleString("zh-Hant-TW")+" 億";
   if(p>0.02)capEl.textContent="核定總經費 3,521.75 億";
+  var hund=Math.floor(burn/500);
+  if(hund>lastHundred){
+    lastHundred=hund;
+    burnEl.classList.remove("pp");void burnEl.offsetWidth;burnEl.classList.add("pp");
+  }
 
-  lastP=p;lastT=t;
+  /* 隆隆聲音量跟速度 */
+  if(AC&&sndOn&&rumbleGain){
+    var target=Math.min(0.5,speed*0.3+(speed>0.02?0.06:0))*(inTunnel?1.35:1);
+    rumbleGain.gain.value+=(target-rumbleGain.gain.value)*0.12;
+  }
+
+  lastP=p;lastCamY=camY;
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
@@ -513,3 +745,5 @@ document.getElementById("replayBtn").addEventListener("click",function(e){
 });
 })();
 </script>
+</body>
+</html>
