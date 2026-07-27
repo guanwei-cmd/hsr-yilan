@@ -44,43 +44,83 @@ p{text-wrap:pretty}
 main{position:relative;z-index:10}
 .step{min-height:110vh;display:flex;align-items:flex-end;justify-content:center;padding:0 16px 12vh}
 .step.tall{min-height:130vh}
-.card{background:rgba(36,46,57,.93);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:24px 22px;max-width:520px;width:100%;box-shadow:0 18px 50px rgba(0,0,0,.45);opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.card{position:relative;background:linear-gradient(#F7F2E5,#EFE8D5),repeating-linear-gradient(45deg,rgba(120,96,52,.02) 0 2px,transparent 2px 6px);border:1px solid #D9CEB4;border-top:6px double rgba(154,106,20,.5);border-radius:18px;padding:24px 22px;max-width:520px;width:100%;color:#3A382F;box-shadow:0 18px 50px rgba(0,0,0,.5);opacity:0;transform:translateY(48px) scale(.965);transition:opacity .5s ease,transform .7s cubic-bezier(.22,1.28,.36,1)}
+.card::after{content:"全民帳本";position:absolute;top:12px;right:14px;font-size:10px;font-weight:800;letter-spacing:.22em;color:rgba(194,69,50,.6);border:1.5px solid rgba(194,69,50,.45);border-radius:4px;padding:2px 6px 2px 8px;transform:rotate(5deg);pointer-events:none}
 .card.in{opacity:1;transform:none}
-.card .kick{font-size:12px;font-weight:800;color:var(--gold);letter-spacing:.08em;margin-bottom:6px}
-.card h2{font-size:clamp(1.35rem,5.5vw,1.8rem);margin:0 0 10px;font-weight:900;line-height:1.4;text-wrap:balance}
-.card p{margin:0 0 10px;font-size:15px;color:#C9D2DA;font-weight:500}
+/* 卡內元素錯落進場 */
+.card>*{opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .5s cubic-bezier(.25,1.25,.4,1)}
+.card.in>*{opacity:1;transform:none}
+.card.in>*:nth-child(1){transition-delay:.08s}
+.card.in>*:nth-child(2){transition-delay:.15s}
+.card.in>*:nth-child(3){transition-delay:.24s}
+.card.in>*:nth-child(4){transition-delay:.33s}
+.card.in>*:nth-child(5){transition-delay:.42s}
+.card.in>*:nth-child(6){transition-delay:.5s}
+.card.in>*:nth-child(7){transition-delay:.58s}
+/* 統計格逐格彈出 */
+.card .st{opacity:0;transform:translateY(14px) scale(.9)}
+.card.in .st{opacity:1;transform:none;transition:opacity .35s ease,transform .5s cubic-bezier(.3,1.55,.4,1)}
+.card.in .st:nth-child(1){transition-delay:.3s}
+.card.in .st:nth-child(2){transition-delay:.4s}
+.card.in .st:nth-child(3){transition-delay:.5s}
+.card.in .st:nth-child(4){transition-delay:.6s}
+/* 對比格左右滑入 */
+.card .vs{opacity:0}
+.card .vsrow .vs:nth-child(odd){transform:translateX(-20px)}
+.card .vsrow .vs:nth-child(even){transform:translateX(20px)}
+.card.in .vs{opacity:1;transform:none;transition:opacity .4s ease,transform .55s cubic-bezier(.25,1.3,.4,1)}
+.card.in .vsrow .vs:nth-child(1){transition-delay:.3s}
+.card.in .vsrow .vs:nth-child(2){transition-delay:.38s}
+.card.in .vsrow .vs:nth-child(3){transition-delay:.46s}
+.card.in .vsrow .vs:nth-child(4){transition-delay:.54s}
+.card.in .vsrow .vs:nth-child(5){transition-delay:.62s}
+.card.in .vsrow .vs:nth-child(6){transition-delay:.7s}
+/* 時間軸列由左依序滑入，圓點跟著亮 */
+.card .trow{opacity:0;transform:translateX(-16px)}
+.card.in .trow{opacity:1;transform:none;transition:opacity .4s ease,transform .5s cubic-bezier(.25,1.25,.4,1)}
+.card.in .trow:nth-child(1){transition-delay:.3s}
+.card.in .trow:nth-child(2){transition-delay:.38s}
+.card.in .trow:nth-child(3){transition-delay:.46s}
+.card.in .trow:nth-child(4){transition-delay:.54s}
+.card.in .trow:nth-child(5){transition-delay:.62s}
+.card.in .trow:nth-child(6){transition-delay:.7s}
+.card.in .trow:nth-child(7){transition-delay:.78s}
+.card.in .trow:nth-child(8){transition-delay:.86s}
+.card .kick{font-size:12px;font-weight:800;color:#C24532;letter-spacing:.08em;margin-bottom:6px}
+.card h2{font-size:clamp(1.35rem,5.5vw,1.8rem);margin:0 0 10px;font-weight:900;line-height:1.4;text-wrap:balance;color:#26241F}
+.card p{margin:0 0 10px;font-size:15px;color:#4A463C;font-weight:500}
 .card p:last-child{margin-bottom:0}
-.card .big{font-family:var(--mono);font-size:clamp(1.9rem,8vw,2.6rem);font-weight:800;color:var(--gold);line-height:1.25;font-variant-numeric:tabular-nums;margin:2px 0 8px}
-.card .big small{font-size:.45em;color:var(--muted);font-family:var(--sans);font-weight:700}
-.card .src{font-size:11px;color:var(--faint);line-height:1.7;font-weight:500;margin-top:12px}
+.card .big{font-family:var(--mono);font-size:clamp(1.9rem,8vw,2.6rem);font-weight:800;color:#9A6A14;line-height:1.25;font-variant-numeric:tabular-nums;margin:2px 0 8px}
+.card .big small{font-size:.45em;color:#8A8271;font-family:var(--sans);font-weight:700}
+.card .src{font-size:11px;color:#8A8271;line-height:1.7;font-weight:500;margin-top:12px}
 .card .vsrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 4px}
-.card .vs{border-radius:14px;padding:12px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06)}
-.card .vs .l{font-size:11.5px;color:var(--muted);font-weight:700;display:block}
+.card .vs{border-radius:12px;padding:12px 14px;background:#F1EAD6;border:1px solid #DCD1B6}
+.card .vs .l{font-size:11.5px;color:#7A7364;font-weight:700;display:block}
 .card .vs .v{font-family:var(--mono);font-size:1.3rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.4}
-.card .vs .v small{font-size:.55em;color:var(--muted);font-family:var(--sans)}
-.card .vs.bad .v{color:var(--danger)}
-.card .vs.good .v{color:var(--ok)}
+.card .vs .v small{font-size:.55em;color:#8A8271;font-family:var(--sans)}
+.card .vs.bad .v{color:#C24532}
+.card .vs.good .v{color:#2F7D4F}
 
 /* 統計格與出處摺疊 */
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0 6px}
-.st{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:10px 12px}
+.st{background:#F1EAD6;border:1px solid #DCD1B6;border-radius:12px;padding:10px 12px}
 .st i.num,.big i.num{font-style:normal}
-.st b{font-family:var(--mono);font-size:1.45rem;color:var(--gold);display:block;line-height:1.35;font-variant-numeric:tabular-nums}
-.st.red b{color:var(--danger)}
-.st span{font-size:11.5px;color:var(--muted);font-weight:700}
+.st b{font-family:var(--mono);font-size:1.45rem;color:#9A6A14;display:block;line-height:1.35;font-variant-numeric:tabular-nums}
+.st.red b{color:#C24532}
+.st span{font-size:11.5px;color:#7A7364;font-weight:700}
 details.srcfold{margin-top:12px}
-details.srcfold summary{font-size:11px;color:var(--faint);cursor:pointer;font-weight:800;letter-spacing:.04em;list-style:none;display:inline-block;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:2px 12px}
+details.srcfold summary{font-size:11px;color:#8A8271;cursor:pointer;font-weight:800;letter-spacing:.04em;list-style:none;display:inline-block;border:1px solid #CFC4A8;border-radius:999px;padding:2px 12px}
 details.srcfold summary::-webkit-details-marker{display:none}
-details.srcfold[open] summary{color:var(--muted)}
+details.srcfold[open] summary{color:#6B675C}
 details.srcfold .src{margin-top:8px}
 
 /* 時間軸 */
-.tlist{margin:12px 0 4px;border-left:2px solid rgba(255,197,61,.35);padding-left:14px}
+.tlist{margin:12px 0 4px;border-left:2px solid rgba(154,106,20,.45);padding-left:14px}
 .trow{display:flex;gap:10px;align-items:baseline;padding:4.5px 0;position:relative}
-.trow::before{content:"";position:absolute;left:-18.5px;top:13px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
-.trow.red::before{background:var(--danger)}
-.trow .td{font-family:var(--mono);font-size:11.5px;color:var(--gold);font-weight:800;flex:none;width:74px;font-variant-numeric:tabular-nums}
-.trow .tx{font-size:13.5px;color:#C9D2DA;font-weight:500;line-height:1.6}
+.trow::before{content:"";position:absolute;left:-18.5px;top:13px;width:7px;height:7px;border-radius:50%;background:#C9A227}
+.trow.red::before{background:#C24532}
+.trow .td{font-family:var(--mono);font-size:11.5px;color:#9A6A14;font-weight:800;flex:none;width:74px;font-variant-numeric:tabular-nums}
+.trow .tx{font-size:13.5px;color:#4A463C;font-weight:500;line-height:1.6}
 
 /* ---------- Hero ---------- */
 .hero{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 22px;position:relative}
@@ -95,15 +135,15 @@ details.srcfold .src{margin-top:8px}
 .finale-in{max-width:560px;margin:0 auto}
 .finale h2{font-size:clamp(1.6rem,6.5vw,2.2rem);font-weight:900;line-height:1.4;margin:0 0 16px;text-wrap:balance}
 .finale h2 em{font-style:normal;color:var(--gold)}
-.alt{background:var(--panel);border:1px solid rgba(255,255,255,.07);border-radius:20px;padding:22px;margin:18px 0}
-.alt h3{margin:0 0 8px;font-size:17px;font-weight:900;color:var(--ok)}
-.alt p{margin:0;font-size:14.5px;color:#C9D2DA}
+.alt{background:linear-gradient(#F7F2E5,#EFE8D5);border:1px solid #D9CEB4;border-radius:18px;padding:22px;margin:18px 0;color:#3A382F}
+.alt h3{margin:0 0 8px;font-size:17px;font-weight:900;color:#2F7D4F}
+.alt p{margin:0;font-size:14.5px;color:#4A463C}
 .track{list-style:none;margin:10px 0 0;padding:0}
-.track li{display:flex;align-items:baseline;gap:10px;padding:7px 0;border-bottom:1px dashed rgba(255,255,255,.08);font-size:14px;color:#C9D2DA;font-weight:500}
+.track li{display:flex;align-items:baseline;gap:10px;padding:7px 0;border-bottom:1px dashed rgba(0,0,0,.12);font-size:14px;color:#4A463C;font-weight:500}
 .track li:last-child{border-bottom:none}
 .track .st{flex:none;font-size:10.5px;font-weight:800;padding:2px 9px;border-radius:999px;letter-spacing:.03em}
-.track .st.no{background:rgba(255,107,87,.16);color:var(--danger)}
-.track .st.half{background:rgba(255,197,61,.14);color:var(--gold)}
+.track .st.no{background:rgba(194,69,50,.13);color:#C24532}
+.track .st.half{background:rgba(154,106,20,.14);color:#9A6A14}
 .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
 .btn{flex:1 1 150px;text-align:center;font-weight:900;font-size:15px;padding:14px 18px;border-radius:999px;text-decoration:none;border:none;cursor:pointer;font-family:var(--sans)}
 .btn.gold{background:var(--gold);color:#14171A}
@@ -115,7 +155,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
 
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
-  .card{opacity:1;transform:none;transition:none}
+  .card,.card>*,.card .st,.card .vs,.card .trow{opacity:1;transform:none;transition:none}
   .hud .burn b.pp{animation:none}
 }
 </style>
@@ -258,14 +298,14 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
       <h3>公民團體的訴求很簡單</h3>
       <p>把三個方案（高鐵、直鐵、台鐵提速）的對照評估攤開來，公開全生命週期帳本、補足公民參與程序，<b>讓宜蘭人在完整資訊下重新選擇</b>。台灣前進陣線（時代力量×台灣綠黨×台灣基進×小民參政歐巴桑聯盟）2026.07.22 提出；宜蘭在地 7 個具名團體持續監督。</p>
     </div>
-    <div class="alt" style="border-color:rgba(255,107,87,.3)">
-      <h3 style="color:var(--danger)">不是只有反對黨這樣說</h3>
-      <p style="margin-bottom:10px">「不智的投資、極大的歷史錯誤。」<br><span style="color:var(--faint);font-size:12.5px">前政委張景森，2026.07.24 為此案退出民進黨（黨齡 32 年）</span></p>
-      <p style="margin-bottom:10px">「選前強推，是想杜絕民意的參與。」<br><span style="color:var(--faint);font-size:12.5px">前交通部長賀陳旦，2026.07.24</span></p>
-      <p>「未先完成可行性研究即進行綜合規劃」等五大違失。<br><span style="color:var(--faint);font-size:12.5px">監察院調查報告，2026.05.13</span></p>
+    <div class="alt" style="border-color:rgba(194,69,50,.45)">
+      <h3 style="color:#C24532">不是只有反對黨這樣說</h3>
+      <p style="margin-bottom:10px">「不智的投資、極大的歷史錯誤。」<br><span style="color:#8A8271;font-size:12.5px">前政委張景森，2026.07.24 為此案退出民進黨（黨齡 32 年）</span></p>
+      <p style="margin-bottom:10px">「選前強推，是想杜絕民意的參與。」<br><span style="color:#8A8271;font-size:12.5px">前交通部長賀陳旦，2026.07.24</span></p>
+      <p>「未先完成可行性研究即進行綜合規劃」等五大違失。<br><span style="color:#8A8271;font-size:12.5px">監察院調查報告，2026.05.13</span></p>
     </div>
-    <div class="alt" style="border-color:rgba(255,197,61,.3)">
-      <h3 style="color:var(--gold)">帳本還沒攤開：持續追蹤五件事</h3>
+    <div class="alt" style="border-color:rgba(154,106,20,.45)">
+      <h3 style="color:#9A6A14">帳本還沒攤開，持續追蹤五件事</h3>
       <ul class="track">
         <li><span class="st no">待公開</span>核定本全文、附帶條件，與對監察院的回應</li>
         <li><span class="st half">部分公開</span>高鐵、直鐵同基準的完整比較</li>
@@ -273,7 +313,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         <li><span class="st no">未公開</span>陳金德加速會議的紀錄與簡報</li>
         <li><span class="st half">部分公開</span>420 公頃的需求論證與環境累積影響</li>
       </ul>
-      <p style="margin-top:12px;font-size:13px;color:var(--muted)">逐項查核、20 位交通／財務／土地／環境專業者意見名錄：<a href="https://yilan-hsr-ledger.lys730.chatgpt.site/" target="_blank" rel="noopener" style="color:var(--gold)">宜蘭高鐵政策查核頁</a>。監督全民帳本，不等於反對宜蘭交通改善。</p>
+      <p style="margin-top:12px;font-size:13px;color:#7A7364">逐項查核、20 位交通／財務／土地／環境專業者意見名錄：<a href="https://yilan-hsr-ledger.lys730.chatgpt.site/" target="_blank" rel="noopener" style="color:#9A6A14">宜蘭高鐵政策查核頁</a>。監督全民帳本，不等於反對宜蘭交通改善。</p>
     </div>
     <div class="actions">
       <button class="btn gold" id="shareBtn">把這頁傳出去</button>
