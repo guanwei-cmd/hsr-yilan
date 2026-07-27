@@ -61,6 +61,19 @@ main{position:relative;z-index:10}
 .card .vs.bad .v{color:var(--danger)}
 .card .vs.good .v{color:var(--ok)}
 
+/* 統計格與出處摺疊 */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:12px 0 6px}
+.st{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:10px 12px}
+.st i.num,.big i.num{font-style:normal}
+.st b{font-family:var(--mono);font-size:1.45rem;color:var(--gold);display:block;line-height:1.35;font-variant-numeric:tabular-nums}
+.st.red b{color:var(--danger)}
+.st span{font-size:11.5px;color:var(--muted);font-weight:700}
+details.srcfold{margin-top:12px}
+details.srcfold summary{font-size:11px;color:var(--faint);cursor:pointer;font-weight:800;letter-spacing:.04em;list-style:none;display:inline-block;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:2px 12px}
+details.srcfold summary::-webkit-details-marker{display:none}
+details.srcfold[open] summary{color:var(--muted)}
+details.srcfold .src{margin-top:8px}
+
 /* 時間軸 */
 .tlist{margin:12px 0 4px;border-left:2px solid rgba(255,197,61,.35);padding-left:14px}
 .trow{display:flex;gap:10px;align-items:baseline;padding:4.5px 0;position:relative}
@@ -131,9 +144,14 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     <div class="card">
       <div class="kick">第一站・這是什麼計畫</div>
       <h2>高鐵延伸宜蘭</h2>
-      <p>南港到宜蘭，新建 <b class="nb">59.6 公里</b>，時速 300 公里。因為要鑽過雪山山脈，全線 <b>98% 以上是橋梁和隧道</b>：10 座山岳隧道、12 座橋，光土方就要挖出約 <b class="nb">961 萬立方公尺</b>。最快 2029 年動工，2036 到 2037 年通車。</p>
-      <p>也就是說：今年出生的孩子，要念到小學四年級才搭得到。但錢，現在就要開始花。</p>
-      <p class="src">來源：鐵道局計畫專區、中央社與公視 2026.07.23 報導、宜蘭高鐵政策查核頁（土方彙整自環評書件）。通車年官方說法有 2036 與 2037 兩版本。</p>
+      <div class="stats">
+        <div class="st"><b><i class="num" data-v="59.6" data-d="1">0</i> 公里</b><span>南港到宜蘭新線</span></div>
+        <div class="st"><b><i class="num" data-v="98">0</i>%</b><span>是橋梁與隧道</span></div>
+        <div class="st"><b><i class="num" data-v="10">0</i> 座</b><span>山岳隧道</span></div>
+        <div class="st"><b><i class="num" data-v="961">0</i> 萬 m³</b><span>挖出的土方</span></div>
+      </div>
+      <p>最快 2029 動工、2036 到 2037 通車。今年出生的孩子，小四才搭得到；但錢，現在就要開始燒。</p>
+      <details class="srcfold"><summary>出處</summary><p class="src">鐵道局計畫專區、中央社與公視 2026.07.23 報導、宜蘭高鐵政策查核頁（土方彙整自環評書件）。通車年官方說法有 2036 與 2037 兩版本。</p></details>
     </div>
   </section>
 
@@ -141,10 +159,14 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     <div class="card">
       <div class="kick">燒錢速度</div>
       <h2>七年，預算長了 3.7 倍</h2>
-      <div class="big">955 → 1,880 → 3,521<small>億元</small></div>
-      <p>2019 年初步規劃說 955 億，2021 年變 1,880 億，2026 年核定 <b class="nb">3,521.75 億</b>。還沒動工，已經翻了快四倍。</p>
-      <p>這還只是工程費。監察院口徑的工程經費 3,650 億，加上 30 年營運成本 1,735 億、台鐵 30 年票收短收 580 億，總帳 <b class="nb">5,965 億</b>，就是右上角碼表跑的那個「<b>近 6,000 億</b>」。</p>
-      <p class="src">來源：自由時報 2019.10、關鍵評論網 2021.12、中央社 2026.07.22（鐵道局說明 3,521.75 億）、監察院 2026.05 調查報告、宜蘭高鐵政策查核頁（總帳 5,965 億之組成）、中央社載時代力量宜蘭縣議員參選人劉仲書之計算。</p>
+      <div class="big"><i class="num" data-v="955">0</i> → <i class="num" data-v="1880">0</i> → <i class="num" data-v="3521">0</i><small>億元</small></div>
+      <p>2019 到 2026，還沒動工，工程費翻了快四倍。</p>
+      <div class="stats">
+        <div class="st"><b>＋<i class="num" data-v="1735">0</i> 億</b><span>30 年營運成本</span></div>
+        <div class="st"><b>＋<i class="num" data-v="580">0</i> 億</b><span>台鐵 30 年票收短收</span></div>
+        <div class="st red" style="grid-column:1/-1"><b>＝<i class="num" data-v="5965">0</i> 億</b><span>總帳，就是右上角碼表跑的近 6,000 億</span></div>
+      </div>
+      <details class="srcfold"><summary>出處</summary><p class="src">自由時報 2019.10、關鍵評論網 2021.12、中央社 2026.07.22（鐵道局說明 3,521.75 億）、監察院 2026.05 調查報告、宜蘭高鐵政策查核頁（總帳 5,965 億之組成）、中央社載時代力量宜蘭縣議員參選人劉仲書之計算。</p></details>
     </div>
   </section>
 
@@ -156,9 +178,8 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         <div class="vs bad"><span class="l">高鐵・到宜蘭市區（含轉乘）</span><span class="v">約 41 分</span></div>
         <div class="vs good"><span class="l">台鐵直鐵・直達宜蘭站</span><span class="v">約 47 分</span></div>
       </div>
-      <p>官方主打「南港到宜蘭 20 幾分鐘」。但高鐵站不在市中心：公民團體試算，加上轉乘進宜蘭市區，跟便宜好幾倍的台鐵直鐵方案相比，<b>只差約 6 分鐘</b>。</p>
-      <p>而且連官方自己的數字都還沒對齊：核定當天，行車時間同時存在 20、27、28 分鐘三種版本。</p>
-      <p class="src">來源：公民幫推試算（眼底城事 2025.08）、鐵道局 FAQ（高鐵 27 分 vs 直鐵 57 至 65 分）、公視與中央社 2026.07.23 報導之版本差異。</p>
+      <p>高鐵站不在市中心。含轉乘進宜蘭市區，跟便宜好幾倍的台鐵直鐵，<b>只差約 6 分鐘</b>。</p>
+      <details class="srcfold"><summary>出處</summary><p class="src">公民幫推試算（眼底城事 2025.08）、鐵道局 FAQ（高鐵 27 分 vs 直鐵 57 至 65 分）。官方行車時間於核定當天同時存在 20、27、28 分鐘三種版本（公視、中央社 2026.07.23）。</p></details>
     </div>
   </section>
 
@@ -174,19 +195,24 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         <div class="vs bad"><span class="l">高鐵・土地衝擊</span><span class="v" style="font-size:1.02rem">140 棟＋420 公頃<small>特定區</small></span></div>
         <div class="vs good"><span class="l">直鐵・土地衝擊</span><span class="v" style="font-size:1.02rem">約 18 棟<small>（南港富康街）</small></span></div>
       </div>
-      <p>同一條北宜走廊，直鐵的造價與 30 年營運成本都遠低於高鐵，卻在 2019 年被同一份顧問契約「評估掉」。直鐵造價另有含物價調整的 <b class="nb">2,220 億</b>估算（中央社 2026.01 整理）；兩案數字口徑不同，本頁一律標明出處。</p>
-      <p class="src">來源：宜蘭高鐵政策查核頁（環評書口徑彙整：直鐵建造 1,321.12 億、30 年營運約 170.2 億）、監察院 2026.05 調查報告（高鐵 30 年營運約 1,735 億）、中央社 2026.01.13、時代力量官網 2026.06.11（140 棟、420 公頃）。</p>
+      <p>同一條走廊。便宜的那條，2019 年被同一份顧問契約「評估掉」。</p>
+      <details class="srcfold"><summary>出處與口徑</summary><p class="src">宜蘭高鐵政策查核頁（環評書口徑：直鐵建造 1,321.12 億、30 年營運約 170.2 億）、監察院 2026.05 調查報告（高鐵 30 年營運約 1,735 億）、時代力量官網 2026.06.11（140 棟、420 公頃）。直鐵造價另有含物價調整之 2,220 億估算（中央社 2026.01.13）；兩案口徑不同。</p></details>
     </div>
   </section>
 
   <section class="step tall">
     <div class="card">
       <div class="kick">看不見的代價</div>
-      <h2>420 公頃農地、140 多棟民宅、6 個聚落</h2>
-      <p>車站旁邊要劃 <b class="nb">420 公頃</b>「特定區」：從原本的 190 公頃暴增一倍多，其中 <b>85% 是要區段徵收的私人土地</b>，拆遷 140 多棟民宅、影響 6 個傳統聚落。監察院直指這 420 公頃「缺乏立論基礎」。</p>
-      <p>核定隔天，站區周邊建案開價已經喊到「4 字頭」，比區域行情高出一截；媒體報導投機客正比照桃園航空城模式卡位抵價地。</p>
-      <p>而你腳下這段路：10 座隧道要穿過環評委員口中「非常多」的斷層帶。當年雪山隧道就在這座山裡遭遇 98 處剪裂帶、單點每秒 750 公升的湧水，還讓翡翠水庫損失約 350 萬噸蓄水。這次時速 300 公里。</p>
-      <p class="src">來源：環境資訊中心 2025.08.21（環評大會）、2023.06.02（範疇界定會議環委發言）、監察院 2026.05 調查報告、時代力量官網 2026.06.11（190→420 公頃、85% 私有地）、自由時報地產天下 2026.07.24（房價與抵價地卡位）、雪山隧道工程紀錄（作為地質風險前例參照；現行路線官方稱已避開翡翠水庫集水區）。</p>
+      <h2>車站旁邊，還要徵一大片</h2>
+      <div class="stats">
+        <div class="st red"><b><i class="num" data-v="420">0</i> 公頃</b><span>特定區（原本 190）</span></div>
+        <div class="st red"><b><i class="num" data-v="85">0</i>%</b><span>是要區段徵收的私有地</span></div>
+        <div class="st"><b><i class="num" data-v="140">0</i>＋棟</b><span>民宅拆遷</span></div>
+        <div class="st"><b><i class="num" data-v="6">0</i> 個</b><span>傳統聚落受影響</span></div>
+      </div>
+      <p>監察院直指這 420 公頃「缺乏立論基礎」。核定隔天，站區建案開價已喊到 4 字頭，投機客比照航空城模式卡位抵價地。</p>
+      <p>而腳下這段路要穿過雪山斷層帶：當年雪隧遭遇 98 處剪裂帶、單點每秒 750 公升湧水。這次，時速 300。</p>
+      <details class="srcfold"><summary>出處</summary><p class="src">環境資訊中心 2025.08.21、2023.06.02（環委稱斷層帶「非常多」）、監察院 2026.05 調查報告、時代力量官網 2026.06.11（190→420 公頃、85% 私有地）、自由時報地產天下 2026.07.24（房價與抵價地卡位）、雪山隧道工程紀錄（地質風險前例；現行路線官方稱已避開翡翠水庫集水區）。</p></details>
     </div>
   </section>
 
@@ -204,7 +230,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         <div class="trow red"><span class="td">2026.04–05</span><span class="tx">監察院公布調查報告，糾正多項違失</span></div>
         <div class="trow red"><span class="td">2026.07.23</span><span class="tx">行政院核定。距監院報告，約兩個月</span></div>
       </div>
-      <p class="src">來源：宜蘭高鐵政策查核頁大事紀（彙整自監察院調查報告、鐵道局計畫大事紀、中央社 2023.12.21）。</p>
+      <details class="srcfold"><summary>出處</summary><p class="src">宜蘭高鐵政策查核頁大事紀（彙整自監察院調查報告、鐵道局計畫大事紀、中央社 2023.12.21）。</p></details>
     </div>
   </section>
 
@@ -212,10 +238,14 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     <div class="card">
       <div class="kick">誰來還這筆錢</div>
       <h2>考卷沒寫完，就先蓋章了</h2>
-      <p>監察院 2026 年 5 月才點出五大違失：沒做完整可行性研究就跳綜合規劃（<b>可行性報告只有 17 頁</b>）、委外採購有角色衝突疑慮、社會對話不足。兩個月後，行政院核定。</p>
-      <p>更妙的是顧問契約：同一份契約從「評估北宜直鐵」一路改成「評估高鐵延伸」，<b>修改 9 次、追加金額達原約 60%</b>。同一個團隊，先寫直鐵不行，再寫高鐵可以。監察院還點出：環評和綜合規劃平行趕工、高鐵與 420 公頃特定區分開環評，<b>整體衝擊從頭到尾沒被一次評估過</b>。</p>
-      <p>財務面：公民團體質疑自償率僅 6.8%，官方至今沒公布核定版數字。前例是桃園捷運綠線：當年官方說自償率 41.77%，監察院後來認定實際只有 2.53%。差額誰付？全民。</p>
-      <p class="src">來源：聯合報 2026.05.13（監察院五大違失）、ETtoday 2026.07.22（劉仲書引監院報告：契約修改 9 次追加 60%）、Newtalk 2026.07.22（自償率 6.8% 質疑、桃捷綠線對照）、ETtoday 2026.07.23（監督聯盟「考卷沒寫完就核定」）、宜蘭高鐵政策查核頁（監院問題彙整）。</p>
+      <div class="stats">
+        <div class="st red"><b><i class="num" data-v="17">0</i> 頁</b><span>可行性報告就這麼薄</span></div>
+        <div class="st red"><b>改 <i class="num" data-v="9">0</i> 次</b><span>同一份顧問契約，追加 60%</span></div>
+        <div class="st red"><b><i class="num" data-v="6.8" data-d="1">0</i>%</b><span>公民試算的自償率</span></div>
+        <div class="st"><b><i class="num" data-v="2">0</i> 個月</b><span>監院點出違失後就核定</span></div>
+      </div>
+      <p>同一個顧問團隊，先寫直鐵不行，再寫高鐵可以；環評跟綜規平行趕工、高鐵與特定區分開環評，<b>整體衝擊從沒被一次評估過</b>。桃捷綠線的前例：官方說自償率 41.77%，監院後來認定只有 2.53%。差額，全民付。</p>
+      <details class="srcfold"><summary>出處</summary><p class="src">聯合報 2026.05.13（監察院五大違失）、ETtoday 2026.07.22（契約修改 9 次追加 60%）、Newtalk 2026.07.22（自償率 6.8%、桃捷綠線對照）、ETtoday 2026.07.23、宜蘭高鐵政策查核頁（監院問題彙整）。</p></details>
     </div>
   </section>
 </main>
@@ -223,7 +253,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
 <div class="finale">
   <div class="finale-in">
     <h2>宜蘭人要的是<em>更快回家</em>，<br>不是更貴的煙火</h2>
-    <p style="color:var(--muted);font-size:15px">民團委託的民調顯示：宜蘭人往返雙北的日常通勤，其實偏好台鐵直鐵方案。偏好高鐵的，是往返桃園以南的長途旅次。這條總帳近 6,000 億的路，到底為誰而蓋？</p>
+    <p style="color:var(--muted);font-size:15px">民調顯示：宜蘭人的雙北日常通勤，偏好台鐵直鐵。這條總帳近 6,000 億的路，到底為誰而蓋？</p>
     <div class="alt">
       <h3>公民團體的訴求很簡單</h3>
       <p>把三個方案（高鐵、直鐵、台鐵提速）的對照評估攤開來，公開全生命週期帳本、補足公民參與程序，<b>讓宜蘭人在完整資訊下重新選擇</b>。台灣前進陣線（時代力量×台灣綠黨×台灣基進×小民參政歐巴桑聯盟）2026.07.22 提出；宜蘭在地 7 個具名團體持續監督。</p>
@@ -725,9 +755,23 @@ function frame(t){
 }
 requestAnimationFrame(frame);
 
-/* 卡片 reveal */
+/* 卡片 reveal＋數字滾動 */
+function rollNums(card){
+  card.querySelectorAll(".num[data-v]").forEach(function(el){
+    var v=parseFloat(el.dataset.v),d=parseInt(el.dataset.d||"0",10);
+    if(reduced){el.textContent=v.toLocaleString("zh-Hant-TW",{minimumFractionDigits:d,maximumFractionDigits:d});return;}
+    var t0=null,DUR=1100;
+    function step(ts){
+      if(!t0)t0=ts;
+      var k=Math.min(1,(ts-t0)/DUR);k=1-Math.pow(1-k,3);
+      el.textContent=(v*k).toLocaleString("zh-Hant-TW",{minimumFractionDigits:d,maximumFractionDigits:d});
+      if(k<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+}
 var io=new IntersectionObserver(function(es){
-  es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});
+  es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");rollNums(e.target);io.unobserve(e.target);}});
 },{threshold:0.25});
 document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
 
