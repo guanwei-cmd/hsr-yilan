@@ -9,7 +9,7 @@
 <meta property="og:description" content="一班還沒開的列車，正在狂噴你的納稅錢。滑完這頁，你會知道答案。">
 <style>
 :root{
-  --bg:#F5EDDA; --bg2:#EFE6CE; --panel:#FFFAF0; --panel2:#F5EDDA;
+  --bg:#EDE5D0; --bg2:#E5DCC2; --panel:#FFFAF0; --panel2:#F5EDDA;
   --ink:#1B1722; --muted:#6A6371; --faint:#8C818E;
   --gold:#FFD500; --gold-deep:#E5B800;
   --purple:#31106F; --purple-b:#6434C7;
@@ -30,7 +30,7 @@ p{text-wrap:pretty}
 #scene{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 
 /* ---------- 儀表 ---------- */
-.hud{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;pointer-events:none;background:linear-gradient(rgba(245,237,218,.96),rgba(245,237,218,0))}
+.hud{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 16px;pointer-events:none;background:linear-gradient(rgba(237,229,208,.96),rgba(237,229,208,0))}
 .hud .brand{font-size:13px;font-weight:800;letter-spacing:.05em;color:var(--muted)}
 .hud .right{display:flex;align-items:center;gap:10px}
 .hud .burn{text-align:right;font-family:var(--mono)}
@@ -172,7 +172,7 @@ details.srcfold .src{margin-top:8px}
 .hero .cta:active{transform:translateY(2px)}
 
 /* ---------- 結尾 ---------- */
-.finale{position:relative;z-index:10;background:linear-gradient(rgba(245,237,218,0),var(--bg) 18%);padding:10vh 16px 60px}
+.finale{position:relative;z-index:10;background:linear-gradient(rgba(237,229,208,0),var(--bg) 18%);padding:10vh 16px 60px}
 .finale-in{max-width:560px;margin:0 auto}
 .finale h2{font-size:clamp(1.6rem,6.5vw,2.2rem);font-weight:900;line-height:1.4;margin:0 0 16px;text-wrap:balance}
 .finale h2 em{font-style:normal;color:var(--purple-b)}
@@ -486,25 +486,28 @@ sndBtn.addEventListener("click",function(){
 });
 
 /* ====== 鈔票與金光粒子 ====== */
-var bills=[],MAXB=reduced?0:110;
-var sparks=[],MAXS=reduced?0:40;
+var bills=[],MAXB=reduced?0:190;
+var sparks=[],MAXS=reduced?0:70;
 function spawnBill(cx,cy,speed){
   if(bills.length>=MAXB)return;
   var side=Math.random()<0.5?-1:1;
+  var fountain=Math.random()<0.3;
   bills.push({
-    x:cx+side*(8+Math.random()*6), y:cy-10-Math.random()*30,
-    vx:side*(0.6+Math.random()*1.6), vy:-(1.2+speed*2.2+Math.random()*1.5),
-    rot:Math.random()*Math.PI, vr:(Math.random()-0.5)*0.18,
+    x:cx+side*(10+Math.random()*24), y:cy-10-Math.random()*36,
+    vx:side*(0.9+Math.random()*2.6)*(fountain?1.8:1),
+    vy:-(1.4+speed*2.6+Math.random()*2.2)*(fountain?1.25:1),
+    rot:Math.random()*Math.PI, vr:(Math.random()-0.5)*0.26,
     ph:Math.random()*6.28,
+    stack:Math.random()<0.07,
     life:1, s:1
   });
-  if(Math.random()<0.3&&sparks.length<MAXS){
+  if(Math.random()<0.45&&sparks.length<MAXS){
     sparks.push({x:cx+side*(6+Math.random()*20),y:cy-Math.random()*40,life:1,r:1.5+Math.random()*2});
   }
 }
 function burst(cx,cy,n){
   for(var i=0;i<n;i++){
-    if(bills.length>=MAXB+30)break;
+    if(bills.length>=MAXB+60)break;
     var a=Math.random()*6.28,sp=1.5+Math.random()*3;
     bills.push({x:cx,y:cy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-1.5,
       rot:Math.random()*3.14,vr:(Math.random()-0.5)*0.3,ph:Math.random()*6.28,life:1.15,s:1});
@@ -514,7 +517,17 @@ function drawBill(b,t){
   ctx.save();
   ctx.translate(b.x,b.y);ctx.rotate(b.rot);
   var flut=0.75+0.25*Math.sin(t/120+b.ph);
-  ctx.scale(b.s*flut,b.s);
+  ctx.scale(b.s*flut*1.15,b.s*1.15);
+  if(b.stack){ /* 整疊鈔票 */
+    ctx.globalAlpha=Math.max(0,Math.min(1,b.life));
+    for(var st=2;st>=0;st--){
+      ctx.fillStyle="#3E5F94";rr(-12,-6.8-st*2.6,24,13.6,2);ctx.fill();
+      ctx.fillStyle="#5C82BC";rr(-10.3,-5.2-st*2.6,20.6,10.4,1.5);ctx.fill();
+    }
+    ctx.fillStyle="#EAF1FB";ctx.font="800 5px ui-monospace,monospace";
+    ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("100萬",0,-2.6);
+    ctx.restore();return;
+  }
   ctx.globalAlpha=Math.max(0,Math.min(1,b.life));
   ctx.fillStyle="#3E5F94";
   rr(-12,-6.8,24,13.6,2);ctx.fill();
@@ -538,6 +551,65 @@ function drawSpark(s){
   ctx.moveTo(s.x-r,s.y);ctx.lineTo(s.x+r,s.y);
   ctx.moveTo(s.x,s.y-r);ctx.lineTo(s.x,s.y+r);
   ctx.stroke();
+  ctx.restore();
+}
+
+/* ====== 民代（笑嘻嘻拍手撿錢）====== */
+var POLS=[];(function(){for(var y=520,i=0;y<8600;y+=590,i++){POLS.push({y:y,side:i%2?1:-1,kind:i%3});}})();
+function drawPol(px,py,kind,side,t){
+  ctx.save();ctx.translate(px,py);
+  if(side>0)ctx.scale(-1,1);            /* 面向軌道 */
+  var ph=reduced?0.5:(Math.sin(t/110+px*0.7)*0.5+0.5);
+  ctx.translate(0,reduced?0:Math.sin(t/260+px)*1.2);
+  /* 錢袋（撿錢型） */
+  if(kind===1){
+    ctx.fillStyle="#8B6F47";
+    ctx.beginPath();ctx.ellipse(13,9,7,8,0,0,7);ctx.fill();
+    ctx.fillStyle="#6E5636";ctx.fillRect(11,-1,4,4);
+    ctx.fillStyle="#F2E9CF";ctx.font="800 8px ui-monospace,monospace";
+    ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("$",13,10);
+  }
+  /* 西裝身體＋襯衫＋紅領帶 */
+  ctx.fillStyle="#2A2731";rr(-6,-8,12,18,5);ctx.fill();
+  ctx.fillStyle="#F4F0E6";ctx.beginPath();ctx.moveTo(-2.5,-8);ctx.lineTo(0,-2);ctx.lineTo(2.5,-8);ctx.closePath();ctx.fill();
+  ctx.fillStyle="#C43B31";ctx.fillRect(-1,-7,2,7);
+  /* 頭＋髮＋笑眼＋咧嘴 */
+  ctx.fillStyle="#EFCB9F";ctx.beginPath();ctx.arc(0,-14,6,0,7);ctx.fill();
+  ctx.fillStyle="#3A3430";ctx.beginPath();ctx.arc(0,-15.5,6,3.35,6.1);ctx.fill();
+  ctx.strokeStyle="#3A3430";ctx.lineWidth=1.2;ctx.lineCap="round";
+  ctx.beginPath();ctx.moveTo(-3.4,-15);ctx.quadraticCurveTo(-2.2,-16.8,-1,-15);
+  ctx.moveTo(1,-15);ctx.quadraticCurveTo(2.2,-16.8,3.4,-15);ctx.stroke();
+  ctx.fillStyle="#7A3B2E";ctx.beginPath();ctx.arc(0,-11.6,2.7,0.15,3.0);ctx.fill();
+  ctx.fillStyle="#FFF";ctx.fillRect(-2.2,-12.4,4.4,1.4);
+  ctx.strokeStyle="#2A2731";ctx.lineWidth=3;ctx.lineCap="round";
+  if(kind===0){ /* 拍手叫好 */
+    var a=4+ph*5.5;
+    ctx.beginPath();ctx.moveTo(-5,-4);ctx.lineTo(-a,-10);ctx.moveTo(5,-4);ctx.lineTo(a,-10);ctx.stroke();
+    ctx.fillStyle="#EFCB9F";ctx.beginPath();ctx.arc(-a,-10.6,2,0,7);ctx.arc(a,-10.6,2,0,7);ctx.fill();
+    if(!reduced&&ph>0.86){
+      ctx.strokeStyle="rgba(216,60,50,.75)";ctx.lineWidth=1.2;
+      ctx.beginPath();ctx.moveTo(0,-14);ctx.lineTo(0,-17);
+      ctx.moveTo(-2.6,-13);ctx.lineTo(-4.2,-15.4);
+      ctx.moveTo(2.6,-13);ctx.lineTo(4.2,-15.4);ctx.stroke();
+    }
+  }else if(kind===1){ /* 彎腰撿錢入袋 */
+    ctx.beginPath();ctx.moveTo(5,-4);ctx.lineTo(11,3+ph*4);ctx.moveTo(-5,-4);ctx.lineTo(-8,-9);ctx.stroke();
+    ctx.fillStyle="#EFCB9F";ctx.beginPath();ctx.arc(11,3.6+ph*4,2,0,7);ctx.fill();
+    ctx.save();ctx.translate(13,14);ctx.rotate(0.3);
+    ctx.fillStyle="#3E5F94";ctx.fillRect(-6,-3.4,12,6.8);
+    ctx.fillStyle="#5C82BC";ctx.fillRect(-5,-2.4,10,4.8);
+    ctx.restore();
+  }else{ /* 揮手＋鈔票扇 */
+    ctx.beginPath();ctx.moveTo(-5,-4);ctx.lineTo(-10,-13+ph*2.5);ctx.stroke();
+    ctx.fillStyle="#EFCB9F";ctx.beginPath();ctx.arc(-10,-13.6+ph*2.5,2,0,7);ctx.fill();
+    ctx.beginPath();ctx.moveTo(5,-4);ctx.lineTo(9,-7);ctx.stroke();
+    for(var q=0;q<3;q++){
+      ctx.save();ctx.translate(10,-8);ctx.rotate(0.5-q*0.35);
+      ctx.fillStyle="#3E5F94";ctx.fillRect(-2.2,-8,4.4,8);
+      ctx.fillStyle="#5C82BC";ctx.fillRect(-1.5,-7,3,6);
+      ctx.restore();
+    }
+  }
   ctx.restore();
 }
 
@@ -699,12 +771,12 @@ function frame(t){
   ctx.clearRect(0,0,W,H);
 
   var inPlain=camY>5300;
-  ctx.fillStyle=inPlain?"#E2EAD0":"#EAE4D2";
+  ctx.fillStyle=inPlain?"#D9D2B4":"#D8D3C4";
   ctx.fillRect(0,0,W,H);
 
   if(camY>5000){
     var seaW=Math.min(1,(camY-5000)/1500)*W*0.22;
-    ctx.fillStyle="#BDE0F1";
+    ctx.fillStyle="#9FB6BE";
     ctx.fillRect(W-seaW,0,seaW,H);
   }
 
@@ -714,30 +786,30 @@ function frame(t){
     if(sy<-160||sy>H+160)continue;
     var sx=f.x*W;
     if(f.t==="bld"){
-      ctx.fillStyle=f.g>0.5?"#CBD1D8":"#C1C8D1";
+      ctx.fillStyle=f.g>0.5?"#B5B4AC":"#A9A9A2";
       ctx.fillRect(sx-f.w/2,sy,f.w,f.h);
-      ctx.fillStyle="rgba(90,84,110,.22)";
+      ctx.fillStyle="rgba(40,38,48,.28)";
       for(var wy=sy+4;wy<sy+f.h-4;wy+=8)for(var wx=sx-f.w/2+4;wx<sx+f.w/2-4;wx+=9){if((wx+wy)%3<1.4)ctx.fillRect(wx,wy,3,3);}
     }else if(f.t==="hill"){
-      ctx.fillStyle=f.g>0.5?"#C2D8AC":"#B4CE9C";
+      ctx.fillStyle=f.g>0.5?"#A8AE93":"#9AA187";
       ctx.beginPath();ctx.ellipse(sx,sy,f.r,f.r*0.72,0,0,7);ctx.fill();
     }else if(f.t==="lake"){
-      ctx.fillStyle="#A8D4EA";
+      ctx.fillStyle="#93AFB9";
       ctx.beginPath();ctx.ellipse(sx,sy,f.r,f.r*0.6,0.4,0,7);ctx.fill();
     }else if(f.t==="field"){
-      ctx.fillStyle=f.g>0.66?"#CFE4AC":(f.g>0.33?"#C3DA9E":"#DAEABE");
+      ctx.fillStyle=f.g>0.66?"#D5C88E":(f.g>0.33?"#C6B87E":"#DFD3A0");
       ctx.fillRect(sx-f.w/2,sy,f.w,f.h);
-      ctx.strokeStyle="rgba(96,96,64,.28)";ctx.strokeRect(sx-f.w/2,sy,f.w,f.h);
+      ctx.strokeStyle="rgba(78,70,44,.32)";ctx.strokeRect(sx-f.w/2,sy,f.w,f.h);
     }
   }
 
   /* 軌道 */
   var tx=W*0.5;
-  ctx.fillStyle="#CBC4B2";
+  ctx.fillStyle="#B9B2A0";
   ctx.fillRect(tx-16,0,32,H);
-  ctx.strokeStyle="#8A8274";ctx.lineWidth=2.5;
+  ctx.strokeStyle="#7C7466";ctx.lineWidth=2.5;
   ctx.beginPath();ctx.moveTo(tx-7,0);ctx.lineTo(tx-7,H);ctx.moveTo(tx+7,0);ctx.lineTo(tx+7,H);ctx.stroke();
-  ctx.fillStyle="#B2AA9A";
+  ctx.fillStyle="#A49C8A";
   var tie0=-((camY*0.9)%22);
   for(var ty=tie0;ty<H;ty+=22){ctx.fillRect(tx-14,ty,28,5);}
   /* 電化架空線與電桿 */
@@ -769,14 +841,22 @@ function frame(t){
     }
     if(lastCamY<lm.y&&camY>=lm.y&&camY-lastCamY<600){
       kaching();
+      if(!reduced)burst(tx,trainPx-140,14);
       burnEl.classList.remove("pp");void burnEl.offsetWidth;burnEl.classList.add("pp");
     }
   }
 
+  /* 民代列隊：笑嘻嘻拍手撿錢 */
+  for(i=0;i<POLS.length;i++){
+    var pol=POLS[i],ppy=trainPx+(pol.y-camY)*0.9;
+    if(ppy<-40||ppy>H+40)continue;
+    drawPol(tx+pol.side*47,ppy,pol.kind,pol.side,t);
+  }
+
   /* 鈔票：從車尾噴出 */
   if(!reduced){
-    var rate=speed>0.02?3:1;
-    for(i=0;i<rate;i++)if(Math.random()<0.8)spawnBill(tx,trainPx-150,speed);
+    var rate=speed>0.02?6:1;
+    for(i=0;i<rate;i++)if(Math.random()<0.88)spawnBill(tx,trainPx-150,speed);
     if(sndOn&&speed>0.05&&t-lastClink>150){clink();lastClink=t;}
     for(i=bills.length-1;i>=0;i--){
       var b=bills[i];
@@ -827,7 +907,7 @@ function frame(t){
   /* 終點宜蘭：鈔票大噴發（一次） */
   if(!finaleDone&&p>0.965&&!reduced){
     finaleDone=true;
-    burst(tx,trainPx,34);
+    burst(tx,trainPx,90);
     kaching();
   }
 
