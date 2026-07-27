@@ -122,6 +122,46 @@ details.srcfold .src{margin-top:8px}
 .trow .td{font-family:var(--mono);font-size:11.5px;color:#9A6A14;font-weight:800;flex:none;width:74px;font-variant-numeric:tabular-nums}
 .trow .tx{font-size:13.5px;color:#4A463C;font-weight:500;line-height:1.6}
 
+/* 比價器 */
+.cmptabs{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 12px}
+.cmptabs button{font-family:var(--sans);font-size:12.5px;font-weight:800;padding:7px 14px;border-radius:999px;border:1.5px solid #CFC4A8;background:#F1EAD6;color:#6B675C;cursor:pointer}
+.cmptabs button[aria-pressed="true"]{background:#26241F;border-color:#26241F;color:#F7F2E5}
+.cmpbody{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:stretch}
+.cmpside{border-radius:12px;padding:12px 12px 10px;background:#F1EAD6;border:1px solid #DCD1B6;text-align:center}
+.cmpside .cl{display:block;font-size:11px;font-weight:800;color:#7A7364;letter-spacing:.04em}
+.cmpside b{display:block;font-family:var(--mono);font-size:clamp(1.15rem,4.6vw,1.5rem);font-weight:800;line-height:1.3;margin:6px 0 2px;font-variant-numeric:tabular-nums}
+.cmpside.bad b{color:#C24532}
+.cmpside.good b{color:#2F7D4F}
+.cmpside .cn{display:block;font-size:10.5px;color:#8A8271;font-weight:700}
+.cmpvs{align-self:center;font-family:var(--mono);font-size:13px;font-weight:800;color:#B4A98C}
+.cmpnote{font-size:13.5px;color:#4A463C;font-weight:600;margin:10px 0 0;min-height:2.6em}
+.cmpbody.sw .cmpside{animation:cmpin .38s cubic-bezier(.25,1.25,.4,1)}
+@keyframes cmpin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* 考卷訂正手風琴 */
+.exam{margin:12px 0 2px}
+.exam details{border-bottom:1px dashed rgba(0,0,0,.14)}
+.exam details:last-child{border-bottom:none}
+.exam summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:9px;padding:9px 2px;font-size:14px;font-weight:800;color:#3A382F}
+.exam summary::-webkit-details-marker{display:none}
+.exam summary i{font-style:normal;color:#C24532;font-weight:900;flex:none}
+.exam summary em{font-style:normal;margin-left:auto;color:#B4A98C;font-size:11px;transition:transform .2s}
+.exam details[open] summary em{transform:rotate(180deg)}
+.exam details p{margin:0 0 10px 24px;font-size:13.5px;color:#4A463C;font-weight:500;line-height:1.75}
+/* 具名疑問點名牆 */
+.qwall{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 4px}
+.qwall button{font-family:var(--sans);font-size:12.5px;font-weight:800;padding:6px 13px;border-radius:999px;border:1.5px solid transparent;cursor:pointer;color:#3A382F}
+.qwall button.c0{background:rgba(47,125,79,.13)}
+.qwall button.c1{background:rgba(154,106,20,.14)}
+.qwall button.c2{background:rgba(194,69,50,.12)}
+.qwall button.c3{background:rgba(58,110,165,.13)}
+.qwall button.c4{background:rgba(110,90,140,.13)}
+.qwall button[aria-pressed="true"]{border-color:#26241F}
+.qbub{margin-top:10px;background:#F1EAD6;border:1px solid #DCD1B6;border-radius:12px;padding:12px 14px;animation:cmpin .3s ease}
+.qbub b{font-size:14px;color:#26241F}
+.qbub .qt{font-size:10.5px;font-weight:800;color:#8A8271;margin-left:8px}
+.qbub p{margin:5px 0 0;font-size:13.5px;color:#4A463C;font-weight:600}
+.orgs{font-size:12px;color:#7A7364;font-weight:600;margin:12px 0 0;line-height:1.9}
+
 /* ---------- Hero ---------- */
 .hero{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 22px;position:relative}
 .hero h1{font-size:clamp(2.2rem,9vw,3.6rem);font-weight:900;line-height:1.3;margin:0 0 14px;max-width:11em;letter-spacing:.01em;text-wrap:balance}
@@ -227,15 +267,13 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     <div class="card">
       <div class="kick">被冷凍的對照組</div>
       <h2>同一條走廊，兩張報價單</h2>
-      <div class="vsrow">
-        <div class="vs bad"><span class="l">高鐵・建造成本</span><span class="v">3,521.8<small> 億（核定）</small></span></div>
-        <div class="vs good"><span class="l">直鐵・建造成本</span><span class="v">1,321.1<small> 億（環評口徑）</small></span></div>
-        <div class="vs bad"><span class="l">高鐵・30 年營運成本</span><span class="v">約 1,735<small> 億</small></span></div>
-        <div class="vs good"><span class="l">直鐵・30 年營運成本</span><span class="v">約 170<small> 億</small></span></div>
-        <div class="vs bad"><span class="l">高鐵・土地衝擊</span><span class="v" style="font-size:1.02rem">140 棟＋420 公頃<small>特定區</small></span></div>
-        <div class="vs good"><span class="l">直鐵・土地衝擊</span><span class="v" style="font-size:1.02rem">約 18 棟<small>（南港富康街）</small></span></div>
+      <div class="cmptabs" id="cmpTabs" role="group" aria-label="比較面向"></div>
+      <div class="cmpbody" id="cmpBody">
+        <div class="cmpside bad"><span class="cl">高鐵延伸宜蘭</span><b id="cmpA">—</b><span class="cn" id="cmpAn"></span></div>
+        <div class="cmpvs">VS</div>
+        <div class="cmpside good"><span class="cl">台鐵北宜直鐵</span><b id="cmpB">—</b><span class="cn" id="cmpBn"></span></div>
       </div>
-      <p>同一條走廊。便宜的那條，2019 年被同一份顧問契約「評估掉」。</p>
+      <p class="cmpnote" id="cmpNote"></p>
       <details class="srcfold"><summary>出處與口徑</summary><p class="src">宜蘭高鐵政策查核頁（環評書口徑：直鐵建造 1,321.12 億、30 年營運約 170.2 億）、監察院 2026.05 調查報告（高鐵 30 年營運約 1,735 億）、時代力量官網 2026.06.11（140 棟、420 公頃）。直鐵造價另有含物價調整之 2,220 億估算（中央社 2026.01.13）；兩案口徑不同。</p></details>
     </div>
   </section>
@@ -284,8 +322,18 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         <div class="st red"><b><i class="num" data-v="6.8" data-d="1">0</i>%</b><span>公民試算的自償率</span></div>
         <div class="st"><b><i class="num" data-v="2">0</i> 個月</b><span>監院點出違失後就核定</span></div>
       </div>
-      <p>同一個顧問團隊，先寫直鐵不行，再寫高鐵可以；環評跟綜規平行趕工、高鐵與特定區分開環評，<b>整體衝擊從沒被一次評估過</b>。桃捷綠線的前例：官方說自償率 41.77%，監院後來認定只有 2.53%。差額，全民付。</p>
-      <details class="srcfold"><summary>出處</summary><p class="src">聯合報 2026.05.13（監察院五大違失）、ETtoday 2026.07.22（契約修改 9 次追加 60%）、Newtalk 2026.07.22（自償率 6.8%、桃捷綠線對照）、ETtoday 2026.07.23、宜蘭高鐵政策查核頁（監院問題彙整）。</p></details>
+      <p>監察院的考卷，逐題點開看：</p>
+      <div class="exam">
+        <details open><summary><i>✗</i>沒寫完可行性研究，就跳綜合規劃<em>▾</em></summary><p>可行性報告僅 17 頁；系統從直鐵換成高鐵，卻沒有回頭重做可行性。</p></details>
+        <details><summary><i>✗</i>同一份顧問契約改 9 次<em>▾</em></summary><p>從「評估北宜直鐵」一路改成「評估高鐵延伸」，追加金額達原約 60%。同一個團隊，先寫直鐵不行，再寫高鐵可以。</p></details>
+        <details><summary><i>✗</i>可研與綜規內容大量相似<em>▾</em></summary><p>兩份不同階段的報告，內容大量摘錄重複，審查形同走過場。</p></details>
+        <details><summary><i>✗</i>政委下場設定時程<em>▾</em></summary><p>陳金德主持會議設定通過時程，環評與綜合規劃平行趕工。</p></details>
+        <details><summary><i>✗</i>社會溝通只靠法定說明會<em>▾</em></summary><p>主要依賴環評法定說明會，實質公民參與不足。</p></details>
+        <details><summary><i>✗</i>自償率僅 6.8%，補貼規模不明<em>▾</em></summary><p>官方至今未公布核定版數字。桃捷綠線前例：官方當年說 41.77%，監院後來認定只有 2.53%。差額，全民付。</p></details>
+        <details><summary><i>✗</i>420 公頃需求缺乏立論<em>▾</em></summary><p>特定區從 190 公頃暴增到 420 公頃，監察院直指缺乏充分立論基礎。</p></details>
+        <details><summary><i>✗</i>高鐵與特定區拆開環評<em>▾</em></summary><p>兩案分開評估，累積的整體衝擊從頭到尾沒被一次評估過。</p></details>
+      </div>
+      <details class="srcfold"><summary>出處</summary><p class="src">監察院調查報告（聯合報 2026.05.13、宜蘭高鐵政策查核頁之八項問題彙整）、ETtoday 2026.07.22（契約修改 9 次追加 60%）、Newtalk 2026.07.22（自償率 6.8%、桃捷綠線對照）。</p></details>
     </div>
   </section>
 </main>
@@ -303,6 +351,14 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
       <p style="margin-bottom:10px">「不智的投資、極大的歷史錯誤。」<br><span style="color:#8A8271;font-size:12.5px">前政委張景森，2026.07.24 為此案退出民進黨（黨齡 32 年）</span></p>
       <p style="margin-bottom:10px">「選前強推，是想杜絕民意的參與。」<br><span style="color:#8A8271;font-size:12.5px">前交通部長賀陳旦，2026.07.24</span></p>
       <p>「未先完成可行性研究即進行綜合規劃」等五大違失。<br><span style="color:#8A8271;font-size:12.5px">監察院調查報告，2026.05.13</span></p>
+    </div>
+    <div class="alt">
+      <h3 style="color:#9A6A14">20 個具名的疑問</h3>
+      <p style="font-size:13px;color:#7A7364;font-weight:700;margin:0">交通、程序、土地財務、環境、地方治理都有人舉手。點名字，看每個人問了什麼。</p>
+      <div class="qwall" id="qwall"></div>
+      <div class="qbub" id="qbub" hidden><b id="qwho"></b><span class="qt" id="qtag"></span><p id="qsay"></p></div>
+      <p class="orgs">在地具名團體：高鐵延伸宜蘭監督聯盟・守護宜蘭工作坊・宜蘭縣環境保護聯盟・宜蘭惜溪聯盟・宜蘭縣國土計畫讀書會・宜蘭縣野鳥學會・宜蘭縣文化協會</p>
+      <details class="srcfold"><summary>出處</summary><p class="src">彙整自宜蘭高鐵政策查核頁之 20 位專業者意見一句話版；各人完整脈絡與原始發言以查核頁及其引註為準。</p></details>
     </div>
     <div class="alt" style="border-color:rgba(154,106,20,.45)">
       <h3 style="color:#9A6A14">帳本還沒攤開，持續追蹤五件事</h3>
@@ -794,6 +850,74 @@ function frame(t){
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
+
+/* ====== 比價器 ====== */
+var CMP=[
+ {k:"行車時間",a:"約 41 分",an:"含轉乘進宜蘭市區",b:"約 47 分",bn:"直達宜蘭站",note:"官方主打 20 幾分鐘，但站不在市中心。進到市區，只差約 6 分鐘。"},
+ {k:"建造成本",a:"3,521.8 億",an:"行政院核定",b:"1,321.1 億",bn:"環評書口徑",note:"直鐵另有含物價調整的 2,220 億估算；兩案口徑不同，出處見摺疊。"},
+ {k:"30 年營運",a:"約 1,735 億",an:"監察院報告",b:"約 170 億",bn:"環評書口徑",note:"差十倍。這筆錢，核定新聞稿裡不會告訴你。"},
+ {k:"土地衝擊",a:"140 棟＋420 公頃",an:"特定區 85% 私有地",b:"約 18 棟",bn:"南港富康街",note:"一邊是整片特定區區段徵收，一邊是十幾棟。"},
+ {k:"自償率",a:"6.8%",an:"公民試算",b:"—",bn:"未提出",note:"官方至今沒公布核定版自償率。剩下九成多，全民補。"}
+];
+var cmpIdx=0,cmpTabs=document.getElementById("cmpTabs"),cmpBodyEl=document.getElementById("cmpBody");
+function setCmp(i){
+  cmpIdx=i;var d=CMP[i];
+  document.getElementById("cmpA").textContent=d.a;
+  document.getElementById("cmpAn").textContent=d.an;
+  document.getElementById("cmpB").textContent=d.b;
+  document.getElementById("cmpBn").textContent=d.bn;
+  document.getElementById("cmpNote").textContent=d.note;
+  if(cmpTabs)[].forEach.call(cmpTabs.children,function(b,j){b.setAttribute("aria-pressed",j===i?"true":"false")});
+  if(cmpBodyEl&&!reduced){cmpBodyEl.classList.remove("sw");void cmpBodyEl.offsetWidth;cmpBodyEl.classList.add("sw");}
+}
+if(cmpTabs){
+  CMP.forEach(function(d,i){
+    var b=document.createElement("button");b.textContent=d.k;
+    b.addEventListener("click",function(){setCmp(i)});
+    cmpTabs.appendChild(b);
+  });
+  setCmp(0);
+}
+
+/* ====== 20 個具名的疑問 ====== */
+var QS=[
+ {n:"賀陳旦",c:1,t:"程序",say:"前交通部長：應重新完成可行性研究。"},
+ {n:"陳建宇",c:1,t:"程序",say:"前交通部長：系統改變，就該回到可研重做。"},
+ {n:"張景森",c:1,t:"程序",say:"前政委：不能脫離全島路網單獨決策。"},
+ {n:"吳澤成",c:1,t:"程序",say:"前政委：不能只蓋到宜蘭、沒有花東銜接。"},
+ {n:"李克聰",c:0,t:"交通",say:"替代方案必須同路廊、同服務目標來比。"},
+ {n:"鍾慧諭",c:0,t:"交通",say:"新增運量可能主要來自台鐵客運移轉。"},
+ {n:"陳志賢",c:0,t:"交通",say:"先確認需求，再選系統。"},
+ {n:"濮大威",c:0,t:"交通",say:"交通決策需要數據論證，不是政治承諾。"},
+ {n:"張勝雄",c:2,t:"財務",say:"運量與效益假設，不能因方案改變就換算法。"},
+ {n:"徐世榮",c:2,t:"土地",say:"政大地政：土地變更需要正當程序。"},
+ {n:"李家儂",c:2,t:"土地",say:"420 公頃應有規劃依據。"},
+ {n:"陳碧源",c:2,t:"財務",say:"估價師：質疑開發模式與市場去化。"},
+ {n:"李鴻源",c:3,t:"環境",say:"前內政部長：先問為什麼要蓋，再問能不能蓋。"},
+ {n:"張智欽",c:3,t:"環境",say:"宜蘭大學：淹水風險必須進入站址選擇。"},
+ {n:"詹順貴",c:3,t:"環境",say:"前環保署副署長：961 萬土方去向應可追蹤。"},
+ {n:"陳永松",c:3,t:"環境",say:"宜蘭大學：農地的多重功能不是成本外的空白。"},
+ {n:"林旺根",c:4,t:"地方",say:"前宜蘭建設局長：不該破壞 12 個台鐵站聚落。"},
+ {n:"陳育貞",c:4,t:"地方",say:"台大城鄉所：新站將重新分配發展利益與排除。"},
+ {n:"謝國安",c:4,t:"地方",say:"單一站點可能弱化原有聚落。"},
+ {n:"呂學麟",c:4,t:"地方",say:"宜蘭工務退休首長：無花東延伸，路網效益待驗證。"}
+];
+var qwall=document.getElementById("qwall");
+if(qwall){
+  QS.forEach(function(q,i){
+    var b=document.createElement("button");b.textContent=q.n;b.className="c"+q.c;
+    b.addEventListener("click",function(){
+      var bub=document.getElementById("qbub");
+      [].forEach.call(qwall.children,function(x){x.setAttribute("aria-pressed","false")});
+      b.setAttribute("aria-pressed","true");
+      document.getElementById("qwho").textContent=q.n;
+      document.getElementById("qtag").textContent=q.t;
+      document.getElementById("qsay").textContent=q.say;
+      bub.hidden=false;
+    });
+    qwall.appendChild(b);
+  });
+}
 
 /* 卡片 reveal＋數字滾動 */
 function rollNums(card){
