@@ -125,6 +125,46 @@ details.srcfold .src{margin-top:8px}
 .trow .td{font-family:var(--mono);font-size:11.5px;font-weight:800;flex:none;width:74px;font-variant-numeric:tabular-nums}
 .trow .tx{font-size:13.5px;color:#3A3542;font-weight:500;line-height:1.6}
 
+/* 目的地選擇與車票 */
+.picklab{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.1em;margin-top:12px}
+.dpick{display:flex;flex-wrap:wrap;gap:7px;margin:6px 0 12px}
+.tkleg.west .tkmark{background:var(--bg2);border-color:var(--faint);color:var(--muted)}
+.dpick button{font-family:var(--sans);font-size:13px;font-weight:800;padding:8px 16px;border-radius:3px;border:1.5px solid var(--ink);background:var(--panel);color:var(--ink);cursor:pointer;box-shadow:2px 2px 0 #141216}
+.dpick button[aria-pressed="true"]{background:var(--danger);border-color:var(--danger);color:#F5F3EC}
+.dpick button:active{transform:translateY(2px);box-shadow:1px 1px 0 #141216}
+.swapbtn{display:inline-block;margin:0 0 12px;font-family:var(--sans);font-size:12.5px;font-weight:800;padding:7px 13px;border-radius:3px;border:1.5px dashed var(--muted);background:transparent;color:var(--muted);cursor:pointer}
+.swapbtn:active{transform:translateY(1px)}
+.ticket{position:relative;background:var(--bg);border:1.5px solid var(--ink);border-radius:3px;box-shadow:5px 5px 0 #141216;padding:16px 16px 14px;margin:0 0 12px;overflow:hidden}
+.ticket::before,.ticket::after{content:"";position:absolute;width:16px;height:16px;border-radius:50%;background:var(--panel);border:1.5px solid var(--ink);top:calc(50% - 8px)}
+.ticket::before{left:-9px}
+.ticket::after{right:-9px}
+.tkhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.tkhead .tkno{font-family:var(--mono);font-size:10.5px;font-weight:800;color:var(--faint);letter-spacing:.06em}
+.tkhead .tkdest{font-family:"Noto Serif TC","Songti TC",serif;font-size:clamp(1.05rem,4.4vw,1.35rem);font-weight:800}
+.tkleg{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed rgba(20,18,22,.3)}
+.tkleg .tkmark{flex:none;font-family:var(--mono);font-size:10px;font-weight:800;padding:3px 6px;border:1.5px solid var(--ink);border-radius:2px;margin-top:2px}
+.tkleg.hsr .tkmark{background:var(--danger);border-color:var(--danger);color:#F5F3EC}
+.tkleg.tra .tkmark{background:var(--ok);border-color:var(--ok);color:#F5F3EC}
+.tkleg.same .tkmark{background:#141216;color:#F5F3EC}
+.tkleg .tkbody{flex:1;min-width:0}
+.tkleg .tkl{display:block;font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.03em}
+.tkleg .tkv{display:block;font-family:var(--mono);font-size:15px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.45;margin-top:2px}
+.tkleg .tkn{display:block;font-size:11.5px;color:var(--faint);font-weight:600;line-height:1.55;margin-top:2px}
+.tkdiff{margin-top:11px;display:flex;align-items:baseline;justify-content:space-between;gap:10px;border:1.5px solid var(--ink);border-radius:3px;padding:9px 12px;background:var(--panel2)}
+.tkdiff .dl{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.03em}
+.tkdiff .dv{font-family:var(--mono);font-size:clamp(1.05rem,4.8vw,1.4rem);font-weight:800;font-variant-numeric:tabular-nums;color:var(--danger)}
+.tkdiff.slower{background:rgba(179,38,30,.1);border-color:var(--danger)}
+.tkdiff.same .dv{color:var(--ink)}
+.tksnark{margin:9px 0 0;font-family:"Noto Serif TC","Songti TC",serif;font-size:clamp(1rem,4.4vw,1.2rem);font-weight:800;line-height:1.6;color:var(--danger);text-wrap:balance}
+.tkfare{margin-top:12px;background:#141216;border-radius:3px;padding:12px 14px;text-align:center}
+.tkfare .fl{display:block;font-size:11px;font-weight:800;color:#8A867C;letter-spacing:.06em}
+.tkfare .fv{display:block;font-family:var(--mono);font-size:clamp(1.5rem,7vw,2.1rem);font-weight:800;color:#FF3B2F;font-variant-numeric:tabular-nums;line-height:1.25;margin:2px 0}
+.tkfare .fn{display:block;font-size:10.5px;color:#8A867C;font-weight:600}
+.tkwarn{margin-top:10px;font-size:12.5px;font-weight:700;color:var(--danger);line-height:1.6}
+.tkact{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px}
+.tkact button{flex:1 1 140px;font-family:var(--sans);font-size:13.5px;font-weight:900;padding:11px 14px;border-radius:4px;border:1.5px solid var(--ink);background:var(--panel);color:var(--ink);cursor:pointer;box-shadow:3px 3px 0 #141216}
+.tkact button:active{transform:translateY(2px);box-shadow:1px 1px 0 #141216}
+
 /* 比價器 */
 .cmptabs{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 12px}
 .cmptabs button{font-family:var(--sans);font-size:12.5px;font-weight:800;padding:7px 14px;border-radius:3px;border:1.5px solid var(--ink);background:var(--panel);color:var(--ink);cursor:pointer}
@@ -223,6 +263,66 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     <a class="cta" href="#s1">出發 ↓</a>
   </section>
 
+  <section class="step tall">
+    <div class="card">
+      <div class="kick">開一張票給自己</div>
+      <h2>從你家到宜蘭，<br>這 5,965 億改到哪一段？</h2>
+      <p style="font-size:13.5px;color:#6A6371">行政院核定的工程費 3,521 億，加上 30 年營運與台鐵短收，總帳近 6,000 億。選起點與終點，看這筆錢到底改到你哪一段路。西部到台北一律走現行高鐵、統一在南港換車；南港以東，才是這筆錢要蓋的。</p>
+      <div class="picklab" id="labO">起點・西部</div>
+      <div class="dpick" id="opick" role="group" aria-label="選擇西部端"></div>
+      <div class="picklab" id="labD">終點・宜蘭</div>
+      <div class="dpick" id="dpick" role="group" aria-label="選擇宜蘭端"></div>
+      <button class="swapbtn" id="tkSwap" type="button">⇅ 換成回程（宜蘭 → 西部）</button>
+      <div class="ticket" id="ticket">
+        <div class="tkhead">
+          <span class="tkdest"><b id="tkOrig">台中</b> → <b id="tkDest">羅東</b></span>
+          <span class="tkno" id="tkNo">NO.5965</span>
+        </div>
+        <div class="tkleg west" id="tkLegW">
+          <span class="tkmark">現行</span>
+          <span class="tkbody">
+            <span class="tkl" id="tkWl">第一段・台中 → 南港</span>
+            <span class="tkv" id="tkWv">現行高鐵，已經在跑</span>
+            <span class="tkn" id="tkWn">這一段不花這筆錢，西部早就有了。</span>
+          </span>
+        </div>
+        <div class="tkleg hsr">
+          <span class="tkmark">高鐵</span>
+          <span class="tkbody">
+            <span class="tkl" id="tkHl">台北 → 羅東・走北宜高鐵</span>
+            <span class="tkv" id="tkHv">46 分</span>
+            <span class="tkn">已加計「轉乘台鐵 10 分鐘」。票價 315 元。</span>
+          </span>
+        </div>
+        <div class="tkleg tra">
+          <span class="tkmark">直鐵</span>
+          <span class="tkbody">
+            <span class="tkl" id="tkTl">台北 → 羅東・走北宜直鐵</span>
+            <span class="tkv" id="tkTv">49 分</span>
+            <span class="tkn">自強直達／半直達，票價 200 元。造價約高鐵的三分之一。</span>
+          </span>
+        </div>
+        <div class="tkdiff" id="tkDiff">
+          <span class="dl">付了 5,965 億，換到</span>
+          <span class="dv" id="tkDv">快 3 分鐘</span>
+        </div>
+        <p class="tksnark" id="tkSnark">才省 3 分鐘，你要我買單？</p>
+        <p class="tkwarn" id="tkWarn" hidden></p>
+        <div class="tkfare">
+          <span class="fl">這張票的真實價格</span>
+          <span class="fv" id="tkFare">NT$0</span>
+          <span class="fn" id="tkFareN">每人平均分攤，全國一人一份</span>
+        </div>
+      </div>
+      <div class="tkact">
+        <button id="tkCard">存成車票圖卡</button>
+        <button id="tkShare">把我的車票傳出去</button>
+      </div>
+      <canvas id="tkCanvas" width="1080" height="1350" hidden></canvas>
+      <details class="srcfold"><summary>出處與口徑</summary><p class="src">兩案到宜蘭各鄉鎮的行車時間，出自監察院 115 交調 0004 調查報告圖 7「北宜『高鐵』案及『直鐵』案行車時間比較圖」（PDF 第 36 頁）：高鐵案（已加計轉乘台鐵時間 10 分鐘、票價 315 元）頭城 59、礁溪 51、宜蘭 41、羅東 46、蘇澳新 59 分鐘；直鐵案（自強直達／半直達、票價 200 元）頭城 32、礁溪 39、宜蘭 41、羅東 49、蘇澳新 64 分鐘。該圖資料來源標示為「陳訴人提供」，非鐵道局估算。鐵道局自身估算為高鐵 28 分鐘（台北至南港 8 分＋南港至宜蘭 20 分）、直鐵 56 至 64 分鐘（台北至南港 10 分＋46 至 54 分），監察院載明該估算「未加計轉乘時間，是以該局應予加計轉乘時間進行比較分析」（同報告表 3、第 35 頁）。另交通部運研所模式情境分析：若宜蘭站兩鐵間轉乘時間大於 25 分鐘，預估約 50% 北部往返花東旅次將選擇全程搭乘台鐵（同報告表 7）。高鐵宜蘭站站址為「縣政中心以南」方案，與台鐵宜蘭新站平行共站、經地面層轉乘（交通部 2022.01.27 審查會議結論；鐵道局計畫資訊專區）；全線約 60.6 公里，宜蘭端僅此一站。西部至台北為現行高鐵既有路網，台灣高鐵公告台北至台南約 83 分、台北至左營約 95 分（直達車），其餘各站以高鐵官網時刻表查詢為準，本頁不列推估值。分攤金額＝5,965 億 ÷ 全國人口 23,243,565 人（內政部 2026 年 6 月底統計）。</p></details>
+    </div>
+  </section>
+
   <section class="step" id="s1">
     <div class="card">
       <div class="kick">第一站・這是什麼計畫</div>
@@ -256,15 +356,17 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
   <section class="step">
     <div class="card">
       <div class="kick">買到什麼</div>
-      <h2>進到宜蘭市區，<br>可能只快 6 分鐘</h2>
+      <h2>到宜蘭市一樣快，<br>到頭城反而慢 27 分</h2>
       <div class="vsrow">
-        <div class="vs bad"><span class="l">高鐵・到宜蘭市區（含轉乘）</span><span class="v">約 41 分</span></div>
-        <div class="vs good"><span class="l">台鐵直鐵・直達宜蘭站</span><span class="v">約 47 分</span></div>
+        <div class="vs bad"><span class="l">高鐵・台北到頭城（含轉乘 10 分）</span><span class="v">59 分</span></div>
+        <div class="vs good"><span class="l">直鐵・台北到頭城</span><span class="v">32 分</span></div>
       </div>
-      <p>高鐵站不在市中心。含轉乘進宜蘭市區，跟便宜好幾倍的台鐵直鐵，<b>只差約 6 分鐘</b>。</p>
-      <details class="srcfold"><summary>出處</summary><p class="src">公民幫推試算（眼底城事 2025.08）、鐵道局 FAQ（高鐵 27 分 vs 直鐵 57 至 65 分）。官方行車時間於核定當天同時存在 20、27、28 分鐘三種版本（公視、中央社 2026.07.23）。</p></details>
-    </div>
-  </section>
+      <p>監察院調查報告載明：鐵道局比較兩案時<b>沒有加計轉乘時間</b>，「應予加計轉乘時間進行比較分析，始符實情」。加計之後，高鐵到宜蘭市與直鐵同為 41 分，到羅東只快 3 分、到蘇澳新只快 5 分，到礁溪慢 12 分，<b>到頭城慢 27 分</b>。</p>
+      <p>更根本的問題在轉乘：交通部運研所的模式分析指出，宜蘭站兩鐵間<b>轉乘時間若大於 25 分鐘，約有 50% 的北部往返花東旅次會乾脆全程搭台鐵</b>。</p>
+      <details class="srcfold"><summary>出處</summary><p class="src">監察院 115 交調 0004 調查報告：圖 7「北宜『高鐵』案及『直鐵』案行車時間比較圖」（PDF 第 36 頁，高鐵側已加計轉乘台鐵時間 10 分鐘，該圖資料來源標示為「陳訴人提供」）；表 3 與第 35 頁載鐵道局估算高鐵 28 分、直鐵 56 至 64 分「未加計轉乘時間，是以該局應予加計轉乘時間進行比較分析」；表 7 載交通部運研所「東臺區域整體運輸規劃系列研究」模式情境分析之 25 分鐘轉乘門檻與 50% 移轉推估。官方行車時間於 2026.07.23 核定當天另同時存在 20、27、28 分鐘三種版本（公視、中央社）。</p></details>
+    </section>
+
+  
 
   <section class="step">
     <div class="card">
@@ -304,14 +406,16 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
       <div class="tlist">
         <div class="trow"><span class="td">2019.04</span><span class="tx">交通部指示改評估高鐵</span></div>
         <div class="trow"><span class="td">2019.11</span><span class="tx">直鐵顧問契約「加入」高鐵工作，此後同約修改 9 次</span></div>
-        <div class="trow"><span class="td">2023.12</span><span class="tx">賴清德競選承諾推動</span></div>
-        <div class="trow"><span class="td">2024 上半</span><span class="tx">特定區 190 → 420 公頃；政委陳金德主持會議設定時程加速</span></div>
+        <div class="trow"><span class="td">2022.01</span><span class="tx">交通部審查會議定案：宜蘭站採「縣政中心以南」方案</span></div>
+        <div class="trow red"><span class="td">2024.05.20</span><span class="tx">賴清德就任；陳金德同日就任政務委員</span></div>
+        <div class="trow red"><span class="td">2024.06.21</span><span class="tx">政院開「加速推動審查程序研商會議」，陳金德主持：各單位「推動態度均不夠積極」，指示環評與綜合規劃平行作業。後續再開 5 次進度追蹤會議</span></div>
+        <div class="trow red"><span class="td">2024.09.27</span><span class="tx">交通部依該會議結論提報階段性報告，轉請國發會審查</span></div>
         <div class="trow"><span class="td">2025.08</span><span class="tx">二階環評通過。高鐵與特定區拆成兩案分開環評</span></div>
-        <div class="trow"><span class="td">2026.01</span><span class="tx">宜蘭縣府先談容積：要求提高約 200%</span></div>
+        <div class="trow red"><span class="td">2026.01.23</span><span class="tx">政院開特定區進度追蹤會議，陳金德主持：請參考桃園、新竹經驗「檢討調高容積率」，認為規劃的約 200% 過低</span></div>
         <div class="trow red"><span class="td">2026.04–05</span><span class="tx">監察院公布調查報告，糾正多項違失</span></div>
         <div class="trow red"><span class="td">2026.07.23</span><span class="tx">行政院核定。距監院報告，約兩個月</span></div>
       </div>
-      <details class="srcfold"><summary>出處</summary><p class="src">宜蘭高鐵政策查核頁大事紀（彙整自監察院調查報告、鐵道局計畫大事紀、中央社 2023.12.21）。</p></details>
+      <details class="srcfold"><summary>出處</summary><p class="src">2024.06.21 與 2026.01.23 兩場會議之名稱、主持人與結論，出自監察院 115 交調 0004 調查報告：行政院 113 年 6 月 21 日召開「高鐵延伸宜蘭計畫加速推動審查程序研商會議」（由陳金德政務委員主持），指出「各相關單位的推動態度均不夠積極」，指示環評與綜合規劃採平行作業，後續再召開 5 次進度追蹤會議；交通部依該結論於 113 年 9 月 27 日提報階段性報告。115 年 1 月 23 日「高鐵宜蘭車站特定區計畫進度追蹤會議」同由陳金德主持，提出「請參考桃園、新竹高鐵特定區經驗，檢討調高容積率」（會議認為規劃之住宅區及產業專用區容積率約 200% 實屬過低）。2019.04.19 交通部指示辦理高鐵延伸宜蘭初步評估、2019.08.30 北宜新線綜合規劃陳報後遭退回並要求納入高鐵議題、2022.01.27 站址審查結論：交通部鐵道局計畫資訊專區大事紀、宜蘭縣政府交通處計畫辦理情形。其餘各列彙整自宜蘭高鐵政策查核頁大事紀。</p></details>
     </div>
   </section>
 
@@ -322,7 +426,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
       <div class="stats">
         <div class="st red"><b><i class="num" data-v="17">0</i> 頁</b><span>可行性報告就這麼薄</span></div>
         <div class="st red"><b>改 <i class="num" data-v="9">0</i> 次</b><span>同一份顧問契約，追加 60%</span></div>
-        <div class="st red"><b><i class="num" data-v="6.8" data-d="1">0</i>%</b><span>公民試算的自償率</span></div>
+        <div class="st red"><b><i class="num" data-v="6.8" data-d="1">0</i>%</b><span>鐵道局自陳的自償率</span></div>
         <div class="st"><b><i class="num" data-v="2">0</i> 個月</b><span>監院點出違失後就核定</span></div>
       </div>
       <p>監察院的考卷，逐題點開看：</p>
@@ -332,7 +436,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         <details><summary><i>✗</i>可研與綜規內容大量相似<em>▾</em></summary><p>兩份不同階段的報告，內容大量摘錄重複，審查形同走過場。</p></details>
         <details><summary><i>✗</i>政委下場設定時程<em>▾</em></summary><p>陳金德主持會議設定通過時程，環評與綜合規劃平行趕工。</p></details>
         <details><summary><i>✗</i>社會溝通只靠法定說明會<em>▾</em></summary><p>主要依賴環評法定說明會，實質公民參與不足。</p></details>
-        <details><summary><i>✗</i>自償率僅 6.8%，補貼規模不明<em>▾</em></summary><p>官方至今未公布核定版數字。桃捷綠線前例：官方當年說 41.77%，監院後來認定只有 2.53%。差額，全民付。</p></details>
+        <details><summary><i>✗</i>自償率僅 6.8%，補貼規模不明<em>▾</em></summary><p>監察院報告載：「據鐵道局表示，本計畫財務自償率 6.8%，無法完全自償（未達 100%）。」桃捷綠線前例：官方當年說 41.77%，監院後來認定只有 2.53%。差額，全民付。</p></details>
         <details><summary><i>✗</i>420 公頃需求缺乏立論<em>▾</em></summary><p>特定區從 190 公頃暴增到 420 公頃，監察院直指缺乏充分立論基礎。</p></details>
         <details><summary><i>✗</i>高鐵與特定區拆開環評<em>▾</em></summary><p>兩案分開評估，累積的整體衝擊從頭到尾沒被一次評估過。</p></details>
       </div>
@@ -386,7 +490,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     <b style="color:var(--muted)">關於本頁</b><br>
     整理高鐵延伸宜蘭計畫的公開資訊與公民團體質疑。所有數字均附來源；本頁碼表與主標採公民總帳口徑 5,965 億（工程 3,650＋30 年營運 1,735＋台鐵短收 580，宜蘭高鐵政策查核頁彙整）；行政院核定之工程經費為 3,521.75 億。<br><br>
     <b style="color:var(--muted)">主要資料來源</b><br>
-    監察院調查報告（2026.05）｜中央社、公視、自由時報、聯合報、ETtoday、Newtalk（2026.05 至 07）｜環境資訊中心（2023 至 2025 環評紀錄）｜眼底城事・公民幫推試算（2025.08）｜鐵道局計畫專區 hsr2yilan.com｜時代力量官網（2026.06.11）｜<a href="https://yilan-hsr-ledger.lys730.chatgpt.site/" target="_blank" rel="noopener">宜蘭高鐵政策查核頁</a>（比較表、大事紀與監院問題彙整）。<br><br>
+    <a href="https://cybsbox.cy.gov.tw/CYBSBoxSSL/edoc/download/73762" target="_blank" rel="noopener">監察院 115 交調 0004 調查報告全文 PDF</a>（審議日期 2026.04.14）｜中央社、公視、自由時報、聯合報、ETtoday、Newtalk（2026.05 至 07）｜環境資訊中心（2023 至 2025 環評紀錄）｜眼底城事・公民幫推試算（2025.08）｜鐵道局計畫專區 hsr2yilan.com｜<a href="https://www.rootlaw.com.tw/Attach/S-Doc/02411501090004-001.pdf" target="_blank" rel="noopener">高鐵延伸宜蘭計畫環境影響評估報告書（定稿）摘要本</a>｜時代力量官網（2026.06.11）｜<a href="https://yilan-hsr-ledger.lys730.chatgpt.site/" target="_blank" rel="noopener">宜蘭高鐵政策查核頁</a>（比較表、大事紀與監院問題彙整）。<br><br>
     論述整理自台灣前進陣線 2026.07.22 記者會與高鐵延伸宜蘭監督聯盟公開發言；各團體立場以其官方公告為準。
   </div>
 </footer>
@@ -558,6 +662,112 @@ function drawSpark(s){
 
 /* ====== 民代（笑嘻嘻拍手撿錢）====== */
 var POLS=[];(function(){for(var y=520,i=0;y<8600;y+=590,i++){POLS.push({y:y,side:i%2?1:-1,kind:i%3});}})();
+
+/* 南方四劍客風格的具名人物：粗線條、圓頭、豆豆眼。
+   名牌一律寫可查證的行為，不寫指控。 */
+var CUTOUTS=[
+  {y:1750,side:-1,name:"賴清德",tag:"2024.05.20 就任，隔月政院開加速會議",hair:"#4A4640",gray:true,tie:"#1E6B3A"},
+  {y:4650,side:1,name:"陳金德",tag:"2024.06.21 主持加速推動會議",hair:"#2E2A24",gray:false,tie:"#1E4C8C"},
+  {y:7250,side:-1,name:"卓榮泰",tag:"2026.07.23 核定",hair:"#3A362F",gray:true,tie:"#8C2018"}
+];
+function drawCutout(px,py,c,t){
+  var ph=reduced?0.6:(Math.sin(t/140+px*0.5)*0.5+0.5);
+  ctx.save();ctx.translate(px,py);ctx.scale(2.15,2.15);
+  if(c.side>0)ctx.scale(-1,1);
+  ctx.translate(0,reduced?0:Math.sin(t/240+px)*1.2);
+  var LW=1.3,OUT="#141216";
+  ctx.lineJoin="round";ctx.lineCap="round";
+  /* 影 */
+  ctx.fillStyle="rgba(10,9,12,.32)";ctx.beginPath();ctx.ellipse(0,13,10,3,0,0,7);ctx.fill();
+  /* 腿（南方四劍客的短棍腿） */
+  ctx.strokeStyle=OUT;ctx.lineWidth=3.2;
+  ctx.beginPath();ctx.moveTo(-3,8);ctx.lineTo(-3,12.5);ctx.moveTo(3,8);ctx.lineTo(3,12.5);ctx.stroke();
+  /* 身體：圓角方塊西裝 */
+  ctx.fillStyle="#2A2730";ctx.strokeStyle=OUT;ctx.lineWidth=LW;
+  ctx.beginPath();
+  if(ctx.roundRect)ctx.roundRect(-7.5,-1,15,10,3);
+  else ctx.rect(-7.5,-1,15,10);
+  ctx.fill();ctx.stroke();
+  /* 襯衫領＋領帶 */
+  ctx.fillStyle="#F2EEE4";ctx.beginPath();ctx.moveTo(-3,-1);ctx.lineTo(0,3.5);ctx.lineTo(3,-1);ctx.closePath();ctx.fill();
+  ctx.fillStyle=c.tie;ctx.beginPath();ctx.moveTo(-1.3,0.5);ctx.lineTo(1.3,0.5);ctx.lineTo(1.9,7);ctx.lineTo(0,8.4);ctx.lineTo(-1.9,7);ctx.closePath();ctx.fill();
+  /* 手：一手抱鈔票、一手比讚 */
+  ctx.strokeStyle=OUT;ctx.lineWidth=2.8;
+  ctx.beginPath();ctx.moveTo(-7,1.5);ctx.lineTo(-11,-1-ph*1.5);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(7,1.5);ctx.lineTo(11.5,-3.5+ph*2);ctx.stroke();
+  ctx.fillStyle="#E7C193";ctx.strokeStyle=OUT;ctx.lineWidth=LW;
+  ctx.beginPath();ctx.arc(-11.4,-1.4-ph*1.5,2.5,0,7);ctx.fill();ctx.stroke();
+  ctx.beginPath();ctx.arc(11.9,-3.9+ph*2,2.5,0,7);ctx.fill();ctx.stroke();
+  /* 手上那疊鈔票 */
+  ctx.save();ctx.translate(-11.4,-1.4-ph*1.5);ctx.rotate(-0.22);
+  for(var s=2;s>=0;s--){
+    ctx.fillStyle="#3E5F94";ctx.strokeStyle=OUT;ctx.lineWidth=.9;
+    ctx.beginPath();ctx.rect(-4.5,-1.6-s*1.9,9,3.4);ctx.fill();ctx.stroke();
+    ctx.fillStyle="#5C82BC";ctx.fillRect(-3.6,-1-s*1.9,7.2,2.2);
+  }
+  ctx.restore();
+  /* 頭：南方四劍客的大圓頭（往上挪，讓嘴巴露出來） */
+  var HY=-11.5;
+  ctx.fillStyle="#EFC79C";ctx.strokeStyle=OUT;ctx.lineWidth=LW;
+  ctx.beginPath();ctx.ellipse(0,HY,9.4,8.6,0,0,7);ctx.fill();ctx.stroke();
+  /* 頭髮：貼頭皮的側分短髮，一撮往右掃 */
+  ctx.save();ctx.beginPath();ctx.ellipse(0,HY,9.4,8.6,0,0,7);ctx.clip();
+  ctx.fillStyle=c.hair;
+  ctx.beginPath();
+  ctx.moveTo(-9.8,HY-1.4);
+  ctx.quadraticCurveTo(-9.4,HY-8.4,-1.6,HY-8.8);
+  ctx.quadraticCurveTo(7.2,HY-9.2,9.8,HY-2.6);
+  ctx.lineTo(9.8,HY-9.6);ctx.lineTo(-9.8,HY-9.6);ctx.closePath();ctx.fill();
+  /* 額前那撮：從左分線斜掃到右 */
+  ctx.beginPath();
+  ctx.moveTo(-4.6,HY-8.6);
+  ctx.quadraticCurveTo(-1.2,HY-3.2,7.4,HY-4.4);
+  ctx.quadraticCurveTo(2.4,HY-8.2,-4.6,HY-8.6);
+  ctx.fill();
+  if(c.gray){ /* 兩鬢泛白，一道就好，別像迷彩 */
+    ctx.fillStyle="rgba(230,226,218,.42)";
+    ctx.beginPath();ctx.ellipse(-7.4,HY-3.4,2.4,3.4,-0.25,0,7);ctx.fill();
+    ctx.beginPath();ctx.ellipse(7.4,HY-3.4,2.4,3.4,0.25,0,7);ctx.fill();
+  }
+  ctx.restore();
+  /* 耳朵 */
+  ctx.fillStyle="#EFC79C";ctx.strokeStyle=OUT;ctx.lineWidth=LW;
+  ctx.beginPath();ctx.ellipse(-9.4,HY+1,1.7,2.3,0,0,7);ctx.fill();ctx.stroke();
+  ctx.beginPath();ctx.ellipse(9.4,HY+1,1.7,2.3,0,0,7);ctx.fill();ctx.stroke();
+  /* 豆豆眼：兩顆大白眼球＋小黑點 */
+  ctx.fillStyle="#FBF8F2";ctx.strokeStyle=OUT;ctx.lineWidth=LW;
+  ctx.beginPath();ctx.ellipse(-3.4,HY+0.4,3.6,4.1,0,0,7);ctx.fill();ctx.stroke();
+  ctx.beginPath();ctx.ellipse(3.4,HY+0.4,3.6,4.1,0,0,7);ctx.fill();ctx.stroke();
+  ctx.fillStyle="#141216";
+  ctx.beginPath();ctx.arc(-2.4,HY+0.7,1.4,0,7);ctx.arc(4.3,HY+0.7,1.4,0,7);ctx.fill();
+  /* 濃眉 */
+  ctx.strokeStyle=OUT;ctx.lineWidth=1.6;
+  ctx.beginPath();ctx.moveTo(-6.6,HY-3.6);ctx.lineTo(-1.1,HY-2.9);ctx.moveTo(1.1,HY-2.9);ctx.lineTo(6.6,HY-3.6);ctx.stroke();
+  /* 咧開的假笑：黑口＋白牙 */
+  ctx.fillStyle="#3A1E1A";ctx.strokeStyle=OUT;ctx.lineWidth=1.2;
+  ctx.beginPath();ctx.moveTo(-5,HY+5.2);ctx.quadraticCurveTo(0,HY+10.4,5,HY+5.2);
+  ctx.quadraticCurveTo(0,HY+6.4,-5,HY+5.2);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.fillStyle="#FBF8F2";ctx.fillRect(-4.1,HY+5.4,8.2,1.5);
+  /* 名牌：寫可查證的行為 */
+  ctx.save();
+  if(c.side>0)ctx.scale(-1,1);
+  ctx.font='700 4.6px "PingFang TC","Noto Sans TC",sans-serif';
+  var wTag=ctx.measureText(c.tag).width;
+  ctx.font='800 6.6px "PingFang TC","Noto Sans TC",sans-serif';
+  var wName=ctx.measureText(c.name).width;
+  var tw=Math.max(wTag,wName)+9;
+  ctx.fillStyle="#141216";ctx.strokeStyle="#B3261E";ctx.lineWidth=1.2;
+  ctx.beginPath();
+  if(ctx.roundRect)ctx.roundRect(-tw/2,15,tw,11.5,2);else ctx.rect(-tw/2,15,tw,11.5);
+  ctx.fill();ctx.stroke();
+  ctx.textAlign="center";ctx.textBaseline="middle";
+  ctx.fillStyle="#F2EEE4";ctx.font='800 6.6px "PingFang TC","Noto Sans TC",sans-serif';
+  ctx.fillText(c.name,0,18.7);
+  ctx.fillStyle="#C9C3B8";ctx.font='700 4.6px "PingFang TC","Noto Sans TC",sans-serif';
+  ctx.fillText(c.tag,0,24.4);
+  ctx.restore();
+  ctx.restore();
+}
 function drawPol(px,py,kind,side,t){
   ctx.save();ctx.translate(px,py);ctx.scale(1.85,1.85);   /* 放大，看得清 */
   if(side>0)ctx.scale(-1,1);            /* 面向軌道 */
@@ -896,6 +1106,14 @@ function frame(t){
     }
   }
 
+  /* 具名人物（南方四劍客風格），站在軌道另一側 */
+  for(i=0;i<CUTOUTS.length;i++){
+    var cu=CUTOUTS[i],cpy=trainPx+(cu.y-camY)*0.9;
+    if(cpy<-70||cpy>H+70)continue;
+    var cux=tx+cu.side*(W<420?86:112);
+    drawCutout(cux,cpy,cu,t);
+  }
+
   /* 鈔票：從車尾噴出 */
   if(!reduced){
     var rate=speed>0.02?6:1;
@@ -977,11 +1195,11 @@ requestAnimationFrame(frame);
 
 /* ====== 比價器 ====== */
 var CMP=[
- {k:"行車時間",a:"約 41 分",an:"含轉乘進宜蘭市區",b:"約 47 分",bn:"直達宜蘭站",note:"官方主打 20 幾分鐘，但站不在市中心。進到市區，只差約 6 分鐘。"},
+ {k:"行車時間",a:"41 ─ 59 分",an:"宜蘭 41、頭城 59",b:"32 ─ 64 分",bn:"頭城 32、蘇澳新 64",note:"高鐵側已加計轉乘台鐵 10 分。到宜蘭市一樣快，到頭城反而慢 27 分。"},
  {k:"建造成本",a:"3,521.8 億",an:"行政院核定",b:"1,321.1 億",bn:"環評書口徑",note:"直鐵另有含物價調整的 2,220 億估算；兩案口徑不同，出處見摺疊。"},
  {k:"30 年營運",a:"約 1,735 億",an:"監察院報告",b:"約 170 億",bn:"環評書口徑",note:"差十倍。這筆錢，核定新聞稿裡不會告訴你。"},
  {k:"土地衝擊",a:"140 棟＋420 公頃",an:"特定區 85% 私有地",b:"約 18 棟",bn:"南港富康街",note:"一邊是整片特定區區段徵收，一邊是十幾棟。"},
- {k:"自償率",a:"6.8%",an:"公民試算",b:"—",bn:"未提出",note:"官方至今沒公布核定版自償率。剩下九成多，全民補。"}
+ {k:"自償率",a:"6.8%",an:"鐵道局自陳",b:"—",bn:"未提出",note:"「據鐵道局表示，本計畫財務自償率 6.8%，無法完全自償」——監察院調查報告。剩下九成多，全民補。"}
 ];
 var cmpIdx=0,cmpTabs=document.getElementById("cmpTabs"),cmpBodyEl=document.getElementById("cmpBody");
 function setCmp(i){
@@ -1013,7 +1231,7 @@ var QS=[
  {n:"鍾慧諭",c:0,t:"交通",say:"新增運量可能主要來自台鐵客運移轉。"},
  {n:"陳志賢",c:0,t:"交通",say:"先確認需求，再選系統。"},
  {n:"濮大威",c:0,t:"交通",say:"交通決策需要數據論證，不是政治承諾。"},
- {n:"張勝雄",c:2,t:"財務",say:"運量與效益假設，不能因方案改變就換算法。"},
+ {n:"張勝雄",c:0,t:"交通",say:"淡江運管系：高鐵縮短的是行車時間，宜蘭端轉乘銜接若不完善，整體旅行時間未必真的降低。"},
  {n:"徐世榮",c:2,t:"土地",say:"政大地政：土地變更需要正當程序。"},
  {n:"李家儂",c:2,t:"土地",say:"420 公頃應有規劃依據。"},
  {n:"陳碧源",c:2,t:"財務",say:"估價師：質疑開發模式與市場去化。"},
@@ -1064,6 +1282,223 @@ var io=new IntersectionObserver(function(es){
 document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
 
 /* 分享 */
+/* ====== 開一張票給自己 ====== */
+(function(){
+  var POP=23243565; /* 內政部 2026.06 底全國人口 */
+  var PER=Math.round(TOTAL_BUDGET*1e8/POP);
+  /* 出發地：西部一律走現行高鐵到南港 */
+  var ORIGS=[
+    {id:"tp",name:"台北",code:"TP",here:true,
+     v:"你已經在台北了",n:"走幾步就到南港。"},
+    {id:"hc",name:"新竹",code:"HC",
+     v:"現行高鐵，已經在跑",n:"這一段不必花這筆錢，西部早就有了。"},
+    {id:"tc",name:"台中",code:"TC",
+     v:"現行高鐵，已經在跑",n:"這一段不必花這筆錢，西部早就有了。"},
+    {id:"tn",name:"台南",code:"TN",
+     v:"現行高鐵，已經在跑",n:"台北到台南現行直達約 83 分。這一段不必花這筆錢。"},
+    {id:"ks",name:"高雄",code:"KS",
+     v:"現行高鐵，已經在跑",n:"台北到左營現行直達約 95 分。這一段不必花這筆錢。"}
+  ];
+  /* 目的地：宜蘭端五個鄉鎮。
+     hsr／tra 為監察院 115交調0004 調查報告圖7（PDF 第36頁）所載，
+     高鐵側已加計「轉乘台鐵時間10分鐘」；圖7 資料來源標示為「陳訴人提供」。 */
+  var DESTS=[
+    {id:"toucheng",name:"頭城",code:"TC2",hsr:59,tra:32},
+    {id:"jiaoxi", name:"礁溪",code:"JX", hsr:51,tra:39},
+    {id:"yilan",  name:"宜蘭",code:"YL", hsr:41,tra:41},
+    {id:"luodong",name:"羅東",code:"LD", hsr:46,tra:49},
+    {id:"suao",   name:"蘇澳",code:"SA", hsr:59,tra:64,dispName:"蘇澳新"}
+  ];
+  /* 酸話分級：慢 → 一樣 → 只快一點 → 快比較多 */
+  function snark(d){
+    var gain=d.tra-d.hsr;   /* 正數＝高鐵比較快 */
+    if(gain<0)  return{cls:"slower",dv:"慢 "+(-gain)+" 分鐘",
+      say:"你是把人民當白痴嗎？付了 6,000 億，結果要搭更久？"};
+    if(gain===0)return{cls:"same",dv:"一分鐘也沒快",
+      say:"花了 6,000 億，時間一模一樣。這筆錢到底買了什麼？"};
+    if(gain<=5) return{cls:"",dv:"快 "+gain+" 分鐘",
+      say:"才省 "+gain+" 分鐘，你要我買單？"};
+    return{cls:"",dv:"快 "+gain+" 分鐘",
+      say:"省下的每一分鐘，每個人先付 "+Math.round(PER/gain).toLocaleString("en-US")+" 元。"};
+  }
+  var ow=document.getElementById("opick"),dw=document.getElementById("dpick"),
+      elO=document.getElementById("tkOrig"),elD=document.getElementById("tkDest"),
+      elNo=document.getElementById("tkNo"),
+      elWl=document.getElementById("tkWl"),elWv=document.getElementById("tkWv"),elWn=document.getElementById("tkWn"),
+      elHl=document.getElementById("tkHl"),elHv=document.getElementById("tkHv"),
+      elTl=document.getElementById("tkTl"),elTv=document.getElementById("tkTv"),
+      elDiff=document.getElementById("tkDiff"),elDv=document.getElementById("tkDv"),
+      elSnark=document.getElementById("tkSnark"),
+      elWarn=document.getElementById("tkWarn"),elFare=document.getElementById("tkFare"),
+      curO=ORIGS[2],curD=DESTS[3];
+
+  var DIR=1; /* 1＝西部→宜蘭，-1＝宜蘭→西部 */
+  function render(){
+    var dn=curD.dispName||curD.name,s=snark(curD);
+    elO.textContent=DIR>0?curO.name:curD.name;
+    elD.textContent=DIR>0?curD.name:curO.name;
+    elNo.textContent="NO.5965-"+(DIR>0?curO.code+curD.code:curD.code+curO.code);
+    elWl.textContent=DIR>0?("第一段・"+curO.name+" → 南港"):("最後一段・南港 → "+curO.name);
+    elWv.textContent=curO.v;
+    elWn.textContent=curO.n;
+    elHl.textContent=(DIR>0?"台北 → "+dn:dn+" → 台北")+"・走北宜高鐵";
+    elHv.textContent=curD.hsr+" 分";
+    elTl.textContent=(DIR>0?"台北 → "+dn:dn+" → 台北")+"・走北宜直鐵";
+    elTv.textContent=curD.tra+" 分";
+    elDiff.className="tkdiff"+(s.cls?" "+s.cls:"");
+    elDv.textContent=s.dv;
+    elSnark.textContent=s.say;
+    curD._say=s.say;curD._dv=s.dv;
+    if(curD.warn){elWarn.textContent=curD.warn;elWarn.hidden=false;}else{elWarn.hidden=true;}
+    elFare.textContent="NT$"+PER.toLocaleString("en-US");
+    mark(ow,curO.id);mark(dw,curD.id);
+  }
+  function mark(w,id){
+    var bs=w.querySelectorAll("button");
+    for(var i=0;i<bs.length;i++){bs[i].setAttribute("aria-pressed",bs[i].dataset.id===id?"true":"false");}
+  }
+  function build(w,list,set){
+    list.forEach(function(x){
+      var b=document.createElement("button");
+      b.type="button";b.textContent=x.name;b.dataset.id=x.id;
+      b.setAttribute("aria-pressed","false");
+      b.addEventListener("click",function(){set(x);render();});
+      w.appendChild(b);
+    });
+  }
+  build(ow,ORIGS,function(x){curO=x;});
+  build(dw,DESTS,function(x){curD=x;});
+  var swap=document.getElementById("tkSwap"),labO=document.getElementById("labO"),labD=document.getElementById("labD");
+  swap.addEventListener("click",function(){
+    DIR=-DIR;
+    labO.textContent=(DIR>0?"起點":"終點")+"・西部";
+    labD.textContent=(DIR>0?"終點":"起點")+"・宜蘭";
+    swap.textContent=DIR>0?"⇅ 換成回程（宜蘭 → 西部）":"⇅ 換成去程（西部 → 宜蘭）";
+    render();
+  });
+  render();
+
+  /* ---- 產生可分享的車票圖卡 ---- */
+  function drawCard(){
+    var cv=document.getElementById("tkCanvas"),g=cv.getContext("2d"),
+        W=cv.width,H=cv.height,dn=curD.dispName||curD.name,s=snark(curD),
+        from=DIR>0?curO.name:curD.name,to=DIR>0?curD.name:curO.name,
+        SANS='"PingFang TC","Noto Sans TC",sans-serif',
+        SERIF='"Noto Serif TC","Songti TC",serif',
+        MONO='ui-monospace,"SF Mono",Menlo,monospace';
+    g.fillStyle="#E9E6DE";g.fillRect(0,0,W,H);
+    /* 票根本體 */
+    var M=60,cx=M,cy=M,cw=W-M*2,ch=H-M*2;
+    g.fillStyle="#141216";g.fillRect(cx+10,cy+10,cw,ch);
+    g.fillStyle="#F5F3EC";g.fillRect(cx,cy,cw,ch);
+    g.strokeStyle="#141216";g.lineWidth=4;g.strokeRect(cx,cy,cw,ch);
+    /* 齒孔 */
+    g.fillStyle="#E9E6DE";
+    for(var py=cy+40;py<cy+ch-20;py+=46){
+      g.beginPath();g.arc(cx,py,11,0,7);g.fill();
+      g.beginPath();g.arc(cx+cw,py,11,0,7);g.fill();
+    }
+    var L=cx+56,R=cx+cw-56,y=cy+92;
+    /* 抬頭 */
+    g.textAlign="left";g.textBaseline="alphabetic";
+    g.fillStyle="#B3261E";g.font="800 26px "+SANS;
+    g.fillText("北宜高鐵・全民帳本",L,y);
+    g.textAlign="right";g.fillStyle="#8A867C";g.font="800 22px "+MONO;
+    g.fillText("NO.5965-"+(DIR>0?curO.code+curD.code:curD.code+curO.code),R,y);
+    y+=26;g.strokeStyle="#141216";g.lineWidth=5;
+    g.beginPath();g.moveTo(L,y);g.lineTo(R,y);g.stroke();
+    /* 起訖 */
+    y+=92;g.textAlign="left";g.fillStyle="#141216";g.font="800 74px "+SERIF;
+    g.fillText(from+" → "+to,L,y);
+    /* 三列 */
+    function row(mark,mc,label,val,note){
+      y+=64;
+      g.fillStyle=mc;g.fillRect(L,y-30,88,40);
+      g.fillStyle="#F5F3EC";g.font="800 22px "+SANS;g.textAlign="center";
+      g.fillText(mark,L+44,y-2);
+      g.textAlign="left";
+      g.fillStyle="#5C5952";g.font="700 22px "+SANS;
+      g.fillText(label,L+108,y-12);
+      g.fillStyle="#141216";g.font="800 40px "+MONO;
+      g.fillText(val,L+108,y+30);
+      if(note){g.fillStyle="#8A867C";g.font="600 20px "+SANS;g.fillText(note,L+108,y+62);}
+      y+=78;
+      g.strokeStyle="rgba(20,18,22,.22)";g.lineWidth=2;
+      g.beginPath();g.moveTo(L,y);g.lineTo(R,y);g.stroke();
+    }
+    var rowWest=function(){row("現行","#5C5952",
+      (DIR>0?"第一段・"+curO.name+" → 南港":"最後一段・南港 → "+curO.name),
+      "現行高鐵，已經在跑","這一段不必花這筆錢，西部早就有了");};
+    var rowRail=function(){
+      row("高鐵","#B3261E",(DIR>0?"台北 → "+dn:dn+" → 台北")+"・走北宜高鐵",curD.hsr+" 分","已加計轉乘台鐵 10 分鐘，票價 315 元");
+      row("直鐵","#2F6B44",(DIR>0?"台北 → "+dn:dn+" → 台北")+"・走北宜直鐵",curD.tra+" 分","自強直達／半直達，票價 200 元");
+    };
+    if(DIR>0){rowWest();rowRail();}else{rowRail();rowWest();}
+    /* 差距 */
+    y+=52;
+    var slower=curD.tra<curD.hsr;
+    g.fillStyle=slower?"rgba(179,38,30,.12)":"#ECE9E0";
+    g.fillRect(L,y-44,R-L,84);
+    g.strokeStyle=slower?"#B3261E":"#141216";g.lineWidth=3;g.strokeRect(L,y-44,R-L,84);
+    g.fillStyle="#5C5952";g.font="800 24px "+SANS;g.textAlign="left";
+    g.fillText("付了 5,965 億，換到",L+22,y+8);
+    g.fillStyle=slower?"#B3261E":"#141216";g.font="800 46px "+MONO;g.textAlign="right";
+    g.fillText(s.dv,R-22,y+12);
+    /* 酸話 */
+    y+=112;g.textAlign="left";g.fillStyle="#B3261E";g.font="800 42px "+SERIF;
+    var words=s.say,line="",lines=[];
+    for(var i=0;i<words.length;i++){
+      var t=line+words[i];
+      if(g.measureText(t).width>R-L&&line){lines.push(line);line=words[i];}else line=t;
+    }
+    if(line)lines.push(line);
+    for(i=0;i<lines.length;i++){g.fillText(lines[i],L,y+i*54);}
+    y+=lines.length*54+18;
+    /* 分攤金額 */
+    g.fillStyle="#141216";g.fillRect(L,y,R-L,150);
+    g.textAlign="center";
+    g.fillStyle="#8A867C";g.font="800 22px "+SANS;
+    g.fillText("這張票的真實價格・每人平均分攤",(L+R)/2,y+44);
+    g.fillStyle="#FF3B2F";g.font="800 72px "+MONO;
+    g.fillText("NT$"+PER.toLocaleString("en-US"),(L+R)/2,y+112);
+    /* 註腳 */
+    g.fillStyle="#8A867C";g.font="600 19px "+SANS;g.textAlign="left";
+    g.fillText("行車時間：監察院 115 交調 0004 調查報告圖 7（資料來源標示為陳訴人提供）",L,y+196);
+    g.fillText("分攤金額：5,965 億 ÷ 全國人口 23,243,565 人（內政部 2026.06）",L,y+226);
+    g.fillStyle="#141216";g.font="800 22px "+SANS;
+    g.fillText("guanwei-cmd.github.io/hsr-yilan",L,y+266);
+    return cv;
+  }
+  document.getElementById("tkCard").addEventListener("click",function(){
+    var btn=this,cv=drawCard(),dn=curD.dispName||curD.name;
+    cv.toBlob(function(blob){
+      if(!blob)return;
+      var file=new File([blob],"北宜高鐵車票-"+dn+".png",{type:"image/png"});
+      if(navigator.canShare&&navigator.canShare({files:[file]})){
+        navigator.share({files:[file],title:"北宜高鐵，值得嗎？"}).catch(function(){});
+        return;
+      }
+      var a=document.createElement("a");
+      a.href=URL.createObjectURL(blob);a.download=file.name;a.click();
+      setTimeout(function(){URL.revokeObjectURL(a.href)},4000);
+      var o=btn.textContent;btn.textContent="已存成圖卡！";setTimeout(function(){btn.textContent=o},2000);
+    },"image/png");
+  });
+
+  document.getElementById("tkShare").addEventListener("click",function(){
+    var btn=this;
+    var dn=curD.dispName||curD.name;
+    var txt="台北到"+dn+"：北宜高鐵 "+curD.hsr+" 分（含轉乘台鐵 10 分）、北宜直鐵 "+curD.tra+" 分。"+
+            "付了 5,965 億，"+curD._dv+"。"+curD._say+
+            "（監察院 115交調0004 調查報告圖7）";
+    var url=location.href;
+    if(navigator.share){navigator.share({title:"北宜高鐵，值得嗎？",text:txt,url:url}).catch(function(){});}
+    else if(navigator.clipboard){navigator.clipboard.writeText(txt+"\n"+url).then(function(){
+      var o=btn.textContent;btn.textContent="已複製車票！";setTimeout(function(){btn.textContent=o},2000);
+    });}
+  });
+})();
+
 document.getElementById("shareBtn").addEventListener("click",function(){
   var txt="一班還沒開的列車，正在狂噴你的納稅錢。滑完這頁，你會知道北宜高鐵值不值得。";
   var url=location.href,btn=this;
