@@ -166,6 +166,26 @@ details.srcfold .src{margin-top:8px}
 .dchd b{font-size:14px;font-weight:800;line-height:1.4}
 .dcbody p{margin:0;padding:12px 13px;font-size:14.5px;color:#33302B;font-weight:500;line-height:1.85}
 .dcpanel{background:var(--panel);border:1.5px solid var(--ink);border-radius:4px;padding:18px 18px 16px;box-shadow:5px 5px 0 #141216}
+/* 具象場景橫向對照（釘住後由垂直捲動驅動水平位移） */
+.hz{position:relative}
+.hzpin{position:sticky;top:0;height:100dvh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.hztop{position:absolute;top:74px;left:0;right:0;display:flex;align-items:center;gap:9px;padding:0 16px;z-index:2}
+.hzkick{flex:none;font-size:11px;font-weight:800;letter-spacing:.14em;color:#F5F3EC;background:#141216;border-radius:2px;padding:3px 9px}
+.hzdots{display:flex;gap:5px;flex:1}
+.hzdots i{flex:1;height:4px;background:rgba(245,243,236,.35);border-radius:1px;transition:background .25s ease}
+.hzdots i.on{background:var(--danger)}
+.hzstrip{display:flex;height:100%;align-items:center;will-change:transform}
+.hzs{flex:none;width:100vw;padding:0 16px;display:flex;justify-content:center;align-items:center}
+.hzcard{width:100%;max-width:520px;background:var(--panel);border:1.5px solid var(--ink);border-radius:4px;box-shadow:6px 6px 0 #141216;overflow:hidden}
+.hzhd{display:flex;align-items:baseline;gap:9px;padding:7px 12px;background:#141216;color:#F5F3EC}
+.hzhd .hzn{flex:none;font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.12em;color:#B9B5AA}
+.hzhd b{font-size:15px;font-weight:900}
+.hzhd em{margin-left:auto;font-style:normal;font-size:11px;font-weight:700;color:#8A867C}
+.hzart{padding:14px 13px 6px}
+.hzart svg{width:100%;height:auto;display:block}
+.hzsay{margin:0;padding:0 13px 10px;font-size:15px;font-weight:800;color:var(--ink);line-height:1.6}
+.hznote{margin:0;padding:0 13px 13px;font-size:10.5px;font-weight:500;color:var(--faint);line-height:1.7}
+.hzhint{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:800;letter-spacing:.1em;color:#F5F3EC;background:#141216;border-radius:2px;padding:4px 12px}
 
 /* 目的地選擇與車票 */
 .picklab{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.1em;margin-top:12px}
@@ -297,6 +317,12 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
   .card,.card>*,.card .st,.card .vs,.card .trow{opacity:1;transform:none;transition:none}
   .hud .burn b.pp{animation:none}
   .dcbody{opacity:1;transition:none}
+  /* 橫向對照降級：不釘住、不位移，四格改直式堆疊 */
+  .hzpin{position:static;height:auto;overflow:visible;display:block;padding:0 0 8vh}
+  .hzstrip{display:block;transform:none!important}
+  .hzs{width:auto;padding:0 16px;margin-bottom:14px}
+  .hztop{position:static;padding:0 16px 10px}
+  .hzdots,.hzhint{display:none}
 }
 </style>
 </head>
@@ -424,6 +450,14 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     </section>
 
   
+
+  <section class="hz" id="hzSec" aria-label="高鐵與直鐵的具象化對照">
+    <div class="hzpin">
+      <div class="hztop"><span class="hzkick">攤開來比</span><div class="hzdots" id="hzDots"></div></div>
+      <div class="hzstrip" id="hzStrip"></div>
+      <span class="hzhint">往下滑，橫著看</span>
+    </div>
+  </section>
 
   <section class="dcsec" id="dcSec">
     <div class="dclead dcpanel">
@@ -1287,6 +1321,134 @@ function frame(t){
 requestAnimationFrame(frame);
 
 /* ====== 比價器 ====== */
+/* ====== 具象場景橫向對照 ======
+   模型取自報導者 scrollable-image：區塊釘住後，垂直捲動距離換算成水平位移。
+   本站以 rAF 取樣 rect（不掛 scroll listener），並用 IntersectionObserver
+   在區塊離開視窗時停掉迴圈。四格數字全部取自站上已列出處者。 */
+var INK="#141216",RED="#B3261E",OK="#2F6B44",GREY="#B9B5AA",PAPER="#E9E6DE";
+function svg(w,h,inner){
+  return '<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="示意圖">'+inner+'</svg>';
+}
+function txt(x,y,t,o){o=o||{};
+  return '<text x="'+x+'" y="'+y+'" fill="'+(o.f||INK)+'" font-size="'+(o.s||9)+'" font-weight="'+(o.w||800)+'"'+
+    (o.a?' text-anchor="'+o.a+'"':'')+(o.m?' font-family="ui-monospace,monospace"':'')+'>'+t+'</text>';
+}
+/* 一、時間：五站對照長條 */
+function artTime(){
+  var ST=[["頭城",59,32],["礁溪",51,39],["宜蘭",41,41],["羅東",46,49],["蘇澳新",59,64]];
+  var W=300,x0=44,maxW=200,MAX=64,y=14,o="";
+  o+=txt(0,8,"■ 高鐵（含轉乘台鐵 10 分）",{f:RED,s:8})+txt(150,8,"■ 直鐵",{f:OK,s:8});
+  ST.forEach(function(r){
+    o+=txt(x0-6,y+7,r[0],{a:"end",s:9});
+    o+='<rect x="'+x0+'" y="'+y+'" width="'+(r[1]/MAX*maxW)+'" height="7" fill="'+RED+'"/>';
+    o+=txt(x0+r[1]/MAX*maxW+4,y+7,r[1]+"",{f:RED,s:8.5,m:1});
+    o+='<rect x="'+x0+'" y="'+(y+9)+'" width="'+(r[2]/MAX*maxW)+'" height="7" fill="'+OK+'"/>';
+    o+=txt(x0+r[2]/MAX*maxW+4,y+16,r[2]+"",{f:OK,s:8.5,m:1});
+    y+=23;
+  });
+  o+=txt(x0,y+6,"單位：分鐘。長條越長＝越久",{f:"#8A867C",s:7.5,w:600});
+  return svg(W,y+12,o);
+}
+/* 二、土地：420 公頃方格（85% 私有地）＋拆遷戶數 */
+function artLand(){
+  var W=300,o="",C=28,R=15,s=6.4,g=0.9,gx=2,gy=12;
+  var priv=Math.round(420*0.85);
+  o+=txt(gx,8,"高鐵特定區 420 公頃（每格 1 公頃）",{s:8});
+  for(var i=0;i<420;i++){
+    var c=i%C,r=Math.floor(i/C);
+    o+='<rect x="'+(gx+c*(s+g))+'" y="'+(gy+r*(s+g))+'" width="'+s+'" height="'+s+'" fill="'+(i<priv?RED:GREY)+'"/>';
+  }
+  var by=gy+R*(s+g)+6;
+  o+=txt(gx,by+7,"■ 區段徵收的私有地 "+priv+" 公頃（85%）",{f:RED,s:8});
+  o+=txt(gx,by+18,"■ 其餘 "+(420-priv)+" 公頃",{f:"#8A867C",s:8});
+  var hy=by+30;
+  o+=txt(gx,hy+7,"民宅拆遷",{s:8.5});
+  function house(x,y,f){return '<path d="M'+x+' '+(y+6)+'l3-4 3 4v4h-6z" fill="'+f+'"/>';}
+  var k=0;
+  for(k=0;k<140;k++)o+=house(gx+42+(k%35)*7.2,hy+(Math.floor(k/35))*11,RED);
+  o+=txt(gx+42+35*7.2+4,hy+7,"高鐵 140 棟＋",{f:RED,s:8});
+  var hy2=hy+4*11+4;
+  for(k=0;k<18;k++)o+=house(gx+42+k*7.2,hy2,OK);
+  o+=txt(gx+42+18*7.2+4,hy2+7,"直鐵 約 18 棟",{f:OK,s:8});
+  return svg(W,hy2+16,o);
+}
+/* 三、生態：雪山山脈 10 座隧道與剩餘土石方 */
+function artEco(){
+  var W=300,H=158,o="";
+  o+=txt(2,10,"雪山山脈地下：全線 10 座隧道",{s:8.5});
+  o+='<path d="M0 74 L38 40 L64 56 L96 22 L134 52 L168 30 L206 58 L240 36 L270 62 L300 48 L300 86 L0 86 Z" fill="'+GREY+'"/>';
+  o+='<rect x="0" y="86" width="300" height="5" fill="'+INK+'"/>';
+  for(var i=0;i<10;i++)o+='<circle cx="'+(16+i*30)+'" cy="77" r="3.2" fill="'+INK+'"/>';
+  o+=txt(258,106,"961.3 萬 m³",{a:"middle",f:RED,s:9.5,m:1});
+  o+='<path d="M212 154 L258 112 L304 154 Z" fill="'+RED+'"/>';
+  o+=txt(258,146,"剩餘土石方",{a:"middle",f:"#F5F3EC",s:8});
+  o+=txt(2,112,"其中去處已載明的部分",{f:"#8A867C",s:7.5,w:600});
+  o+=txt(2,128,"236 萬 m³ 運台北港填海",{s:8.5});
+  o+=txt(2,144,"391.3 萬 m³ 暫置特定區良田，尚無最終去處",{s:8.5});
+  return svg(W,H,o);
+}
+/* 四、成本：工程＋30 年營運疊起來 */
+function artCost(){
+  var W=300,o="",A=3521.75+1735.32,B=1321.12+170.17;
+  var unit=250,ha=Math.round(A/unit),hb=Math.round(B/unit),bh=5,bg=1.4,base=176;
+  function stack(x,n,f,lab,val){
+    var s="";
+    for(var i=0;i<n;i++)s+='<rect x="'+x+'" y="'+(base-(i+1)*(bh+bg))+'" width="54" height="'+bh+'" fill="'+f+'"/>';
+    s+=txt(x+27,base-n*(bh+bg)-7,val+" 億",{a:"middle",f:f,s:11,m:1});
+    s+=txt(x+27,base+12,lab,{a:"middle",s:8.5});
+    return s;
+  }
+  o+=stack(52,ha,RED,"高鐵延伸宜蘭","5,257");
+  o+=stack(190,hb,OK,"台鐵北宜直鐵","1,491");
+  o+='<rect x="0" y="'+base+'" width="300" height="2" fill="'+INK+'"/>';
+  o+=txt(150,base+26,"工程＋30 年營運，每格 250 億",{a:"middle",f:"#8A867C",s:7.5,w:600});
+  return svg(W,base+32,o);
+}
+var HZ=[
+ {k:"時間",t:"到宜蘭的那幾站",art:artTime,
+  say:"到宜蘭市一樣快，到頭城慢 27 分鐘。",
+  note:"監察院 115 交調 0004 調查報告圖 7（審議日期 2026.04.14）。高鐵側已加計轉乘台鐵 10 分鐘；該圖資料來源標示為「陳訴人提供」，非監察院或鐵道局估算。"},
+ {k:"土地",t:"要徵走的那一片",art:artLand,
+  say:"一邊是整片區段徵收，一邊是十幾棟。",
+  note:"420 公頃特定區、85% 私有地、140 棟以上民宅拆遷：時代力量官網 2026.06.11、監察院調查報告（直指 420 公頃缺乏立論基礎）。直鐵約 18 棟為南港富康街段。"},
+ {k:"生態",t:"挖出來的那些土",art:artEco,
+  say:"堪比全國一整年的土石方去化量。",
+  note:"環評報告書所載，詹順貴 2026.02.04 於思想坦克引述：施工總計產生 961.3 萬立方公尺剩餘土石方，運往台北港填海 236 萬，另 391.3 萬暫置於特定區約 420 公頃良田之上，尚無明確最終去處。全國一整年土石方最終去化量 1,053 萬立方公尺（內政部 115.01.14 記者會投影片）。直鐵側本站未取得同基準的公布數字，故不並列。"},
+ {k:"成本",t:"疊起來的那一疊",art:artCost,
+  say:"工程加三十年營運，一邊是另一邊的 3.5 倍。",
+  note:"高鐵：行政院 2026.07.23 核定工程費 3,521.75 億＋30 年營運約 1,735 億。直鐵：環評書口徑建造 1,321.12 億＋30 年營運約 170 億；另有含物價調整之 2,220 億估算（中央社 2026.01.13）。兩案口徑不同。"}
+];
+(function(){
+  var sec=document.getElementById("hzSec"),strip=document.getElementById("hzStrip"),dots=document.getElementById("hzDots");
+  if(!sec||!strip||!dots)return;
+  HZ.forEach(function(d,i){
+    var a=document.createElement("article");a.className="hzs";
+    a.innerHTML='<div class="hzcard"><header class="hzhd"><span class="hzn">0'+(i+1)+'</span><b>'+d.k+'</b><em>'+d.t+'</em></header>'+
+      '<div class="hzart">'+d.art()+'</div><p class="hzsay">'+d.say+'</p><p class="hznote">'+d.note+'</p></div>';
+    strip.appendChild(a);
+    var dot=document.createElement("i");dots.appendChild(dot);
+  });
+  if(reduced)return;                        /* 降級：交給 CSS 直式堆疊 */
+  sec.style.height="calc(100dvh + "+((HZ.length-1)*70)+"dvh)";
+  var live=false,lastP=-1;
+  new IntersectionObserver(function(es){
+    es.forEach(function(e){ live=e.isIntersecting; if(live)tick(); });
+  },{rootMargin:"120px 0px 120px 0px"}).observe(sec);
+  function tick(){
+    if(!live)return;
+    var r=sec.getBoundingClientRect(),span=r.height-window.innerHeight;
+    var p=span>0?Math.min(1,Math.max(0,-r.top/span)):0;
+    if(Math.abs(p-lastP)>0.0005){
+      lastP=p;
+      var pan=strip.scrollWidth-strip.clientWidth;
+      strip.style.transform="translate3d("+(-p*pan)+"px,0,0)";
+      var idx=Math.min(HZ.length-1,Math.round(p*(HZ.length-1)));
+      [].forEach.call(dots.children,function(x,j){x.classList.toggle("on",j<=idx)});
+    }
+    requestAnimationFrame(tick);
+  }
+})();
+
 var CMP=[
  {k:"行車時間",a:"41 ─ 59 分",an:"宜蘭 41、頭城 59",b:"32 ─ 64 分",bn:"頭城 32、蘇澳新 64",
   p:"官方最愛講的數字是 28 分鐘，那是南港到宜蘭站的純行車時間。但下了高鐵還要轉台鐵才進得了市區。把轉乘的 10 分鐘加回去，到宜蘭市兩案一樣快，到頭城高鐵反而慢 27 分鐘。"},
@@ -1414,7 +1576,7 @@ if(wA&&wB){
    標題／金句類元素的「直接文字節點」依標點切段，各段包成 .nb（inline-block）成塊換行，
    因此只會在標點後折行，不會從子句中間斷開。元素子節點（em/br/span）不動，段落正文不處理。 */
 (function(){
-  var SEL=["main h1","main h2","main h3",".hero .sub",".dclead p",".tlgs",".tlgh b",".dchd b",".tksnark"].join(",");
+  var SEL=["main h1","main h2","main h3",".hero .sub",".dclead p",".tlgs",".tlgh b",".dchd b",".tksnark",".hzsay"].join(",");
   var PUNCT=/([，、。；：！？…・]+|[ \u3000]+)/;
   function run(root){
     (root||document).querySelectorAll(SEL).forEach(function(el){
