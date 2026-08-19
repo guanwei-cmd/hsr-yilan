@@ -1390,12 +1390,16 @@ if(wA&&wB){
       document.getElementById("qtitle").textContent=q.ti;
       document.getElementById("qsay").textContent="「"+q.say+"」";
       var av=document.getElementById("qav");
-      av.textContent=q.n.charAt(0);
+      av.textContent="";
       if(q.img){
-        var im=new Image();
-        im.alt=q.n;im.loading="lazy";
-        im.onload=function(){av.textContent="";av.appendChild(im);};
+        /* 直接掛圖，不等 onload，避免先閃一下姓名首字 */
+        var im=document.createElement("img");
+        im.alt="";im.decoding="async";
+        im.onerror=function(){av.textContent=q.n.charAt(0)};
         im.src="img/"+q.img+"_s.jpg";
+        av.appendChild(im);
+      }else{
+        av.textContent=q.n.charAt(0);
       }
       var a=document.getElementById("qsrc");
       a.href=q.u;a.textContent=q.k+"・"+q.s+" "+q.d+" \u2197";
