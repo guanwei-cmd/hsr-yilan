@@ -117,13 +117,55 @@ details.srcfold[open] summary{color:var(--ink)}
 details.srcfold .src{margin-top:8px}
 
 /* 時間軸 */
-.tlist{margin:12px 0 4px;border-left:2px solid var(--ink);padding-left:14px}
+/* 時間軸：group（階段）／unit（事件）兩層 */
+.tl{display:flex;flex-direction:column;gap:11px;margin:12px 0 4px}
+.tlg{border:1.5px solid var(--ink);border-radius:3px;background:var(--panel2);box-shadow:3px 3px 0 rgba(20,18,22,.16);overflow:hidden}
+.tlg.hot{border-color:var(--danger);background:rgba(179,38,30,.055)}
+.tlgh{display:flex;align-items:baseline;gap:9px;padding:6px 11px;background:#141216;color:#F5F3EC}
+.tlg.hot .tlgh{background:var(--danger)}
+.tlgh .gp{flex:none;font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.04em;color:#B9B5AA}
+.tlg.hot .tlgh .gp{color:rgba(255,255,255,.78)}
+.tlgh b{font-size:13.5px;font-weight:800;line-height:1.4}
+.tlgh em{flex:none;margin-left:auto;font-style:normal;font-family:var(--mono);font-size:10.5px;color:#8A867C}
+.tlg.hot .tlgh em{color:rgba(255,255,255,.6)}
+.tlgs{margin:9px 12px 0;font-size:12.5px;font-weight:700;color:#3A3542;line-height:1.7}
+.tlus{position:relative;padding:6px 12px 10px 27px}
+.tlus::before{content:"";position:absolute;left:15px;top:13px;bottom:16px;width:1.5px;background:rgba(20,18,22,.22)}
+.tlg.hot .tlus::before{background:rgba(179,38,30,.3)}
 .trow{display:flex;gap:10px;align-items:baseline;padding:4.5px 0;position:relative}
-.trow::before{content:"";position:absolute;left:-19px;top:12px;width:8px;height:8px;background:var(--ink)}
-.trow.red::before{background:var(--danger)}
-.trow .td{color:var(--danger)}
-.trow .td{font-family:var(--mono);font-size:11.5px;font-weight:800;flex:none;width:74px;font-variant-numeric:tabular-nums}
-.trow .tx{font-size:13.5px;color:#3A3542;font-weight:500;line-height:1.6}
+.trow::before{content:"";position:absolute;left:-15px;top:11px;width:7px;height:7px;background:var(--ink)}
+.tlg.hot .trow::before{background:var(--danger)}
+.trow .td{font-family:var(--mono);font-size:11.5px;font-weight:800;flex:none;width:74px;color:var(--danger);font-variant-numeric:tabular-nums}
+.trow .tx{font-size:13.5px;color:#3A3542;font-weight:500;line-height:1.6;margin:0}
+
+/* 雙軌對照：比較盤釘住，文字段落捲動推進 */
+.dcsec{position:relative;padding:0 16px 12vh}
+.dclead,.dctrack,.dcend{max-width:520px;margin:0 auto}
+.dclead{padding-top:13vh}
+.dcsec .kick{display:inline-block;font-size:11.5px;font-weight:800;color:#F5F3EC;letter-spacing:.14em;margin-bottom:9px;background:#141216;border-radius:2px;padding:3px 10px}
+.dcsec h2{font-size:clamp(1.35rem,5.5vw,1.8rem);margin:0 0 10px;font-weight:900;line-height:1.4;text-wrap:balance;color:var(--ink)}
+.dcsec>.dclead p{margin:0;font-size:15px;color:#33302B;font-weight:500;line-height:1.85}
+.dcsec .src{font-size:11px;color:var(--faint);line-height:1.7;font-weight:500;margin-top:12px}
+.dcstage{position:sticky;top:62px;z-index:3;max-width:520px;margin:14px auto 0}
+.dcbox{background:var(--panel);border:1.5px solid var(--ink);border-radius:4px;padding:12px 13px 14px;box-shadow:5px 5px 0 #141216}
+.dcbox .cmpbody{gap:8px}
+.dcbox .cmpside{padding:11px 8px 9px}
+.dcbox .cmpside b{font-size:clamp(1rem,4.1vw,1.36rem);white-space:nowrap;margin:5px 0 2px}
+.dcbox .cmpside .cl{font-size:10.5px}
+.dcbox .cmpside .cn{font-size:10px}
+.dcprog{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 11px}
+.dcprog button{font-family:var(--sans);font-size:11.5px;font-weight:800;padding:5px 11px;border-radius:3px;border:1.5px solid var(--ink);background:var(--panel);color:var(--ink);cursor:pointer}
+.dcprog button[aria-pressed="true"]{background:#141216;border-color:#141216;color:#F5F3EC}
+.dcstep{min-height:50vh;display:flex;flex-direction:column;justify-content:center;padding:18px 0}
+.dcbody{background:var(--panel);border:1.5px solid var(--ink);border-radius:3px;box-shadow:4px 4px 0 #141216;overflow:hidden;opacity:.55;transition:opacity .35s ease}
+.dcstep.on .dcbody{opacity:1}
+.dchd{display:flex;align-items:baseline;gap:9px;padding:6px 11px;background:#141216;color:#F5F3EC}
+.dcstep.on .dchd{background:var(--danger)}
+.dchd .dcn{flex:none;font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.12em;color:#B9B5AA}
+.dcstep.on .dchd .dcn{color:rgba(255,255,255,.8)}
+.dchd b{font-size:14px;font-weight:800;line-height:1.4}
+.dcbody p{margin:0;padding:12px 13px;font-size:14.5px;color:#33302B;font-weight:500;line-height:1.85}
+.dcpanel{background:var(--panel);border:1.5px solid var(--ink);border-radius:4px;padding:18px 18px 16px;box-shadow:5px 5px 0 #141216}
 
 /* 目的地選擇與車票 */
 .picklab{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.1em;margin-top:12px}
@@ -166,9 +208,6 @@ details.srcfold .src{margin-top:8px}
 .tkact button:active{transform:translateY(2px);box-shadow:1px 1px 0 #141216}
 
 /* 比價器 */
-.cmptabs{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 12px}
-.cmptabs button{font-family:var(--sans);font-size:12.5px;font-weight:800;padding:7px 14px;border-radius:3px;border:1.5px solid var(--ink);background:var(--panel);color:var(--ink);cursor:pointer}
-.cmptabs button[aria-pressed="true"]{background:#141216;border-color:#141216;color:#F5F3EC}
 .cmpbody{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:stretch}
 .cmpside{border-radius:3px;padding:12px 12px 10px;background:var(--bg);border:1.5px solid var(--ink);box-shadow:3px 3px 0 #141216;text-align:center}
 .cmpside .cl{display:block;font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.04em}
@@ -177,7 +216,6 @@ details.srcfold .src{margin-top:8px}
 .cmpside.good b{color:var(--ok)}
 .cmpside .cn{display:block;font-size:10.5px;color:var(--faint);font-weight:700}
 .cmpvs{align-self:center;font-family:var(--mono);font-size:13px;font-weight:800;color:var(--faint)}
-.cmpnote{font-size:13.5px;color:#3A3542;font-weight:600;margin:10px 0 0;min-height:2.6em}
 .cmpbody.sw .cmpside{animation:cmpin .38s cubic-bezier(.25,1.25,.4,1)}
 @keyframes cmpin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 /* 考卷訂正手風琴 */
@@ -258,6 +296,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
   html{scroll-behavior:auto}
   .card,.card>*,.card .st,.card .vs,.card .trow{opacity:1;transform:none;transition:none}
   .hud .burn b.pp{animation:none}
+  .dcbody{opacity:1;transition:none}
 }
 </style>
 </head>
@@ -386,18 +425,25 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
 
   
 
-  <section class="step">
-    <div class="card">
+  <section class="dcsec" id="dcSec">
+    <div class="dclead dcpanel">
       <div class="kick">被冷凍的對照組</div>
       <h2>同一條走廊，兩張報價單</h2>
-      <div class="cmptabs" id="cmpTabs" role="group" aria-label="比較面向"></div>
-      <div class="cmpbody" id="cmpBody">
-        <div class="cmpside bad"><span class="cl">高鐵延伸宜蘭</span><b id="cmpA">—</b><span class="cn" id="cmpAn"></span></div>
-        <div class="cmpvs">VS</div>
-        <div class="cmpside good"><span class="cl">台鐵北宜直鐵</span><b id="cmpB">—</b><span class="cn" id="cmpBn"></span></div>
+      <p>南港到宜蘭，兩套方案一直並存。往下滑，一項一項對——右邊那張報價單，從來沒有被同一個基準攤開比過。</p>
+    </div>
+    <div class="dcstage" id="dcStage">
+      <div class="dcbox">
+        <div class="dcprog" id="dcProg" role="group" aria-label="比較面向"></div>
+        <div class="cmpbody" id="cmpBody">
+          <div class="cmpside bad"><span class="cl">高鐵延伸宜蘭</span><b id="cmpA">—</b><span class="cn" id="cmpAn"></span></div>
+          <div class="cmpvs">VS</div>
+          <div class="cmpside good"><span class="cl">台鐵北宜直鐵</span><b id="cmpB">—</b><span class="cn" id="cmpBn"></span></div>
+        </div>
       </div>
-      <p class="cmpnote" id="cmpNote"></p>
-      <details class="srcfold"><summary>出處與口徑</summary><p class="src">宜蘭高鐵政策查核頁（環評書口徑：直鐵建造 1,321.12 億、30 年營運約 170.2 億）、監察院 2026.05 調查報告（高鐵 30 年營運約 1,735 億）、時代力量官網 2026.06.11（140 棟、420 公頃）。直鐵造價另有含物價調整之 2,220 億估算（中央社 2026.01.13）；兩案口徑不同。</p></details>
+    </div>
+    <div class="dctrack" id="dcTrack"></div>
+    <div class="dcend dcpanel">
+      <details class="srcfold"><summary>出處與口徑</summary><p class="src">行車時間各站數字出自監察院 115 交調 0004 調查報告圖 7（審議日期 2026.04.14），高鐵側已加計轉乘台鐵 10 分鐘；該圖資料來源標示為「陳訴人提供」，非監察院或鐵道局估算。建造成本：行政院 2026.07.23 核定 3,521.75 億；直鐵 1,321.12 億為環評書口徑，另有含物價調整之 2,220 億估算（中央社 2026.01.13），兩案口徑不同。30 年營運成本與土地衝擊數字彙整自宜蘭高鐵政策查核頁、監察院調查報告與時代力量官網 2026.06.11（140 棟、420 公頃）。自償率 6.8% 為報告中鐵道局自陳之數字。</p></details>
     </div>
   </section>
 
@@ -421,19 +467,38 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     <div class="card">
       <div class="kick">七年快轉</div>
       <h2>從「評估直鐵」，<br>一路改到「核定高鐵」</h2>
-      <div class="tlist">
-        <div class="trow"><span class="td">2019.04</span><span class="tx">交通部指示改評估高鐵</span></div>
-        <div class="trow"><span class="td">2019.11</span><span class="tx">直鐵顧問契約「加入」高鐵工作，此後同約修改 9 次</span></div>
-        <div class="trow"><span class="td">2022.01</span><span class="tx">交通部審查會議定案：宜蘭站採「縣政中心以南」方案</span></div>
-        <div class="trow red"><span class="td">2024.05.20</span><span class="tx">賴清德就任；陳金德同日就任政務委員</span></div>
-        <div class="trow red"><span class="td">2024.06.21</span><span class="tx">政院開「加速推動審查程序研商會議」，陳金德主持：各單位「推動態度均不夠積極」，指示環評與綜合規劃平行作業。後續再開 5 次進度追蹤會議</span></div>
-        <div class="trow red"><span class="td">2024.09.27</span><span class="tx">交通部依該會議結論提報階段性報告，轉請國發會審查</span></div>
-        <div class="trow"><span class="td">2025.08</span><span class="tx">二階環評通過。高鐵與特定區拆成兩案分開環評</span></div>
-        <div class="trow red"><span class="td">2026.01.23</span><span class="tx">政院開特定區進度追蹤會議，陳金德主持：請參考桃園、新竹經驗「檢討調高容積率」，認為規劃的約 200% 過低</span></div>
-        <div class="trow red"><span class="td">2026.04–05</span><span class="tx">監察院公布調查報告，糾正多項違失</span></div>
-        <div class="trow red"><span class="td">2026.07.23</span><span class="tx">行政院核定。距監院報告，約兩個月</span></div>
+      <div class="tl">
+        <section class="tlg">
+          <header class="tlgh"><span class="gp">2019 ─ 2022</span><b>轉向：直鐵讓位給高鐵</b><em>4 件</em></header>
+          <p class="tlgs">轉向不是 2024 才開始。用高鐵取代直鐵的決定，在前一任政府任內就已經做完。</p>
+          <div class="tlus">
+            <div class="trow"><span class="td">2019.04</span><p class="tx">交通部指示辦理高鐵延伸宜蘭初步評估</p></div>
+            <div class="trow"><span class="td">2019.08</span><p class="tx">北宜新線（直鐵）綜合規劃陳報後遭退回，並要求納入高鐵議題</p></div>
+            <div class="trow"><span class="td">2019.11</span><p class="tx">直鐵顧問契約「加入」高鐵工作，此後同一份契約修改 9 次</p></div>
+            <div class="trow"><span class="td">2022.01</span><p class="tx">交通部審查會議定案：宜蘭站採「縣政中心以南」方案</p></div>
+          </div>
+        </section>
+        <section class="tlg hot">
+          <header class="tlgh"><span class="gp">2024 ─ 2025</span><b>衝刺：一場會議之後</b><em>4 件</em></header>
+          <p class="tlgs">加速會議指各單位「推動態度均不夠積極」，環評與綜合規劃自此改為平行作業，後續再開 5 次進度追蹤。</p>
+          <div class="tlus">
+            <div class="trow"><span class="td">2024.05.20</span><p class="tx">賴清德就任；陳金德同日就任政務委員</p></div>
+            <div class="trow"><span class="td">2024.06.21</span><p class="tx">政院開「高鐵延伸宜蘭計畫加速推動審查程序研商會議」，陳金德主持</p></div>
+            <div class="trow"><span class="td">2024.09.27</span><p class="tx">交通部依該會議結論提報階段性報告，轉請國發會審查</p></div>
+            <div class="trow"><span class="td">2025.08</span><p class="tx">二階環評通過。高鐵與特定區拆成兩案分開環評</p></div>
+          </div>
+        </section>
+        <section class="tlg hot">
+          <header class="tlgh"><span class="gp">2026</span><b>踩煞車，然後照核</b><em>3 件</em></header>
+          <p class="tlgs">監察院列出五大違失。兩個多月後，行政院照樣核定 3,521.75 億。</p>
+          <div class="tlus">
+            <div class="trow"><span class="td">2026.01.23</span><p class="tx">政院開特定區進度追蹤會議，陳金德主持：請參考桃園、新竹經驗「檢討調高容積率」，認為規劃的約 200% 過低</p></div>
+            <div class="trow"><span class="td">2026.04.14</span><p class="tx">監察院調查報告審議通過，列出未先完成可行性研究即進行綜合規劃等五大違失</p></div>
+            <div class="trow"><span class="td">2026.07.23</span><p class="tx">行政院核定，總經費 3,521.75 億</p></div>
+          </div>
+        </section>
       </div>
-      <details class="srcfold"><summary>出處</summary><p class="src">2024.06.21 與 2026.01.23 兩場會議之名稱、主持人與結論，出自監察院 115 交調 0004 調查報告：行政院 113 年 6 月 21 日召開「高鐵延伸宜蘭計畫加速推動審查程序研商會議」（由陳金德政務委員主持），指出「各相關單位的推動態度均不夠積極」，指示環評與綜合規劃採平行作業，後續再召開 5 次進度追蹤會議；交通部依該結論於 113 年 9 月 27 日提報階段性報告。115 年 1 月 23 日「高鐵宜蘭車站特定區計畫進度追蹤會議」同由陳金德主持，提出「請參考桃園、新竹高鐵特定區經驗，檢討調高容積率」（會議認為規劃之住宅區及產業專用區容積率約 200% 實屬過低）。2019.04.19 交通部指示辦理高鐵延伸宜蘭初步評估、2019.08.30 北宜新線綜合規劃陳報後遭退回並要求納入高鐵議題、2022.01.27 站址審查結論：交通部鐵道局計畫資訊專區大事紀、宜蘭縣政府交通處計畫辦理情形。其餘各列彙整自宜蘭高鐵政策查核頁大事紀。</p></details>
+      <details class="srcfold"><summary>出處</summary><p class="src">2024.06.21 與 2026.01.23 兩場會議之名稱、主持人與結論，出自監察院 115 交調 0004 調查報告：行政院 113 年 6 月 21 日召開「高鐵延伸宜蘭計畫加速推動審查程序研商會議」（由陳金德政務委員主持），指出「各相關單位的推動態度均不夠積極」，指示環評與綜合規劃採平行作業，後續再召開 5 次進度追蹤會議；交通部依該結論於 113 年 9 月 27 日提報階段性報告。115 年 1 月 23 日「高鐵宜蘭車站特定區計畫進度追蹤會議」同由陳金德主持，提出「請參考桃園、新竹高鐵特定區經驗，檢討調高容積率」（會議認為規劃之住宅區及產業專用區容積率約 200% 實屬過低）。2019.04.19 交通部指示辦理高鐵延伸宜蘭初步評估、2019.08.30 北宜新線綜合規劃陳報後遭退回並要求納入高鐵議題、2022.01.27 站址審查結論：交通部鐵道局計畫資訊專區大事紀、宜蘭縣政府交通處計畫辦理情形。監察院調查報告之審議日期為 115 年 4 月 14 日，報告本身未載公布日期，本站不標公布日。其餘各列彙整自宜蘭高鐵政策查核頁大事紀。</p></details>
     </div>
   </section>
 
@@ -475,7 +540,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
       <h3 style="color:#D83C32">不是只有反對黨這樣說</h3>
       <p style="margin-bottom:10px">「不智的投資、極大的歷史錯誤。」<br><span style="color:#8C818E;font-size:12.5px">前政委張景森，2026.07.24 為此案退出民進黨（黨齡 32 年）</span></p>
       <p style="margin-bottom:10px">「選前強推，是想杜絕民意的參與。」<br><span style="color:#8C818E;font-size:12.5px">前交通部長賀陳旦，2026.07.24</span></p>
-      <p>「未先完成可行性研究即進行綜合規劃」等五大違失。<br><span style="color:#8C818E;font-size:12.5px">監察院調查報告，2026.05.13</span></p>
+      <p>「未先完成可行性研究即進行綜合規劃」等五大違失。<br><span style="color:#8C818E;font-size:12.5px">監察院 115 交調 0004 調查報告，審議日期 2026.04.14</span></p>
     </div>
     <div class="alt">
       <h3 style="color:#B3261E">15 段逐字的質疑</h3>
@@ -1223,30 +1288,57 @@ requestAnimationFrame(frame);
 
 /* ====== 比價器 ====== */
 var CMP=[
- {k:"行車時間",a:"41 ─ 59 分",an:"宜蘭 41、頭城 59",b:"32 ─ 64 分",bn:"頭城 32、蘇澳新 64",note:"高鐵側已加計轉乘台鐵 10 分。到宜蘭市一樣快，到頭城反而慢 27 分。"},
- {k:"建造成本",a:"3,521.8 億",an:"行政院核定",b:"1,321.1 億",bn:"環評書口徑",note:"直鐵另有含物價調整的 2,220 億估算；兩案口徑不同，出處見摺疊。"},
- {k:"30 年營運",a:"約 1,735 億",an:"監察院報告",b:"約 170 億",bn:"環評書口徑",note:"差十倍。這筆錢，核定新聞稿裡不會告訴你。"},
- {k:"土地衝擊",a:"140 棟＋420 公頃",an:"特定區 85% 私有地",b:"約 18 棟",bn:"南港富康街",note:"一邊是整片特定區區段徵收，一邊是十幾棟。"},
- {k:"自償率",a:"6.8%",an:"鐵道局自陳",b:"—",bn:"未提出",note:"「據鐵道局表示，本計畫財務自償率 6.8%，無法完全自償」——監察院調查報告。剩下九成多，全民補。"}
+ {k:"行車時間",a:"41 ─ 59 分",an:"宜蘭 41、頭城 59",b:"32 ─ 64 分",bn:"頭城 32、蘇澳新 64",
+  p:"官方最愛講的數字是 28 分鐘，那是南港到宜蘭站的純行車時間。但下了高鐵還要轉台鐵才進得了市區。把轉乘的 10 分鐘加回去，到宜蘭市兩案一樣快，到頭城高鐵反而慢 27 分鐘。"},
+ {k:"建造成本",a:"3,521.8 億",an:"行政院核定",b:"1,321.1 億",bn:"環評書口徑",
+  p:"2019 年這案估 955 億，七年後核定 3,521.75 億，3.7 倍。同一條走廊的直鐵，環評書口徑 1,321.1 億。多出來的兩千多億，買到的是到宜蘭市一樣快。"},
+ {k:"30 年營運",a:"約 1,735 億",an:"監察院報告",b:"約 170 億",bn:"環評書口徑",
+  p:"蓋完不是結束。通車後三十年的營運成本，高鐵約 1,735 億，直鐵約 170 億，差十倍。這筆錢不在 3,521.75 億的核定金額裡，也不在核定新聞稿裡。"},
+ {k:"土地衝擊",a:"140 棟＋420 公頃",an:"特定區 85% 私有地",b:"約 18 棟",bn:"南港富康街",
+  p:"高鐵站旁邊要劃 420 公頃特定區，其中 85% 是私有地，要用區段徵收拿走，140 棟以上民宅拆遷。直鐵這邊，南港富康街約 18 棟。監察院直指這 420 公頃缺乏立論基礎。"},
+ {k:"自償率",a:"6.8%",an:"鐵道局自陳",b:"—",bn:"未提出",
+  p:"6.8%。這不是公民團體試算的，是鐵道局自己講的：「據鐵道局表示，本計畫財務自償率 6.8%，無法完全自償」。剩下九成三，全民補。直鐵沒有對應數字：它的綜合規劃 2019 年遭退回之後，就沒再往下走。"}
 ];
-var cmpIdx=0,cmpTabs=document.getElementById("cmpTabs"),cmpBodyEl=document.getElementById("cmpBody");
+/* 雙軌對照：比較盤釘住不動，文字段落捲到定位就切換（IntersectionObserver，無 scroll listener） */
+var cmpBodyEl=document.getElementById("cmpBody"),
+    dcProg=document.getElementById("dcProg"),
+    dcTrack=document.getElementById("dcTrack"),
+    dcSteps=[],dcIdx=-1;
 function setCmp(i){
-  cmpIdx=i;var d=CMP[i];
+  if(i<0||i>=CMP.length||i===dcIdx)return;
+  dcIdx=i;var d=CMP[i];
   document.getElementById("cmpA").textContent=d.a;
   document.getElementById("cmpAn").textContent=d.an;
   document.getElementById("cmpB").textContent=d.b;
   document.getElementById("cmpBn").textContent=d.bn;
-  document.getElementById("cmpNote").textContent=d.note;
-  if(cmpTabs)[].forEach.call(cmpTabs.children,function(b,j){b.setAttribute("aria-pressed",j===i?"true":"false")});
+  if(dcProg)[].forEach.call(dcProg.children,function(b,j){b.setAttribute("aria-pressed",j===i?"true":"false")});
+  dcSteps.forEach(function(sp,j){sp.classList.toggle("on",j===i)});
   if(cmpBodyEl&&!reduced){cmpBodyEl.classList.remove("sw");void cmpBodyEl.offsetWidth;cmpBodyEl.classList.add("sw");}
 }
-if(cmpTabs){
+if(dcProg&&dcTrack){
   CMP.forEach(function(d,i){
-    var b=document.createElement("button");b.textContent=d.k;
-    b.addEventListener("click",function(){setCmp(i)});
-    cmpTabs.appendChild(b);
+    var b=document.createElement("button");
+    b.type="button";b.textContent=d.k;b.setAttribute("aria-pressed","false");
+    b.addEventListener("click",function(){
+      setCmp(i);
+      dcSteps[i].scrollIntoView({block:"center",behavior:reduced?"auto":"smooth"});
+    });
+    dcProg.appendChild(b);
+    var st=document.createElement("div");st.className="dcstep";
+    var bd=document.createElement("div");bd.className="dcbody";
+    var hd=document.createElement("header");hd.className="dchd";
+    var n=document.createElement("span");n.className="dcn";n.textContent="0"+(i+1);
+    var t=document.createElement("b");t.textContent=d.k;
+    hd.appendChild(n);hd.appendChild(t);
+    var p=document.createElement("p");p.textContent=d.p;
+    bd.appendChild(hd);bd.appendChild(p);st.appendChild(bd);
+    dcTrack.appendChild(st);dcSteps.push(st);
   });
   setCmp(0);
+  var dcio=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting)setCmp(dcSteps.indexOf(e.target))});
+  },{rootMargin:"-52% 0px -40% 0px",threshold:0});
+  dcSteps.forEach(function(st){dcio.observe(st)});
 }
 
 /* ====== 15 段逐字的質疑（每則均經原文查核） ====== */
