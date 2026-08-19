@@ -191,8 +191,20 @@ details.srcfold .src{margin-top:8px}
 .exam details[open] summary em{transform:rotate(180deg)}
 .exam details p{margin:0 0 10px 24px;font-size:13.5px;color:#3A3542;font-weight:500;line-height:1.75}
 /* 具名疑問點名牆 */
-.qwall{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 4px}
-.qwall button{font-family:var(--sans);font-size:12.5px;font-weight:800;padding:6px 13px;border-radius:3px;border:1.5px solid var(--ink);cursor:pointer;color:var(--ink)}
+.qgrp{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:800;color:var(--faint);letter-spacing:.08em;margin:14px 0 0}
+.qgrp::after{content:"";flex:1;height:1.5px;background:rgba(20,18,22,.14)}
+.qgrp em{font-style:normal;color:var(--muted);letter-spacing:0}
+.qwall{display:flex;flex-wrap:wrap;align-items:stretch;gap:7px;margin:8px 0 4px}
+.qwall button{display:flex;align-items:center;gap:8px;font-family:var(--sans);font-size:12.5px;font-weight:800;padding:5px 12px 5px 6px;border-radius:3px;border:1.5px solid var(--ink);cursor:pointer;color:var(--ink);text-align:left}
+.qwall .qca{flex:none;width:26px;height:26px;border-radius:2px;border:1px solid rgba(20,18,22,.55);background:var(--panel2)}
+.qwall img.qca{display:block;object-fit:cover;object-position:50% 20%}
+.qwall span.qca{display:flex;align-items:center;justify-content:center;font-family:"Noto Serif TC",serif;font-size:14px;font-weight:800;color:var(--muted)}
+.qwall .qcw{display:flex;flex-direction:column;gap:1px;min-width:0}
+.qwall .qct{font-size:10.5px;font-weight:700;color:var(--muted);letter-spacing:.01em}
+.qwall.wlead button{padding:6px 14px 6px 7px}
+.qwall.wlead .qca{width:40px;height:40px}
+.qwall.wlead .qcn{font-size:14px}
+.qwall.wlead span.qca{font-size:19px}
 .qwall button.c0{background:rgba(47,133,90,.16)}
 .qwall button.c1{background:rgba(179,38,30,.08)}
 .qwall button.c2{background:rgba(216,60,50,.14)}
@@ -468,7 +480,10 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     <div class="alt">
       <h3 style="color:#B3261E">15 段逐字的質疑</h3>
       <p style="font-size:13px;color:#6A6371;font-weight:700;margin:0">交通、程序、土地財務、環境、地方治理都有人舉手。點名字，看他原話怎麼說、出處在哪。</p>
-      <div class="qwall" id="qwall"></div>
+      <p class="qgrp">曾任中央政務首長<em>5 人</em></p>
+      <div class="qwall wlead" id="qwallA"></div>
+      <p class="qgrp">學者與實務專業者<em>10 人</em></p>
+      <div class="qwall" id="qwallB"></div>
       <div class="qbub" id="qbub" hidden>
         <div class="qhead">
           <span class="qav" id="qav"></span>
@@ -478,7 +493,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         <a class="qsrc" id="qsrc" href="#" target="_blank" rel="noopener"></a>
       </div>
       <p class="orgs">在地具名團體：高鐵延伸宜蘭監督聯盟・守護宜蘭工作坊・宜蘭縣環境保護聯盟・宜蘭惜溪聯盟・宜蘭縣國土計畫讀書會・宜蘭縣野鳥學會・宜蘭縣文化協會</p>
-      <details class="srcfold"><summary>出處與查證方式</summary><p class="src">本區每一則引言均為逐字原文，並附可點開的原始出處；標「具名投書」者為本人署名文章，標「媒體報導」者為記者以引號完整引錄之發言。凡查不到逐字原文者一律不列，因此本區人數少於記者會場上的具名人數。肖像僅採用公有領域或政府網站資料開放宣告（GWOIA）之照片，均存放於 Wikimedia Commons：賀陳旦、詹順貴（美國之音，公有領域）；張景森、吳澤成、李鴻源（行政院／政府網站資料開放宣告，須註明出處）。其餘人士查無可合法再利用之肖像，以姓名首字呈現。各人完整脈絡請點原文。</p></details>
+      <details class="srcfold"><summary>出處與查證方式</summary><p class="src">本區每一則引言均為逐字原文，並附可點開的原始出處；標「具名投書」者為本人署名文章，標「媒體報導」者為記者以引號完整引錄之發言。凡查不到逐字原文者一律不列，因此本區人數少於記者會場上的具名人數。肖像分三類，逐張列明出處：（一）公有領域——賀陳旦、詹順貴（美國之音 VOA，Wikimedia Commons）；（二）政府網站資料開放宣告（GWOIA，須註明出處）——張景森、吳澤成（行政院）、李鴻源（內政部），均取自 Wikimedia Commons；（三）機構官方公開簡介照——徐世榮（政治大學地政學系師資頁）、張勝雄（淡江大學運輸管理學系師資頁）、李家儂、林旺根（政大商學院信義不動產研究中心）、陳永松（宜蘭大學生物技術與動物科學系師資頁）、陳碧源（宜蘭大學傑出校友頁）、李克聰（國家政策研究基金會作者頁）、鍾慧諭（智行股份有限公司官網），僅作為報導與評論所引用之人物識別使用，不作商業利用；著作權仍歸原權利人，來源逐筆記於本站 img/CREDITS.md，權利人如有異議即移除。濮大威、張智欽查無可資識別之公開單人照，以姓名首字呈現。各人完整脈絡請點原文。</p></details>
     </div>
     <div class="alt" style="border-color:#B3261E">
       <h3 style="color:#B3261E">帳本還沒攤開，持續追蹤五件事</h3>
@@ -1236,29 +1251,47 @@ if(cmpTabs){
 
 /* ====== 15 段逐字的質疑（每則均經原文查核） ====== */
 var QS=[
- {"n":"賀陳旦","c":1,"t":"程序","ti":"前交通部長","say":"民主的前提是充分討論，決策者不理會已經訴願在案的民眾意見，又不處理各方新質疑，冒然決定，這不叫作果斷，只突顯政治權謀，突顯不在乎民主。卓院長，你對民主制度運作準則的三不：不副署、不公布、不執行，難道要再加上「不答覆」嗎？","k":"具名投書","d":"2026-07-27","s":"風傳媒","u":"https://www.storm.mg/article/11151795","img":"hochentan"},
- {"n":"張景森","c":1,"t":"程序","ti":"行政院前政務委員","say":"本人認為這是一個不智的投資，極大的歷史錯誤。因此本人在此宣布：即日起退出民主進步黨。","k":"媒體報導","d":"2026-07-24","s":"自由時報","u":"https://news.ltn.com.tw/news/politics/breakingnews/5516136","img":"changchingsen"},
- {"n":"吳澤成","c":1,"t":"程序","ti":"前行政院政務委員、前公共工程會主委","say":"交通部都不講，很不負責任。","k":"媒體報導","d":"2026-06-30","s":"聯合報","u":"https://udn.com/news/story/7314/9596512","img":"wutsecheng"},
- {"n":"李克聰","c":0,"t":"交通","ti":"消基會交通委員會召集人・逢甲大學運輸科技與管理學系副教授","say":"建議在評估四個候選宜蘭站址時，不應將直截之南港到宜蘭之北宜高鐵方案與太過彎繞之南港經雙溪新站到大溪站之不符合直鐵的原則的北宜直鐵方案相互比較評估，而是應將同樣直截的56.4公里相同路廊由南港到宜蘭的高鐵與直鐵方案相互比較綜合評估。","k":"具名投書","d":"2021-07-06","s":"ETtoday 新聞雲・雲論","u":"https://forum.ettoday.net/news/2023864","img":""},
- {"n":"鍾慧諭","c":0,"t":"交通","ti":"前臺北市交通局長","say":"回歸問題本質，北宜新線目的在改善台鐵北部路段路線容量不足、花東線運能不足問題，既然重點在服務花東乘客，規劃方案的思考應該著重花東鐵路與高鐵車站的整合，而非著眼於國五擁塞；從台灣西部經驗，高鐵服務無助於紓解台北－新竹間國一、國三的交通問題。","k":"具名投書","d":"2021-09-30","s":"報導者 The Reporter","u":"https://www.twreporter.org/a/opinion-high-speed-rail-ilan-station","img":""},
+ {"n":"賀陳旦","c":1,"t":"程序","ti":"前交通部長","say":"民主的前提是充分討論，決策者不理會已經訴願在案的民眾意見，又不處理各方新質疑，冒然決定，這不叫作果斷，只突顯政治權謀，突顯不在乎民主。卓院長，你對民主制度運作準則的三不：不副署、不公布、不執行，難道要再加上「不答覆」嗎？","k":"具名投書","d":"2026-07-27","s":"風傳媒","u":"https://www.storm.mg/article/11151795","img":"hochentan","lead":1,"tc":"前交通部長"},
+ {"n":"張景森","c":1,"t":"程序","ti":"行政院前政務委員","say":"本人認為這是一個不智的投資，極大的歷史錯誤。因此本人在此宣布：即日起退出民主進步黨。","k":"媒體報導","d":"2026-07-24","s":"自由時報","u":"https://news.ltn.com.tw/news/politics/breakingnews/5516136","img":"changchingsen","lead":1,"tc":"行政院前政委"},
+ {"n":"吳澤成","c":1,"t":"程序","ti":"前行政院政務委員、前公共工程會主委","say":"交通部都不講，很不負責任。","k":"媒體報導","d":"2026-06-30","s":"聯合報","u":"https://udn.com/news/story/7314/9596512","img":"wutsecheng","lead":1,"tc":"前工程會主委"},
+ {"n":"李克聰","c":0,"t":"交通","ti":"消基會交通委員會召集人・逢甲大學運輸科技與管理學系副教授","say":"建議在評估四個候選宜蘭站址時，不應將直截之南港到宜蘭之北宜高鐵方案與太過彎繞之南港經雙溪新站到大溪站之不符合直鐵的原則的北宜直鐵方案相互比較評估，而是應將同樣直截的56.4公里相同路廊由南港到宜蘭的高鐵與直鐵方案相互比較綜合評估。","k":"具名投書","d":"2021-07-06","s":"ETtoday 新聞雲・雲論","u":"https://forum.ettoday.net/news/2023864","img":"likotsung"},
+ {"n":"鍾慧諭","c":0,"t":"交通","ti":"前臺北市交通局長","say":"回歸問題本質，北宜新線目的在改善台鐵北部路段路線容量不足、花東線運能不足問題，既然重點在服務花東乘客，規劃方案的思考應該著重花東鐵路與高鐵車站的整合，而非著眼於國五擁塞；從台灣西部經驗，高鐵服務無助於紓解台北－新竹間國一、國三的交通問題。","k":"具名投書","d":"2021-09-30","s":"報導者 The Reporter","u":"https://www.twreporter.org/a/opinion-high-speed-rail-ilan-station","img":"chunghuiyu"},
  {"n":"濮大威","c":0,"t":"交通","ti":"前台北市交通局長","say":"宜蘭高鐵延伸案從未做過完整可行性研究，這不只是錯誤，甚至可說是違反專業精神，接近違法。","k":"媒體報導","d":"2026-01-10","s":"城市學","u":"https://city.gvm.com.tw/article/127384","img":""},
- {"n":"張勝雄","c":0,"t":"交通","ti":"淡江大學運輸管理學系教授","say":"怎麼會像月亮一樣，初一、十五不同？","k":"媒體報導","d":"2025-07-10","s":"環境資訊中心","u":"https://e-info.org.tw/node/241656","img":""},
- {"n":"徐世榮","c":2,"t":"土地","ti":"政治大學地政學系教授","say":"在黨政高層出手後，高鐵宜蘭站址似往「宜蘭站以南」移動。本文不討論何處是最佳設站地點，而是要告訴大家，不論高鐵宜蘭站設在那裡，政府都會動用土地徵收公權力，強制剝奪人民的土地所有權及他項權利。設站選址爭議凸顯一個長久以來的大問題，即國人的財產權、生存權及人性尊嚴依舊完全不受尊重及保障。","k":"具名投書","d":"2021-10-22","s":"ETtoday新聞雲 雲論","u":"https://forum.ettoday.net/news/2106913","img":""},
- {"n":"李家儂","c":2,"t":"土地","ti":"文化大學土地資源學系教授","say":"但是觀光客坐高鐵到了宜蘭還是沒手沒腳（指沒有移動能力），如果地方交通銜接沒辦法配合，大家會覺得開車方便，最後可能只會剩下通勤族來搭乘。","k":"媒體報導","d":"2021-08-15","s":"上下游新聞","u":"https://www.newsmarket.com.tw/blog/157382/","img":""},
- {"n":"陳碧源","c":2,"t":"財務","ti":"不動產估價師","say":"不要因變更土地所得的利益，卻損及所有交通人的隱形金錢成本。","k":"媒體報導","d":"2026-07-27","s":"上下游新聞","u":"https://www.newsmarket.com.tw/blog/240541/","img":""},
- {"n":"李鴻源","c":3,"t":"環境","ti":"前內政部長","say":"所以我是覺得不是不能蓋，而是為什麼要去那裡，後面就會牽扯到很多利益糾葛，會有很多的政商關係，政商關係不見得都是不好的，而是專業的來面對了。","k":"媒體報導","d":"2026-01-13","s":"風傳媒","u":"https://www.storm.mg/article/11094733","img":"leehungyuan"},
+ {"n":"張勝雄","c":0,"t":"交通","ti":"淡江大學運輸管理學系教授","say":"怎麼會像月亮一樣，初一、十五不同？","k":"媒體報導","d":"2025-07-10","s":"環境資訊中心","u":"https://e-info.org.tw/node/241656","img":"changshenghsiung"},
+ {"n":"徐世榮","c":2,"t":"土地","ti":"政治大學地政學系教授","say":"在黨政高層出手後，高鐵宜蘭站址似往「宜蘭站以南」移動。本文不討論何處是最佳設站地點，而是要告訴大家，不論高鐵宜蘭站設在那裡，政府都會動用土地徵收公權力，強制剝奪人民的土地所有權及他項權利。設站選址爭議凸顯一個長久以來的大問題，即國人的財產權、生存權及人性尊嚴依舊完全不受尊重及保障。","k":"具名投書","d":"2021-10-22","s":"ETtoday新聞雲 雲論","u":"https://forum.ettoday.net/news/2106913","img":"hsushihjung"},
+ {"n":"李家儂","c":2,"t":"土地","ti":"文化大學土地資源學系教授","say":"但是觀光客坐高鐵到了宜蘭還是沒手沒腳（指沒有移動能力），如果地方交通銜接沒辦法配合，大家會覺得開車方便，最後可能只會剩下通勤族來搭乘。","k":"媒體報導","d":"2021-08-15","s":"上下游新聞","u":"https://www.newsmarket.com.tw/blog/157382/","img":"leechianung"},
+ {"n":"陳碧源","c":2,"t":"財務","ti":"不動產估價師","say":"不要因變更土地所得的利益，卻損及所有交通人的隱形金錢成本。","k":"媒體報導","d":"2026-07-27","s":"上下游新聞","u":"https://www.newsmarket.com.tw/blog/240541/","img":"chenpiyuan"},
+ {"n":"李鴻源","c":3,"t":"環境","ti":"前內政部長","say":"所以我是覺得不是不能蓋，而是為什麼要去那裡，後面就會牽扯到很多利益糾葛，會有很多的政商關係，政商關係不見得都是不好的，而是專業的來面對了。","k":"媒體報導","d":"2026-01-13","s":"風傳媒","u":"https://www.storm.mg/article/11094733","img":"leehungyuan","lead":1,"tc":"前內政部長"},
  {"n":"張智欽","c":3,"t":"環境","ti":"宜蘭大學兼任教授","say":"四城這個地方，650公厘（毫米）在一天內下光，會造成這個地方淹水3公尺，處理不當真的是一個災難。","k":"媒體報導","d":"2021-09-16","s":"公視新聞網","u":"https://news.pts.org.tw/article/545109","img":""},
- {"n":"詹順貴","c":3,"t":"環境","ti":"律師、前環保署副署長","say":"對於所產生巨量剩餘土石方胡亂聲稱有去處的公共工程亦有之，例如月前在高度爭議中通過環評的「高鐵延伸宜蘭案」，由於需要大量在雪山山脈挖掘隧道，依其環評報告書所載，未來施工時總計將產生高達961.3萬立方公尺的剩餘土石方，堪比全國一整年累積之土石方最終去化量（1053萬立方公尺，內政部115年1月14日記者會投影片數據），規劃運往台北港填海造地即高達236萬立方公尺，此數據接近新北市一年需埋填的土石方量，另外還有391.3萬立方公尺土方，宣稱將先暫置於「宜蘭高鐵特定區計畫」內約420公頃的良田之上，但尚無明確的最終去處。","k":"具名投書","d":"2026-02-04","s":"思想坦克 Voicettank","u":"https://voicettank.org/20260204-1/","img":"chanshunkuei"},
- {"n":"陳永松","c":3,"t":"環境","ti":"宜蘭大學生物技術及動物科學系教授","say":"如果建了高鐵、建了直鐵，讓宜蘭的生活方式不見了、宜蘭價值也不見了，那你還要嗎？","k":"媒體報導","d":"2026-01-14","s":"遠見城市學","u":"https://city.gvm.com.tw/article/127384","img":""},
- {"n":"林旺根","c":4,"t":"地方","ti":"前宜蘭縣建設局長","say":"交通部陳世凱部長昨天對前交通部賀陳部長及民團有關高鐵延伸的質疑回應說：「宜蘭大多數民代都支持高鐵」。報告陳部長、正確的說法應該是：「宜蘭大多數民代都不敢反高鐵」，中央要送宜蘭四千億的大禮又不用地方買單誰敢反對？尤其在此選舉的敏感時刻這等於是政治自殺，睿智用心又了解宜蘭的民代怎不知高鐵對宜蘭的用處？私下表示支持直鐵的很多、而阻礙頭城、礁溪、宜蘭、羅東幾個主要城市發展的鐵路立體化才是他們所殷殷期盼。","k":"具名投書","d":"2026-02-02","s":"NOWnews今日新聞","u":"https://www.nownews.com/news/6782348","img":""}
+ {"n":"詹順貴","c":3,"t":"環境","ti":"律師、前環保署副署長","say":"對於所產生巨量剩餘土石方胡亂聲稱有去處的公共工程亦有之，例如月前在高度爭議中通過環評的「高鐵延伸宜蘭案」，由於需要大量在雪山山脈挖掘隧道，依其環評報告書所載，未來施工時總計將產生高達961.3萬立方公尺的剩餘土石方，堪比全國一整年累積之土石方最終去化量（1053萬立方公尺，內政部115年1月14日記者會投影片數據），規劃運往台北港填海造地即高達236萬立方公尺，此數據接近新北市一年需埋填的土石方量，另外還有391.3萬立方公尺土方，宣稱將先暫置於「宜蘭高鐵特定區計畫」內約420公頃的良田之上，但尚無明確的最終去處。","k":"具名投書","d":"2026-02-04","s":"思想坦克 Voicettank","u":"https://voicettank.org/20260204-1/","img":"chanshunkuei","lead":1,"tc":"前環保署副署長"},
+ {"n":"陳永松","c":3,"t":"環境","ti":"宜蘭大學生物技術及動物科學系教授","say":"如果建了高鐵、建了直鐵，讓宜蘭的生活方式不見了、宜蘭價值也不見了，那你還要嗎？","k":"媒體報導","d":"2026-01-14","s":"遠見城市學","u":"https://city.gvm.com.tw/article/127384","img":"chenyungsung"},
+ {"n":"林旺根","c":4,"t":"地方","ti":"前宜蘭縣建設局長","say":"交通部陳世凱部長昨天對前交通部賀陳部長及民團有關高鐵延伸的質疑回應說：「宜蘭大多數民代都支持高鐵」。報告陳部長、正確的說法應該是：「宜蘭大多數民代都不敢反高鐵」，中央要送宜蘭四千億的大禮又不用地方買單誰敢反對？尤其在此選舉的敏感時刻這等於是政治自殺，睿智用心又了解宜蘭的民代怎不知高鐵對宜蘭的用處？私下表示支持直鐵的很多、而阻礙頭城、礁溪、宜蘭、羅東幾個主要城市發展的鐵路立體化才是他們所殷殷期盼。","k":"具名投書","d":"2026-02-02","s":"NOWnews今日新聞","u":"https://www.nownews.com/news/6782348","img":"linwangken"}
 ];
-var qwall=document.getElementById("qwall");
-if(qwall){
-  QS.forEach(function(q,i){
-    var b=document.createElement("button");b.textContent=q.n;b.className="c"+q.c;
+/* 兩層點名牆：曾任中央政務首長（頭像＋短職稱）／學者與專業者（頭像） */
+var wA=document.getElementById("qwallA"),wB=document.getElementById("qwallB");
+function qFace(q){
+  if(q.img){
+    var im=document.createElement("img");
+    im.className="qca";im.src="img/"+q.img+"_s.jpg";im.alt="";im.loading="lazy";im.decoding="async";
+    return im;
+  }
+  var s=document.createElement("span");
+  s.className="qca";s.setAttribute("aria-hidden","true");s.textContent=q.n.charAt(0);
+  return s;
+}
+if(wA&&wB){
+  QS.forEach(function(q){
+    var b=document.createElement("button");
+    b.className="c"+q.c;
+    b.setAttribute("aria-pressed","false");
+    b.appendChild(qFace(q));
+    var w=document.createElement("span");w.className="qcw";
+    var n=document.createElement("span");n.className="qcn";n.textContent=q.n;w.appendChild(n);
+    if(q.lead&&q.tc){var t=document.createElement("span");t.className="qct";t.textContent=q.tc;w.appendChild(t);}
+    b.appendChild(w);
     b.addEventListener("click",function(){
       var bub=document.getElementById("qbub");
-      [].forEach.call(qwall.children,function(x){x.setAttribute("aria-pressed","false")});
+      [].forEach.call(document.querySelectorAll(".qwall button"),function(x){x.setAttribute("aria-pressed","false")});
       b.setAttribute("aria-pressed","true");
       document.getElementById("qwho").textContent=q.n;
       document.getElementById("qtag").textContent=q.t;
@@ -1275,8 +1308,9 @@ if(qwall){
       var a=document.getElementById("qsrc");
       a.href=q.u;a.textContent=q.k+"・"+q.s+" "+q.d+" \u2197";
       bub.hidden=false;
+      if(bub.scrollIntoView)bub.scrollIntoView({block:"nearest"});
     });
-    qwall.appendChild(b);
+    (q.lead?wA:wB).appendChild(b);
   });
 }
 
