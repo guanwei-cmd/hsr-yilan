@@ -25,7 +25,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line
 ::selection{background:rgba(179,38,30,.25)}
 p{text-wrap:pretty}
 h1,h2,h3{font-family:"Noto Serif TC","Songti TC",Georgia,serif;letter-spacing:.02em}
-.nb{white-space:nowrap}
+.nb{display:inline-block}/* 斷行不切句：子句成塊（同 taiwangogo-site 規範） */
 
 /* ---------- 場景畫布 ---------- */
 #scene{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
@@ -429,7 +429,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     <div class="dclead dcpanel">
       <div class="kick">被冷凍的對照組</div>
       <h2>同一條走廊，兩張報價單</h2>
-      <p>南港到宜蘭，兩套方案一直並存。往下滑，一項一項對——右邊那張報價單，從來沒有被同一個基準攤開比過。</p>
+      <p>南港到宜蘭，兩套方案一直並存。往下滑，一項一項對。右邊那張報價單，從來沒有被同一個基準攤開比過。</p>
     </div>
     <div class="dcstage" id="dcStage">
       <div class="dcbox">
@@ -558,7 +558,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         <a class="qsrc" id="qsrc" href="#" target="_blank" rel="noopener"></a>
       </div>
       <p class="orgs">在地具名團體：高鐵延伸宜蘭監督聯盟・守護宜蘭工作坊・宜蘭縣環境保護聯盟・宜蘭惜溪聯盟・宜蘭縣國土計畫讀書會・宜蘭縣野鳥學會・宜蘭縣文化協會</p>
-      <details class="srcfold"><summary>出處與查證方式</summary><p class="src">本區每一則引言均為逐字原文，並附可點開的原始出處；標「具名投書」者為本人署名文章，標「媒體報導」者為記者以引號完整引錄之發言。凡查不到逐字原文者一律不列，因此本區人數少於記者會場上的具名人數。肖像分三類，逐張列明出處：（一）公有領域——賀陳旦、詹順貴（美國之音 VOA，Wikimedia Commons）；（二）政府網站資料開放宣告（GWOIA，須註明出處）——張景森、吳澤成（行政院）、李鴻源（內政部），均取自 Wikimedia Commons；（三）機構官方公開簡介照——徐世榮（政治大學地政學系師資頁）、張勝雄（淡江大學運輸管理學系師資頁）、李家儂、林旺根（政大商學院信義不動產研究中心）、陳永松（宜蘭大學生物技術與動物科學系師資頁）、陳碧源（宜蘭大學傑出校友頁）、李克聰（國家政策研究基金會作者頁）、鍾慧諭（智行股份有限公司官網），僅作為報導與評論所引用之人物識別使用，不作商業利用；著作權仍歸原權利人，來源逐筆記於本站 img/CREDITS.md，權利人如有異議即移除。濮大威、張智欽查無可資識別之公開單人照，以姓名首字呈現。各人完整脈絡請點原文。</p></details>
+      <details class="srcfold"><summary>出處與查證方式</summary><p class="src">本區每一則引言均為逐字原文，並附可點開的原始出處；標「具名投書」者為本人署名文章，標「媒體報導」者為記者以引號完整引錄之發言。凡查不到逐字原文者一律不列，因此本區人數少於記者會場上的具名人數。肖像分三類，逐張列明出處：（一）公有領域：賀陳旦、詹順貴（美國之音 VOA，Wikimedia Commons）；（二）政府網站資料開放宣告（GWOIA，須註明出處）：張景森、吳澤成（行政院）、李鴻源（內政部），均取自 Wikimedia Commons；（三）機構官方公開簡介照：徐世榮（政治大學地政學系師資頁）、張勝雄（淡江大學運輸管理學系師資頁）、李家儂、林旺根（政大商學院信義不動產研究中心）、陳永松（宜蘭大學生物技術與動物科學系師資頁）、陳碧源（宜蘭大學傑出校友頁）、李克聰（國家政策研究基金會作者頁）、鍾慧諭（智行股份有限公司官網），僅作為報導與評論所引用之人物識別使用，不作商業利用；著作權仍歸原權利人，來源逐筆記於本站 img/CREDITS.md，權利人如有異議即移除。濮大威、張智欽查無可資識別之公開單人照，以姓名首字呈現。各人完整脈絡請點原文。</p></details>
     </div>
     <div class="alt" style="border-color:#B3261E">
       <h3 style="color:#B3261E">帳本還沒攤開，持續追蹤五件事</h3>
@@ -1409,6 +1409,47 @@ if(wA&&wB){
     (q.lead?wA:wB).appendChild(b);
   });
 }
+
+/* ====== 斷行不切句（撰寫規範，與 taiwangogo-site 同步） ======
+   標題／金句類元素的「直接文字節點」依標點切段，各段包成 .nb（inline-block）成塊換行，
+   因此只會在標點後折行，不會從子句中間斷開。元素子節點（em/br/span）不動，段落正文不處理。 */
+(function(){
+  var SEL=["main h1","main h2","main h3",".hero .sub",".dclead p",".tlgs",".tlgh b",".dchd b",".tksnark"].join(",");
+  var PUNCT=/([，、。；：！？…・]+|[ \u3000]+)/;
+  function run(root){
+    (root||document).querySelectorAll(SEL).forEach(function(el){
+      if(el.dataset.nbDone)return;
+      el.dataset.nbDone="1";
+      [].slice.call(el.childNodes).forEach(function(node){
+        if(node.nodeType!==3||!node.textContent.trim())return;
+        var parts=node.textContent.split(PUNCT);
+        if(parts.length<3)return;
+        var frag=document.createDocumentFragment();
+        for(var i=0;i<parts.length;i+=2){
+          var sep=parts[i+1]||"";
+          if(/^[ \u3000]+$/.test(sep)){
+            if(parts[i]){var sp=document.createElement("span");sp.className="nb";sp.textContent=parts[i];frag.appendChild(sp);}
+            frag.appendChild(document.createTextNode(" "));
+            continue;
+          }
+          var seg=parts[i]+sep;
+          if(!seg)continue;
+          /* 純標點（例：緊接在 <span class="nb"> 之後的「。」）併回前一塊，避免標點落單成行。
+             前一塊可能在本 fragment 內，也可能是這個文字節點前面的既有元素。 */
+          if(!parts[i]){
+            var prev=frag.lastChild;
+            if(!prev){var ps=node.previousSibling;if(ps&&ps.nodeType===1&&ps.classList&&ps.classList.contains("nb"))prev=ps;}
+            if(prev&&prev.nodeType===1){prev.textContent+=seg;continue;}
+          }
+          var sp2=document.createElement("span");sp2.className="nb";sp2.textContent=seg;frag.appendChild(sp2);
+        }
+        node.replaceWith(frag);
+      });
+    });
+  }
+  run();
+  window.clauseWrap=run;   /* 動態插入的區塊（雙軌段落、點名牆）建完後再呼叫一次 */
+})();
 
 /* 卡片 reveal＋數字滾動 */
 function rollNums(card){
