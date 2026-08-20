@@ -159,6 +159,23 @@ details.srcfold .src{margin-top:8px}
 .dcstep{min-height:50vh;display:flex;flex-direction:column;justify-content:center;padding:18px 0}
 .dcbody{background:var(--panel);border:1.5px solid var(--ink);border-radius:3px;box-shadow:4px 4px 0 #141216;overflow:hidden;opacity:.55;transition:opacity .35s ease}
 .dcstep.on .dcbody{opacity:1}
+/* 走廊飛越：正射影像沿真實地標路徑推進 */
+.fly{position:relative}
+.flypin{position:sticky;top:0;height:100dvh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:64px 16px 12px}
+.flyhead{max-width:520px;width:100%;margin:0 auto}
+.flykick{display:inline-block;font-size:11.5px;font-weight:800;color:#F5F3EC;letter-spacing:.14em;background:#141216;border-radius:2px;padding:3px 10px}
+.flyview{position:relative;max-width:520px;width:100%;margin:0 auto;height:46dvh;overflow:hidden;border:1.5px solid var(--ink);border-radius:3px;box-shadow:5px 5px 0 #141216;background:#141216}
+.flyimg{position:absolute;left:0;top:0;will-change:transform;image-rendering:auto}
+.flymk{position:absolute;transform:translate(-50%,-50%);pointer-events:none}
+.flymk i{display:block;width:11px;height:11px;border-radius:50%;border:2.5px solid #F5F3EC;background:var(--danger);box-shadow:0 0 0 2px rgba(20,18,22,.55)}
+.flymk b{position:absolute;left:15px;top:-4px;white-space:nowrap;font-size:11px;font-weight:800;color:#F5F3EC;background:rgba(20,18,22,.82);border-radius:2px;padding:2px 7px}
+.flymk.on i{background:var(--gold);transform:scale(1.25)}
+.flycard{max-width:520px;width:100%;margin:0 auto;background:var(--panel);border:1.5px solid var(--ink);border-radius:3px;box-shadow:4px 4px 0 #141216;overflow:hidden}
+.flych{display:flex;align-items:baseline;gap:9px;padding:6px 11px;background:var(--danger);color:#F5F3EC}
+.flych .fn{flex:none;font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.12em;color:rgba(255,255,255,.78)}
+.flych b{font-size:14px;font-weight:900}
+.flycard p{margin:0;padding:11px 13px;font-size:14px;font-weight:500;color:#33302B;line-height:1.8}
+.flysrc{align-self:center;max-width:520px;font-size:10px;font-weight:600;line-height:1.7;color:#CFCBC1;background:rgba(20,18,22,.78);border-radius:2px;padding:4px 8px}
 .dchd{display:flex;align-items:baseline;gap:9px;padding:6px 11px;background:#141216;color:#F5F3EC}
 .dcstep.on .dchd{background:var(--danger)}
 .dchd .dcn{flex:none;font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.12em;color:#B9B5AA}
@@ -323,6 +340,10 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
   .hzs{width:auto;padding:0 16px;margin-bottom:14px}
   .hztop{position:static;padding:0 16px 10px}
   .hzdots,.hzhint{display:none}
+  /* 走廊飛越降級：不釘住，整張圖與五段說明直式呈現 */
+  .flypin{position:static;height:auto;overflow:visible;display:block;padding:0 16px 8vh}
+  .flyview{height:auto;margin-bottom:12px}
+  .flycard{margin-bottom:10px}
 }
 </style>
 </head>
@@ -450,6 +471,21 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     </section>
 
   
+
+  <section class="fly" id="flySec" aria-label="南港至宜蘭走廊正射影像飛越">
+    <div class="flypin">
+      <div class="flyhead"><span class="flykick">這 60 公里，要穿過哪裡</span></div>
+      <div class="flyview" id="flyView">
+        <img class="flyimg" id="flyImg" src="img/corridor.jpg" alt="南港至宜蘭一帶正射影像" decoding="async">
+        <div class="flymk" id="flyMk" style="position:absolute;left:0;top:0;transform-origin:0 0"></div>
+      </div>
+      <div class="flycard">
+        <header class="flych"><span class="fn" id="flyNum">01</span><b id="flyWho">南港</b></header>
+        <p id="flySay"></p>
+      </div>
+      <span class="flysrc">影像：內政部國土測繪中心・臺灣通用電子地圖正射影像（免申請介接服務）。標點依實際經緯度換算，未繪製路線線形。</span>
+    </div>
+  </section>
 
   <section class="hz" id="hzSec" aria-label="高鐵與直鐵的具象化對照">
     <div class="hzpin">
@@ -1321,6 +1357,85 @@ function frame(t){
 requestAnimationFrame(frame);
 
 /* ====== 比價器 ====== */
+/* ====== 走廊飛越 ======
+   底圖為內政部國土測繪中心臺灣通用電子地圖正射影像（PHOTO2，免申請介接），
+   南港至宜蘭一帶，涵蓋約 25×40 公里，有效解析度約 25 公尺／像素。
+   地標位置由實際經緯度換算成影像百分比座標，路線本身不繪製：
+   本站未取得可公開的高鐵線形圖資，畫一條線就是捏造。 */
+var FLY=[
+ {n:"南港",x:8.9,y:6.0,
+  say:"起點。鐵道局的表 3 說南港到宜蘭 20 分鐘，加上台北到南港 8 分鐘，全程 28 分。監察院載明這個數字「未加計轉乘時間」。"},
+ {n:"坪林",x:50.8,y:38.2,
+  say:"畫面左邊那片樹枝狀的水域是翡翠水庫。2006 年的直鐵版本因為集水區爭議被否決；高鐵路線官方稱已避開，水源論點不能直接套用到這一案。"},
+ {n:"雪隧南口・頭城",x:86.6,y:57.8,
+  say:"這片山底下要開 10 座隧道。環評報告書載明施工將產生 961.3 萬立方公尺剩餘土石方，其中 236 萬運往台北港填海。到頭城，高鐵 59 分、直鐵 32 分。"},
+ {n:"礁溪",x:75.2,y:68.9,
+  say:"高鐵 51 分，直鐵 39 分。高鐵側已加計轉乘台鐵的 10 分鐘，因為下了高鐵還要換車才進得了市區。"},
+ {n:"宜蘭",x:69.2,y:89.2,
+  say:"終點。到宜蘭市兩案一樣快，都是 41 分。車站旁邊要劃 420 公頃特定區，其中 85% 是私有地，要用區段徵收拿走。"}
+];
+(function(){
+  var sec=document.getElementById("flySec"),view=document.getElementById("flyView"),
+      img=document.getElementById("flyImg"),mkw=document.getElementById("flyMk"),
+      num=document.getElementById("flyNum"),who=document.getElementById("flyWho"),say=document.getElementById("flySay");
+  if(!sec||!view||!img)return;
+  var marks=FLY.map(function(d,i){
+    var m=document.createElement("div");m.className="flymk";
+    m.style.left=d.x+"%";m.style.top=d.y+"%";
+    m.innerHTML='<i></i><b>'+d.n+'</b>';
+    mkw.appendChild(m);return m;
+  });
+  var cur=-1;
+  function setCard(i){
+    if(i===cur)return; cur=i;
+    num.textContent="0"+(i+1);who.textContent=FLY[i].n;say.textContent=FLY[i].say;
+    marks.forEach(function(m,j){m.classList.toggle("on",j===i)});
+  }
+  setCard(0);
+  if(reduced){                              /* 降級：整張圖靜態呈現，五段說明全部列出 */
+    img.style.width="100%";img.style.position="static";
+    function fitMk(){mkw.style.width="100%";mkw.style.height=img.clientHeight+"px"}
+    if(img.complete)fitMk(); else img.addEventListener("load",fitMk);
+    var wrap=say.parentNode.parentNode;
+    FLY.forEach(function(d,i){
+      if(i===0)return;
+      var c=document.createElement("div");c.className="flycard";
+      c.innerHTML='<header class="flych"><span class="fn">0'+(i+1)+'</span><b></b></header><p></p>';
+      c.querySelector("b").textContent=d.n;c.querySelector("p").textContent=d.say;
+      wrap.parentNode.insertBefore(c,wrap.nextSibling);
+    });
+    return;
+  }
+  sec.style.height="calc(100dvh + "+((FLY.length-1)*80)+"dvh)";
+  var live=false,lastP=-1;
+  new IntersectionObserver(function(es){
+    es.forEach(function(e){live=e.isIntersecting;if(live)tick()});
+  },{rootMargin:"120px 0px 120px 0px"}).observe(sec);
+  function lerp(a,b,t){return a+(b-a)*t}
+  function tick(){
+    if(!live)return;
+    var r=sec.getBoundingClientRect(),span=r.height-window.innerHeight;
+    var p=span>0?Math.min(1,Math.max(0,-r.top/span)):0;
+    if(Math.abs(p-lastP)>0.0004){
+      lastP=p;
+      var vw=view.clientWidth,vh=view.clientHeight;
+      /* 寬高都取整數並明確指定，避免計算值與實際算繪高度差 1px 露出底色 */
+      var dw=Math.round(vw*1.9),dh=Math.round(dw*1586/1000);
+      img.style.width=dw+"px";img.style.height=dh+"px";
+      var seg=p*(FLY.length-1),i=Math.min(FLY.length-2,Math.floor(seg)),t=seg-i;
+      var tx=lerp(FLY[i].x,FLY[i+1].x,t)/100*dw;
+      var ty=lerp(FLY[i].y,FLY[i+1].y,t)/100*dh;
+      var ox=Math.min(0,Math.max(vw-dw, vw/2-tx));
+      var oy=Math.min(0,Math.max(vh-dh, vh/2-ty));
+      img.style.transform="translate3d("+ox+"px,"+oy+"px,0)";
+      mkw.style.transform=img.style.transform;
+      mkw.style.width=dw+"px";mkw.style.height=dh+"px";
+      setCard(Math.min(FLY.length-1,Math.round(seg)));
+    }
+    requestAnimationFrame(tick);
+  }
+})();
+
 /* ====== 具象場景橫向對照 ======
    模型取自報導者 scrollable-image：區塊釘住後，垂直捲動距離換算成水平位移。
    本站以 rAF 取樣 rect（不掛 scroll listener），並用 IntersectionObserver
