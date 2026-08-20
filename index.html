@@ -3,14 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>北宜高鐵，值得嗎？</title>
-<meta name="description" content="一班還沒開的列車，正在狂噴你的納稅錢。跟這班車從南港開到宜蘭，看近 6,000 億的總帳怎麼燒、換到了什麼。">
-<meta property="og:title" content="北宜高鐵，值得嗎？">
-<meta property="og:description" content="一班還沒開的列車，正在狂噴你的納稅錢。滑完這頁，你會知道答案。">
+<title>北宜高鐵，值得嗎？｜5,837 億總帳，每個數字都附得出來源</title>
+<meta name="description" content="行政院 2026.07.23 核定高鐵延伸宜蘭，工程費 3,521.75 億。加上 30 年營運 1,735.32 億與臺鐵票收短收 580 億，公民總帳 5,837 億。監察院五項調查意見、420 公頃區段徵收、行車時間逐站對照，每個數字都附得出官方出處。">
+<link rel="canonical" href="https://guanwei-cmd.github.io/hsr-yilan/">
+<meta name="theme-color" content="#141216">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="北宜高鐵，值得嗎？">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:url" content="https://guanwei-cmd.github.io/hsr-yilan/">
+<meta property="og:title" content="北宜高鐵，值得嗎？5,837 億的總帳">
+<meta property="og:description" content="核定工程費 3,521.75 億，加上 30 年營運與臺鐵票收短收，總帳 5,837 億。到宜蘭市兩案一樣快，到頭城高鐵反而慢 27 分鐘。">
+<meta property="og:image" content="https://guanwei-cmd.github.io/hsr-yilan/og.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="北宜高鐵總帳 5,837 億：工程 3,521.75 億加 30 年營運 1,735.32 億加臺鐵票收短收 580 億">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="北宜高鐵，值得嗎？5,837 億的總帳">
+<meta name="twitter:description" content="核定工程費 3,521.75 億，加上 30 年營運與臺鐵票收短收，總帳 5,837 億。每個數字都附得出官方出處。">
+<meta name="twitter:image" content="https://guanwei-cmd.github.io/hsr-yilan/og.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"北宜高鐵，值得嗎？","url":"https://guanwei-cmd.github.io/hsr-yilan/","inLanguage":"zh-Hant-TW","description":"高鐵延伸宜蘭計畫的公民總帳與查證資料整理","license":"https://creativecommons.org/licenses/by/4.0/deed.zh-hant","dateModified":"2026-08-20"}</script>
 <style>
 :root{
   --bg:#E9E6DE; --bg2:#E0DDD2; --panel:#F5F3EC; --panel2:#ECE9E0;
-  --ink:#141216; --muted:#5C5952; --faint:#8A867C;
+  --ink:#141216; --muted:#5C5952; --faint:#6B675E;   /* faint 由 #6B675E 改深，對比 3.27:1 → 5.07:1，通過 WCAG AA */
   --gold:#FFD500; --gold-deep:#E5B800;
   --purple:#31106F; --purple-b:#B3261E;
   --bill:#7FA3D7; --bill-deep:#4A6FA5;
@@ -32,14 +50,14 @@ h1,h2,h3{font-family:"Noto Serif TC","Songti TC",Georgia,serif;letter-spacing:.0
 
 /* ---------- 儀表 ---------- */
 .hud{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 16px;pointer-events:none;background:#141216;border-bottom:3px solid var(--danger)}
-.hud .brand{font-size:13px;font-weight:800;letter-spacing:.05em;color:#E9E6DE}
+.hud .brand{font-size:13px;font-weight:800;letter-spacing:.05em;color:#E9E6DE;white-space:nowrap}
 .hud .right{display:flex;align-items:center;gap:10px}
 .hud .burn{text-align:right;font-family:var(--mono)}
 .hud .burn b{display:block;font-size:20px;color:#FF3B2F;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.2}
 .hud .burn b.pp{animation:pulse .45s ease}
 @keyframes pulse{0%{transform:scale(1)}35%{transform:scale(1.16)}100%{transform:scale(1)}}
-.hud .burn span{font-size:10.5px;color:#8A867C;font-weight:600}
-#sndBtn{pointer-events:auto;background:#141216;border:1.5px solid #5C5952;color:#E9E6DE;width:36px;height:36px;border-radius:4px;font-size:15px;cursor:pointer;line-height:1;flex:none}
+.hud .burn span{font-size:11px;color:#B9B5AA;font-weight:600;white-space:nowrap}
+#sndBtn{pointer-events:auto;background:#141216;border:1.5px solid #5C5952;color:#E9E6DE;width:44px;height:44px;border-radius:4px;font-size:15px;cursor:pointer;line-height:1;flex:none}
 #sndBtn:active{transform:translateY(1px)}
 
 /* ---------- 捲動內容 ---------- */
@@ -88,13 +106,13 @@ main{position:relative;z-index:10}
 .card.in .trow:nth-child(6){transition-delay:.7s}
 .card.in .trow:nth-child(7){transition-delay:.78s}
 .card.in .trow:nth-child(8){transition-delay:.86s}
-.card .kick{display:inline-block;font-size:11.5px;font-weight:800;color:#F5F3EC;letter-spacing:.14em;margin-bottom:9px;background:#141216;border-radius:2px;padding:3px 10px}
+.card .kick{display:inline-block;font-size:12px;font-weight:800;color:#F5F3EC;letter-spacing:.14em;margin-bottom:9px;background:#141216;border-radius:2px;padding:3px 10px}
 .card h2{font-size:clamp(1.35rem,5.5vw,1.8rem);margin:0 0 10px;font-weight:900;line-height:1.4;text-wrap:balance;color:var(--ink)}
 .card p{margin:0 0 10px;font-size:15px;color:#33302B;font-weight:500}
 .card p:last-child{margin-bottom:0}
 .card .big{font-family:var(--mono);font-size:clamp(1.9rem,8vw,2.6rem);font-weight:800;color:var(--danger);line-height:1.25;font-variant-numeric:tabular-nums;margin:2px 0 8px}
 .card .big small{font-size:.45em;color:var(--faint);font-family:var(--sans);font-weight:700}
-.card .src{font-size:11px;color:var(--faint);line-height:1.7;font-weight:500;margin-top:12px}
+.card .src{font-size:12.5px;color:var(--faint);line-height:1.7;font-weight:500;margin-top:12px}
 .card .vsrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 4px}
 .card .vs{border-radius:3px;padding:12px 14px;background:var(--bg);border:1.5px solid var(--ink);box-shadow:3px 3px 0 #141216}
 .card .vs .l{font-size:11.5px;color:var(--muted);font-weight:700;display:block}
@@ -111,7 +129,7 @@ main{position:relative;z-index:10}
 .st.red b{color:var(--danger)}
 .st span{font-size:11.5px;color:var(--muted);font-weight:700}
 details.srcfold{margin-top:12px}
-details.srcfold summary{font-size:11px;color:var(--muted);cursor:pointer;font-weight:800;letter-spacing:.04em;list-style:none;display:inline-block;border:1.5px solid rgba(20,18,22,.45);border-radius:2px;padding:2px 12px}
+details.srcfold summary{font-size:12.5px;color:var(--muted);cursor:pointer;font-weight:800;letter-spacing:.04em;list-style:none;display:inline-flex;align-items:center;min-height:46px;border:1.5px solid rgba(20,18,22,.45);border-radius:2px;padding:0 14px}
 details.srcfold summary::-webkit-details-marker{display:none}
 details.srcfold[open] summary{color:var(--ink)}
 details.srcfold .src{margin-top:8px}
@@ -126,7 +144,7 @@ details.srcfold .src{margin-top:8px}
 .tlgh .gp{flex:none;font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.04em;color:#B9B5AA}
 .tlg.hot .tlgh .gp{color:rgba(255,255,255,.78)}
 .tlgh b{font-size:13.5px;font-weight:800;line-height:1.4}
-.tlgh em{flex:none;margin-left:auto;font-style:normal;font-family:var(--mono);font-size:10.5px;color:#8A867C}
+.tlgh em{flex:none;margin-left:auto;font-style:normal;font-family:var(--mono);font-size:10.5px;color:#6B675E}
 .tlg.hot .tlgh em{color:rgba(255,255,255,.6)}
 .tlgs{margin:9px 12px 0;font-size:12.5px;font-weight:700;color:#3A3542;line-height:1.7}
 .tlus{position:relative;padding:6px 12px 10px 27px}
@@ -135,18 +153,18 @@ details.srcfold .src{margin-top:8px}
 .trow{display:flex;gap:10px;align-items:baseline;padding:4.5px 0;position:relative}
 .trow::before{content:"";position:absolute;left:-15px;top:11px;width:7px;height:7px;background:var(--ink)}
 .tlg.hot .trow::before{background:var(--danger)}
-.trow .td{font-family:var(--mono);font-size:11.5px;font-weight:800;flex:none;width:74px;color:var(--danger);font-variant-numeric:tabular-nums}
+.trow .td{font-family:var(--mono);font-size:12px;font-weight:800;flex:none;width:74px;color:var(--danger);font-variant-numeric:tabular-nums}
 .trow .tx{font-size:13.5px;color:#3A3542;font-weight:500;line-height:1.6;margin:0}
 
 /* 雙軌對照：比較盤釘住，文字段落捲動推進 */
 .dcsec{position:relative;padding:0 16px 12vh}
 .dclead,.dctrack,.dcend{max-width:520px;margin:0 auto}
 .dclead{padding-top:13vh}
-.dcsec .kick{display:inline-block;font-size:11.5px;font-weight:800;color:#F5F3EC;letter-spacing:.14em;margin-bottom:9px;background:#141216;border-radius:2px;padding:3px 10px}
+.dcsec .kick{display:inline-block;font-size:12px;font-weight:800;color:#F5F3EC;letter-spacing:.14em;margin-bottom:9px;background:#141216;border-radius:2px;padding:3px 10px}
 .dcsec h2{font-size:clamp(1.35rem,5.5vw,1.8rem);margin:0 0 10px;font-weight:900;line-height:1.4;text-wrap:balance;color:var(--ink)}
 .dcsec>.dclead p{margin:0;font-size:15px;color:#33302B;font-weight:500;line-height:1.85}
-.dcsec .src{font-size:11px;color:var(--faint);line-height:1.7;font-weight:500;margin-top:12px}
-.dcstage{position:sticky;top:62px;z-index:3;max-width:520px;margin:14px auto 0}
+.dcsec .src{font-size:12.5px;color:var(--faint);line-height:1.7;font-weight:500;margin-top:12px}
+.dcstage{position:sticky;top:calc(var(--hud-h,62px) + 8px);z-index:3;max-width:520px;margin:14px auto 0}
 .dcbox{background:var(--panel);border:1.5px solid var(--ink);border-radius:4px;padding:12px 13px 14px;box-shadow:5px 5px 0 #141216}
 .dcbox .cmpbody{gap:8px}
 .dcbox .cmpside{padding:11px 8px 9px}
@@ -154,20 +172,21 @@ details.srcfold .src{margin-top:8px}
 .dcbox .cmpside .cl{font-size:10.5px}
 .dcbox .cmpside .cn{font-size:10px}
 .dcprog{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 11px}
-.dcprog button{font-family:var(--sans);font-size:11.5px;font-weight:800;padding:5px 11px;border-radius:3px;border:1.5px solid var(--ink);background:var(--panel);color:var(--ink);cursor:pointer}
+.dcprog button{font-family:var(--sans);font-size:12.5px;font-weight:800;min-height:46px;padding:5px 12px;border-radius:3px;border:1.5px solid var(--ink);background:var(--panel);color:var(--ink);cursor:pointer}
 .dcprog button[aria-pressed="true"]{background:#141216;border-color:#141216;color:#F5F3EC}
 .dcstep{min-height:50vh;display:flex;flex-direction:column;justify-content:center;padding:18px 0}
 .dcbody{background:var(--panel);border:1.5px solid var(--ink);border-radius:3px;box-shadow:4px 4px 0 #141216;overflow:hidden;opacity:.55;transition:opacity .35s ease}
 .dcstep.on .dcbody{opacity:1}
 /* 走廊飛越：正射影像沿真實地標路徑推進 */
 .fly{position:relative}
-.flypin{position:sticky;top:0;height:100dvh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:64px 16px 12px}
+.flypin{position:sticky;top:0;height:100dvh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:calc(var(--hud-h,62px) + 12px) 16px 12px}
 .flyhead{max-width:520px;width:100%;margin:0 auto}
 .flykick{display:inline-block;font-size:11.5px;font-weight:800;color:#F5F3EC;letter-spacing:.14em;background:#141216;border-radius:2px;padding:3px 10px}
 .flyview{position:relative;max-width:520px;width:100%;margin:0 auto;height:46dvh;overflow:hidden;border:1.5px solid var(--ink);border-radius:3px;box-shadow:5px 5px 0 #141216;background:#141216}
 .flyimg{position:absolute;left:0;top:0;will-change:transform;image-rendering:auto}
 .flymk{position:absolute;transform:translate(-50%,-50%);pointer-events:none}
 .flymk i{display:block;width:11px;height:11px;border-radius:50%;border:2.5px solid #F5F3EC;background:var(--danger);box-shadow:0 0 0 2px rgba(20,18,22,.55)}
+.flymk.lft b{left:auto;right:15px}
 .flymk b{position:absolute;left:15px;top:-4px;white-space:nowrap;font-size:11px;font-weight:800;color:#F5F3EC;background:rgba(20,18,22,.82);border-radius:2px;padding:2px 7px}
 .flymk.on i{background:var(--gold);transform:scale(1.25)}
 .flycard{max-width:520px;width:100%;margin:0 auto;background:var(--panel);border:1.5px solid var(--ink);border-radius:3px;box-shadow:4px 4px 0 #141216;overflow:hidden}
@@ -175,7 +194,7 @@ details.srcfold .src{margin-top:8px}
 .flych .fn{flex:none;font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.12em;color:rgba(255,255,255,.78)}
 .flych b{font-size:14px;font-weight:900}
 .flycard p{margin:0;padding:11px 13px;font-size:14px;font-weight:500;color:#33302B;line-height:1.8}
-.flysrc{align-self:center;max-width:520px;font-size:10px;font-weight:600;line-height:1.7;color:#CFCBC1;background:rgba(20,18,22,.78);border-radius:2px;padding:4px 8px}
+.flysrc{align-self:center;max-width:520px;font-size:11.5px;font-weight:600;line-height:1.7;color:#CFCBC1;background:rgba(20,18,22,.78);border-radius:2px;padding:4px 8px}
 .dchd{display:flex;align-items:baseline;gap:9px;padding:6px 11px;background:#141216;color:#F5F3EC}
 .dcstep.on .dchd{background:var(--danger)}
 .dchd .dcn{flex:none;font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.12em;color:#B9B5AA}
@@ -186,7 +205,7 @@ details.srcfold .src{margin-top:8px}
 /* 具象場景橫向對照（釘住後由垂直捲動驅動水平位移） */
 .hz{position:relative}
 .hzpin{position:sticky;top:0;height:100dvh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
-.hztop{position:absolute;top:74px;left:0;right:0;display:flex;align-items:center;gap:9px;padding:0 16px;z-index:2}
+.hztop{position:absolute;top:calc(var(--hud-h,62px) + 12px);left:0;right:0;display:flex;align-items:center;gap:9px;padding:0 16px;z-index:2}
 .hzkick{flex:none;font-size:11px;font-weight:800;letter-spacing:.14em;color:#F5F3EC;background:#141216;border-radius:2px;padding:3px 9px}
 .hzdots{display:flex;gap:5px;flex:1}
 .hzdots i{flex:1;height:4px;background:rgba(245,243,236,.35);border-radius:1px;transition:background .25s ease}
@@ -197,21 +216,21 @@ details.srcfold .src{margin-top:8px}
 .hzhd{display:flex;align-items:baseline;gap:9px;padding:7px 12px;background:#141216;color:#F5F3EC}
 .hzhd .hzn{flex:none;font-family:var(--mono);font-size:11px;font-weight:800;letter-spacing:.12em;color:#B9B5AA}
 .hzhd b{font-size:15px;font-weight:900}
-.hzhd em{margin-left:auto;font-style:normal;font-size:11px;font-weight:700;color:#8A867C}
+.hzhd em{margin-left:auto;font-style:normal;font-size:11px;font-weight:700;color:#6B675E}
 .hzart{padding:14px 13px 6px}
 .hzart svg{width:100%;height:auto;display:block}
 .hzsay{margin:0;padding:0 13px 10px;font-size:15px;font-weight:800;color:var(--ink);line-height:1.6}
-.hznote{margin:0;padding:0 13px 13px;font-size:10.5px;font-weight:500;color:var(--faint);line-height:1.7}
+.hznote{margin:0;padding:0 13px 13px;font-size:12px;font-weight:500;color:var(--faint);line-height:1.7}
 .hzhint{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:800;letter-spacing:.1em;color:#F5F3EC;background:#141216;border-radius:2px;padding:4px 12px}
 
 /* 目的地選擇與車票 */
 .picklab{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.1em;margin-top:12px}
 .dpick{display:flex;flex-wrap:wrap;gap:7px;margin:6px 0 12px}
 .tkleg.west .tkmark{background:var(--bg2);border-color:var(--faint);color:var(--muted)}
-.dpick button{font-family:var(--sans);font-size:13px;font-weight:800;padding:8px 16px;border-radius:3px;border:1.5px solid var(--ink);background:var(--panel);color:var(--ink);cursor:pointer;box-shadow:2px 2px 0 #141216}
+.dpick button{font-family:var(--sans);font-size:14px;font-weight:800;min-height:46px;padding:8px 16px;border-radius:3px;border:1.5px solid var(--ink);background:var(--panel);color:var(--ink);cursor:pointer;box-shadow:2px 2px 0 #141216}
 .dpick button[aria-pressed="true"]{background:var(--danger);border-color:var(--danger);color:#F5F3EC}
 .dpick button:active{transform:translateY(2px);box-shadow:1px 1px 0 #141216}
-.swapbtn{display:inline-block;margin:0 0 12px;font-family:var(--sans);font-size:12.5px;font-weight:800;padding:7px 13px;border-radius:3px;border:1.5px dashed var(--muted);background:transparent;color:var(--muted);cursor:pointer}
+.swapbtn{display:inline-flex;align-items:center;margin:0 0 12px;font-family:var(--sans);font-size:13.5px;font-weight:800;min-height:46px;padding:0 15px;border-radius:3px;border:1.5px dashed var(--muted);background:transparent;color:var(--muted);cursor:pointer}
 .swapbtn:active{transform:translateY(1px)}
 .ticket{position:relative;background:var(--bg);border:1.5px solid var(--ink);border-radius:3px;box-shadow:5px 5px 0 #141216;padding:16px 16px 14px;margin:0 0 12px;overflow:hidden}
 .ticket::before,.ticket::after{content:"";position:absolute;width:16px;height:16px;border-radius:50%;background:var(--panel);border:1.5px solid var(--ink);top:calc(50% - 8px)}
@@ -236,12 +255,12 @@ details.srcfold .src{margin-top:8px}
 .tkdiff.same .dv{color:var(--ink)}
 .tksnark{margin:9px 0 0;font-family:"Noto Serif TC","Songti TC",serif;font-size:clamp(1rem,4.4vw,1.2rem);font-weight:800;line-height:1.6;color:var(--danger);text-wrap:balance}
 .tkfare{margin-top:12px;background:#141216;border-radius:3px;padding:12px 14px;text-align:center}
-.tkfare .fl{display:block;font-size:11px;font-weight:800;color:#8A867C;letter-spacing:.06em}
+.tkfare .fl{display:block;font-size:11px;font-weight:800;color:#6B675E;letter-spacing:.06em}
 .tkfare .fv{display:block;font-family:var(--mono);font-size:clamp(1.5rem,7vw,2.1rem);font-weight:800;color:#FF3B2F;font-variant-numeric:tabular-nums;line-height:1.25;margin:2px 0}
-.tkfare .fn{display:block;font-size:10.5px;color:#8A867C;font-weight:600}
+.tkfare .fn{display:block;font-size:10.5px;color:#6B675E;font-weight:600}
 .tkwarn{margin-top:10px;font-size:12.5px;font-weight:700;color:var(--danger);line-height:1.6}
 .tkact{display:flex;gap:8px;flex-wrap:wrap;margin-top:2px}
-.tkact button{flex:1 1 140px;font-family:var(--sans);font-size:13.5px;font-weight:900;padding:11px 14px;border-radius:4px;border:1.5px solid var(--ink);background:var(--panel);color:var(--ink);cursor:pointer;box-shadow:3px 3px 0 #141216}
+.tkact button{flex:1 1 140px;min-height:46px;font-family:var(--sans);font-size:14px;font-weight:900;padding:11px 14px;border-radius:4px;border:1.5px solid var(--ink);background:var(--panel);color:var(--ink);cursor:pointer;box-shadow:3px 3px 0 #141216}
 .tkact button:active{transform:translateY(2px);box-shadow:1px 1px 0 #141216}
 
 /* 比價器 */
@@ -259,10 +278,10 @@ details.srcfold .src{margin-top:8px}
 .exam{margin:12px 0 2px}
 .exam details{border-bottom:1.5px dashed rgba(27,23,34,.25)}
 .exam details:last-child{border-bottom:none}
-.exam summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:9px;padding:9px 2px;font-size:14px;font-weight:800;color:var(--ink)}
+.exam summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:9px;min-height:46px;padding:9px 2px;font-size:14px;font-weight:800;color:var(--ink)}
 .exam summary::-webkit-details-marker{display:none}
 .exam summary i{font-style:normal;color:var(--danger);font-weight:900;flex:none}
-.exam summary em{font-style:normal;margin-left:auto;color:var(--faint);font-size:11px;transition:transform .2s}
+.exam summary em{font-style:normal;margin-left:auto;color:var(--faint);font-size:12px;transition:transform .2s}
 .exam details[open] summary em{transform:rotate(180deg)}
 .exam details p{margin:0 0 10px 24px;font-size:13.5px;color:#3A3542;font-weight:500;line-height:1.75}
 /* 具名疑問點名牆 */
@@ -270,12 +289,12 @@ details.srcfold .src{margin-top:8px}
 .qgrp::after{content:"";flex:1;height:1.5px;background:rgba(20,18,22,.14)}
 .qgrp em{font-style:normal;color:var(--muted);letter-spacing:0}
 .qwall{display:flex;flex-wrap:wrap;align-items:stretch;gap:7px;margin:8px 0 4px}
-.qwall button{display:flex;align-items:center;gap:8px;font-family:var(--sans);font-size:12.5px;font-weight:800;padding:5px 12px 5px 6px;border-radius:3px;border:1.5px solid var(--ink);cursor:pointer;color:var(--ink);text-align:left}
+.qwall button{display:flex;align-items:center;gap:8px;min-height:46px;font-family:var(--sans);font-size:13px;font-weight:800;padding:5px 12px 5px 6px;border-radius:3px;border:1.5px solid var(--ink);cursor:pointer;color:var(--ink);text-align:left}
 .qwall .qca{flex:none;width:26px;height:26px;border-radius:2px;border:1px solid rgba(20,18,22,.55);background:var(--panel2)}
 .qwall img.qca{display:block;object-fit:cover;object-position:50% 20%}
 .qwall span.qca{display:flex;align-items:center;justify-content:center;font-family:"Noto Serif TC",serif;font-size:14px;font-weight:800;color:var(--muted)}
 .qwall .qcw{display:flex;flex-direction:column;gap:1px;min-width:0}
-.qwall .qct{font-size:10.5px;font-weight:700;color:var(--muted);letter-spacing:.01em}
+.qwall .qct{font-size:11.5px;font-weight:700;color:var(--muted);letter-spacing:.01em}
 .qwall.wlead button{padding:6px 14px 6px 7px}
 .qwall.wlead .qca{width:40px;height:40px}
 .qwall.wlead .qcn{font-size:14px}
@@ -300,6 +319,8 @@ details.srcfold .src{margin-top:8px}
 
 /* ---------- Hero ---------- */
 .hero{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 22px;position:relative}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(233,230,222,0) 0%,rgba(233,230,222,.72) 22%,rgba(233,230,222,.94) 50%,rgba(233,230,222,.72) 84%,rgba(233,230,222,0) 100%);pointer-events:none}
+.hero>*{position:relative;z-index:1}
 .hero h1{font-size:clamp(2.2rem,9vw,3.6rem);font-weight:900;line-height:1.3;margin:0 0 14px;max-width:11em;letter-spacing:.01em;text-wrap:balance}
 .hero h1 em{font-style:normal;background:#141216;color:#F5F3EC;padding:0 10px;border-radius:2px}
 .hero .sub{font-size:clamp(.95rem,3.8vw,1.1rem);color:var(--muted);font-weight:600;margin:0 0 26px;max-width:24em}
@@ -349,6 +370,16 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
 </head>
 <body>
 
+<noscript>
+  <style>.card,.card>*,.card .st,.card .vs,.card .trow,.dcbody{opacity:1!important;transform:none!important}
+  .hzpin,.flypin{position:static;height:auto;overflow:visible}
+  .hzstrip{display:block;transform:none!important}.hzs{width:auto}
+  #scene{display:none}</style>
+  <p style="max-width:520px;margin:88px auto 0;padding:14px 16px;background:#F5F3EC;border:1.5px solid #141216;border-radius:3px;font-size:14.5px;line-height:1.85">
+  這一頁的捲動動畫需要 JavaScript，但所有內容與出處在關閉 JavaScript 時仍然完整可讀。
+  總帳 5,837 億＝行政院核定工程費 3,521.75 億＋30 年營運 1,735.32 億＋臺鐵 30 年票收短收 580 億。</p>
+</noscript>
+
 <canvas id="scene" aria-hidden="true"></canvas>
 
 <div class="hud">
@@ -370,7 +401,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
   <section class="step tall">
     <div class="card">
       <div class="kick">開一張票給自己</div>
-      <h2>從你家到宜蘭，<br>這 5,965 億改到哪一段？</h2>
+      <h2>從你家到宜蘭，<br>這 5,837 億改到哪一段？</h2>
       <p style="font-size:13.5px;color:#6A6371">行政院核定的工程費 3,521 億，加上 30 年營運與台鐵短收，總帳近 6,000 億。選起點與終點，看這筆錢到底改到你哪一段路。西部到台北一律走現行高鐵、統一在南港換車；南港以東，才是這筆錢要蓋的。</p>
       <div class="picklab" id="labO">起點・西部</div>
       <div class="dpick" id="opick" role="group" aria-label="選擇西部端"></div>
@@ -380,7 +411,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
       <div class="ticket" id="ticket">
         <div class="tkhead">
           <span class="tkdest"><b id="tkOrig">台中</b> → <b id="tkDest">羅東</b></span>
-          <span class="tkno" id="tkNo">NO.5965</span>
+          <span class="tkno" id="tkNo">NO.5837</span>
         </div>
         <div class="tkleg west" id="tkLegW">
           <span class="tkmark">現行</span>
@@ -407,7 +438,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
           </span>
         </div>
         <div class="tkdiff" id="tkDiff">
-          <span class="dl">付了 5,965 億，換到</span>
+          <span class="dl">付了 5,837 億，換到</span>
           <span class="dv" id="tkDv">快 3 分鐘</span>
         </div>
         <p class="tksnark" id="tkSnark">才省 3 分鐘，你要我買單？</p>
@@ -423,7 +454,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         <button id="tkShare">把我的車票傳出去</button>
       </div>
       <canvas id="tkCanvas" width="1080" height="1350" hidden></canvas>
-      <details class="srcfold"><summary>出處與口徑</summary><p class="src">兩案到宜蘭各鄉鎮的行車時間，出自監察院 115 交調 0004 調查報告圖 7「北宜『高鐵』案及『直鐵』案行車時間比較圖」（PDF 第 36 頁）：高鐵案（已加計轉乘台鐵時間 10 分鐘、票價 315 元）頭城 59、礁溪 51、宜蘭 41、羅東 46、蘇澳新 59 分鐘；直鐵案（自強直達／半直達、票價 200 元）頭城 32、礁溪 39、宜蘭 41、羅東 49、蘇澳新 64 分鐘。該圖資料來源標示為「陳訴人提供」，非鐵道局估算。鐵道局自身估算為高鐵 28 分鐘（台北至南港 8 分＋南港至宜蘭 20 分）、直鐵 56 至 64 分鐘（台北至南港 10 分＋46 至 54 分），監察院載明該估算「未加計轉乘時間，是以該局應予加計轉乘時間進行比較分析」（同報告表 3、第 35 頁）。另交通部運研所模式情境分析：若宜蘭站兩鐵間轉乘時間大於 25 分鐘，預估約 50% 北部往返花東旅次將選擇全程搭乘台鐵（同報告表 7）。高鐵宜蘭站站址為「縣政中心以南」方案，與台鐵宜蘭新站平行共站、經地面層轉乘（交通部 2022.01.27 審查會議結論；鐵道局計畫資訊專區）；全線約 60.6 公里，宜蘭端僅此一站。西部至台北為現行高鐵既有路網，台灣高鐵公告台北至台南約 83 分、台北至左營約 95 分（直達車），其餘各站以高鐵官網時刻表查詢為準，本頁不列推估值。分攤金額＝5,965 億 ÷ 全國人口 23,243,565 人（內政部 2026 年 6 月底統計）。</p></details>
+      <details class="srcfold"><summary>出處與口徑</summary><p class="src">兩案到宜蘭各鄉鎮的行車時間，出自監察院 115 交調 0004 調查報告圖 7「北宜『高鐵』案及『直鐵』案行車時間比較圖」（PDF 第 36 頁）：高鐵案（已加計轉乘台鐵時間 10 分鐘、票價 315 元）頭城 59、礁溪 51、宜蘭 41、羅東 46、蘇澳新 59 分鐘；直鐵案（自強直達／半直達、票價 200 元）頭城 32、礁溪 39、宜蘭 41、羅東 49、蘇澳新 64 分鐘。該圖資料來源標示為「陳訴人提供」，非鐵道局估算。鐵道局自身估算為高鐵 28 分鐘（台北至南港 8 分＋南港至宜蘭 20 分）、直鐵 56 至 64 分鐘（台北至南港 10 分＋46 至 54 分），監察院載明該估算「未加計轉乘時間，是以該局應予加計轉乘時間進行比較分析」（同報告表 3、第 35 頁）。另交通部運研所模式情境分析：若宜蘭站兩鐵間轉乘時間大於 25 分鐘，預估約 50% 北部往返花東旅次將選擇全程搭乘台鐵（同報告表 7）。高鐵宜蘭站站址為「縣政中心以南」方案，與台鐵宜蘭新站平行共站、經地面層轉乘（交通部 2022.01.27 審查會議結論；鐵道局計畫資訊專區）；全線約 60.6 公里，宜蘭端僅此一站。西部至台北為現行高鐵既有路網，台灣高鐵公告台北至台南約 83 分、台北至左營約 95 分（直達車），其餘各站以高鐵官網時刻表查詢為準，本頁不列推估值。分攤金額＝5,837 億 ÷ 全國人口 23,243,565 人（內政部 2026 年 6 月底統計）。</p></details>
     </div>
   </section>
 
@@ -438,7 +469,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         <div class="st"><b><i class="num" data-v="961">0</i> 萬 m³</b><span>挖出的土方</span></div>
       </div>
       <p>最快 2029 動工、2036 到 2037 通車。今年出生的孩子，小四才搭得到；但錢，現在就要開始燒。</p>
-      <details class="srcfold"><summary>出處</summary><p class="src">鐵道局計畫專區、中央社與公視 2026.07.23 報導、宜蘭高鐵政策查核頁（土方彙整自環評書件）。通車年官方說法有 2036 與 2037 兩版本。</p></details>
+      <details class="srcfold"><summary>出處</summary><p class="src">鐵道局計畫專區、中央社與公視 2026.07.23 報導。通車年官方說法有 2036 與 2037 兩版本。</p></details>
     </div>
   </section>
 
@@ -451,9 +482,9 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
       <div class="stats">
         <div class="st"><b>＋<i class="num" data-v="1735">0</i> 億</b><span>30 年營運成本</span></div>
         <div class="st"><b>＋<i class="num" data-v="580">0</i> 億</b><span>台鐵 30 年票收短收</span></div>
-        <div class="st red" style="grid-column:1/-1"><b>＝<i class="num" data-v="5965">0</i> 億</b><span>總帳，就是右上角碼表跑的近 6,000 億</span></div>
+        <div class="st red" style="grid-column:1/-1"><b>＝<i class="num" data-v="5837">0</i> 億</b><span>總帳，就是右上角碼表跑的近 6,000 億</span></div>
       </div>
-      <details class="srcfold"><summary>出處</summary><p class="src">自由時報 2019.10、關鍵評論網 2021.12、中央社 2026.07.22（鐵道局說明 3,521.75 億）、監察院 115 交調 0004 調查報告、宜蘭高鐵政策查核頁（總帳 5,965 億之組成）、中央社載時代力量宜蘭縣議員參選人劉仲書之計算。</p></details>
+      <details class="srcfold"><summary>出處</summary><p class="src">逐年估算：鐵道局 2019.10 初步可行性規劃 955 億（自由時報 2019.10）；111 年 1 月估 1,880 億、114 年 6 月估 3,521.75 億（監察院 115 交調 0004 調查報告）；行政院 2026.07.23 核定 3,521.75 億（中央社 2026.07.22 鐵道局說明）。總帳三項組成：工程 3,521.75 億為核定值；30 年營運 1,735.32 億出自 114 年環評報告書（定稿本）表 9.1.3-15、9.1.3-20，監察院引述；臺鐵 30 年票收短收 580 億為臺灣鐵路產業工會依臺鐵公司 7 月 22 日評估所作推估，逐字載於監察院調查報告。該報告另載鐵道局推估高鐵將減少臺鐵 150.61 億元票收、直鐵則可提升 214.59 億元票收。</p></details>
     </div>
   </section>
 
@@ -461,7 +492,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
 
   <section class="fly" id="flySec" aria-label="南港至宜蘭走廊正射影像飛越">
     <div class="flypin">
-      <div class="flyhead"><span class="flykick">這 60 公里，要穿過哪裡</span></div>
+      <div class="flyhead"><span class="flykick">這 60 公里長什麼樣子</span></div>
       <div class="flyview" id="flyView">
         <img class="flyimg" id="flyImg" src="img/corridor.jpg" alt="南港至宜蘭一帶正射影像" decoding="async">
         <div class="flymk" id="flyMk" style="position:absolute;left:0;top:0;transform-origin:0 0"></div>
@@ -549,7 +580,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
           </div>
         </section>
       </div>
-      <details class="srcfold"><summary>出處</summary><p class="src">2024.06.21 與 2026.01.23 兩場會議之名稱、主持人與結論，出自監察院 115 交調 0004 調查報告：行政院 113 年 6 月 21 日召開「高鐵延伸宜蘭計畫加速推動審查程序研商會議」（由陳金德政務委員主持），指出「各相關單位的推動態度均不夠積極」，指示環評與綜合規劃採平行作業，後續再召開 5 次進度追蹤會議；交通部依該結論於 113 年 9 月 27 日提報階段性報告。115 年 1 月 23 日「高鐵宜蘭車站特定區計畫進度追蹤會議」同由陳金德主持，提出「請參考桃園、新竹高鐵特定區經驗，檢討調高容積率」（會議認為規劃之住宅區及產業專用區容積率約 200% 實屬過低）。2019.04.19 交通部指示辦理高鐵延伸宜蘭初步評估、2019.08.30 北宜新線綜合規劃陳報後遭退回並要求納入高鐵議題、2022.01.27 站址審查結論：交通部鐵道局計畫資訊專區大事紀、宜蘭縣政府交通處計畫辦理情形。監察院 115 交調 0004 調查報告全文未載審議或公布日期，本站因此不標日期；報告載明 115 年 2 月 9 日詢問行政院、交通部、鐵道局、國發會、環境部及工程會等機關主管人員後「已調查竣事」，最早見於 2026.05.12 中央社報導。調查委員：林盛豐、蘇麗瓊、施錦芳。報告列五項調查意見（報告本身未使用「違失」一詞），處理辦法為函請行政院督同相關部會參處。其餘各列彙整自宜蘭高鐵政策查核頁大事紀。</p></details>
+      <details class="srcfold"><summary>出處</summary><p class="src">2024.06.21 與 2026.01.23 兩場會議之名稱、主持人與結論，出自監察院 115 交調 0004 調查報告：行政院 113 年 6 月 21 日召開「高鐵延伸宜蘭計畫加速推動審查程序研商會議」（由陳金德政務委員主持），指出「各相關單位的推動態度均不夠積極」，指示環評與綜合規劃採平行作業，後續再召開 5 次進度追蹤會議；交通部依該結論於 113 年 9 月 27 日提報階段性報告。115 年 1 月 23 日「高鐵宜蘭車站特定區計畫進度追蹤會議」同由陳金德主持，提出「請參考桃園、新竹高鐵特定區經驗，檢討調高容積率」（會議認為規劃之住宅區及產業專用區容積率約 200% 實屬過低）。2019.04.19 交通部指示辦理高鐵延伸宜蘭初步評估、2019.08.30 北宜新線綜合規劃陳報後遭退回並要求納入高鐵議題、2022.01.27 站址審查結論：交通部鐵道局計畫資訊專區大事紀、宜蘭縣政府交通處計畫辦理情形。監察院 115 交調 0004 調查報告全文未載審議或公布日期，本站因此不標日期；報告載明 115 年 2 月 9 日詢問行政院、交通部、鐵道局、國發會、環境部及工程會等機關主管人員後「已調查竣事」，最早見於 2026.05.12 中央社報導。調查委員：林盛豐、蘇麗瓊、施錦芳。報告列五項調查意見（報告本身未使用「違失」一詞），處理辦法為函請行政院督同相關部會參處。</p></details>
     </div>
   </section>
 
@@ -574,7 +605,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         <details><summary><i>✗</i>420 公頃需求缺乏立論<em>▾</em></summary><p>特定區從 190 公頃暴增到 420 公頃，監察院直指缺乏充分立論基礎。</p></details>
         <details><summary><i>✗</i>高鐵與特定區拆開環評<em>▾</em></summary><p>兩案分開評估，累積的整體衝擊從頭到尾沒被一次評估過。</p></details>
       </div>
-      <details class="srcfold"><summary>出處</summary><p class="src">監察院調查報告（聯合報 2026.05.13、宜蘭高鐵政策查核頁之八項問題彙整）、ETtoday 2026.07.22（契約修改 9 次追加 60%）、Newtalk 2026.07.22（自償率 6.8%、桃捷綠線對照）。</p></details>
+      <details class="srcfold"><summary>出處</summary><p class="src">監察院調查報告（聯合報 2026.05.13）、ETtoday 2026.07.22（契約修改 9 次追加 60%）、Newtalk 2026.07.22（自償率 6.8%、桃捷綠線對照）。</p></details>
     </div>
   </section>
 </main>
@@ -582,7 +613,8 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
 <div class="finale">
   <div class="finale-in">
     <h2>宜蘭人要的是<em>更快回家</em>，<br>不是更貴的煙火</h2>
-    <p style="color:var(--muted);font-size:15px">民調顯示：宜蘭人的雙北日常通勤，偏好台鐵直鐵。這條總帳近 6,000 億的路，到底為誰而蓋？</p>
+    <p style="color:var(--muted);font-size:15px">納入換車轉乘與宜蘭長期發展等因素後，宜蘭縣民明顯偏好北宜台鐵。這條總帳 5,837 億的路，到底為誰而蓋？</p>
+      <details class="srcfold"><summary>民調出處</summary><p class="src">典通股份有限公司執行、公民幫推等民間團體委託，2026 年 2 月 23 日至 3 月 1 日以市話與手機雙軌全國電訪，對象為 18 歲以上且有北宜路線旅運經驗者，依居住縣市分宜蘭縣、北北基桃、新竹以南、花蓮臺東四組，各組抽樣誤差在 4.5% 以內（中央社 2026.05.19）。本頁不引用未經原始報告確認之百分比數字。</p></details>
     <div class="alt">
       <h3>公民團體的訴求很簡單</h3>
       <p>把三個方案（高鐵、直鐵、台鐵提速）的對照評估攤開來，公開全生命週期帳本、補足公民參與程序，<b>讓宜蘭人在完整資訊下重新選擇</b>。台灣前進陣線（時代力量×台灣綠黨×台灣基進×小民參政歐巴桑聯盟）2026.07.22 提出；宜蘭在地 7 個具名團體持續監督。</p>
@@ -620,10 +652,11 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         <li><span class="st no">未公開</span>陳金德加速會議的紀錄與簡報</li>
         <li><span class="st half">部分公開</span>420 公頃的需求論證與環境累積影響</li>
       </ul>
-      <p style="margin-top:12px;font-size:13px;color:#6A6371">逐項查核、20 位交通／財務／土地／環境專業者意見名錄：<a href="https://yilan-hsr-ledger.lys730.chatgpt.site/" target="_blank" rel="noopener" style="color:#B3261E">宜蘭高鐵政策查核頁</a>。監督全民帳本，不等於反對宜蘭交通改善。</p>
+      <p style="margin-top:12px;font-size:13px;color:#6A6371">五件事的狀態最後查核於 2026.08.20。監督全民帳本，不等於反對宜蘭交通改善。</p>
     </div>
     <div class="actions">
       <button class="btn gold" id="shareBtn">把這頁傳出去</button>
+      <a class="btn line" id="lineBtn" href="#" rel="noopener">傳到 LINE</a>
       <a class="btn line" href="#top" id="replayBtn">再看一次</a>
     </div>
   </div>
@@ -632,10 +665,16 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
 <footer>
   <div class="foot">
     <b style="color:var(--muted)">關於本頁</b><br>
-    整理高鐵延伸宜蘭計畫的公開資訊與公民團體質疑。所有數字均附來源；本頁碼表與主標採公民總帳口徑 5,965 億（工程 3,650＋30 年營運 1,735＋台鐵短收 580，宜蘭高鐵政策查核頁彙整）；行政院核定之工程經費為 3,521.75 億。<br><br>
+    整理高鐵延伸宜蘭計畫的公開資訊與公民團體質疑。所有數字均附來源；本頁碼表與主標採公民總帳 5,837 億，三項組成各有官方文件可回推：行政院 2026.07.23 核定工程費 3,521.75 億；30 年營運成本 1,735.32 億出自 114 年環評報告書（定稿本）表 9.1.3-15、9.1.3-20，監察院調查報告引述；臺鐵 30 年票收短收 580 億為臺灣鐵路產業工會依臺鐵公司 7 月 22 日評估所作之推估，載於監察院 115 交調 0004 調查報告。監察院報告案由另載「工程經費達 3,650 億元」，惟該數字標示為「據訴」（陳訴人所述），本站因此改採核定值。<br><br>
     <b style="color:var(--muted)">主要資料來源</b><br>
-    <a href="https://cybsbox.cy.gov.tw/CYBSBoxSSL/edoc/download/73762" target="_blank" rel="noopener">監察院 115 交調 0004 調查報告全文 PDF</a>（報告未載審議或公布日期；最早見於 2026.05.12 中央社報導）｜中央社、公視、自由時報、聯合報、ETtoday、Newtalk（2026.05 至 07）｜環境資訊中心（2023 至 2025 環評紀錄）｜眼底城事・公民幫推試算（2025.08）｜鐵道局計畫專區 hsr2yilan.com｜<a href="https://www.rootlaw.com.tw/Attach/S-Doc/02411501090004-001.pdf" target="_blank" rel="noopener">高鐵延伸宜蘭計畫環境影響評估報告書（定稿）摘要本</a>｜時代力量官網（2026.06.11）｜<a href="https://yilan-hsr-ledger.lys730.chatgpt.site/" target="_blank" rel="noopener">宜蘭高鐵政策查核頁</a>（比較表、大事紀與監院問題彙整）。<br><br>
-    論述整理自台灣前進陣線 2026.07.22 記者會與高鐵延伸宜蘭監督聯盟公開發言；各團體立場以其官方公告為準。
+    <a href="https://cybsbox.cy.gov.tw/CYBSBoxSSL/edoc/download/73762" target="_blank" rel="noopener">監察院 115 交調 0004 調查報告全文 PDF</a>（報告未載審議或公布日期；最早見於 2026.05.12 中央社報導）｜中央社、公視、自由時報、聯合報、ETtoday、Newtalk（2026.05 至 07）｜環境資訊中心（2023 至 2025 環評紀錄）｜眼底城事・公民幫推試算（2025.08）｜鐵道局計畫專區 hsr2yilan.com｜<a href="https://www.rootlaw.com.tw/Attach/S-Doc/02411501090004-001.pdf" target="_blank" rel="noopener">高鐵延伸宜蘭計畫環境影響評估報告書（定稿）摘要本</a>｜時代力量官網（2026.06.11）。<br><br>
+      <b style="color:var(--muted)">不採用的來源</b><br>
+      「宜蘭高鐵政策查核頁」（yilan-hsr-ledger）：2026.08.07 逐句回溯後確認該頁多則專業者引言在任何原文中都找不到，屬改寫或捏造，本站已全面停止引用，也不建議讀者以其作為查證依據。本頁先前引自該頁的大事紀與總帳組成，已改由監察院調查報告、環評報告書定稿本與各原始報導逐項替換。<br><br>
+    論述整理自台灣前進陣線 2026.07.22 記者會與高鐵延伸宜蘭監督聯盟公開發言；各團體立場以其官方公告為準。<br><br>
+    <b style="color:var(--muted)">關於製作與授權</b><br>
+    本頁由公民自行整理製作，非任何政黨或機關之官方網站，未受任何單位委託或出資。原始碼與完整出處紀錄公開於 <a href="https://github.com/guanwei-cmd/hsr-yilan" target="_blank" rel="noopener">github.com/guanwei-cmd/hsr-yilan</a>，肖像與圖資的逐張授權見 <a href="https://github.com/guanwei-cmd/hsr-yilan/blob/main/img/CREDITS.md" target="_blank" rel="noopener">img/CREDITS.md</a>。發現數字或引述有誤，請到該 repo 開 issue，會更正並在此註記。<br>
+    本頁文字與自製圖表採 <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hant" target="_blank" rel="noopener">CC BY 4.0</a> 釋出，地方團體與媒體可自由轉用，請註明出處；引用之肖像、正射影像與官方文件另依其原授權，不在此範圍。<br><br>
+    <b style="color:var(--danger)">最後查核：2026.08.20</b>　本頁數字以此日之公開資料為準。
   </div>
 </footer>
 
@@ -644,8 +683,24 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
 "use strict";
 var reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/* HUD 是固定元素，字級與換行會讓它在不同寬度長不一樣高。
+   量一次寫進 --hud-h，三個 sticky 區塊都吃這個值，不要各自猜。 */
+function measureHud(){
+  var el=document.querySelector(".hud");
+  if(el)document.documentElement.style.setProperty("--hud-h",el.offsetHeight+"px");
+}
+measureHud();
+window.addEventListener("resize",measureHud);
+window.addEventListener("load",measureHud);
+
+/* JS 失效保險：卡片預設 opacity:0，靠 IntersectionObserver 補 .in。
+   若 3 秒後仍有卡片沒進場（IO 不支援、腳本中斷、內建瀏覽器異常），一律補上。 */
+setTimeout(function(){
+  document.querySelectorAll(".card:not(.in)").forEach(function(c){c.classList.add("in")});
+},3000);
+
 /* ====== 資料 ====== */
-var TOTAL_BUDGET=5965; /* 億：公民總帳口徑＝工程 3,650＋30 年營運 1,735＋台鐵 30 年短收 580（宜蘭高鐵政策查核頁）；核定工程費為 3,521.75 億 */
+var TOTAL_BUDGET=5837; /* 億：公民總帳＝行政院核定工程費 3,521.75＋30 年營運 1,735.32（環評定稿本，監察院引述）＋臺鐵 30 年票收短收 580（臺灣鐵路產業工會依臺鐵公司評估推估，載於監察院調查報告）＝5,837.07 */
 
 /* ====== 場景 ====== */
 var cv=document.getElementById("scene"),ctx=cv.getContext("2d");
@@ -1319,7 +1374,7 @@ function frame(t){
   /* 儀表 */
   var burn=Math.round(p*TOTAL_BUDGET);
   burnEl.textContent="NT$ "+burn.toLocaleString("zh-Hant-TW")+" 億";
-  if(p>0.02)capEl.textContent="總帳 5,965 億（工程＋營運＋台鐵短收）";
+  if(p>0.02)capEl.textContent="總帳 5,837 億（工程＋營運＋臺鐵短收）";
   var hund=Math.floor(burn/500);
   if(hund>lastHundred){
     lastHundred=hund;
@@ -1364,6 +1419,7 @@ var FLY=[
     var m=document.createElement("div");m.className="flymk";
     m.style.left=d.x+"%";m.style.top=d.y+"%";
     m.innerHTML='<i></i><b>'+d.n+'</b>';
+    if(d.x>58)m.classList.add("lft");   /* 靠右的地標，標籤翻到左側，不被畫面邊界切掉 */
     mkw.appendChild(m);return m;
   });
   var cur=-1;
@@ -1442,7 +1498,7 @@ function artTime(){
     o+=txt(x0+r[2]/MAX*maxW+4,y+16,r[2]+"",{f:OK,s:8.5,m:1});
     y+=23;
   });
-  o+=txt(x0,y+6,"單位：分鐘。長條越長＝越久",{f:"#8A867C",s:7.5,w:600});
+  o+=txt(x0,y+6,"單位：分鐘。長條越長＝越久",{f:"#6B675E",s:7.5,w:600});
   return svg(W,y+12,o);
 }
 /* 二、土地：官方正射影像＋420 公頃面積示意方框＋拆遷戶數 */
@@ -1478,7 +1534,7 @@ function artEco(){
   o+=txt(258,106,"961.3 萬 m³",{a:"middle",f:RED,s:9.5,m:1});
   o+='<path d="M212 154 L258 112 L304 154 Z" fill="'+RED+'"/>';
   o+=txt(258,146,"剩餘土石方",{a:"middle",f:"#F5F3EC",s:8});
-  o+=txt(2,112,"其中去處已載明的部分",{f:"#8A867C",s:7.5,w:600});
+  o+=txt(2,112,"其中去處已載明的部分",{f:"#6B675E",s:7.5,w:600});
   o+=txt(2,128,"236 萬 m³ 運台北港填海",{s:8.5});
   o+=txt(2,144,"391.3 萬 m³ 暫置特定區良田，尚無最終去處",{s:8.5});
   return svg(W,H,o);
@@ -1497,7 +1553,7 @@ function artCost(){
   o+=stack(52,ha,RED,"高鐵延伸宜蘭","5,257");
   o+=stack(190,hb,OK,"台鐵北宜直鐵","1,491");
   o+='<rect x="0" y="'+base+'" width="300" height="2" fill="'+INK+'"/>';
-  o+=txt(150,base+26,"工程＋30 年營運，每格 250 億",{a:"middle",f:"#8A867C",s:7.5,w:600});
+  o+=txt(150,base+26,"工程＋30 年營運，每格 250 億",{a:"middle",f:"#6B675E",s:7.5,w:600});
   return svg(W,base+32,o);
 }
 var HZ=[
@@ -1537,7 +1593,12 @@ var HZ=[
     if(Math.abs(p-lastP)>0.0005){
       lastP=p;
       var pan=strip.scrollWidth-strip.clientWidth;
-      strip.style.transform="translate3d("+(-p*pan)+"px,0,0)";
+      /* 分段 easing：每張卡對位後停留 60% 行程，避免整段捲動都停在兩張卡中間 */
+      var n=HZ.length,seg=p*(n-1),si=Math.min(n-2,Math.floor(seg)),st=seg-si,k;
+      if(st<0.3)k=0; else if(st>0.7)k=1; else k=(st-0.3)/0.4;
+      k=k*k*(3-2*k);
+      var ep=(si+k)/(n-1);
+      strip.style.transform="translate3d("+(-ep*pan)+"px,0,0)";
       var idx=Math.min(HZ.length-1,Math.round(p*(HZ.length-1)));
       [].forEach.call(dots.children,function(x,j){x.classList.toggle("on",j<=idx)});
     }
@@ -1603,7 +1664,7 @@ if(dcProg&&dcTrack){
 var QS=[
  {"n":"賀陳旦","c":1,"t":"程序","ti":"前交通部長","say":"民主的前提是充分討論，決策者不理會已經訴願在案的民眾意見，又不處理各方新質疑，冒然決定，這不叫作果斷，只突顯政治權謀，突顯不在乎民主。卓院長，你對民主制度運作準則的三不：不副署、不公布、不執行，難道要再加上「不答覆」嗎？","k":"具名投書","d":"2026-07-27","s":"風傳媒","u":"https://www.storm.mg/article/11151795","img":"hochentan","lead":1,"tc":"前交通部長"},
  {"n":"張景森","c":1,"t":"程序","ti":"行政院前政務委員","say":"本人認為這是一個不智的投資，極大的歷史錯誤。因此本人在此宣布：即日起退出民主進步黨。","k":"媒體報導","d":"2026-07-24","s":"自由時報","u":"https://news.ltn.com.tw/news/politics/breakingnews/5516136","img":"changchingsen","lead":1,"tc":"行政院前政委"},
- {"n":"吳澤成","c":1,"t":"程序","ti":"前行政院政務委員、前公共工程會主委","say":"交通部都不講，很不負責任。","k":"媒體報導","d":"2026-06-30","s":"聯合報","u":"https://udn.com/news/story/7314/9596512","img":"wutsecheng","lead":1,"tc":"前工程會主委"},
+ {"n":"吳澤成","c":1,"t":"程序","ti":"前行政院政務委員、前公共工程會主委","say":"交通部都不講，很不負責任。","k":"媒體報導","d":"2026-06-30","s":"聯合報","u":"https://udn.com/news/story/7314/9583712","img":"wutsecheng","lead":1,"tc":"前工程會主委"},
  {"n":"李克聰","c":0,"t":"交通","ti":"消基會交通委員會召集人・逢甲大學運輸科技與管理學系副教授","say":"建議在評估四個候選宜蘭站址時，不應將直截之南港到宜蘭之北宜高鐵方案與太過彎繞之南港經雙溪新站到大溪站之不符合直鐵的原則的北宜直鐵方案相互比較評估，而是應將同樣直截的56.4公里相同路廊由南港到宜蘭的高鐵與直鐵方案相互比較綜合評估。","k":"具名投書","d":"2021-07-06","s":"ETtoday 新聞雲・雲論","u":"https://forum.ettoday.net/news/2023864","img":"likotsung"},
  {"n":"鍾慧諭","c":0,"t":"交通","ti":"前臺北市交通局長","say":"回歸問題本質，北宜新線目的在改善台鐵北部路段路線容量不足、花東線運能不足問題，既然重點在服務花東乘客，規劃方案的思考應該著重花東鐵路與高鐵車站的整合，而非著眼於國五擁塞；從台灣西部經驗，高鐵服務無助於紓解台北－新竹間國一、國三的交通問題。","k":"具名投書","d":"2021-09-30","s":"報導者 The Reporter","u":"https://www.twreporter.org/a/opinion-high-speed-rail-ilan-station","img":"chunghuiyu"},
  {"n":"濮大威","c":0,"t":"交通","ti":"前台北市交通局長","say":"宜蘭高鐵延伸案從未做過完整可行性研究，這不只是錯誤，甚至可說是違反專業精神，接近違法。","k":"媒體報導","d":"2026-01-10","s":"城市學","u":"https://city.gvm.com.tw/article/127384","img":""},
@@ -1785,7 +1846,7 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
     var dn=curD.dispName||curD.name,s=snark(curD);
     elO.textContent=DIR>0?curO.name:curD.name;
     elD.textContent=DIR>0?curD.name:curO.name;
-    elNo.textContent="NO.5965-"+(DIR>0?curO.code+curD.code:curD.code+curO.code);
+    elNo.textContent="NO.5837-"+(DIR>0?curO.code+curD.code:curD.code+curO.code);
     elWl.textContent=DIR>0?("第一段・"+curO.name+" → 南港"):("最後一段・南港 → "+curO.name);
     elWv.textContent=curO.v;
     elWn.textContent=curO.n;
@@ -1851,8 +1912,8 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
     g.textAlign="left";g.textBaseline="alphabetic";
     g.fillStyle="#B3261E";g.font="800 26px "+SANS;
     g.fillText("北宜高鐵・全民帳本",L,y);
-    g.textAlign="right";g.fillStyle="#8A867C";g.font="800 22px "+MONO;
-    g.fillText("NO.5965-"+(DIR>0?curO.code+curD.code:curD.code+curO.code),R,y);
+    g.textAlign="right";g.fillStyle="#6B675E";g.font="800 22px "+MONO;
+    g.fillText("NO.5837-"+(DIR>0?curO.code+curD.code:curD.code+curO.code),R,y);
     y+=26;g.strokeStyle="#141216";g.lineWidth=5;
     g.beginPath();g.moveTo(L,y);g.lineTo(R,y);g.stroke();
     /* 起訖 */
@@ -1869,7 +1930,7 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
       g.fillText(label,L+108,y-12);
       g.fillStyle="#141216";g.font="800 40px "+MONO;
       g.fillText(val,L+108,y+30);
-      if(note){g.fillStyle="#8A867C";g.font="600 20px "+SANS;g.fillText(note,L+108,y+62);}
+      if(note){g.fillStyle="#6B675E";g.font="600 20px "+SANS;g.fillText(note,L+108,y+62);}
       y+=78;
       g.strokeStyle="rgba(20,18,22,.22)";g.lineWidth=2;
       g.beginPath();g.moveTo(L,y);g.lineTo(R,y);g.stroke();
@@ -1889,7 +1950,7 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
     g.fillRect(L,y-44,R-L,84);
     g.strokeStyle=slower?"#B3261E":"#141216";g.lineWidth=3;g.strokeRect(L,y-44,R-L,84);
     g.fillStyle="#5C5952";g.font="800 24px "+SANS;g.textAlign="left";
-    g.fillText("付了 5,965 億，換到",L+22,y+8);
+    g.fillText("付了 5,837 億，換到",L+22,y+8);
     g.fillStyle=slower?"#B3261E":"#141216";g.font="800 46px "+MONO;g.textAlign="right";
     g.fillText(s.dv,R-22,y+12);
     /* 酸話 */
@@ -1905,14 +1966,14 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
     /* 分攤金額 */
     g.fillStyle="#141216";g.fillRect(L,y,R-L,150);
     g.textAlign="center";
-    g.fillStyle="#8A867C";g.font="800 22px "+SANS;
+    g.fillStyle="#6B675E";g.font="800 22px "+SANS;
     g.fillText("這張票的真實價格・每人平均分攤",(L+R)/2,y+44);
     g.fillStyle="#FF3B2F";g.font="800 72px "+MONO;
     g.fillText("NT$"+PER.toLocaleString("en-US"),(L+R)/2,y+112);
     /* 註腳 */
-    g.fillStyle="#8A867C";g.font="600 19px "+SANS;g.textAlign="left";
+    g.fillStyle="#6B675E";g.font="600 19px "+SANS;g.textAlign="left";
     g.fillText("行車時間：監察院 115 交調 0004 調查報告圖 7（資料來源標示為陳訴人提供）",L,y+196);
-    g.fillText("分攤金額：5,965 億 ÷ 全國人口 23,243,565 人（內政部 2026.06）",L,y+226);
+    g.fillText("分攤金額：5,837 億 ÷ 全國人口 23,243,565 人（內政部 2026.06）",L,y+226);
     g.fillStyle="#141216";g.font="800 22px "+SANS;
     g.fillText("guanwei-cmd.github.io/hsr-yilan",L,y+266);
     return cv;
@@ -1937,7 +1998,7 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
     var btn=this;
     var dn=curD.dispName||curD.name;
     var txt="台北到"+dn+"：北宜高鐵 "+curD.hsr+" 分（含轉乘台鐵 10 分）、北宜直鐵 "+curD.tra+" 分。"+
-            "付了 5,965 億，"+curD._dv+"。"+curD._say+
+            "付了 5,837 億，"+curD._dv+"。"+curD._say+
             "（監察院 115交調0004 調查報告圖7）";
     var url=location.href;
     if(navigator.share){navigator.share({title:"北宜高鐵，值得嗎？",text:txt,url:url}).catch(function(){});}
@@ -1947,13 +2008,19 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
   });
 })();
 
+var SHARE_TXT="北宜高鐵總帳 5,837 億：工程 3,521.75 億＋30 年營運 1,735.32 億＋臺鐵票收短收 580 億。到宜蘭市兩案一樣快，到頭城高鐵反而慢 27 分鐘。";
 document.getElementById("shareBtn").addEventListener("click",function(){
-  var txt="一班還沒開的列車，正在狂噴你的納稅錢。滑完這頁，你會知道北宜高鐵值不值得。";
   var url=location.href,btn=this;
-  if(navigator.share){navigator.share({title:"北宜高鐵，值得嗎？",text:txt,url:url}).catch(function(){});}
-  else if(navigator.clipboard){navigator.clipboard.writeText(txt+"\n"+url).then(function(){
+  if(navigator.share){navigator.share({title:"北宜高鐵，值得嗎？",text:SHARE_TXT,url:url}).catch(function(){});}
+  else if(navigator.clipboard){navigator.clipboard.writeText(SHARE_TXT+"\n"+url).then(function(){
     var o=btn.textContent;btn.textContent="已複製連結！";setTimeout(function(){btn.textContent=o},2000);
   });}
+});
+var lineBtn=document.getElementById("lineBtn");
+if(lineBtn)lineBtn.addEventListener("click",function(e){
+  e.preventDefault();
+  window.open("https://social-plugins.line.me/lineit/share?url="+encodeURIComponent(location.href)+
+              "&text="+encodeURIComponent(SHARE_TXT),"_blank","noopener");
 });
 document.getElementById("replayBtn").addEventListener("click",function(e){
   e.preventDefault();window.scrollTo({top:0,behavior:reduced?"auto":"smooth"});

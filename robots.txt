@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://guanwei-cmd.github.io/hsr-yilan/sitemap.xml
