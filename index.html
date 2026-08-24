@@ -156,6 +156,17 @@ details.srcfold .src{margin-top:8px}
 .trow .td{font-family:var(--mono);font-size:12px;font-weight:800;flex:none;width:74px;color:var(--danger);font-variant-numeric:tabular-nums}
 .trow .tx{font-size:13.5px;color:#3A3542;font-weight:500;line-height:1.6;margin:0}
 
+/* 延伸內容（預設收合） */
+.more{border:1.5px solid var(--ink);border-radius:3px;margin:10px 0;background:var(--panel2);overflow:hidden}
+.more summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:9px;min-height:52px;padding:8px 12px;background:#141216;color:#F5F3EC}
+.more summary::-webkit-details-marker{display:none}
+.more .mn{flex:none;font-family:var(--mono);font-size:11.5px;font-weight:800;color:#B9B5AA;letter-spacing:.1em}
+.more summary b{font-size:15px;font-weight:900}
+.more .mt{font-size:12.5px;font-weight:700;color:#B9B5AA}
+.more summary em{margin-left:auto;font-style:normal;font-size:13px;color:#B9B5AA;transition:transform .2s}
+.more[open] summary em{transform:rotate(180deg)}
+.mbody{background:var(--panel)}
+
 /* 靜態路線圖：官方正射影像，點位由實際經緯度換算，不繪製線形 */
 .rmap{position:relative;margin:12px 0 0;border:1.5px solid var(--ink);border-radius:3px;overflow:hidden;background:#141216}
 .rmap img{display:block;width:100%;height:auto}
@@ -439,17 +450,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     </div>
   </section>
 
-  <section class="step">
-    <div class="card">
-      <div class="kick">燒錢速度</div>
-      <h2>還沒動工，<br>價錢先漲了三倍多</h2>
-      <div class="big"><i class="num" data-v="955">0</i> → <i class="num" data-v="1880">0</i> → <i class="num" data-v="3521">0</i><small>億元</small></div>
-      <p>鐵道局 2019 年初步可行性規劃估 955 億，2022 年 1 月估 1,880 億，2025 年 6 月估 3,521.75 億，行政院照這個數字核定。這七年之間，一根樁都還沒打下去。</p>
-      <details class="srcfold"><summary>出處</summary><p class="src">逐年估算：鐵道局 2019.10 初步可行性規劃 955 億（自由時報 2019.10）；111 年 1 月估 1,880 億、114 年 6 月估 3,521.75 億（監察院 115 交調 0004 調查報告）；行政院 2026.07.23 核定 3,521.75 億（中央社 2026.07.22 鐵道局說明）。本頁只計建造成本，不計通車後的營運支出與臺鐵票收影響。</p></details>
-    </div>
-  </section>
-
-    
+      
 
       <section class="step tall" id="mapSec">
     <div class="card">
@@ -484,17 +485,17 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     </div>
   </section>
 
-    <section class="step">
+<section class="step">
     <div class="card">
-      <div class="kick">看不見的代價</div>
-      <h2>地價先漲了，<br>斷層還在那裡</h2>
-      <p>那 420 公頃裡有 6 個傳統聚落。核定隔天，站區建案開價已喊到 4 字頭，投機客比照航空城模式卡位抵價地。</p>
-      <p>而腳下這段路要穿過雪山斷層帶：當年雪隧遭遇 98 處剪裂帶、單點每秒 750 公升湧水。這次，時速 300。</p>
-      <details class="srcfold"><summary>出處</summary><p class="src">環境資訊中心 2025.08.21、2023.06.02（環委稱斷層帶「非常多」）、監察院 115 交調 0004 調查報告、時代力量官網 2026.06.11（190→420 公頃、85% 私有地）、自由時報地產天下 2026.07.24（房價與抵價地卡位）、雪山隧道工程紀錄（地質風險前例；現行路線官方稱已避開翡翠水庫集水區）。</p></details>
+      <div class="kick">燒錢速度</div>
+      <h2>還沒動工，<br>價錢先漲了三倍多</h2>
+      <div class="big"><i class="num" data-v="955">0</i> → <i class="num" data-v="1880">0</i> → <i class="num" data-v="3521">0</i><small>億元</small></div>
+      <p>鐵道局 2019 年初步可行性規劃估 955 億，2022 年 1 月估 1,880 億，2025 年 6 月估 3,521.75 億，行政院照這個數字核定。這七年之間，一根樁都還沒打下去。</p>
+      <details class="srcfold"><summary>出處</summary><p class="src">逐年估算：鐵道局 2019.10 初步可行性規劃 955 億（自由時報 2019.10）；111 年 1 月估 1,880 億、114 年 6 月估 3,521.75 億（監察院 115 交調 0004 調查報告）；行政院 2026.07.23 核定 3,521.75 億（中央社 2026.07.22 鐵道局說明）。本頁只計建造成本，不計通車後的營運支出與臺鐵票收影響。</p></details>
     </div>
   </section>
 
-  <section class="step tall">
+      <section class="step tall">
     <div class="card">
       <div class="kick">七年快轉</div>
       <h2>從「評估直鐵」，<br>一路改到「核定高鐵」</h2>
@@ -557,6 +558,25 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
       <details class="srcfold"><summary>出處</summary><p class="src">監察院調查報告（聯合報 2026.05.13）、ETtoday 2026.07.22（契約修改 9 次追加 60%）、Newtalk 2026.07.22（自償率 6.8%、桃捷綠線對照）。</p></details>
     </div>
   </section>
+  <section class="step" id="moreSec">
+    <div class="card">
+      <div class="kick">想再往下看</div>
+      <h2>土地與生態，<br>還有兩筆帳</h2>
+      <p>這兩件事不影響前面的時間與金錢比較，但影響的是宜蘭往後幾十年的樣子。點開自己看。</p>
+      <div id="moreWrap"></div>
+    </div>
+  </section>
+
+<section class="step">
+    <div class="card">
+      <div class="kick">看不見的代價</div>
+      <h2>地價先漲了，<br>斷層還在那裡</h2>
+      <p>那 420 公頃裡有 6 個傳統聚落。核定隔天，站區建案開價已喊到 4 字頭，投機客比照航空城模式卡位抵價地。</p>
+      <p>而腳下這段路要穿過雪山斷層帶：當年雪隧遭遇 98 處剪裂帶、單點每秒 750 公升湧水。這次，時速 300。</p>
+      <details class="srcfold"><summary>出處</summary><p class="src">環境資訊中心 2025.08.21、2023.06.02（環委稱斷層帶「非常多」）、監察院 115 交調 0004 調查報告、時代力量官網 2026.06.11（190→420 公頃、85% 私有地）、自由時報地產天下 2026.07.24（房價與抵價地卡位）、雪山隧道工程紀錄（地質風險前例；現行路線官方稱已避開翡翠水庫集水區）。</p></details>
+    </div>
+  </section>
+
 </main>
 
 <div class="finale">
@@ -1429,16 +1449,19 @@ var HZ=[
  {k:"時間",t:"到宜蘭的那幾站",art:artTime,
   say:"五站排下來，高鐵只有兩站比較快。",
   note:"監察院 115 交調 0004 調查報告圖 7。高鐵側已加計轉乘臺鐵 10 分鐘；該圖資料來源標示為「陳訴人提供」，非監察院或鐵道局估算。報告載明鐵道局比較兩案時未加計轉乘，「應予加計轉乘時間進行比較分析，始符實情」。另據交通部運輸研究所模式分析，宜蘭站兩鐵轉乘時間若大於 25 分鐘，預估將有約 50% 的北部往返花東旅次選擇全程搭乘臺鐵。"},
- {k:"土地",t:"要徵走的那一片",art:function(){return artLand()+artHouse()},
-  say:"紅框就是 420 公頃。框裡框外，都是這樣的農地。",
-  note:"底圖為內政部國土測繪中心「臺灣通用電子地圖正射影像」（國土測繪圖資服務雲免申請介接服務，圖層代號 PHOTO2），涵蓋宜蘭市縣政中心以南一帶，影像寬約 5.5 公里。紅框僅呈現 420 公頃的實際面積大小（邊長約 2,049 公尺），不是特定區的公告範圍，本站未取得可公開的界線圖資。420 公頃、85% 私有地、140 棟以上民宅拆遷：時代力量官網 2026.06.11；「缺乏立論基礎」為監察院調查意見四之標題用語。直鐵約 18 棟為南港富康街段。"},
- {k:"生態",t:"挖出來的那些土",art:artEco,
-  say:"堪比全國一整年的土石方去化量。",
-  note:"環評報告書所載，詹順貴 2026.02.04 於思想坦克引述：施工總計產生 961.3 萬立方公尺剩餘土石方，運往台北港填海 236 萬，另 391.3 萬暫置於特定區約 420 公頃良田之上，尚無明確最終去處。全國一整年土石方最終去化量 1,053 萬立方公尺（內政部 115.01.14 記者會投影片）。直鐵側本站未取得同基準的公布數字，故不並列。"},
  {k:"成本",t:"疊起來的那一疊",art:artCost,
   say:"兩疊都是你的錢。差的那一疊，2,201 億。",
   note:"高鐵 3,521.75 億為行政院 2026.07.23 核定之建造成本。直鐵 1,321.12 億為環評書口徑；監察院調查報告另載，鐵道局當年的可行性研究專章估直鐵新方案一建造成本約 668 億元，遠低於高鐵，另有含物價調整之 2,220 億估算（中央社 2026.01.13）。三個數字口徑不同，本頁採環評書口徑以與高鐵同基準比較。通車後的營運支出本頁不計。"}
 ];
+var MORE=[
+ {k:"土地",t:"要徵走的那一片",art:function(){return artLand()+artHouse();},
+  say:"紅框就是 420 公頃。框裡框外，都是這樣的農地。",
+  note:"底圖為內政部國土測繪中心「臺灣通用電子地圖正射影像」（國土測繪圖資服務雲免申請介接服務，圖層代號 PHOTO2），涵蓋宜蘭市縣政中心以南一帶，影像寬約 5.5 公里。紅框僅呈現 420 公頃的實際面積大小（邊長約 2,049 公尺），不是特定區的公告範圍，本站未取得可公開的界線圖資。420 公頃、85% 私有地、140 棟以上民宅拆遷：時代力量官網 2026.06.11；「缺乏立論基礎」為監察院調查意見四之標題用語。直鐵約 18 棟為南港富康街段。"},
+ {k:"生態",t:"挖出來的那些土",art:artEco,
+  say:"堪比全國一整年的土石方去化量。",
+  note:"環評報告書所載，詹順貴 2026.02.04 於思想坦克引述：施工總計產生 961.3 萬立方公尺剩餘土石方，運往台北港填海 236 萬，另 391.3 萬暫置於特定區約 420 公頃良田之上，尚無明確最終去處。全國一整年土石方最終去化量 1,053 萬立方公尺（內政部 115.01.14 記者會投影片）。直鐵側本站未取得同基準的公布數字，故不並列。"}
+];
+
 (function(){
   var sec=document.getElementById("hzSec"),strip=document.getElementById("hzStrip"),dots=document.getElementById("hzDots");
   if(!sec||!strip||!dots)return;
@@ -1473,6 +1496,21 @@ var HZ=[
     }
     requestAnimationFrame(tick);
   }
+})();
+
+/* 延伸內容：土地與生態，預設收合，讓有興趣的人自己點開 */
+(function(){
+  var w=document.getElementById("moreWrap");
+  if(!w)return;
+  MORE.forEach(function(d,i){
+    var dt=document.createElement("details");dt.className="more";
+    var sm=document.createElement("summary");
+    sm.innerHTML='<span class="mn">0'+(i+1)+'</span><b>'+d.k+'</b><span class="mt">'+d.t+'</span><em>▾</em>';
+    dt.appendChild(sm);
+    var bd=document.createElement("div");bd.className="mbody";
+    bd.innerHTML='<div class="hzart">'+d.art()+'</div><p class="hzsay">'+d.say+'</p><p class="hznote">'+d.note+'</p>';
+    dt.appendChild(bd);w.appendChild(dt);
+  });
 })();
 
 /* ====== 斷行不切句（撰寫規範，與 taiwangogo-site 同步） ======
