@@ -12,6 +12,7 @@
 | `index.html` | 全站唯一檔案。CSS、JS、資料、canvas 繪圖全部內嵌，無 build step、無相依套件 |
 | `img/` | 名錄肖像（`*.jpg` 長邊 480px、`*_s.jpg` 長邊 240px，皆已裁方形）與地理影像（`corridor.jpg` 走廊、`yilan_ortho.jpg` 站區） |
 | `img/CREDITS.md` | 肖像與地理影像逐張出處與授權依據。**新增素材必須同步這份** |
+| `lib/` | 自架的 GSAP 3.15.0 與 ScrollTrigger。**授權標頭不可移除**（條款明文禁止） |
 
 改站直接編輯 `index.html`，本機 `python3 -m http.server` 開起來看即可。
 
@@ -78,13 +79,14 @@
 | 兩層時間軸 | `.tl` / `.tlg` / `.trow` | group（階段）／unit（事件）兩層。每組有期間、標題、件數與一行階段摘要 |
 | 逐段路徑卡 | `.route` / `.rsteps` | 車票段的核心。兩案各自列出完整段落與換車次數；段落顏色：灰＝現有路網、紅＝這筆錢要蓋的、金＝必須換車。**不列票價** |
 | 靜態路線圖 | `.rmap` / `.mp` | 官方正射影像，七個點依實際經緯度換算標定。**不繪製線形** |
-| 橫向對照 | `.hz` / `.hzpin` / `.hzstrip` | 只有兩格：01 時間、02 成本。釘住後由垂直捲動換算水平位移，分段 easing 讓每張卡停留 60% 行程 |
+| 橫向對照 | `.hz` / `.hzpin` / `.hzstrip` | 只有兩格：01 時間、02 成本。用 GSAP ScrollTrigger 的 pin＋scrub，停留寫成自訂 `dwell()` ease（每張卡停 60% 行程）。**試過 ScrollTrigger 的 snap，在這種短行程下會把捲動甩到最後一張，已放棄** |
 | 延伸內容 | `.more` | 土地與生態，`details` 預設收合，讓有興趣的人自己點開 |
 | 分層名錄 | `#qwallA` / `#qwallB` | 曾任中央政務首長 5 人（大 chip，頭像＋短職稱）／學者與實務專業者 10 人（小 chip，頭像） |
 
 ### 效能與可及性慣例
 
-- **不掛 scroll listener。** canvas 用 rAF 取樣捲動進度，DOM 用 IntersectionObserver
+- **不掛 scroll listener。** canvas 用 rAF 取樣捲動進度，DOM 用 IntersectionObserver 或 ScrollTrigger
+- **GSAP 是自架、非開源套件。** 依 [Standard「No Charge」License](https://gsap.com/standard-license/)：本站不向使用者收費故符合免費條件，但著作權歸 Webflow、條款可被單方修改、違約可撤銷授權。**不可移除 `lib/` 內的授權標頭**，也不要在文件裡把它列為「開源相依套件」。若 GSAP 載入失敗或使用者要求減少動態，`html.nogsap` 會讓橫向對照退回直式堆疊
 - **HUD 高度不要寫死。** 啟動時量測寫進 `--hud-h`（實測約 75px，隨字級與換行變動），所有 sticky 定位都吃這個變數
 - **JS 失效要有保險。** 有 `<noscript>` 降級樣式，另有 3 秒逾時強制補上 `.in`
 - 對比至少 WCAG AA（`--faint` 為 `#6B675E`，勿改回 `#8A867C`）；觸控目標 ≥46px

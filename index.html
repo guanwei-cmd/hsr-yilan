@@ -231,6 +231,12 @@ details.srcfold .src{margin-top:8px}
 /* 具象場景橫向對照（釘住後由垂直捲動驅動水平位移） */
 .hz{position:relative}
 .hzpin{position:sticky;top:0;height:100dvh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.hz.gsp .hzpin{position:relative;top:auto}   /* ScrollTrigger 自己處理 pin，sticky 要讓開 */
+.nogsap .hzpin{position:static;height:auto;overflow:visible;display:block;padding:0 16px 8vh}
+.nogsap .hzstrip{display:block;transform:none!important}
+.nogsap .hzs{width:auto;margin-bottom:14px}
+.nogsap .hztop{position:static;padding:0 16px 10px}
+.nogsap .hzdots,.nogsap .hzhint{display:none}
 .hztop{position:absolute;top:calc(var(--hud-h,62px) + 12px);left:0;right:0;display:flex;align-items:center;gap:9px;padding:0 16px;z-index:2}
 .hzkick{flex:none;font-size:var(--fs-xs);font-weight:800;letter-spacing:.14em;color:#F5F3EC;background:#141216;border-radius:2px;padding:3px 9px}
 .hzdots{display:flex;gap:5px;flex:1}
@@ -682,11 +688,14 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     論述整理自台灣前進陣線 2026.07.22 記者會與高鐵延伸宜蘭監督聯盟公開發言；各團體立場以其官方公告為準。<br><br>
     <b style="color:var(--muted)">關於製作與授權</b><br>
     本頁由公民自行整理製作，非任何政黨或機關之官方網站，未受任何單位委託或出資。原始碼與完整出處紀錄公開於 <a href="https://github.com/guanwei-cmd/hsr-yilan" target="_blank" rel="noopener">github.com/guanwei-cmd/hsr-yilan</a>，肖像與圖資的逐張授權見 <a href="https://github.com/guanwei-cmd/hsr-yilan/blob/main/img/CREDITS.md" target="_blank" rel="noopener">img/CREDITS.md</a>。發現數字或引述有誤，請到該 repo 開 issue，會更正並在此註記。<br>
+    捲動動畫使用 <a href="https://gsap.com" target="_blank" rel="noopener">GSAP</a> 與 ScrollTrigger（Webflow 提供，依其 <a href="https://gsap.com/standard-license/" target="_blank" rel="noopener">Standard「No Charge」License</a>：本站不向使用者收取任何費用，符合免費使用條件；著作權歸 Webflow 所有，本站自行託管且未移除其授權標頭）。<br>
     本頁文字與自製圖表採 <a href="https://creativecommons.org/licenses/by/4.0/deed.zh-hant" target="_blank" rel="noopener">CC BY 4.0</a> 釋出，地方團體與媒體可自由轉用，請註明出處；引用之肖像、正射影像與官方文件另依其原授權，不在此範圍。<br><br>
     <b style="color:var(--danger)">最後查核：2026.08.20</b>　本頁數字以此日之公開資料為準。
   </div>
 </footer>
 
+<script src="lib/gsap.min.js"></script>
+<script src="lib/ScrollTrigger.min.js"></script>
 <script>
 (function(){
 "use strict";
@@ -1503,39 +1512,164 @@ var MORE=[
 ];
 
 (function(){
-  var sec=document.getElementById("hzSec"),strip=document.getElementById("hzStrip"),dots=document.getElementById("hzDots");
+  var sec=document.getElementById("hzSec"),strip=document.getElementById("hzStrip"),
+      dots=document.getElementById("hzDots"),pin=sec&&sec.querySelector(".hzpin");
   if(!sec||!strip||!dots)return;
   HZ.forEach(function(d,i){
     var a=document.createElement("article");a.className="hzs";
     a.innerHTML='<div class="hzcard"><header class="hzhd"><span class="hzn">0'+(i+1)+'</span><b>'+d.k+'</b><em>'+d.t+'</em></header>'+
       '<div class="hzart">'+d.art()+'</div><p class="hzsay">'+d.say+'</p><p class="hznote">'+d.note+'</p></div>';
     strip.appendChild(a);
-    var dot=document.createElement("i");dots.appendChild(dot);
+    dots.appendChild(document.createElement("i"));
   });
-  if(reduced)return;                        /* 降級：交給 CSS 直式堆疊 */
-  sec.style.height="calc(100dvh + "+((HZ.length-1)*70)+"dvh)";
-  var live=false,lastP=-1;
-  new IntersectionObserver(function(es){
-    es.forEach(function(e){ live=e.isIntersecting; if(live)tick(); });
-  },{rootMargin:"120px 0px 120px 0px"}).observe(sec);
-  function tick(){
-    if(!live)return;
-    var r=sec.getBoundingClientRect(),span=r.height-window.innerHeight;
-    var p=span>0?Math.min(1,Math.max(0,-r.top/span)):0;
-    if(Math.abs(p-lastP)>0.0005){
-      lastP=p;
-      var pan=strip.scrollWidth-strip.clientWidth;
-      /* 分段 easing：每張卡對位後停留 60% 行程，避免整段捲動都停在兩張卡中間 */
-      var n=HZ.length,seg=p*(n-1),si=Math.min(n-2,Math.floor(seg)),st=seg-si,k;
-      if(st<0.3)k=0; else if(st>0.7)k=1; else k=(st-0.3)/0.4;
-      k=k*k*(3-2*k);
-      var ep=(si+k)/(n-1);
-      strip.style.transform="translate3d("+(-ep*pan)+"px,0,0)";
-      var idx=Math.min(HZ.length-1,Math.round(p*(HZ.length-1)));
-      [].forEach.call(dots.children,function(x,j){x.classList.toggle("on",j<=idx)});
-    }
-    requestAnimationFrame(tick);
+  function setDots(i){
+    [].forEach.call(dots.children,function(x,j){x.classList.toggle("on",j<=i);});
   }
+  setDots(0);
+  /* 沒有 GSAP 或使用者要求減少動態時，退回直式堆疊（CSS 已備好） */
+  if(reduced||!window.gsap||!window.ScrollTrigger){
+    document.documentElement.classList.add("nogsap");
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+  var pan=function(){return Math.max(0,strip.scrollWidth-strip.clientWidth);};
+  /* 停留 ease：每張卡對位後停住六成行程，只有四成在移動。
+     試過 ScrollTrigger 的 snap，但本站這段行程短（約 500px），snap 會把捲動甩到最後一張，
+     改以自訂 ease 直接把停留寫進補間，行為可預期得多。 */
+  function dwell(t){
+    var n=HZ.length,seg=t*(n-1),i=Math.min(n-2,Math.floor(seg)),st=seg-i,k;
+    if(st<0.3)k=0; else if(st>0.7)k=1; else k=(st-0.3)/0.4;
+    k=k*k*(3-2*k);
+    return (i+k)/(n-1);
+  }
+  sec.classList.add("gsp");
+  gsap.to(strip,{
+    x:function(){return -pan();},
+    ease:dwell,
+    scrollTrigger:{
+      trigger:sec,
+      pin:pin,
+      scrub:0.5,
+      start:"top top",
+      end:function(){return "+="+Math.round(pan()*1.8);},
+      invalidateOnRefresh:true,
+      onUpdate:function(self){
+        setDots(Math.round(self.progress*(HZ.length-1)));
+      }
+    }
+  });
+  /* 圖片載完會改變寬度，重算一次 */
+  window.addEventListener("load",function(){ScrollTrigger.refresh();});
+})();
+
+/* ====== 15 段逐字的質疑（每則均經原文查核） ====== */
+var QS=[
+ {"n":"賀陳旦","c":1,"t":"程序","ti":"前交通部長","say":"民主的前提是充分討論，決策者不理會已經訴願在案的民眾意見，又不處理各方新質疑，冒然決定，這不叫作果斷，只突顯政治權謀，突顯不在乎民主。卓院長，你對民主制度運作準則的三不：不副署、不公布、不執行，難道要再加上「不答覆」嗎？","k":"具名投書","d":"2026-07-27","s":"風傳媒","u":"https://www.storm.mg/article/11151795","img":"hochentan","lead":1,"tc":"前交通部長"},
+ {"n":"張景森","c":1,"t":"程序","ti":"行政院前政務委員","say":"本人認為這是一個不智的投資，極大的歷史錯誤。因此本人在此宣布：即日起退出民主進步黨。","k":"媒體報導","d":"2026-07-24","s":"自由時報","u":"https://news.ltn.com.tw/news/politics/breakingnews/5516136","img":"changchingsen","lead":1,"tc":"行政院前政委"},
+ {"n":"吳澤成","c":1,"t":"程序","ti":"前行政院政務委員、前公共工程會主委","say":"交通部都不講，很不負責任。","k":"媒體報導","d":"2026-06-30","s":"聯合報","u":"https://udn.com/news/story/7314/9583712","img":"wutsecheng","lead":1,"tc":"前工程會主委"},
+ {"n":"李克聰","c":0,"t":"交通","ti":"消基會交通委員會召集人・逢甲大學運輸科技與管理學系副教授","say":"建議在評估四個候選宜蘭站址時，不應將直截之南港到宜蘭之北宜高鐵方案與太過彎繞之南港經雙溪新站到大溪站之不符合直鐵的原則的北宜直鐵方案相互比較評估，而是應將同樣直截的56.4公里相同路廊由南港到宜蘭的高鐵與直鐵方案相互比較綜合評估。","k":"具名投書","d":"2021-07-06","s":"ETtoday 新聞雲・雲論","u":"https://forum.ettoday.net/news/2023864","img":"likotsung"},
+ {"n":"鍾慧諭","c":0,"t":"交通","ti":"前臺北市交通局長","say":"回歸問題本質，北宜新線目的在改善台鐵北部路段路線容量不足、花東線運能不足問題，既然重點在服務花東乘客，規劃方案的思考應該著重花東鐵路與高鐵車站的整合，而非著眼於國五擁塞；從台灣西部經驗，高鐵服務無助於紓解台北－新竹間國一、國三的交通問題。","k":"具名投書","d":"2021-09-30","s":"報導者 The Reporter","u":"https://www.twreporter.org/a/opinion-high-speed-rail-ilan-station","img":"chunghuiyu"},
+ {"n":"濮大威","c":0,"t":"交通","ti":"前台北市交通局長","say":"宜蘭高鐵延伸案從未做過完整可行性研究，這不只是錯誤，甚至可說是違反專業精神，接近違法。","k":"媒體報導","d":"2026-01-10","s":"城市學","u":"https://city.gvm.com.tw/article/127384","img":""},
+ {"n":"張勝雄","c":0,"t":"交通","ti":"淡江大學運輸管理學系教授","say":"怎麼會像月亮一樣，初一、十五不同？","k":"媒體報導","d":"2025-07-10","s":"環境資訊中心","u":"https://e-info.org.tw/node/241656","img":"changshenghsiung"},
+ {"n":"徐世榮","c":2,"t":"土地","ti":"政治大學地政學系教授","say":"在黨政高層出手後，高鐵宜蘭站址似往「宜蘭站以南」移動。本文不討論何處是最佳設站地點，而是要告訴大家，不論高鐵宜蘭站設在那裡，政府都會動用土地徵收公權力，強制剝奪人民的土地所有權及他項權利。設站選址爭議凸顯一個長久以來的大問題，即國人的財產權、生存權及人性尊嚴依舊完全不受尊重及保障。","k":"具名投書","d":"2021-10-22","s":"ETtoday新聞雲 雲論","u":"https://forum.ettoday.net/news/2106913","img":"hsushihjung"},
+ {"n":"李家儂","c":2,"t":"土地","ti":"文化大學土地資源學系教授","say":"但是觀光客坐高鐵到了宜蘭還是沒手沒腳（指沒有移動能力），如果地方交通銜接沒辦法配合，大家會覺得開車方便，最後可能只會剩下通勤族來搭乘。","k":"媒體報導","d":"2021-08-15","s":"上下游新聞","u":"https://www.newsmarket.com.tw/blog/157382/","img":"leechianung"},
+ {"n":"陳碧源","c":2,"t":"財務","ti":"不動產估價師","say":"不要因變更土地所得的利益，卻損及所有交通人的隱形金錢成本。","k":"媒體報導","d":"2026-07-27","s":"上下游新聞","u":"https://www.newsmarket.com.tw/blog/240541/","img":"chenpiyuan"},
+ {"n":"李鴻源","c":3,"t":"環境","ti":"前內政部長","say":"所以我是覺得不是不能蓋，而是為什麼要去那裡，後面就會牽扯到很多利益糾葛，會有很多的政商關係，政商關係不見得都是不好的，而是專業的來面對了。","k":"媒體報導","d":"2026-01-13","s":"風傳媒","u":"https://www.storm.mg/article/11094733","img":"leehungyuan","lead":1,"tc":"前內政部長"},
+ {"n":"張智欽","c":3,"t":"環境","ti":"宜蘭大學兼任教授","say":"四城這個地方，650公厘（毫米）在一天內下光，會造成這個地方淹水3公尺，處理不當真的是一個災難。","k":"媒體報導","d":"2021-09-16","s":"公視新聞網","u":"https://news.pts.org.tw/article/545109","img":""},
+ {"n":"詹順貴","c":3,"t":"環境","ti":"律師、前環保署副署長","say":"對於所產生巨量剩餘土石方胡亂聲稱有去處的公共工程亦有之，例如月前在高度爭議中通過環評的「高鐵延伸宜蘭案」，由於需要大量在雪山山脈挖掘隧道，依其環評報告書所載，未來施工時總計將產生高達961.3萬立方公尺的剩餘土石方，堪比全國一整年累積之土石方最終去化量（1053萬立方公尺，內政部115年1月14日記者會投影片數據），規劃運往台北港填海造地即高達236萬立方公尺，此數據接近新北市一年需埋填的土石方量，另外還有391.3萬立方公尺土方，宣稱將先暫置於「宜蘭高鐵特定區計畫」內約420公頃的良田之上，但尚無明確的最終去處。","k":"具名投書","d":"2026-02-04","s":"思想坦克 Voicettank","u":"https://voicettank.org/20260204-1/","img":"chanshunkuei","lead":1,"tc":"前環保署副署長"},
+ {"n":"陳永松","c":3,"t":"環境","ti":"宜蘭大學生物技術及動物科學系教授","say":"如果建了高鐵、建了直鐵，讓宜蘭的生活方式不見了、宜蘭價值也不見了，那你還要嗎？","k":"媒體報導","d":"2026-01-14","s":"遠見城市學","u":"https://city.gvm.com.tw/article/127384","img":"chenyungsung"},
+ {"n":"林旺根","c":4,"t":"地方","ti":"前宜蘭縣建設局長","say":"交通部陳世凱部長昨天對前交通部賀陳部長及民團有關高鐵延伸的質疑回應說：「宜蘭大多數民代都支持高鐵」。報告陳部長、正確的說法應該是：「宜蘭大多數民代都不敢反高鐵」，中央要送宜蘭四千億的大禮又不用地方買單誰敢反對？尤其在此選舉的敏感時刻這等於是政治自殺，睿智用心又了解宜蘭的民代怎不知高鐵對宜蘭的用處？私下表示支持直鐵的很多、而阻礙頭城、礁溪、宜蘭、羅東幾個主要城市發展的鐵路立體化才是他們所殷殷期盼。","k":"具名投書","d":"2026-02-02","s":"NOWnews今日新聞","u":"https://www.nownews.com/news/6782348","img":"linwangken"}
+];
+/* 兩層點名牆：曾任中央政務首長（頭像＋短職稱）／學者與專業者（頭像） */
+var wA=document.getElementById("qwallA"),wB=document.getElementById("qwallB");
+function qFace(q){
+  if(q.img){
+    var im=document.createElement("img");
+    im.className="qca";im.src="img/"+q.img+"_s.jpg";im.alt="";im.loading="lazy";im.decoding="async";
+    return im;
+  }
+  var s=document.createElement("span");
+  s.className="qca";s.setAttribute("aria-hidden","true");s.textContent=q.n.charAt(0);
+  return s;
+}
+if(wA&&wB){
+  QS.forEach(function(q){
+    var b=document.createElement("button");
+    b.className="c"+q.c;
+    b.setAttribute("aria-pressed","false");
+    b.appendChild(qFace(q));
+    var w=document.createElement("span");w.className="qcw";
+    var n=document.createElement("span");n.className="qcn";n.textContent=q.n;w.appendChild(n);
+    if(q.lead&&q.tc){var t=document.createElement("span");t.className="qct";t.textContent=q.tc;w.appendChild(t);}
+    b.appendChild(w);
+    b.addEventListener("click",function(){
+      var bub=document.getElementById("qbub");
+      [].forEach.call(document.querySelectorAll(".qwall button"),function(x){x.setAttribute("aria-pressed","false")});
+      b.setAttribute("aria-pressed","true");
+      document.getElementById("qwho").textContent=q.n;
+      document.getElementById("qtag").textContent=q.t;
+      document.getElementById("qtitle").textContent=q.ti;
+      document.getElementById("qsay").textContent="「"+q.say+"」";
+      var av=document.getElementById("qav");
+      av.textContent="";
+      if(q.img){
+        /* 直接掛圖，不等 onload，避免先閃一下姓名首字 */
+        var im=document.createElement("img");
+        im.alt="";im.decoding="async";
+        im.onerror=function(){av.textContent=q.n.charAt(0)};
+        im.src="img/"+q.img+"_s.jpg";
+        av.appendChild(im);
+      }else{
+        av.textContent=q.n.charAt(0);
+      }
+      var a=document.getElementById("qsrc");
+      a.href=q.u;a.textContent=q.k+"・"+q.s+" "+q.d+" \u2197";
+      bub.hidden=false;
+      if(bub.scrollIntoView)bub.scrollIntoView({block:"nearest"});
+    });
+    (q.lead?wA:wB).appendChild(b);
+  });
+}
+
+/* ====== 斷行不切句（撰寫規範，與 taiwangogo-site 同步） ======
+   標題／金句類元素的「直接文字節點」依標點切段，各段包成 .nb（inline-block）成塊換行，
+   因此只會在標點後折行，不會從子句中間斷開。元素子節點（em/br/span）不動，段落正文不處理。 */
+(function(){
+  var SEL=["main h1","main h2","main h3",".hero .sub",".dclead p",".tlgs",".tlgh b",".dchd b",".tksnark",".hzsay"].join(",");
+  var PUNCT=/([，、。；：！？…・]+|[ \u3000]+)/;
+  function run(root){
+    (root||document).querySelectorAll(SEL).forEach(function(el){
+      if(el.dataset.nbDone)return;
+      el.dataset.nbDone="1";
+      [].slice.call(el.childNodes).forEach(function(node){
+        if(node.nodeType!==3||!node.textContent.trim())return;
+        var parts=node.textContent.split(PUNCT);
+        if(parts.length<3)return;
+        var frag=document.createDocumentFragment();
+        for(var i=0;i<parts.length;i+=2){
+          var sep=parts[i+1]||"";
+          if(/^[ \u3000]+$/.test(sep)){
+            if(parts[i]){var sp=document.createElement("span");sp.className="nb";sp.textContent=parts[i];frag.appendChild(sp);}
+            frag.appendChild(document.createTextNode(" "));
+            continue;
+          }
+          var seg=parts[i]+sep;
+          if(!seg)continue;
+          /* 純標點（例：緊接在 <span class="nb"> 之後的「。」）併回前一塊，避免標點落單成行。
+             前一塊可能在本 fragment 內，也可能是這個文字節點前面的既有元素。 */
+          if(!parts[i]){
+            var prev=frag.lastChild;
+            if(!prev){var ps=node.previousSibling;if(ps&&ps.nodeType===1&&ps.classList&&ps.classList.contains("nb"))prev=ps;}
+            if(prev&&prev.nodeType===1){prev.textContent+=seg;continue;}
+          }
+          var sp2=document.createElement("span");sp2.className="nb";sp2.textContent=seg;frag.appendChild(sp2);
+        }
+        node.replaceWith(frag);
+      });
+    });
+  }
+  run();
+  window.clauseWrap=run;   /* 動態插入的區塊（雙軌段落、點名牆）建完後再呼叫一次 */
 })();
 
 /* 延伸內容：土地與生態，預設收合，讓有興趣的人自己點開 */
