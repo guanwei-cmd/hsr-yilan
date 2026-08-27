@@ -219,6 +219,7 @@ details.srcfold .src{margin-top:8px}
 .rtag{flex:none;font-size:16px;font-weight:900}
 .rth em{flex:none;font-style:normal;font-size:var(--fs-xs);font-weight:700;color:rgba(255,255,255,.85)}
 .rth b{margin-left:auto;font-family:var(--mono);font-size:var(--fs-m);font-weight:800;font-variant-numeric:tabular-nums}
+.rcav{margin:0;padding:7px 15px;background:rgba(20,18,22,.055);border-bottom:1.5px solid rgba(20,18,22,.12);font-size:var(--fs-xs);font-weight:700;color:var(--muted);line-height:1.6}
 .rsteps{list-style:none;margin:0;padding:12px 16px 14px;counter-reset:rs}
 .rsteps li{position:relative;padding:7px 0 7px 28px;counter-increment:rs}
 .rsteps li::before{content:counter(rs);position:absolute;left:0;top:8px;width:19px;height:19px;border-radius:50%;background:#6B675E;color:#F5F3EC;font-family:var(--mono);font-size:var(--fs-xs);font-weight:800;display:flex;align-items:center;justify-content:center}
@@ -450,10 +451,12 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         </div>
         <div class="route hsr">
           <header class="rth"><span class="rtag">走北宜高鐵</span><em id="tkHx">換 1 次車</em><b id="tkHv">46 分</b></header>
+          <p class="rcav" id="tkHc">南港以東起算，已含宜蘭端轉乘 10 分</p>
           <ol class="rsteps" id="tkHSteps"></ol>
         </div>
         <div class="route tra">
           <header class="rth"><span class="rtag">走北宜直鐵</span><em id="tkTx">不用換車</em><b id="tkTv">49 分</b></header>
+          <p class="rcav" id="tkTc">南港以東起算</p>
           <ol class="rsteps" id="tkTSteps"></ol>
         </div>
         <div class="tkdiff" id="tkDiff">
@@ -1794,6 +1797,7 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
       elHS=document.getElementById("tkHSteps"),elTS=document.getElementById("tkTSteps"),
       elHx=document.getElementById("tkHx"),elTx=document.getElementById("tkTx"),
       elHv=document.getElementById("tkHv"),elTv=document.getElementById("tkTv"),
+      elHc=document.getElementById("tkHc"),elTc=document.getElementById("tkTc"),
       elDiff=document.getElementById("tkDiff"),elDv=document.getElementById("tkDv"),
       elSnark=document.getElementById("tkSnark"),
       elWarn=document.getElementById("tkWarn"),elFare=document.getElementById("tkFare"),
@@ -1810,6 +1814,9 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
     elTv.textContent=curD.tra+" 分";
     elHx.textContent="換 1 次車";
     elTx.textContent=curO.here?"不用換車":"換 1 次車";
+    /* 兩案各自沒被算進分鐘數的部分，據實標明，不估數字 */
+    elHc.textContent=curO.here?"已含宜蘭端轉乘 10 分":"已含宜蘭端轉乘 10 分，未計南港是否需換車";
+    elTc.textContent=curO.here?"全程直達，無轉乘":"未計南港換乘臺鐵所需時間";
     elDiff.className="tkdiff"+(s.cls?" "+s.cls:"");
     elDv.textContent=s.dv;
     elSnark.textContent=s.say;
@@ -1835,7 +1842,7 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
   function hsrRoute(o,dn){
     var a=[];
     if(o.here)a.push(seg("","台北 → 南港","現行高鐵，約 8 分鐘。不是這筆錢蓋的。"));
-    else a.push(seg("",o.name+" → 南港","現行高鐵，已經在跑。不是這筆錢蓋的。"));
+    else a.push(seg("",o.name+" → 南港","現行高鐵，已經在跑。不是這筆錢蓋的。是否直通宜蘭、要不要在南港換車，監察院載明營運模式迄未確認。"));
     a.push(seg("new","南港 → 高鐵宜蘭站","北宜高鐵。這一段才是 3,521.75 億要蓋的。"));
     a.push(seg("chg","高鐵宜蘭站 → "+dn,"換乘臺鐵。高鐵在宜蘭只設一站，站旁另設臺鐵宜蘭新站，兩站平行共站、經地面層轉乘。"));
     return a;
