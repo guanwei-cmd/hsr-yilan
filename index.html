@@ -157,6 +157,20 @@ details.srcfold .src{margin-top:8px}
 .trow .td{font-family:var(--mono);font-size:var(--fs-xs);font-weight:800;flex:none;width:86px;color:var(--danger);font-variant-numeric:tabular-nums}
 .trow .tx{font-size:16px;color:#3A3542;font-weight:500;line-height:1.6;margin:0}
 
+/* 兩案摘要比較表 */
+.ctwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0 0;border:1.5px solid var(--ink);border-radius:3px}
+.ct{border-collapse:collapse;width:100%;min-width:520px;background:var(--panel);font-size:var(--fs-xs)}
+.ct th,.ct td{padding:10px 12px;text-align:left;vertical-align:top;line-height:1.7;border-bottom:1px solid rgba(20,18,22,.12)}
+.ct thead th{background:#141216;color:#F5F3EC;font-weight:900;font-size:var(--fs-xs);position:sticky;top:0}
+.ct thead th.a{background:var(--danger)}
+.ct thead th.b{background:var(--ok)}
+.ct tbody th{width:30%;font-weight:800;color:var(--ink);background:var(--panel2)}
+.ct td.a{width:36%;color:#3A3542}
+.ct td.b{width:34%;color:#3A3542}
+.ct td.nd{color:var(--muted);font-style:normal;background:rgba(20,18,22,.035)}
+.ct tr.grp td{background:#141216;color:#F5F3EC;font-weight:900;letter-spacing:.14em;padding:6px 12px;font-size:var(--fs-xs)}
+.ctnote{margin:12px 0 0;padding:12px 14px;background:rgba(47,107,68,.07);border-left:4px solid var(--ok);border-radius:2px;font-size:var(--fs-xs);line-height:1.8}
+
 /* 延伸內容（預設收合） */
 .more{border:1.5px solid var(--ink);border-radius:3px;margin:10px 0;background:var(--panel2);overflow:hidden}
 .more summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;min-height:56px;padding:10px 15px;background:#141216;color:#F5F3EC}
@@ -181,6 +195,10 @@ details.srcfold .src{margin-top:8px}
 .mp.lft{flex-direction:row-reverse}
 .mgap{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .mgapl{position:absolute;transform:translate(-100%,-50%);white-space:nowrap;font-size:var(--fs-xs);font-weight:800;color:#F5F3EC;background:var(--danger);border-radius:2px;padding:2px 7px;pointer-events:none}
+.rsub{margin:22px 0 8px;font-size:var(--fs-m);font-weight:900;color:var(--ink);line-height:1.5}
+.offmap{margin:12px 0 0;border:1.5px solid var(--ink);border-radius:3px;overflow:hidden;background:var(--panel)}
+.offmap img{display:block;width:100%;height:auto}
+.offmap figcaption{padding:10px 13px;font-size:var(--fs-xs);font-weight:600;color:var(--muted);line-height:1.75;background:var(--panel2)}
 .rmapleg{display:flex;flex-wrap:wrap;gap:8px 16px;margin:10px 0 0;font-size:var(--fs-xs);font-weight:700;color:var(--muted)}
 .rmapleg span{display:flex;align-items:center;gap:6px}
 .rmapleg i{width:11px;height:11px;border-radius:50%;flex:none}
@@ -516,7 +534,13 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         <span><i style="background:#2F6B44"></i>直鐵停靠的既有臺鐵車站</span>
         <span><i style="background:#141216"></i>起點南港</span>
       </p>
-      <p style="margin-top:10px">中間那片深色的山就是雪山山脈。全線要開 10 座隧道從底下穿過。</p>
+      <p style="margin-top:10px">中間那片深色的山就是雪山山脈。全線要開 11 座隧道從底下穿過（1 座明挖覆蓋＋10 座山岳隧道）。</p>
+      <h3 class="rsub">官方自己畫的路線比較圖</h3>
+      <p>本站沒有可公開的線形圖資，所以上面那張衛星圖不畫線。但監察院調查報告裡有一張，把兩案畫在同一張底圖上，還標出翡翠水庫集水區：</p>
+      <figure class="offmap">
+        <img src="img/route-official.jpg" alt="監察院調查報告第 10 頁：北宜直鐵新方案一、新方案二與高鐵延伸方案 A、B、C 之路線比較圖，含翡翠水庫集水區範圍" decoding="async" loading="lazy">
+        <figcaption>監察院 115 交調 0004 調查報告，第 10 頁「圖 3 北宜『直鐵』案與『高鐵』案路線方案比較圖」。橘色虛線為高鐵延伸方案 A／B／C，藍線為直鐵新方案二，灰線為直鐵新方案一，淺藍區塊為翡翠水庫集水區。圖下方兩欄是鐵道局自己列的兩案優劣。</figcaption>
+      </figure>
       <details class="srcfold"><summary>出處與繪製方式</summary><p class="src">底圖為內政部國土測繪中心「臺灣通用電子地圖正射影像」（國土測繪圖資服務雲免申請介接服務，圖層代號 PHOTO2），zoom 13，涵蓋約 26×58 公里。各點位置由實際經緯度換算成影像百分比座標標定，可回推驗證。高鐵宜蘭站站址為「縣政中心以南」方案，位於宜蘭市壯二、縣政中心以南約 350 公尺、縣政府東南側（交通部 2022.01.27 審查會議結論）。<b>本圖不繪製路線線形</b>：本站未取得可公開的高鐵線形圖資，畫一條線就是捏造。全線約 60.6 公里、10 座隧道：鐵道局計畫資訊專區、環評報告書。</p></details>
     </div>
   </section>
@@ -529,7 +553,47 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     </div>
   </section>
 
-      <section class="step tall">
+      <section class="step" id="sumSec">
+    <div class="card">
+      <div class="kick">一次看完</div>
+      <h2>兩案攤在同一張表上</h2>
+      <p>只想看重點的，看這張就夠。每一格都能回推到官方文件；查不到的就寫查無，不推估。</p>
+      <div class="ctwrap">
+      <table class="ct">
+        <thead><tr><th>比較項目</th><th class="a">北宜高鐵</th><th class="b">北宜直鐵</th></tr></thead>
+        <tbody>
+          <tr class="grp"><td colspan="3">時間</td></tr>
+          <tr><th>到宜蘭市區</th><td class="a">41 分，要換 1 次車</td><td class="b">41 分，不用換車</td></tr>
+          <tr><th>到頭城</th><td class="a">59 分</td><td class="b">32 分</td></tr>
+          <tr><th>宜蘭端停靠</th><td class="a">只設 1 站（宜蘭市壯二），旁邊須新蓋臺鐵宜蘭新站</td><td class="b">停既有 5 站：頭城、礁溪、宜蘭、羅東、蘇澳新</td></tr>
+          <tr><th>減少國道 5 號車流</th><td class="a">官方三組數字：15.5–16.9%／3.1%、6.8%／3.4–6.1%</td><td class="b nd">查無官方數字</td></tr>
+
+          <tr class="grp"><td colspan="3">錢</td></tr>
+          <tr><th>建造成本</th><td class="a">3,521.75 億元（行政院核定）</td><td class="b">1,321.12 億元（環評書口徑）</td></tr>
+          <tr><th>財務自償率</th><td class="a">6.8%，鐵道局自陳無法完全自償</td><td class="b nd">未提出</td></tr>
+
+          <tr class="grp"><td colspan="3">工程技術</td></tr>
+          <tr><th>路線長度</th><td class="a">全長 60.6 公里，其中新建工程 59.6 公里</td><td class="b nd">查無同基準數字</td></tr>
+          <tr><th>橋隧比例</th><td class="a">98.4%：隧道 33.88 公里 56.8%、橋梁 24.78 公里 41.6%、路工僅 0.94 公里（分母為新建 59.6 公里）</td><td class="b nd">查無橋梁數據</td></tr>
+          <tr><th>隧道</th><td class="a">11 座：1 座明挖覆蓋＋10 座山岳隧道，單座 0.10–8.04 公里</td><td class="b nd">查無座數與長度</td></tr>
+
+          <tr class="grp"><td colspan="3">土地</td></tr>
+          <tr><th>路線徵收（一般徵收）</th><td class="a">私有地 127.14 公頃、1,634 筆；特定農業區 41.55 公頃、988 筆</td><td class="b nd">查無</td></tr>
+          <tr><th>建物拆遷</th><td class="a">140 棟，投影面積 2.74 公頃</td><td class="b">南港富康街約 18 棟</td></tr>
+          <tr><th>車站特定區（區段徵收）</th><td class="a">420 公頃。私有地 355.8 公頃約 85%、特定農業區 335.76 公頃約 80%</td><td class="b">無特定區</td></tr>
+
+          <tr class="grp"><td colspan="3">環境</td></tr>
+          <tr><th>剩餘土石方</th><td class="a">剩餘運棄 961.7 萬 m³（鬆方）；剩餘土石方 627.6 萬 m³（自然方）</td><td class="b nd">查無</td></tr>
+          <tr><th>環評辦理</th><td class="a">已通過二階環評；路線與車站特定區分開辦理，未先做政策環評</td><td class="b nd">未提報環評</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="ctnote">「查無」不代表直鐵比較好，而是這個方案從來沒有被要求提出同一份作業。監察院調查意見一即指出，本案未先提出可行性研究就進行綜合規劃。直鐵案的綜合規劃在 2019 年遭退回後就沒再往下走，因此多數欄位沒有對應文件可比。</p>
+      <details class="srcfold"><summary>各欄出處</summary><p class="src">時間：監察院 115 交調 0004 調查報告圖 7（陳訴人提供）與表 3（鐵道局）。國道 5 號：鐵道局計畫資訊專區、114 年環評報告書（定稿）摘要本第 175／259 頁、監察院報告第 44 頁表 7。建造成本：行政院 2026.07.23 核定；直鐵為環評書口徑。自償率：監察院報告，鐵道局自陳。工程技術：114 年環評報告書（定稿）摘要本第 54、58 頁。路線徵收：監察院報告第 32 至 33 頁，鐵道局函復，範圍為路線、車站及機廠，不含車站特定區。車站特定區：監察院報告第 51、63 頁，宜蘭縣政府函復。土石方：環評摘要本第四章與第九章，兩組口徑基準不同。環評辦理：監察院調查意見五。<br><br>本表刻意不列 30 年營運成本與臺鐵票收影響，因本頁只比建造成本，避免兩案口徑混用。</p></details>
+    </div>
+  </section>
+
+  <section class="step tall">
     <div class="card">
       <div class="kick">七年快轉</div>
       <h2>從「評估直鐵」，<br>一路改到「核定高鐵」</h2>
@@ -1461,13 +1525,35 @@ function artEco(){
   o+='<path d="M0 74 L38 40 L64 56 L96 22 L134 52 L168 30 L206 58 L240 36 L270 62 L300 48 L300 86 L0 86 Z" fill="'+GREY+'"/>';
   o+='<rect x="0" y="86" width="300" height="5" fill="'+INK+'"/>';
   for(var i=0;i<10;i++)o+='<circle cx="'+(16+i*30)+'" cy="77" r="3.2" fill="'+INK+'"/>';
-  o+=txt(258,106,"961.3 萬 m³",{a:"middle",f:RED,s:9.5,m:1});
+  o+=txt(258,106,"961.7 萬 m³",{a:"middle",f:RED,s:9.5,m:1});
   o+='<path d="M212 154 L258 112 L304 154 Z" fill="'+RED+'"/>';
-  o+=txt(258,146,"剩餘土石方",{a:"middle",f:"#F5F3EC",s:8});
-  o+=txt(2,112,"其中去處已載明的部分",{f:"#6B675E",s:7.5,w:600});
-  o+=txt(2,128,"236 萬 m³ 運台北港填海",{s:8.5});
-  o+=txt(2,144,"391.3 萬 m³ 暫置特定區良田，尚無最終去處",{s:8.5});
+  o+=txt(258,146,"剩餘運棄土方",{a:"middle",f:"#F5F3EC",s:8});
+  o+=txt(2,112,"另一組口徑：剩餘土石方 627.6 萬 m³（自然方）",{f:"#6B675E",s:7.5,w:600});
+  o+=txt(2,128,"236.3 萬 m³ 雙溪以北，運臺北商港與臺北港填海",{s:8.5});
+  o+=txt(2,144,"391.3 萬 m³ 雙溪以南，交換利用至車站特定區",{s:8.5});
   return svg(W,H,o);
+}
+/* 〇、國道五號：官方自己給了三組對不起來的數字 */
+function artNat5(){
+  var W=300,o="",x0=8,BW=196,MX=18;
+  var ROWS=[
+    ["鐵道局官網",15.5,16.9,"小客車車流移轉"],
+    ["環評書 p.175",3.1,6.8,"平日／假日交通量減少"],
+    ["環評書 p.259",3.4,6.1,"目標年交通減量"]
+  ];
+  o+=txt(0,10,"高鐵能減少多少國道五號車流？",{s:9.5});
+  ROWS.forEach(function(r,i){
+    var y=24+i*34;
+    o+=txt(0,y+8,r[0],{s:8.5,w:800});
+    o+='<rect x="'+(x0+r[1]/MX*BW)+'" y="'+(y+1)+'" width="'+((r[2]-r[1])/MX*BW||2)+'" height="11" fill="'+RED+'"/>';
+    o+='<line x1="'+x0+'" y1="'+(y+6.5)+'" x2="'+(x0+BW)+'" y2="'+(y+6.5)+'" stroke="#B9B5AA" stroke-width="0.8"/>';
+    o+=txt(x0+r[2]/MX*BW+5,y+10,r[1].toFixed(1)+"–"+r[2].toFixed(1)+"%",{f:RED,s:8.5,m:1});
+    o+=txt(0,y+20,r[3],{f:"#6B675E",s:7.5,w:600});
+  });
+  var yy=24+3*34+4;
+  o+='<rect x="0" y="'+yy+'" width="300" height="1.5" fill="'+INK+'"/>';
+  o+=txt(0,yy+16,"直鐵：查無任何官方減量數字，無法並列",{f:OK,s:8.5});
+  return svg(W,yy+24,o);
 }
 /* 四、成本：只比建造成本 */
 function artCost(){
@@ -1500,6 +1586,9 @@ function artCost(){
   return svg(W,ey+14+3*20+6,o);
 }
 var HZ=[
+ {k:"國道五號",t:"到底能少多少車",art:artNat5,
+  say:"同一個問題，官方給了三組對不起來的數字。",
+  note:"三組數字皆為官方文件所載：（一）鐵道局「高鐵延伸宜蘭計畫資訊專區」hsr2yilan.com 運輸需求預測段落，載目標年（140 年）對國道 5 號「小客車車流移轉效果」平假日約 15.5%~16.9%；（二）114 年環評報告書（定稿）摘要本第八章對居民意見之處理，載「平日減少 3.1%、假日減少 6.8%」，同句重複出現於第 175、183、195、227、229、231、241 頁共 7 次；（三）同一份摘要本第 259、285 頁，載目標年國道 5 號交通減量「約可達 3.4% 至 6.1%」。三者計算基礎的措辭不同（車流移轉效果／交通量減少／交通減量），官方文件未說明彼此的定義差異或換算關係。監察院 115 交調 0004 調查報告第 44 頁表 7 另記為平日 3.4%、假日 6.1%。陳訴人的質疑是：鐵道局以「移轉量」呈現效益，未將移轉量放回國道 5 號總車輛數的分母。北宜直鐵能減少多少國道 5 號交通量：三份文件皆查無數字，故本頁不並列，也不推估。"},
  {k:"時間",t:"到宜蘭的那幾站",art:artTime,
   say:"五站排下來，高鐵只有兩站比較快。",
   note:"監察院 115 交調 0004 調查報告圖 7。高鐵側已加計轉乘臺鐵 10 分鐘；該圖資料來源標示為「陳訴人提供」，非監察院或鐵道局估算。報告載明鐵道局比較兩案時未加計轉乘，「應予加計轉乘時間進行比較分析，始符實情」。另據交通部運輸研究所模式分析，宜蘭站兩鐵轉乘時間若大於 25 分鐘，預估將有約 50% 的北部往返花東旅次選擇全程搭乘臺鐵。"},
@@ -1512,8 +1601,8 @@ var MORE=[
   say:"紅框就是 420 公頃。框裡框外，都是這樣的農地。",
   note:"底圖為內政部國土測繪中心「臺灣通用電子地圖正射影像」（國土測繪圖資服務雲免申請介接服務，圖層代號 PHOTO2），涵蓋宜蘭市縣政中心以南一帶，影像寬約 5.5 公里。紅框僅呈現 420 公頃的實際面積大小（邊長約 2,049 公尺），不是特定區的公告範圍，本站未取得可公開的界線圖資。420 公頃、85% 私有地、140 棟以上民宅拆遷：時代力量官網 2026.06.11；「缺乏立論基礎」為監察院調查意見四之標題用語。直鐵約 18 棟為南港富康街段。"},
  {k:"生態",t:"挖出來的那些土",art:artEco,
-  say:"堪比全國一整年的土石方去化量。",
-  note:"環評報告書所載，詹順貴 2026.02.04 於思想坦克引述：施工總計產生 961.3 萬立方公尺剩餘土石方，運往台北港填海 236 萬，另 391.3 萬暫置於特定區約 420 公頃良田之上，尚無明確最終去處。全國一整年土石方最終去化量 1,053 萬立方公尺（內政部 115.01.14 記者會投影片）。直鐵側本站未取得同基準的公布數字，故不並列。"}
+  say:"堆到特定區的那些土，官方自己算得出來的容量只有一半。",
+  note:"依 114 年環評報告書（定稿）摘要本：總挖方 666.2 萬、總填方 38.6 萬、剩餘土石方 627.6 萬立方公尺（以上皆自然方），剩餘運棄土方量 961.7 萬立方公尺（鬆方，見第九章摘要表）。兩者基準不同，不可相加或混用，文件亦未載換算係數。去處：雙溪以北 236.3 萬運往「臺北商港物流倉儲區填海造地計畫工程」與「臺北港南碼頭區二期填海造地開發計畫」；雙溪以南 391.3 萬規劃交換利用至高鐵宜蘭車站特定區，因兩案工期落差約 2 年而先行堆置（以上為自然方，236.3＋391.3＝627.6）。堆置區為車站專用區約 35 公頃加維修基地約 12 公頃、合計約 47 公頃，最大堆置高度約 5 公尺、最大堆置量約 212 萬方——這個容量明顯小於要堆的 391.3 萬方。沿線另規劃約 32 處臨時暫置區。直鐵案的土石方數量：查無，因直鐵案未提報環評，環評書亦載明本計畫「僅有零方案」，故無同基準數字可並列。"}
 ];
 
 (function(){
