@@ -465,18 +465,13 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         </div>
         <p class="tksnark" id="tkSnark">才省 3 分鐘，你要我買單？</p>
         <p class="tkwarn" id="tkWarn" hidden></p>
-        <div class="tkfare">
-          <span class="fl">這張票的真實價格</span>
-          <span class="fv" id="tkFare">NT$0</span>
-          <span class="fn" id="tkFareN">建造成本每人平均分攤，全國一人一份</span>
         </div>
-      </div>
       <div class="tkact">
         <button id="tkCard">存成車票圖卡</button>
         <button id="tkShare">把我的車票傳出去</button>
       </div>
       <canvas id="tkCanvas" width="1080" height="1350" hidden></canvas>
-      <details class="srcfold"><summary>出處與口徑</summary><p class="src">兩案到宜蘭各鄉鎮的行車時間，出自監察院 115 交調 0004 調查報告圖 7「北宜『高鐵』案及『直鐵』案行車時間比較圖」（PDF 第 36 頁）：高鐵案（已加計轉乘臺鐵時間 10 分鐘）頭城 59、礁溪 51、宜蘭 41、羅東 46、蘇澳新 59 分鐘；直鐵案（自強直達／半直達）頭城 32、礁溪 39、宜蘭 41、羅東 49、蘇澳新 64 分鐘。該圖資料來源標示為「陳訴人提供」，非鐵道局估算。鐵道局自身估算為高鐵 28 分鐘（台北至南港 8 分＋南港至宜蘭 20 分）、直鐵 56 至 64 分鐘（台北至南港 10 分＋46 至 54 分），監察院載明該估算「未加計轉乘時間，是以該局應予加計轉乘時間進行比較分析」（同報告表 3、第 35 頁）。另交通部運研所模式情境分析：若宜蘭站兩鐵間轉乘時間大於 25 分鐘，預估約 50% 北部往返花東旅次將選擇全程搭乘台鐵（同報告表 7）。高鐵宜蘭站站址為「縣政中心以南」方案，與台鐵宜蘭新站平行共站、經地面層轉乘（交通部 2022.01.27 審查會議結論；鐵道局計畫資訊專區）；全線約 60.6 公里，宜蘭端僅此一站。西部至台北為現行高鐵既有路網，台灣高鐵公告台北至台南約 83 分、台北至左營約 95 分（直達車），其餘各站以高鐵官網時刻表查詢為準，本頁不列推估值。分攤金額＝建造成本 3,521.75 億 ÷ 全國人口 23,243,565 人（內政部 2026 年 6 月底統計）。<br><br>轉乘的計算方式：本頁只計入「確定會發生」的換乘。宜蘭端，高鐵在宜蘭只設一站，要到頭城、礁溪、羅東、蘇澳新都必須換乘臺鐵，圖 7 已加計 10 分鐘；直鐵行駛臺鐵路線、直接停靠既有五站，監察院調查意見稱之為「到站即到家的優勢」，故不加計。西部端，走直鐵必須在南港由高鐵換乘臺鐵，因兩者軌距與系統不同、無法直通，本頁據實標示但不估分鐘數；走高鐵是否由西部直通宜蘭，監察院調查報告載明「本件『高鐵延伸宜蘭計畫』之興建與營運模式，亦迄未依前瞻基礎建設特別條例確認營運模式」，尚未確定，故同樣不估。所有轉乘與接駁的分鐘數，凡查無可引用出處者一律不列推估值。</p></details>
+      <details class="srcfold"><summary>出處與口徑</summary><p class="src">兩案到宜蘭各鄉鎮的行車時間，出自監察院 115 交調 0004 調查報告圖 7「北宜『高鐵』案及『直鐵』案行車時間比較圖」（PDF 第 36 頁）：高鐵案（已加計轉乘臺鐵時間 10 分鐘）頭城 59、礁溪 51、宜蘭 41、羅東 46、蘇澳新 59 分鐘；直鐵案（自強直達／半直達）頭城 32、礁溪 39、宜蘭 41、羅東 49、蘇澳新 64 分鐘。該圖資料來源標示為「陳訴人提供」，非鐵道局估算。鐵道局自身估算為高鐵 28 分鐘（台北至南港 8 分＋南港至宜蘭 20 分）、直鐵 56 至 64 分鐘（台北至南港 10 分＋46 至 54 分），監察院載明該估算「未加計轉乘時間，是以該局應予加計轉乘時間進行比較分析」（同報告表 3、第 35 頁）。另交通部運研所模式情境分析：若宜蘭站兩鐵間轉乘時間大於 25 分鐘，預估約 50% 北部往返花東旅次將選擇全程搭乘台鐵（同報告表 7）。高鐵宜蘭站站址為「縣政中心以南」方案，與台鐵宜蘭新站平行共站、經地面層轉乘（交通部 2022.01.27 審查會議結論；鐵道局計畫資訊專區）；全線約 60.6 公里，宜蘭端僅此一站。西部至台北為現行高鐵既有路網，台灣高鐵公告台北至台南約 83 分、台北至左營約 95 分（直達車），其餘各站以高鐵官網時刻表查詢為準，本頁不列推估值。<br><br>轉乘的計算方式：本頁只計入「確定會發生」的換乘。宜蘭端，高鐵在宜蘭只設一站，要到頭城、礁溪、羅東、蘇澳新都必須換乘臺鐵，圖 7 已加計 10 分鐘；直鐵行駛臺鐵路線、直接停靠既有五站，監察院調查意見稱之為「到站即到家的優勢」，故不加計。西部端，走直鐵必須在南港由高鐵換乘臺鐵，因兩者軌距與系統不同、無法直通，本頁據實標示但不估分鐘數；走高鐵是否由西部直通宜蘭，監察院調查報告載明「本件『高鐵延伸宜蘭計畫』之興建與營運模式，亦迄未依前瞻基礎建設特別條例確認營運模式」，尚未確定，故同樣不估。所有轉乘與接駁的分鐘數，凡查無可引用出處者一律不列推估值。</p></details>
     </div>
   </section>
 
@@ -1754,8 +1749,6 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
 /* 分享 */
 /* ====== 開一張票給自己 ====== */
 (function(){
-  var POP=23243565; /* 內政部 2026.06 底全國人口 */
-  var PER=Math.round(TOTAL_BUDGET*1e8/POP);
   /* 出發地：西部一律走現行高鐵到南港 */
   var ORIGS=[
     {id:"tp",name:"台北",code:"TP",here:true,
@@ -1788,8 +1781,8 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
       say:"花 3,521.75 億，時間一模一樣。這筆錢買到什麼？"};
     if(gain<=5) return{cls:"",dv:"快 "+gain+" 分鐘",
       say:"才省 "+gain+" 分鐘，你要我買單？"};
-    return{cls:"",dv:"快 "+gain+" 分鐘",
-      say:"省下的每一分鐘，每個人先付 "+Math.round(PER/gain).toLocaleString("en-US")+" 元。"};
+      return{cls:"",dv:"快 "+gain+" 分鐘",
+      say:"快 "+gain+" 分鐘。為了這 "+gain+" 分鐘，要新蓋 60.6 公里。"};
   }
   var ow=document.getElementById("opick"),dw=document.getElementById("dpick"),
       elO=document.getElementById("tkOrig"),elD=document.getElementById("tkDest"),
@@ -1800,7 +1793,7 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
       elHc=document.getElementById("tkHc"),elTc=document.getElementById("tkTc"),
       elDiff=document.getElementById("tkDiff"),elDv=document.getElementById("tkDv"),
       elSnark=document.getElementById("tkSnark"),
-      elWarn=document.getElementById("tkWarn"),elFare=document.getElementById("tkFare"),
+      elWarn=document.getElementById("tkWarn"),
       curO=ORIGS[2],curD=DESTS[3];
 
   var DIR=1; /* 1＝西部→宜蘭，-1＝宜蘭→西部 */
@@ -1822,7 +1815,6 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
     elSnark.textContent=s.say;
     curD._say=s.say;curD._dv=s.dv;
     if(curD.warn){elWarn.textContent=curD.warn;elWarn.hidden=false;}else{elWarn.hidden=true;}
-    elFare.textContent="NT$"+PER.toLocaleString("en-US");
     mark(ow,curO.id);mark(dw,curD.id);
     blow();
   }
@@ -1979,18 +1971,17 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
     if(line)lines.push(line);
     for(i=0;i<lines.length;i++){g.fillText(lines[i],L,y+i*54);}
     y+=lines.length*54+18;
-    /* 分攤金額 */
+    /* 換車次數（取代原本的分攤金額） */
     g.fillStyle="#141216";g.fillRect(L,y,R-L,150);
     g.textAlign="center";
     g.fillStyle="#6B675E";g.font="800 22px "+SANS;
-    g.fillText("建造成本・每人平均分攤",(L+R)/2,y+44);
-    g.fillStyle="#FF3B2F";g.font="800 72px "+MONO;
-    g.fillText("NT$"+PER.toLocaleString("en-US"),(L+R)/2,y+112);
+    g.fillText("這一趟要換幾次車",(L+R)/2,y+44);
+    g.fillStyle="#F5F3EC";g.font="800 46px "+SANS;
+    g.fillText("高鐵 換 1 次　　直鐵 "+(curO.here?"不用換":"換 1 次"),(L+R)/2,y+108);
     /* 註腳 */
     g.fillStyle="#6B675E";g.font="600 19px "+SANS;g.textAlign="left";
     g.fillText("行車時間：監察院 115 交調 0004 調查報告圖 7（資料來源標示為陳訴人提供）",L,y+196);
-    g.fillText("分攤金額：建造成本 3,521.75 億 ÷ 全國人口 23,243,565 人（內政部 2026.06）",L,y+226);
-    g.fillStyle="#141216";g.font="800 22px "+SANS;
+        g.fillStyle="#141216";g.font="800 22px "+SANS;
     g.fillText("guanwei-cmd.github.io/hsr-yilan",L,y+266);
     return cv;
   }
