@@ -169,6 +169,7 @@ details.srcfold .src{margin-top:8px}
 .mbody{background:var(--panel)}
 
 /* 靜態路線圖：官方正射影像，點位由實際經緯度換算，不繪製線形 */
+.warnbox{margin:12px 0 0;padding:12px 14px;background:rgba(179,38,30,.07);border-left:4px solid var(--danger);border-radius:2px;font-size:var(--fs-base);line-height:1.8}
 .rmap{position:relative;margin:12px 0 0;border:1.5px solid var(--ink);border-radius:3px;overflow:hidden;background:#141216}
 .rmap img{display:block;width:100%;height:auto}
 .mp{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:6px;pointer-events:none;white-space:nowrap}
@@ -178,6 +179,8 @@ details.srcfold .src{margin-top:8px}
 .mp b{font-size:var(--fs-xs);font-weight:800;color:#F5F3EC;background:rgba(20,18,22,.86);border-radius:2px;padding:2px 7px}
 .mp.hsr b{background:var(--danger)}
 .mp.lft{flex-direction:row-reverse}
+.mgap{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.mgapl{position:absolute;transform:translate(-100%,-50%);white-space:nowrap;font-size:var(--fs-xs);font-weight:800;color:#F5F3EC;background:var(--danger);border-radius:2px;padding:2px 7px;pointer-events:none}
 .rmapleg{display:flex;flex-wrap:wrap;gap:8px 16px;margin:10px 0 0;font-size:var(--fs-xs);font-weight:700;color:var(--muted)}
 .rmapleg span{display:flex;align-items:center;gap:6px}
 .rmapleg i{width:11px;height:11px;border-radius:50%;flex:none}
@@ -493,13 +496,18 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
       <div class="kick">這 60 公里</div>
       <h2>兩條路線，<br>停的站完全不同</h2>
       <p>北宜高鐵全線約 60.6 公里，在宜蘭只設一站，位置在宜蘭市壯二、縣政中心以南約 350 公尺。北宜直鐵走臺鐵路線，沿途停既有的頭城、礁溪、宜蘭、羅東、蘇澳新五站。</p>
+      <p class="warnbox"><b>高鐵宜蘭站不是宜蘭車站。</b>兩者相距約 2.3 公里。要進宜蘭市區，得在高鐵站旁另外新蓋的「臺鐵宜蘭新站」換車，再搭一段臺鐵。這一帶總共會有三座站：高鐵宜蘭站、臺鐵宜蘭新站（新蓋）、既有的臺鐵宜蘭車站。</p>
       <figure class="rmap">
         <img src="img/routemap.jpg" alt="南港至蘇澳一帶正射影像，標示南港、高鐵宜蘭站與臺鐵五站的實際位置" decoding="async" loading="lazy">
         <span class="mp org" style="left:8.5%;top:6.1%"><i></i><b>南港</b></span>
         <span class="mp lft" style="left:91.6%;top:43.7%"><i></i><b>頭城</b></span>
         <span class="mp lft" style="left:72.4%;top:49.7%"><i></i><b>礁溪</b></span>
-        <span class="mp lft" style="left:66.6%;top:63.8%"><i></i><b>宜蘭</b></span>
-        <span class="mp hsr" style="left:65.2%;top:67.7%"><i></i><b>高鐵宜蘭站</b></span>
+        <span class="mp lft" style="left:66.6%;top:63.8%"><i></i><b>臺鐵宜蘭車站（市區）</b></span>
+        <svg class="mgap" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <line x1="66.6" y1="63.8" x2="65.2" y2="67.7" stroke="#B3261E" stroke-width="0.45" stroke-dasharray="1.4 1.1"/>
+        </svg>
+        <span class="mgapl" style="left:52%;top:65.8%">相距 2.3 公里</span>
+        <span class="mp hsr" style="left:65.2%;top:67.7%"><i></i><b>高鐵宜蘭站（壯二）</b></span>
         <span class="mp lft" style="left:69.8%;top:78.5%"><i></i><b>羅東</b></span>
         <span class="mp lft" style="left:92.5%;top:92.7%"><i></i><b>蘇澳新</b></span>
       </figure>
@@ -1835,8 +1843,8 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
     if(o.here)a.push(seg("","台北 → 南港","現行高鐵。不是這筆錢蓋的。","8 分"));
     else a.push(seg("",o.name+" → 南港","現行高鐵，已經在跑。不是這筆錢蓋的。是否直通宜蘭、要不要在南港換車，監察院載明營運模式迄未確認。","不計入"));
     a.push(seg("new","南港 → 高鐵宜蘭站","北宜高鐵。這一段才是 3,521.75 億要蓋的。","20 分"));
-    a.push(seg("chg","高鐵宜蘭站 → 臺鐵宜蘭新站","下車換乘。高鐵在宜蘭只設一站，站旁另設臺鐵宜蘭新站，兩站平行共站、經地面層轉乘。","10 分"));
-    a.push(seg("","臺鐵宜蘭新站 → "+dn,"再搭一段臺鐵才到得了。",rail+" 分"));
+    a.push(seg("chg","高鐵宜蘭站 → 臺鐵宜蘭新站","下車換乘。高鐵宜蘭站在壯二，不是宜蘭車站；旁邊要另外新蓋一座臺鐵宜蘭新站，兩站平行共站、經地面層轉乘。","10 分"));
+    a.push(seg("","臺鐵宜蘭新站 → "+(dn==="宜蘭"?"宜蘭車站（市區）":dn),dn==="宜蘭"?"高鐵站離宜蘭車站約 2.3 公里，還要再搭一段臺鐵。":"再搭一段臺鐵才到得了。",rail+" 分"));
     return a;
   }
   function traRoute(o,dn,d){
