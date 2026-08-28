@@ -253,7 +253,7 @@ details.srcfold .src{margin-top:8px}
 
 /* 具象場景橫向對照（釘住後由垂直捲動驅動水平位移） */
 .hz{position:relative}
-.hzpin{position:sticky;top:0;height:100dvh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.hzpin{position:sticky;top:0;height:100dvh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;padding-top:calc(var(--hud-h,62px) + 44px);padding-bottom:52px}
 .hz.gsp .hzpin{position:relative;top:auto}   /* ScrollTrigger 自己處理 pin，sticky 要讓開 */
 .nogsap .hzpin{position:static;height:auto;overflow:visible;display:block;padding:0 16px 8vh}
 .nogsap .hzstrip{display:block;transform:none!important}
@@ -265,17 +265,22 @@ details.srcfold .src{margin-top:8px}
 .hzdots{display:flex;gap:5px;flex:1}
 .hzdots i{flex:1;height:4px;background:rgba(245,243,236,.35);border-radius:1px;transition:background .25s ease}
 .hzdots i.on{background:var(--danger)}
-.hzstrip{display:flex;height:100%;align-items:center;will-change:transform}
-.hzs{flex:none;width:100vw;padding:0 16px;display:flex;justify-content:center;align-items:center}
+.hzstrip{display:flex;flex:1 1 auto;min-height:0;align-items:center;will-change:transform}
+.hzs{flex:none;width:100vw;height:100%;padding:0 16px;display:flex;justify-content:center;align-items:center}
 .hzcard{width:100%;max-width:520px;background:var(--panel);border:1.5px solid var(--ink);border-radius:4px;box-shadow:6px 6px 0 #141216;overflow:hidden}
 .hzhd{display:flex;align-items:baseline;gap:10px;padding:10px 15px;background:#141216;color:#F5F3EC}
 .hzhd .hzn{flex:none;font-family:var(--mono);font-size:var(--fs-xs);font-weight:800;letter-spacing:.12em;color:#B9B5AA}
 .hzhd b{font-size:var(--fs-base);font-weight:900}
 .hzhd em{margin-left:auto;font-style:normal;font-size:var(--fs-xs);font-weight:700;color:#6B675E}
 .hzart{padding:16px 16px 8px}
-.hzart svg{width:100%;height:auto;display:block}
+.hzart svg{width:100%;height:auto;display:block;max-height:calc(100dvh - var(--hud-h,62px) - 348px)}
 .hzsay{margin:0;padding:0 16px 12px;font-size:var(--fs-base);font-weight:800;color:var(--ink);line-height:1.6}
-.hznote{margin:0;padding:0 16px 16px;font-size:var(--fs-xs);font-weight:500;color:var(--faint);line-height:1.7}
+.hznote{margin:0;padding:10px 16px 16px;font-size:var(--fs-xs);font-weight:500;color:var(--faint);line-height:1.7}
+  .hzsrc{margin:0 16px 14px}
+  .hzsrc summary{font-size:var(--fs-xs);color:var(--muted);cursor:pointer;font-weight:800;letter-spacing:.04em;list-style:none;display:inline-flex;align-items:center;min-height:46px;border:1.5px solid rgba(20,18,22,.45);border-radius:2px;padding:0 14px}
+  .hzsrc summary::-webkit-details-marker{display:none}
+  .hzsrc[open] summary{color:var(--ink)}
+  .hzsrc .hznote{padding:10px 0 0}
 .hzhint{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);font-size:var(--fs-xs);font-weight:800;letter-spacing:.1em;color:#F5F3EC;background:#141216;border-radius:2px;padding:4px 12px}
 
 /* 目的地選擇與車票 */
@@ -493,7 +498,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         <button id="tkShare">把我的車票傳出去</button>
       </div>
       <canvas id="tkCanvas" width="1080" height="1350" hidden></canvas>
-      <details class="srcfold"><summary>出處與口徑</summary><p class="src">兩案到宜蘭各鄉鎮的行車時間，出自監察院 115 交調 0004 調查報告圖 7「北宜『高鐵』案及『直鐵』案行車時間比較圖」（PDF 第 36 頁）：高鐵案（已加計轉乘臺鐵時間 10 分鐘）頭城 59、礁溪 51、宜蘭 41、羅東 46、蘇澳新 59 分鐘；直鐵案（自強直達／半直達）頭城 32、礁溪 39、宜蘭 41、羅東 49、蘇澳新 64 分鐘。該圖資料來源標示為「陳訴人提供」；陳訴人為 2025 年 5 月向監察院遞交「高鐵延伸宜蘭計畫陳情書」的四個團體：公民幫推、守護宜蘭工作坊、高鐵延伸宜蘭監督聯盟、臺灣鐵路產業工會（自由時報 2026.05.12、公視新聞網）。<br><br>逐段分鐘的組成：鐵道局表 3（監察院報告第 35 頁，資料來源標示為鐵道局）以路線示意圖列出「臺北 8 分 南港 20 分 宜蘭」，總計 28 分；直鐵側為「臺北 10 分 南港 46~54 分 宜蘭」，總計 56~64 分，但表 3 註 1 載明直鐵採「南港至大溪之新方案二」路線，與圖 7 所用方案不同，兩者不可直接相加。本頁高鐵各段為：台北至南港 8 分、南港至高鐵宜蘭站 20 分（皆為表 3 所載）、轉乘 10 分（圖 7 加計），末段臺鐵時間以「圖 7 總計 − 38」推算；直鐵為台北至南港 10 分（表 3），南港以東以「圖 7 總計 − 10」推算。推算部分為本站算式，非文件直接載明。南港換乘臺鐵所需時間，官方文件查無數字，故不估。鐵道局自身估算為高鐵 28 分鐘、直鐵 56 至 64 分鐘，監察院載明該估算「未加計轉乘時間，是以該局應予加計轉乘時間進行比較分析」（同報告表 3、第 35 頁）。另交通部運研所模式情境分析：若宜蘭站兩鐵間轉乘時間大於 25 分鐘，預估約 50% 北部往返花東旅次將選擇全程搭乘台鐵（同報告表 7）。高鐵宜蘭站站址為「縣政中心以南」方案，與台鐵宜蘭新站平行共站、經地面層轉乘（交通部 2022.01.27 審查會議結論；鐵道局計畫資訊專區）；全線約 60.6 公里，宜蘭端僅此一站。西部至台北為現行高鐵既有路網，台灣高鐵公告台北至台南約 83 分、台北至左營約 95 分（直達車），其餘各站以高鐵官網時刻表查詢為準，本頁不列推估值。<br><br>轉乘的計算方式：本頁只計入「確定會發生」的換乘。宜蘭端，高鐵在宜蘭只設一站，要到頭城、礁溪、羅東、蘇澳新都必須換乘臺鐵，圖 7 已加計 10 分鐘；直鐵行駛臺鐵路線、直接停靠既有五站，監察院調查意見稱之為「到站即到家的優勢」，故不加計。西部端，走直鐵必須在南港由高鐵換乘臺鐵，因兩者軌距與系統不同、無法直通，本頁據實標示但不估分鐘數；走高鐵是否由西部直通宜蘭，監察院調查報告載明「本件『高鐵延伸宜蘭計畫』之興建與營運模式，亦迄未依前瞻基礎建設特別條例確認營運模式」，尚未確定，故同樣不估。所有轉乘與接駁的分鐘數，凡查無可引用出處者一律不列推估值。</p></details>
+      <details class="srcfold"><summary>出處與口徑</summary><p class="src">兩案到宜蘭各鄉鎮的行車時間，出自監察院 115 交調 0004 調查報告圖 7「北宜『高鐵』案及『直鐵』案行車時間比較圖」（PDF 第 36 頁）：高鐵案（已加計轉乘臺鐵時間 10 分鐘）頭城 59、礁溪 51、宜蘭 41、羅東 46、蘇澳新 59 分鐘；直鐵案（自強直達／半直達）頭城 32、礁溪 39、宜蘭 41、羅東 49、蘇澳新 64 分鐘。該圖資料來源標示為「陳訴人提供」；陳訴人為 2025 年 5 月向監察院遞交「高鐵延伸宜蘭計畫陳情書」的四個團體：公民幫推、守護宜蘭工作坊、高鐵延伸宜蘭監督聯盟、臺灣鐵路產業工會（自由時報 2026.05.12、公視新聞網）。<br><br>逐段分鐘的組成：鐵道局表 3（監察院報告第 35 頁，資料來源標示為鐵道局）以路線示意圖列出「臺北 8 分 南港 20 分 宜蘭」，總計 28 分；直鐵側為「臺北 10 分 南港 46~54 分 宜蘭」，總計 56~64 分，但表 3 註 1 載明直鐵採「南港至大溪之新方案二」路線，與圖 7 所用方案不同，兩者不可直接相加。本頁高鐵各段為：台北至南港 8 分、南港至高鐵宜蘭站 20 分（皆為表 3 所載）、轉乘 10 分（圖 7 加計），末段臺鐵時間以「圖 7 總計 − 38」推算；直鐵為台北至南港 10 分（表 3），南港以東以「圖 7 總計 − 10」推算。推算部分為本站算式，非文件直接載明。南港由高鐵換乘臺鐵所需時間，官方文件查無數字；本站不留白，改比照圖 7 在宜蘭端加計的同一個轉乘時間，一樣採 10 分鐘，此為本站採用之假設，非官方數字。又表 3 註 1 載明其直鐵側採「新方案二」，與圖 7 所用方案不同，惟台北至南港為兩案共用之既有臺鐵路段，故仍以表 3 之 10 分計。鐵道局自身估算為高鐵 28 分鐘、直鐵 56 至 64 分鐘，監察院載明該估算「未加計轉乘時間，是以該局應予加計轉乘時間進行比較分析」（同報告表 3、第 35 頁）。另交通部運研所模式情境分析：若宜蘭站兩鐵間轉乘時間大於 25 分鐘，預估約 50% 北部往返花東旅次將選擇全程搭乘台鐵（同報告表 7）。高鐵宜蘭站站址為「縣政中心以南」方案，與台鐵宜蘭新站平行共站、經地面層轉乘（交通部 2022.01.27 審查會議結論；鐵道局計畫資訊專區）；全線約 60.6 公里，宜蘭端僅此一站。西部至台北為現行高鐵既有路網，台灣高鐵公告台北至台南約 83 分、台北至左營約 95 分（直達車），其餘各站以高鐵官網時刻表查詢為準，本頁不列推估值。<br><br>轉乘的計算方式：本頁只計入「確定會發生」的換乘。宜蘭端，高鐵在宜蘭只設一站，要到頭城、礁溪、羅東、蘇澳新都必須換乘臺鐵，圖 7 已加計 10 分鐘；直鐵行駛臺鐵路線、直接停靠既有五站，監察院調查意見稱之為「到站即到家的優勢」，故不加計。西部端，走直鐵必須在南港由高鐵換乘臺鐵，因兩者軌距與系統不同、無法直通，本頁據實標示但不估分鐘數；走高鐵是否由西部直通宜蘭，監察院調查報告載明「本件『高鐵延伸宜蘭計畫』之興建與營運模式，亦迄未依前瞻基礎建設特別條例確認營運模式」，尚未確定，故同樣不估。所有轉乘與接駁的分鐘數，凡查無可引用出處者一律不列推估值。</p></details>
     </div>
   </section>
 
@@ -516,7 +521,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
       <p>北宜高鐵全線約 60.6 公里，在宜蘭只設一站，位置在宜蘭市壯二、縣政中心以南約 350 公尺。北宜直鐵走臺鐵路線，沿途停既有的頭城、礁溪、宜蘭、羅東、蘇澳新五站。</p>
       <p class="warnbox"><b>高鐵宜蘭站不是宜蘭車站。</b>兩者相距約 2.3 公里。要進宜蘭市區，得在高鐵站旁另外新蓋的「臺鐵宜蘭新站」換車，再搭一段臺鐵。這一帶總共會有三座站：高鐵宜蘭站、臺鐵宜蘭新站（新蓋）、既有的臺鐵宜蘭車站。</p>
       <figure class="rmap">
-        <img src="img/routemap.jpg" alt="南港至蘇澳一帶正射影像，標示南港、高鐵宜蘭站與臺鐵五站的實際位置" decoding="async" loading="lazy">
+        <img src="img/routemap.jpg" width="900" height="1983" alt="南港至蘇澳一帶正射影像，標示南港、高鐵宜蘭站與臺鐵五站的實際位置" decoding="async" loading="lazy">
         <span class="mp org" style="left:8.5%;top:6.1%"><i></i><b>南港</b></span>
         <span class="mp lft" style="left:91.6%;top:43.7%"><i></i><b>頭城</b></span>
         <span class="mp lft" style="left:72.4%;top:49.7%"><i></i><b>礁溪</b></span>
@@ -538,7 +543,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
       <h3 class="rsub">官方自己畫的路線比較圖</h3>
       <p>本站沒有可公開的線形圖資，所以上面那張衛星圖不畫線。但監察院調查報告裡有一張，把兩案畫在同一張底圖上，還標出翡翠水庫集水區：</p>
       <figure class="offmap">
-        <img src="img/route-official.jpg" alt="監察院調查報告第 10 頁：北宜直鐵新方案一、新方案二與高鐵延伸方案 A、B、C 之路線比較圖，含翡翠水庫集水區範圍" decoding="async" loading="lazy">
+        <img src="img/route-official.jpg" width="813" height="827" alt="監察院調查報告第 10 頁：北宜直鐵新方案一、新方案二與高鐵延伸方案 A、B、C 之路線比較圖，含翡翠水庫集水區範圍" decoding="async" loading="lazy">
         <figcaption>監察院 115 交調 0004 調查報告，第 10 頁「圖 3 北宜『直鐵』案與『高鐵』案路線方案比較圖」。橘色虛線為高鐵延伸方案 A／B／C，藍線為直鐵新方案二，灰線為直鐵新方案一，淺藍區塊為翡翠水庫集水區。圖下方兩欄是鐵道局自己列的兩案優劣。</figcaption>
       </figure>
       <details class="srcfold"><summary>出處與繪製方式</summary><p class="src">底圖為內政部國土測繪中心「臺灣通用電子地圖正射影像」（國土測繪圖資服務雲免申請介接服務，圖層代號 PHOTO2），zoom 13，涵蓋約 26×58 公里。各點位置由實際經緯度換算成影像百分比座標標定，可回推驗證。高鐵宜蘭站站址為「縣政中心以南」方案，位於宜蘭市壯二、縣政中心以南約 350 公尺、縣政府東南側（交通部 2022.01.27 審查會議結論）。<b>本圖不繪製路線線形</b>：本站未取得可公開的高鐵線形圖資，畫一條線就是捏造。全線約 60.6 公里、10 座隧道：鐵道局計畫資訊專區、環評報告書。</p></details>
@@ -566,7 +571,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
           <tr><th>到宜蘭市區</th><td class="a">41 分，要換 1 次車</td><td class="b">41 分，不用換車</td></tr>
           <tr><th>到頭城</th><td class="a">59 分</td><td class="b">32 分</td></tr>
           <tr><th>宜蘭端停靠</th><td class="a">只設 1 站（宜蘭市壯二），旁邊須新蓋臺鐵宜蘭新站</td><td class="b">停既有 5 站：頭城、礁溪、宜蘭、羅東、蘇澳新</td></tr>
-          <tr><th>減少國道 5 號車流</th><td class="a">官方三組數字：15.5–16.9%／3.1%、6.8%／3.4–6.1%</td><td class="b nd">查無官方數字</td></tr>
+          <tr><th>減少國道 5 號車流</th><td class="a">官方主打 15%～17%；加計高鐵自己誘發的車流後，官方算出的淨值是 3%～6%</td><td class="b nd">查無官方數字</td></tr>
 
           <tr class="grp"><td colspan="3">錢</td></tr>
           <tr><th>建造成本</th><td class="a">3,521.75 億元（行政院核定）</td><td class="b">1,321.12 億元（環評書口徑）</td></tr>
@@ -1535,25 +1540,34 @@ function artEco(){
 }
 /* 〇、國道五號：官方自己給了三組對不起來的數字 */
 function artNat5(){
-  var W=300,o="",x0=8,BW=196,MX=18;
-  var ROWS=[
-    ["鐵道局官網",15.5,16.9,"小客車車流移轉"],
-    ["環評書 p.175",3.1,6.8,"平日／假日交通量減少"],
-    ["環評書 p.259",3.4,6.1,"目標年交通減量"]
-  ];
+  var W=300,o="",x0=40,BW=206,MX=18;
+  /* 同一張官方表格的兩欄：移轉效果（未計衍生交通量）／加計衍生交通量後 */
+  var ROWS=[["平日",16.9,3.4],["假日",15.5,6.1]];
   o+=txt(0,10,"高鐵能減少多少國道五號車流？",{s:9.5});
+  o+=txt(0,23,"鐵道局自己的簡報，同一張表，兩個答案",{f:"#6B675E",s:8,w:600});
   ROWS.forEach(function(r,i){
-    var y=24+i*34;
-    o+=txt(0,y+8,r[0],{s:8.5,w:800});
-    o+='<rect x="'+(x0+r[1]/MX*BW)+'" y="'+(y+1)+'" width="'+((r[2]-r[1])/MX*BW||2)+'" height="11" fill="'+RED+'"/>';
-    o+='<line x1="'+x0+'" y1="'+(y+6.5)+'" x2="'+(x0+BW)+'" y2="'+(y+6.5)+'" stroke="#B9B5AA" stroke-width="0.8"/>';
-    o+=txt(x0+r[2]/MX*BW+5,y+10,r[1].toFixed(1)+"–"+r[2].toFixed(1)+"%",{f:RED,s:8.5,m:1});
-    o+=txt(0,y+20,r[3],{f:"#6B675E",s:7.5,w:600});
+    var y=36+i*28,wg=r[1]/MX*BW,wn=r[2]/MX*BW;
+    o+=txt(0,y+10,r[0],{s:9,w:700});
+    o+='<rect x="'+x0+'" y="'+y+'" width="'+wg+'" height="13" fill="'+RED+'" opacity="0.2"/>';
+    o+='<rect x="'+x0+'" y="'+y+'" width="'+wn+'" height="13" fill="'+RED+'"/>';
+    o+=txt(x0+wn+4,y+10,r[2].toFixed(1)+"%",{f:RED,s:9.5,m:1});
+    o+=txt(x0+wg+4,y+10,r[1].toFixed(1)+"%",{f:"#A9A599",s:8.5,m:1});
   });
-  var yy=24+3*34+4;
-  o+='<rect x="0" y="'+yy+'" width="300" height="1.5" fill="'+INK+'"/>';
-  o+=txt(0,yy+16,"直鐵：查無任何官方減量數字，無法並列",{f:OK,s:8.5});
-  return svg(W,yy+24,o);
+  var y2=36+2*28+6;
+  o+='<rect x="0" y="'+y2+'" width="9" height="9" fill="'+RED+'" opacity="0.2"/>';
+  o+=txt(13,y2+8,"移轉效果：官網掛出來的數字",{f:"#6B675E",s:7.5,w:600});
+  o+='<rect x="0" y="'+(y2+14)+'" width="9" height="9" fill="'+RED+'"/>';
+  o+=txt(13,y2+22,"加計高鐵自己誘發的車流後，官方算出的淨值",{f:"#6B675E",s:7.5,w:600});
+  var y3=y2+34;
+  o+='<rect x="0" y="'+y3+'" width="300" height="1.5" fill="'+INK+'"/>';
+  o+=txt(0,y3+16,"環評定稿本自己寫：",{s:8.5,w:600});
+  o+=txt(0,y3+29,"「雖無法完全解決國 5 交通瓶頸問題」",{s:9.5});
+  o+=txt(0,y3+45,"換算下來，假日車流每少 1 個百分點",{f:"#6B675E",s:8,w:600});
+  o+=txt(0,y3+62,"518",{f:RED,s:20,m:1});
+  o+=txt(46,y3+62,"億元",{f:RED,s:10});
+  var y4=y3+74;
+  o+=txt(0,y4+10,"直鐵：查無任何官方減量數字，無法並列",{f:OK,s:8.5});
+  return svg(W,y4+18,o);
 }
 /* 四、成本：只比建造成本 */
 function artCost(){
@@ -1587,8 +1601,8 @@ function artCost(){
 }
 var HZ=[
  {k:"國道五號",t:"到底能少多少車",art:artNat5,
-  say:"同一個問題，官方給了三組對不起來的數字。",
-  note:"三組數字皆為官方文件所載：（一）鐵道局「高鐵延伸宜蘭計畫資訊專區」hsr2yilan.com 運輸需求預測段落，載目標年（140 年）對國道 5 號「小客車車流移轉效果」平假日約 15.5%~16.9%；（二）114 年環評報告書（定稿）摘要本第八章對居民意見之處理，載「平日減少 3.1%、假日減少 6.8%」，同句重複出現於第 175、183、195、227、229、231、241 頁共 7 次；（三）同一份摘要本第 259、285 頁，載目標年國道 5 號交通減量「約可達 3.4% 至 6.1%」。三者計算基礎的措辭不同（車流移轉效果／交通量減少／交通減量），官方文件未說明彼此的定義差異或換算關係。監察院 115 交調 0004 調查報告第 44 頁表 7 另記為平日 3.4%、假日 6.1%。陳訴人的質疑是：鐵道局以「移轉量」呈現效益，未將移轉量放回國道 5 號總車輛數的分母。北宜直鐵能減少多少國道 5 號交通量：三份文件皆查無數字，故本頁不並列，也不推估。"},
+  say:"官方主打的 15%～17%，是還沒扣掉高鐵自己誘發出來的車流。",
+  note:"鐵道局 114 年 7 月 9 日環評專案小組第 2 次初審會議簡報第 21 頁，標題「高鐵可減緩國道 5 號壅塞」：第一點以紅字寫「北宜高鐵對於國 5 小客車減量達 15%～17%」，第二點接著寫「加計衍生交通量後，平假日國 5 小客車減量達 3%～6%」。同頁表格以紅色虛線框標示的是「有高鐵」欄的 −16.9%（平日）與 −15.5%（假日），加計衍生交通量後的 −3.4% 與 −6.1% 未標示。鐵道局官網 hsr2yilan.com/about 只寫移轉效果 15.5%~16.9%，全文查無「衍生交通量」一詞，但同一段計算高鐵運量時則採計「衍生旅次約 1.1 萬人/日」。時代力量 2026.07.29 記者會，高鐵延伸宜蘭監督聯盟發言人劉仲書引環評定稿本「國道五號平日交通量預期減少 3.1%、假日減少 6.8%，雖無法完全解決國 5 交通瓶頸問題」，並換算假日車流每減少一個百分點約 518 億元（3,521.75 ÷ 6.8）。北宜直鐵能減少多少國 5 交通量，上述文件皆查無數字，故不並列、不推估。"},
  {k:"時間",t:"到宜蘭的那幾站",art:artTime,
   say:"五站排下來，高鐵只有兩站比較快。",
   note:"監察院 115 交調 0004 調查報告圖 7。高鐵側已加計轉乘臺鐵 10 分鐘；該圖資料來源標示為「陳訴人提供」，非監察院或鐵道局估算。報告載明鐵道局比較兩案時未加計轉乘，「應予加計轉乘時間進行比較分析，始符實情」。另據交通部運輸研究所模式分析，宜蘭站兩鐵轉乘時間若大於 25 分鐘，預估將有約 50% 的北部往返花東旅次選擇全程搭乘臺鐵。"},
@@ -1612,7 +1626,8 @@ var MORE=[
   HZ.forEach(function(d,i){
     var a=document.createElement("article");a.className="hzs";
     a.innerHTML='<div class="hzcard"><header class="hzhd"><span class="hzn">0'+(i+1)+'</span><b>'+d.k+'</b><em>'+d.t+'</em></header>'+
-      '<div class="hzart">'+d.art()+'</div><p class="hzsay">'+d.say+'</p><p class="hznote">'+d.note+'</p></div>';
+      '<div class="hzart">'+d.art()+'</div><p class="hzsay">'+d.say+'</p>'+
+      '<details class="hzsrc"><summary>出處與口徑</summary><p class="hznote">'+d.note+'</p></details></div>';
     strip.appendChild(a);
     dots.appendChild(document.createElement("i"));
   });
@@ -1652,8 +1667,16 @@ var MORE=[
       }
     }
   });
-  /* 圖片載完會改變寬度，重算一次 */
-  window.addEventListener("load",function(){ScrollTrigger.refresh();});
+  /* 版面高度會被圖片改變，任何一張載完都要重算釘選起點。
+     lazy 圖不會延後 window.load，必須各自掛 load。 */
+  function reflow(){ScrollTrigger.refresh();}
+  window.addEventListener("load",reflow);
+  [].forEach.call(document.images,function(im){
+    if(im.complete)return;
+    im.addEventListener("load",reflow);
+    im.addEventListener("error",reflow);
+  });
+  if(window.ResizeObserver){new ResizeObserver(reflow).observe(document.body);}
 })();
 
 /* ====== 15 段逐字的質疑（每則均經原文查核） ====== */
@@ -1944,7 +1967,7 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
       return a;
     }
     a.push(seg("",o.name+" → 南港","現行高鐵，已經在跑。不是這筆錢蓋的。","不計入"));
-    a.push(seg("chg","南港・換乘臺鐵","高鐵是標準軌獨立專用線、臺鐵是窄軌，兩套系統無法直通，必須換月台。","官方未載"));
+    a.push(seg("chg","南港・換乘臺鐵","高鐵是標準軌獨立專用線、臺鐵是窄軌，兩套系統無法直通，必須換月台。官方文件沒寫這段要多久，本站比照陳訴人在宜蘭端採計的同一個轉乘時間，一樣給 10 分鐘。","10 分"));
     a.push(seg("new","南港 → "+dn,"北宜直鐵，直接停靠既有臺鐵"+dn+"站。",east+" 分"));
     return a;
   }
