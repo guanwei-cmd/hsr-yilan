@@ -226,7 +226,8 @@ details.srcfold .src{margin-top:8px}
 .rsteps li.new::before{background:var(--danger)}
 .rsteps li.chg::before{background:var(--gold-deep);color:#141216}
 .rsteps li:not(:last-child)::after{content:"";position:absolute;left:9px;top:29px;bottom:-3px;width:1.5px;background:rgba(20,18,22,.2)}
-.rsteps b{display:block;font-size:var(--fs-base);font-weight:800;color:var(--ink);line-height:1.55}
+.rsteps b{display:flex;align-items:baseline;gap:8px;font-size:var(--fs-base);font-weight:800;color:var(--ink);line-height:1.55}
+.rsteps .rmin{margin-left:auto;flex:none;font-style:normal;font-family:var(--mono);font-size:var(--fs-xs);font-weight:800;color:var(--danger);font-variant-numeric:tabular-nums;white-space:nowrap}
 .rsteps span{display:block;font-size:16px;font-weight:600;color:var(--muted);line-height:1.75;margin-top:2px}
 
 /* 具象場景橫向對照（釘住後由垂直捲動驅動水平位移） */
@@ -471,7 +472,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         <button id="tkShare">把我的車票傳出去</button>
       </div>
       <canvas id="tkCanvas" width="1080" height="1350" hidden></canvas>
-      <details class="srcfold"><summary>出處與口徑</summary><p class="src">兩案到宜蘭各鄉鎮的行車時間，出自監察院 115 交調 0004 調查報告圖 7「北宜『高鐵』案及『直鐵』案行車時間比較圖」（PDF 第 36 頁）：高鐵案（已加計轉乘臺鐵時間 10 分鐘）頭城 59、礁溪 51、宜蘭 41、羅東 46、蘇澳新 59 分鐘；直鐵案（自強直達／半直達）頭城 32、礁溪 39、宜蘭 41、羅東 49、蘇澳新 64 分鐘。該圖資料來源標示為「陳訴人提供」，非鐵道局估算。鐵道局自身估算為高鐵 28 分鐘（台北至南港 8 分＋南港至宜蘭 20 分）、直鐵 56 至 64 分鐘（台北至南港 10 分＋46 至 54 分），監察院載明該估算「未加計轉乘時間，是以該局應予加計轉乘時間進行比較分析」（同報告表 3、第 35 頁）。另交通部運研所模式情境分析：若宜蘭站兩鐵間轉乘時間大於 25 分鐘，預估約 50% 北部往返花東旅次將選擇全程搭乘台鐵（同報告表 7）。高鐵宜蘭站站址為「縣政中心以南」方案，與台鐵宜蘭新站平行共站、經地面層轉乘（交通部 2022.01.27 審查會議結論；鐵道局計畫資訊專區）；全線約 60.6 公里，宜蘭端僅此一站。西部至台北為現行高鐵既有路網，台灣高鐵公告台北至台南約 83 分、台北至左營約 95 分（直達車），其餘各站以高鐵官網時刻表查詢為準，本頁不列推估值。<br><br>轉乘的計算方式：本頁只計入「確定會發生」的換乘。宜蘭端，高鐵在宜蘭只設一站，要到頭城、礁溪、羅東、蘇澳新都必須換乘臺鐵，圖 7 已加計 10 分鐘；直鐵行駛臺鐵路線、直接停靠既有五站，監察院調查意見稱之為「到站即到家的優勢」，故不加計。西部端，走直鐵必須在南港由高鐵換乘臺鐵，因兩者軌距與系統不同、無法直通，本頁據實標示但不估分鐘數；走高鐵是否由西部直通宜蘭，監察院調查報告載明「本件『高鐵延伸宜蘭計畫』之興建與營運模式，亦迄未依前瞻基礎建設特別條例確認營運模式」，尚未確定，故同樣不估。所有轉乘與接駁的分鐘數，凡查無可引用出處者一律不列推估值。</p></details>
+      <details class="srcfold"><summary>出處與口徑</summary><p class="src">兩案到宜蘭各鄉鎮的行車時間，出自監察院 115 交調 0004 調查報告圖 7「北宜『高鐵』案及『直鐵』案行車時間比較圖」（PDF 第 36 頁）：高鐵案（已加計轉乘臺鐵時間 10 分鐘）頭城 59、礁溪 51、宜蘭 41、羅東 46、蘇澳新 59 分鐘；直鐵案（自強直達／半直達）頭城 32、礁溪 39、宜蘭 41、羅東 49、蘇澳新 64 分鐘。該圖資料來源標示為「陳訴人提供」；陳訴人為 2025 年 5 月向監察院遞交「高鐵延伸宜蘭計畫陳情書」的四個團體：公民幫推、守護宜蘭工作坊、高鐵延伸宜蘭監督聯盟、臺灣鐵路產業工會（自由時報 2026.05.12、公視新聞網）。<br><br>逐段分鐘的組成：鐵道局表 3（監察院報告第 35 頁，資料來源標示為鐵道局）以路線示意圖列出「臺北 8 分 南港 20 分 宜蘭」，總計 28 分；直鐵側為「臺北 10 分 南港 46~54 分 宜蘭」，總計 56~64 分，但表 3 註 1 載明直鐵採「南港至大溪之新方案二」路線，與圖 7 所用方案不同，兩者不可直接相加。本頁高鐵各段為：台北至南港 8 分、南港至高鐵宜蘭站 20 分（皆為表 3 所載）、轉乘 10 分（圖 7 加計），末段臺鐵時間以「圖 7 總計 − 38」推算；直鐵為台北至南港 10 分（表 3），南港以東以「圖 7 總計 − 10」推算。推算部分為本站算式，非文件直接載明。南港換乘臺鐵所需時間，官方文件查無數字，故不估。鐵道局自身估算為高鐵 28 分鐘、直鐵 56 至 64 分鐘，監察院載明該估算「未加計轉乘時間，是以該局應予加計轉乘時間進行比較分析」（同報告表 3、第 35 頁）。另交通部運研所模式情境分析：若宜蘭站兩鐵間轉乘時間大於 25 分鐘，預估約 50% 北部往返花東旅次將選擇全程搭乘台鐵（同報告表 7）。高鐵宜蘭站站址為「縣政中心以南」方案，與台鐵宜蘭新站平行共站、經地面層轉乘（交通部 2022.01.27 審查會議結論；鐵道局計畫資訊專區）；全線約 60.6 公里，宜蘭端僅此一站。西部至台北為現行高鐵既有路網，台灣高鐵公告台北至台南約 83 分、台北至左營約 95 分（直達車），其餘各站以高鐵官網時刻表查詢為準，本頁不列推估值。<br><br>轉乘的計算方式：本頁只計入「確定會發生」的換乘。宜蘭端，高鐵在宜蘭只設一站，要到頭城、礁溪、羅東、蘇澳新都必須換乘臺鐵，圖 7 已加計 10 分鐘；直鐵行駛臺鐵路線、直接停靠既有五站，監察院調查意見稱之為「到站即到家的優勢」，故不加計。西部端，走直鐵必須在南港由高鐵換乘臺鐵，因兩者軌距與系統不同、無法直通，本頁據實標示但不估分鐘數；走高鐵是否由西部直通宜蘭，監察院調查報告載明「本件『高鐵延伸宜蘭計畫』之興建與營運模式，亦迄未依前瞻基礎建設特別條例確認營運模式」，尚未確定，故同樣不估。所有轉乘與接駁的分鐘數，凡查無可引用出處者一律不列推估值。</p></details>
     </div>
   </section>
 
@@ -1800,14 +1801,14 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
     elO.textContent=DIR>0?curO.name:curD.name;
     elD.textContent=DIR>0?curD.name:curO.name;
     elNo.textContent="NO.3521-"+(DIR>0?curO.code+curD.code:curD.code+curO.code);
-    paint(elHS,hsrRoute(curO,dn));paint(elTS,traRoute(curO,dn));
+    paint(elHS,hsrRoute(curO,dn,curD));paint(elTS,traRoute(curO,dn,curD));
     elHv.textContent=curD.hsr+" 分";
     elTv.textContent=curD.tra+" 分";
     elHx.textContent="換 1 次車";
     elTx.textContent=curO.here?"不用換車":"換 1 次車";
     /* 兩案各自沒被算進分鐘數的部分，據實標明，不估數字 */
-    elHc.textContent=curO.here?"已含宜蘭端轉乘 10 分":"已含宜蘭端轉乘 10 分，未計南港是否需換車";
-    elTc.textContent=curO.here?"全程直達，無轉乘":"未計南港換乘臺鐵所需時間";
+    elHc.textContent="台北起算：8＋20＋轉乘 10＋臺鐵 "+(curD.hsr-38)+"＝"+curD.hsr+" 分"+(curO.here?"":"（西部到南港未計入）");
+    elTc.textContent="台北起算：10＋"+(curD.tra-10)+"＝"+curD.tra+" 分"+(curO.here?"":"（西部到南港、南港換乘未計入）");
     elDiff.className="tkdiff"+(s.cls?" "+s.cls:"");
     elDv.textContent=s.dv;
     elSnark.textContent=s.say;
@@ -1827,25 +1828,27 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
     blowT=setTimeout(function(){tkEl.classList.remove("blow");},1200);
   }
   /* 逐段路徑：kind 空＝現有路網、new＝這筆錢要蓋的、chg＝必須換車 */
-  function seg(kind,title,note){return{k:kind,t:title,n:note};}
+  function seg(kind,title,note,min){return{k:kind,t:title,n:note,m:min||""};}
   function flip(t){var p=t.split(" → ");return p.length===2?p[1]+" → "+p[0]:t;}
-  function hsrRoute(o,dn){
-    var a=[];
-    if(o.here)a.push(seg("","台北 → 南港","現行高鐵，約 8 分鐘。不是這筆錢蓋的。"));
-    else a.push(seg("",o.name+" → 南港","現行高鐵，已經在跑。不是這筆錢蓋的。是否直通宜蘭、要不要在南港換車，監察院載明營運模式迄未確認。"));
-    a.push(seg("new","南港 → 高鐵宜蘭站","北宜高鐵。這一段才是 3,521.75 億要蓋的。"));
-    a.push(seg("chg","高鐵宜蘭站 → "+dn,"換乘臺鐵。高鐵在宜蘭只設一站，站旁另設臺鐵宜蘭新站，兩站平行共站、經地面層轉乘。"));
+  function hsrRoute(o,dn,d){
+    var a=[],rail=d.hsr-38;   /* 圖7 總計 − 台北至南港 8 − 南港至宜蘭 20 − 轉乘 10 */
+    if(o.here)a.push(seg("","台北 → 南港","現行高鐵。不是這筆錢蓋的。","8 分"));
+    else a.push(seg("",o.name+" → 南港","現行高鐵，已經在跑。不是這筆錢蓋的。是否直通宜蘭、要不要在南港換車，監察院載明營運模式迄未確認。","不計入"));
+    a.push(seg("new","南港 → 高鐵宜蘭站","北宜高鐵。這一段才是 3,521.75 億要蓋的。","20 分"));
+    a.push(seg("chg","高鐵宜蘭站 → 臺鐵宜蘭新站","下車換乘。高鐵在宜蘭只設一站，站旁另設臺鐵宜蘭新站，兩站平行共站、經地面層轉乘。","10 分"));
+    a.push(seg("","臺鐵宜蘭新站 → "+dn,"再搭一段臺鐵才到得了。",rail+" 分"));
     return a;
   }
-  function traRoute(o,dn){
-    var a=[];
+  function traRoute(o,dn,d){
+    var a=[],east=d.tra-10;   /* 圖7 總計 − 台北至南港 10 */
     if(o.here){
-      a.push(seg("new","台北 → "+dn,"北宜直鐵。全程不用換車，直接停靠既有臺鐵"+dn+"站。"));
+      a.push(seg("","台北 → 南港","現行臺鐵。","10 分"));
+      a.push(seg("new","南港 → "+dn,"北宜直鐵，直接停靠既有臺鐵"+dn+"站，不用換車。",east+" 分"));
       return a;
     }
-    a.push(seg("",o.name+" → 南港","現行高鐵，已經在跑。不是這筆錢蓋的。"));
-    a.push(seg("chg","南港・換乘臺鐵","高鐵是標準軌獨立專用線、臺鐵是窄軌，兩套系統無法直通，必須換月台。"));
-    a.push(seg("new","南港 → "+dn,"北宜直鐵，直接停靠既有臺鐵"+dn+"站。"));
+    a.push(seg("",o.name+" → 南港","現行高鐵，已經在跑。不是這筆錢蓋的。","不計入"));
+    a.push(seg("chg","南港・換乘臺鐵","高鐵是標準軌獨立專用線、臺鐵是窄軌，兩套系統無法直通，必須換月台。","官方未載"));
+    a.push(seg("new","南港 → "+dn,"北宜直鐵，直接停靠既有臺鐵"+dn+"站。",east+" 分"));
     return a;
   }
   function paint(ul,list){
@@ -1855,6 +1858,7 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
       var li=document.createElement("li");
       if(x.k)li.className=x.k;
       var b=document.createElement("b");b.textContent=DIR>0?x.t:flip(x.t);
+      if(x.m){var mm=document.createElement("i");mm.className="rmin";mm.textContent=x.m;b.appendChild(mm);}
       var sp=document.createElement("span");sp.textContent=x.n;
       li.appendChild(b);li.appendChild(sp);ul.appendChild(li);
     });
