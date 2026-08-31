@@ -533,12 +533,8 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         <img src="img/route-corridor.jpg" width="855" height="1116" alt="鐵道局環評簡報路線佈設圖：南港站至新增宜蘭站的高鐵路線，區分隧道段與橋梁段，並標示既有臺鐵、臺鐵各站與翡翠水庫集水區範圍" decoding="async" loading="lazy">
         <figcaption><b>南港到宜蘭，全長 60.6 公里。</b>鐵道局送環評的簡報裡的路線佈設圖，只畫定案的這一條。紅線是要蓋的高鐵，虛線是隧道、實線是橋梁；黑色點線是既有臺鐵，直鐵在宜蘭段走的就是這條。橄欖色那一大片是翡翠水庫集水區。</figcaption>
       </figure>
-      <p class="rmapleg">
-        <span><i style="background:#C0392B"></i>紅線＝高鐵（虛線隧道、實線橋梁）</span>
-        <span><i style="background:#141216"></i>黑色點線＝既有臺鐵</span>
-        <span><i style="background:#A9A96B"></i>橄欖色＝翡翠水庫集水區</span>
-      </p>
-      <p class="rmapnote"><b>翡翠水庫這件事，兩案沒有差別。</b>圖上看得出來，這條線是繞著集水區東緣走的，簡報自己也寫「避開翡翠水庫集水區後進入頭城」。穿越集水區的是<b>已經被淘汰的直鐵新方案一</b>（官方數字：行經集水區最長約 12.3 公里），不是現在要比的新方案二，後者官方同樣稱已避開。所以不能拿翡翠水庫來說高鐵比較環保。</p>
+      
+      
 
       <h3 class="rsub">拉近到宜蘭：三座車站</h3>
       <figure class="rmap">
@@ -1531,7 +1527,9 @@ function artEco(){
 /* 四、成本：只比建造成本 */
 function artCost(){
   var W=300,o="",A=3521.75,B=1321.12;   /* 只計建造成本 */
-  var unit=250,ha=Math.round(A/unit),hb=Math.round(B/unit),bh=5,bg=1.4,base=176;
+  /* base 原為 176，但最高那疊只堆到 y=86，viewBox 頂端會空掉約四分之一。
+     基線上移到剛好容納 14 格＋數字，畫面才不會上面一大塊留白。 */
+  var unit=250,ha=Math.round(A/unit),hb=Math.round(B/unit),bh=5,bg=1.4,base=112;
   function stack(x,n,f,lab,val){
     var s="";
     for(var i=0;i<n;i++)s+='<rect x="'+x+'" y="'+(base-(i+1)*(bh+bg))+'" width="54" height="'+bh+'" fill="'+f+'"/>';
@@ -2091,17 +2089,30 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
     },"image/png");
   });
 
+  /* 傳出去的是「圖卡本身」，不是網址。帶著檔案叫系統分享，才會跳出 LINE／IG 那排 App。
+     不支援檔案分享的環境（多數桌機瀏覽器）才退回分享文字＋網址。 */
   document.getElementById("tkShare").addEventListener("click",function(){
-    var btn=this;
-    var dn=curD.dispName||curD.name;
+    var btn=this,dn=curD.dispName||curD.name,url=location.href;
     var txt=curO.name+"到"+dn+"：北宜高鐵 "+curD._ht+" 分（含轉乘台鐵 10 分）、北宜直鐵 "+curD._tt+" 分。"+
             "花了 3,521.75 億，"+curD._dv+"。"+curD._say+
             "（監察院 115交調0004 調查報告圖7）";
-    var url=location.href;
-    if(navigator.share){navigator.share({title:"北宜高鐵，值得嗎？",text:txt,url:url}).catch(function(){});}
-    else if(navigator.clipboard){navigator.clipboard.writeText(txt+"\n"+url).then(function(){
-      var o=btn.textContent;btn.textContent="已複製車票！";setTimeout(function(){btn.textContent=o},2000);
-    });}
+    function fallback(){
+      if(navigator.share){navigator.share({title:"北宜高鐵，值得嗎？",text:txt,url:url}).catch(function(){});return;}
+      if(navigator.clipboard){navigator.clipboard.writeText(txt+"\n"+url).then(function(){
+        var o=btn.textContent;btn.textContent="已複製車票！";setTimeout(function(){btn.textContent=o},2000);
+      });}
+    }
+    var cv;
+    try{cv=drawCard();}catch(e){fallback();return;}
+    if(!cv||!cv.toBlob){fallback();return;}
+    cv.toBlob(function(blob){
+      if(!blob){fallback();return;}
+      var file=new File([blob],"北宜高鐵車票-"+dn+".png",{type:"image/png"});
+      /* 附檔案時不帶 url：部分平台看到 url 就會改用純連結分享，圖卡反而不見 */
+      if(navigator.canShare&&navigator.canShare({files:[file]})){
+        navigator.share({files:[file],title:"北宜高鐵，值得嗎？",text:txt+"\n"+url}).catch(function(){});
+      }else{fallback();}
+    },"image/png");
   });
 })();
 
