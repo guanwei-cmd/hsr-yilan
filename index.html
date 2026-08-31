@@ -197,12 +197,11 @@ details.srcfold .src{margin-top:8px}
 .mgap{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .mgapl{position:absolute;transform:translate(-100%,-50%);white-space:nowrap;font-size:var(--fs-xs);font-weight:800;color:#F5F3EC;background:var(--danger);border-radius:2px;padding:2px 7px;pointer-events:none}
 .rsub{margin:22px 0 8px;font-size:var(--fs-m);font-weight:900;color:var(--ink);line-height:1.5}
-.twomap{display:grid;gap:14px;margin:12px 0 0}
-  @media (min-width:900px){.twomap{grid-template-columns:1fr 1fr;align-items:start}}
-  .twomap .offmap,.twomap .rmap{margin:0}
+@media (min-width:900px){}
   .card .rmapnote{margin:8px 0 0;font-size:var(--fs-xs);font-weight:600;color:var(--muted);line-height:1.75}
   .rmap figcaption,.offmap figcaption{padding:10px 13px;font-size:var(--fs-xs);font-weight:600;color:var(--muted);line-height:1.75;background:var(--panel2)}
   .mp.gov i{background:#4A4740}
+  .omark{position:absolute;transform:translateY(-50%);white-space:nowrap;font-size:var(--fs-xs);font-weight:800;color:#F5F3EC;background:var(--danger);border-radius:2px;padding:3px 8px;pointer-events:none;box-shadow:0 0 0 1.5px rgba(20,18,22,.5)}
   .rmapin{position:relative;display:block}
   .rmapin img{display:block;width:100%;height:auto}
   .offmap{margin:12px 0 0;border:1.5px solid var(--ink);border-radius:3px;overflow:hidden;background:var(--panel)}
@@ -530,25 +529,10 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
       <h2>兩條路線，<br>停的站完全不同</h2>
       <p>北宜高鐵全線約 60.6 公里，在宜蘭只設一站，位置在縣政中心以南、宜蘭縣政府東南側。站址到現在還沒定案，2025 年 10 月又往北移了約 300 公尺，鐵道局說要等後續設計階段才確認。北宜直鐵走臺鐵路線，沿途停既有的頭城、礁溪、宜蘭、羅東、蘇澳新五站。</p>
       <p class="warnbox"><b>高鐵宜蘭站不是宜蘭車站。</b>兩者相距約 2.7 公里（本站依官方公布地標推估，官方查無此數字）。要進宜蘭市區，得在高鐵站旁的「臺鐵宜蘭新站」換車，再搭一段臺鐵。這一帶總共會有三座站：高鐵宜蘭站、臺鐵宜蘭新站、既有的臺鐵宜蘭車站。<b>臺鐵那一座不在這筆 3,521.75 億裡</b>，屬另案的宜蘭至羅東鐵路高架化計畫。</p>
-      <div class="twomap">
-        <figure class="offmap">
-          <img src="img/route-official.jpg" width="813" height="827" alt="監察院調查報告第 10 頁：北宜直鐵新方案一、新方案二與高鐵延伸方案 A、B、C 之路線比較圖，含翡翠水庫集水區範圍" decoding="async" loading="lazy">
-          <figcaption><b>兩案怎麼走。</b>監察院 115 交調 0004 調查報告第 10 頁「圖 3」，官方畫的。本站沒有可公開的線形圖資，所以線一律引官方圖，不自己畫。</figcaption>
-        </figure>
-        <figure class="rmap">
-          <div class="rmapin">
-            <img src="img/yilan-3stations.jpg" width="839" height="1026" alt="宜蘭市電子地圖，標示既有臺鐵宜蘭車站與縣政中心一帶的高鐵宜蘭站預定位置" decoding="async" loading="lazy">
-            <svg class="mgap" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-              <line x1="38.3" y1="16.8" x2="58.4" y2="76.1" stroke="#B3261E" stroke-width="0.6" stroke-dasharray="1.6 1.2"/>
-            </svg>
-            <span class="mp lft" style="left:38.3%;top:16.8%"><i></i><b>臺鐵宜蘭車站</b></span>
-            <span class="mgapl" style="left:56%;top:46%">直線約 2.7 公里</span>
-            <span class="mp hsr lft" style="left:58.4%;top:76.1%"><i></i><b>高鐵宜蘭站</b></span>
-            <span class="mp gov" style="left:51.9%;top:86%"><i></i><b>縣政中心</b></span>
-          </div>
-          <figcaption><b>宜蘭端會有三座站。</b>高鐵宜蘭站與要新建的臺鐵宜蘭新站平行共站，都在縣政中心一帶；既有的臺鐵宜蘭車站在市區，是另一個地方。</figcaption>
-        </figure>
-      </div>
+      <figure class="offmap">
+        <img src="img/route-official.jpg" width="813" height="827" alt="監察院調查報告第 10 頁：北宜直鐵新方案一、新方案二與高鐵延伸方案 A、B、C 之路線比較圖，含翡翠水庫集水區範圍" decoding="async" loading="lazy">
+        <figcaption><b>兩案怎麼走。</b>監察院 115 交調 0004 調查報告第 10 頁「圖 3」，官方畫的。本站沒有可公開的線形圖資，所以線一律引官方圖，不自己畫。</figcaption>
+      </figure>
       <p class="rmapleg">
         <span><i style="background:#E8862A"></i>橘色虛線＝高鐵延伸方案 A／B／C</span>
         <span><i style="background:#2B5CAB"></i>藍色實線＝直鐵新方案二</span>
@@ -556,6 +540,22 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
       </p>
       <p class="rmapnote">官方圖下方那兩欄的底色是鐵道局自己的配色：<b>紅色欄</b>講的是圖上的<b>橘色虛線</b>，藍色欄講的是藍線。方塊顏色和線的顏色對不起來，是原圖就這樣，本站不修改官方圖。</p>
       <p>中間那片山就是雪山山脈。全線要開 11 座隧道從底下穿過（1 座明挖覆蓋＋10 座山岳隧道）。</p>
+
+      <h3 class="rsub">拉近到宜蘭：路線與三座車站</h3>
+      <p>這張也是鐵道局自己畫的，就在他們送環評的簡報裡。橘色虛線是高鐵要走的路線，從山區下來、彎進蘭陽平原，在縣政中心旁邊停下。</p>
+      <figure class="rmap">
+        <div class="rmapin">
+          <img src="img/yilan-station-official.jpg" width="1088" height="1148" alt="鐵道局環評簡報宜蘭站區圖：橘色虛線為高鐵延伸宜蘭計畫路線，黑白虛線為宜蘭鐵路高架化計畫的臺鐵廊帶，圖中標示高鐵宜蘭站、臺鐵宜蘭新站、縣政中心、竹科宜蘭園區與高鐵維修基地" decoding="async" loading="lazy">
+          <span class="omark" style="left:9.5%;top:4.4%">往北 2.7 公里＝既有臺鐵宜蘭車站</span>
+        </div>
+        <figcaption><b>三座站都在這張圖上。</b>橘框的高鐵宜蘭站與黑框的臺鐵宜蘭新站並排在一起，就在縣政中心旁；第三座是既有的臺鐵宜蘭車站，沿左上角那條黑白虛線往北約 2.7 公里，已在圖外。比例尺看得出來，這段距離是圖上那條 400 公尺標尺的六倍多。</figcaption>
+      </figure>
+      <p class="rmapleg">
+        <span><i style="background:#E8862A"></i>橘色虛線＝高鐵路線</span>
+        <span><i style="background:#141216"></i>黑白虛線＝臺鐵（宜蘭鐵路高架化計畫，另案）</span>
+        <span><i style="background:#D32F2F"></i>紅框＝高鐵維修基地</span>
+      </p>
+      <p class="rmapnote">圖上黑白虛線往北的黃色箭頭標著「宜蘭」、往南標著「羅東」，指的就是既有臺鐵路線的兩個方向。站址目前仍未定案，2025 年 10 月站體北端才又往北移了約 300 公尺。</p>
       <p class="warnbox"><b>翡翠水庫這件事，兩案沒有差別。</b>穿越集水區的是灰色那條，也就是<b>已經被淘汰的直鐵新方案一</b>，官方數字是行經集水區最長約 12.3 公里。真正要蓋的高鐵方案，和圖上的直鐵新方案二，官方都明文說已經避開。所以不能拿翡翠水庫來說高鐵比較環保。</p>
       <details class="srcfold"><summary>出處與繪製方式</summary><p class="src">
       <b>官方路線圖</b>：監察院 115 交調 0004 調查報告第 10 頁「圖 3 北宜『直鐵』案與『高鐵』案路線方案比較圖」，原圖資料來源標示為鐵道局。<b>本站不繪製路線線形</b>：data.gov.tw、環境部環境資料開放平臺、國土測繪中心皆查無本案向量線形圖資，畫一條線就是捏造。<br><br>
