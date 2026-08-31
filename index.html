@@ -1858,8 +1858,8 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
     {id:"suao",   name:"蘇澳",code:"SA", hsr:59,tra:64,dispName:"蘇澳新"}
   ];
   /* 酸話分級：慢 → 一樣 → 只快一點 → 快比較多 */
-  function snark(d){
-    var gain=d.tra-d.hsr;   /* 正數＝高鐵比較快 */
+  function snark(hsrTotal,traTotal){
+    var gain=traTotal-hsrTotal;   /* 正數＝高鐵比較快 */
     if(gain<0)  return{cls:"slower",dv:"慢 "+(-gain)+" 分鐘",
       say:"花 3,521.75 億蓋的新線，結果搭更久。"};
     if(gain===0)return{cls:"same",dv:"一分鐘也沒快",
@@ -1883,22 +1883,23 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
 
   var DIR=1; /* 1＝西部→宜蘭，-1＝宜蘭→西部 */
   function render(){
-    var dn=curD.dispName||curD.name,s=snark(curD);
+    var dn=curD.dispName||curD.name;
     elO.textContent=DIR>0?curO.name:curD.name;
     elD.textContent=DIR>0?curD.name:curO.name;
     elNo.textContent="NO.3521-"+(DIR>0?curO.code+curD.code:curD.code+curO.code);
-    paint(elHS,hsrRoute(curO,dn,curD));paint(elTS,traRoute(curO,dn,curD));
-    elHv.textContent=curD.hsr+" 分";
-    elTv.textContent=curD.tra+" 分";
+    var hList=hsrRoute(curO,dn,curD),tList=traRoute(curO,dn,curD);
+    paint(elHS,hList);paint(elTS,tList);
+    var hTot=sumMin(hList),tTot=sumMin(tList),s=snark(hTot,tTot);
+    elHv.textContent=hTot+" 分";
+    elTv.textContent=tTot+" 分";
     elHx.textContent="換 1 次車";
     elTx.textContent=curO.here?"不用換車":"換 1 次車";
-    /* 兩案各自沒被算進分鐘數的部分，據實標明，不估數字 */
-    elHc.textContent="台北起算：8＋20＋轉乘 10＋臺鐵 "+(curD.hsr-38)+"＝"+curD.hsr+" 分"+(curO.here?"":"（西部到南港未計入）");
-    elTc.textContent="台北起算：10＋"+(curD.tra-10)+"＝"+curD.tra+" 分"+(curO.here?"":"（西部到南港、南港換乘未計入）");
+    elHc.textContent=formula(hList);
+    elTc.textContent=formula(tList);
     elDiff.className="tkdiff"+(s.cls?" "+s.cls:"");
     elDv.textContent=s.dv;
     elSnark.textContent=s.say;
-    curD._say=s.say;curD._dv=s.dv;
+    curD._say=s.say;curD._dv=s.dv;curD._ht=hTot;curD._tt=tTot;
     if(curD.warn){elWarn.textContent=curD.warn;elWarn.hidden=false;}else{elWarn.hidden=true;}
     mark(ow,curO.id);mark(dw,curD.id);
     blow();
@@ -1915,6 +1916,14 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
   }
   /* 逐段路徑：kind 空＝現有路網、new＝這筆錢要蓋的、chg＝必須換車 */
   function seg(kind,title,note,min){return{k:kind,t:title,n:note,m:min||""};}
+  /* 抬頭的總計一律等於下面各段的加總，沒有分鐘數的段（例如「另計」）視為 0 並標明 */
+  function minOf(x){var m=/^(\d+)/.exec(x.m||"");return m?parseInt(m[1],10):null;}
+  function sumMin(list){var t=0;list.forEach(function(x){var v=minOf(x);if(v!==null)t+=v;});return t;}
+  function formula(list){
+    var parts=[],miss=0;
+    list.forEach(function(x){var v=minOf(x);if(v===null){miss++;return;}parts.push(String(v));});
+    return "逐段加總："+parts.join("＋")+"＝"+sumMin(list)+" 分"+(miss?"（有 "+miss+" 段官方查無時間，未計入）":"");
+  }
   function flip(t){var p=t.split(" → ");return p.length===2?p[1]+" → "+p[0]:t;}
   function hsrRoute(o,dn,d){
     var a=[],rail=d.hsr-38;   /* 圖7 總計 − 台北至南港 8 − 南港至宜蘭 20 − 轉乘 10 */
@@ -2090,7 +2099,7 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
   document.getElementById("tkShare").addEventListener("click",function(){
     var btn=this;
     var dn=curD.dispName||curD.name;
-    var txt="台北到"+dn+"：北宜高鐵 "+curD.hsr+" 分（含轉乘台鐵 10 分）、北宜直鐵 "+curD.tra+" 分。"+
+    var txt=curO.name+"到"+dn+"：北宜高鐵 "+curD._ht+" 分（含轉乘台鐵 10 分）、北宜直鐵 "+curD._tt+" 分。"+
             "花了 3,521.75 億，"+curD._dv+"。"+curD._say+
             "（監察院 115交調0004 調查報告圖7）";
     var url=location.href;
