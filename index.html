@@ -140,16 +140,16 @@ details.srcfold .src{margin-top:8px}
 .tl{display:flex;flex-direction:column;gap:11px;margin:12px 0 4px}
 .tlg{border:1.5px solid var(--ink);border-radius:3px;background:var(--panel2);box-shadow:3px 3px 0 rgba(20,18,22,.16);overflow:hidden}
 .tlg.hot{border-color:var(--danger);background:rgba(179,38,30,.055)}
-.tlgh{display:flex;align-items:baseline;gap:10px;padding:9px 14px;background:#141216;color:#F5F3EC}
+.tlgh{display:flex;align-items:baseline;gap:10px;padding:11px 18px;background:#141216;color:#F5F3EC}
 .tlg.hot .tlgh{background:var(--danger)}
 .tlgh .gp{flex:none;font-family:var(--mono);font-size:var(--fs-xs);font-weight:800;letter-spacing:.04em;color:#B9B5AA}
 .tlg.hot .tlgh .gp{color:rgba(255,255,255,.78)}
 .tlgh b{font-size:16px;font-weight:800;line-height:1.4}
 .tlgh em{flex:none;margin-left:auto;font-style:normal;font-family:var(--mono);font-size:var(--fs-xs);color:#6B675E}
 .tlg.hot .tlgh em{color:rgba(255,255,255,.6)}
-.tlgs{margin:12px 15px 0;font-size:var(--fs-xs);font-weight:700;color:#3A3542;line-height:1.7}
-.tlus{position:relative;padding:8px 15px 13px 32px}
-.tlus::before{content:"";position:absolute;left:19px;top:13px;bottom:16px;width:1.5px;background:rgba(20,18,22,.22)}
+.card .tlgs{margin:13px 18px 0;font-size:var(--fs-xs);font-weight:700;color:#3A3542;line-height:1.7}
+.tlus{position:relative;padding:9px 18px 15px 36px}
+.tlus::before{content:"";position:absolute;left:23px;top:14px;bottom:17px;width:1.5px;background:rgba(20,18,22,.22)}
 .tlg.hot .tlus::before{background:rgba(179,38,30,.3)}
 .trow{display:flex;gap:12px;align-items:baseline;padding:7px 0;position:relative}
 .trow::before{content:"";position:absolute;left:-16.5px;top:12px;width:7px;height:7px;background:var(--ink)}
@@ -169,7 +169,7 @@ details.srcfold .src{margin-top:8px}
 .ct td.b{width:34%;color:#3A3542}
 .ct td.nd{color:var(--muted);font-style:normal;background:rgba(20,18,22,.035)}
 .ct tr.grp td{background:#141216;color:#F5F3EC;font-weight:900;letter-spacing:.14em;padding:6px 12px;font-size:var(--fs-xs)}
-.ctwrap{margin:16px 0 0;padding:14px 15px;background:var(--panel2);border:1.5px solid var(--ink);border-radius:3px;font-size:var(--fs-base);font-weight:800;line-height:1.75}
+.card .ctsum{margin:16px 0 0;padding:14px 16px;background:var(--panel2);border:1.5px solid var(--ink);border-radius:3px;font-size:var(--fs-base);font-weight:800;line-height:1.75}
   .ctnote{margin:12px 0 0;padding:12px 14px;background:rgba(47,107,68,.07);border-left:4px solid var(--ok);border-radius:2px;font-size:var(--fs-xs);line-height:1.8}
 
 /* 延伸內容（預設收合） */
@@ -200,7 +200,7 @@ details.srcfold .src{margin-top:8px}
 .twomap{display:grid;gap:14px;margin:12px 0 0}
   @media (min-width:900px){.twomap{grid-template-columns:1fr 1fr;align-items:start}}
   .twomap .offmap,.twomap .rmap{margin:0}
-  .rmapnote{margin:8px 0 0;font-size:var(--fs-xs);font-weight:600;color:var(--muted);line-height:1.75}
+  .card .rmapnote{margin:8px 0 0;font-size:var(--fs-xs);font-weight:600;color:var(--muted);line-height:1.75}
   .rmap figcaption,.offmap figcaption{padding:10px 13px;font-size:var(--fs-xs);font-weight:600;color:var(--muted);line-height:1.75;background:var(--panel2)}
   .mp.gov i{background:#4A4740}
   .rmapin{position:relative;display:block}
@@ -208,7 +208,7 @@ details.srcfold .src{margin-top:8px}
   .offmap{margin:12px 0 0;border:1.5px solid var(--ink);border-radius:3px;overflow:hidden;background:var(--panel)}
 .offmap img{display:block;width:100%;height:auto}
 .offmap figcaption{padding:10px 13px;font-size:var(--fs-xs);font-weight:600;color:var(--muted);line-height:1.75;background:var(--panel2)}
-.rmapleg{display:flex;flex-wrap:wrap;gap:8px 16px;margin:10px 0 0;font-size:var(--fs-xs);font-weight:700;color:var(--muted)}
+.card .rmapleg{display:flex;flex-wrap:wrap;gap:8px 16px;margin:10px 0 0;font-size:var(--fs-xs);font-weight:700;color:var(--muted)}
 .rmapleg span{display:flex;align-items:center;gap:6px}
 .rmapleg i{width:11px;height:11px;border-radius:50%;flex:none}
 
@@ -597,9 +597,9 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
           </tbody>
       </table>
       </div>
-      <p class="ctnote">這張表只比兩件事：時間與錢。土地徵收、工程技術、土石方等項目本站不並列，因為直鐵案的綜合規劃 2019 年遭退回後就沒再往下走，多數欄位沒有對應文件可比；把兩案的徵收規模並排，也會變成在暗示哪一種徵收比較可以接受，而本站並不主張任何一種。</p>
+      
       <details class="srcfold"><summary>各欄出處</summary><p class="src">時間：監察院 115 交調 0004 調查報告圖 7（第 36 頁，資料來源標示為陳訴人提供）與表 3（第 35 頁，資料來源標示為鐵道局）。宜蘭端停靠：交通部 111.01.27 審查會議結論（監察院報告第 7 頁）；站址未定案見中國時報 2025.10.23；臺鐵宜蘭新站屬另案之宜蘭至羅東鐵路高架化計畫，行政院 115.03.25 原則同意（宜蘭縣政府新聞稿 115-03-27），不在本計畫新設車站範圍內（鐵道局環評第 2 次專審簡報第 44 頁）。減少國道 5 號車流：鐵道局環評第 2 次專審簡報第 21 頁。建造成本：行政院 2026.07.23 核定 3,521.75 億元；直鐵 1,321.12 億元為環評書口徑。另據監察院報告第 35 頁表 3，直鐵新方案二計畫經費為 2,220 億元、經濟效益益本比 1.08、財務營運益本比 0.64，同表高鐵為 3,521 億元、1.19、1.03。該表標題為「鐵道局對北宜『直鐵』案及北宜『高鐵』案之比較分析表」，資料來源欄載明「鐵道局」，是鐵道局自己做的比較；報告第 34 頁引述時即寫明該局「直指『高鐵』案明顯優於『直鐵』案」，而監察院轉載後緊接的第 35 至 39 頁整段，記載的正是陳訴人對這份比較的質疑，監察院並未背書其結論。又該表註 1 載明其直鐵側採「新方案二」，與本站其他欄位所用方案不同。兩案口徑不同，本表不混用，也不並列益本比。自償率：監察院報告，鐵道局自陳。</p></details>
-      <p class="ctwrap">同樣是把台北接到宜蘭，一個要 3,521.75 億，一個 1,321.12 億。時間的差距，上面也攤開了。<b>那為什麼最後選了貴的那一個？</b>他們的決策過程是什麼？</p>
+      <p class="ctsum">同樣是把台北接到宜蘭，一個要 3,521.75 億，一個 1,321.12 億。時間的差距，上面也攤開了。<b>那為什麼最後選了貴的那一個？</b>他們的決策過程是什麼？</p>
     </div>
   </section>
 
@@ -675,15 +675,7 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
     </div>
   </section>
 
-<section class="step">
-    <div class="card">
-      <div class="kick">看不見的代價</div>
-      <h2>地價先漲了，<br>斷層還在那裡</h2>
-      <p>那 420 公頃裡有 6 個傳統聚落。核定隔天，站區建案開價已喊到 4 字頭，投機客比照航空城模式卡位抵價地。</p>
-      <p>而腳下這段路要穿過雪山斷層帶：當年雪隧遭遇 98 處剪裂帶、單點每秒 750 公升湧水。這次，時速 300。</p>
-      <details class="srcfold"><summary>出處</summary><p class="src">環境資訊中心 2025.08.21、2023.06.02（環委稱斷層帶「非常多」）、監察院 115 交調 0004 調查報告、時代力量官網 2026.06.11（190→420 公頃、85% 私有地）、自由時報地產天下 2026.07.24（房價與抵價地卡位）、雪山隧道工程紀錄（地質風險前例；現行路線官方稱已避開翡翠水庫集水區）。</p></details>
-    </div>
-  </section>
+
 
 </main>
 
@@ -1953,8 +1945,9 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
       if(x.k)li.className=x.k;
       var b=document.createElement("b");b.textContent=DIR>0?x.t:flip(x.t);
       if(x.m){var mm=document.createElement("i");mm.className="rmin";mm.textContent=x.m;b.appendChild(mm);}
-      var sp=document.createElement("span");sp.textContent=x.n;
-      li.appendChild(b);li.appendChild(sp);ul.appendChild(li);
+      /* 每段只留站名與分鐘。原本的逐段說明已移入下方「出處與口徑」，
+         總計本來就不含西部到南港，抬頭那行已標明，不必每段再講一次。 */
+      li.appendChild(b);ul.appendChild(li);
     });
   }
   function mark(w,id){
