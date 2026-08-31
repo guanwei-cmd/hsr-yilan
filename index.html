@@ -344,6 +344,17 @@ details.srcfold .src{margin-top:8px}
 .tkact button{flex:1 1 140px;min-height:46px;font-family:var(--sans);font-size:16px;font-weight:900;padding:11px 14px;border-radius:4px;border:1.5px solid var(--ink);background:var(--panel);color:var(--ink);cursor:pointer;box-shadow:3px 3px 0 #141216}
 .tkact button:active{transform:translateY(2px);box-shadow:1px 1px 0 #141216}
 
+/* 分享管道選單：桌機沒有檔案分享能力時改走這裡，點了真的跳過去 */
+.shmask{position:fixed;inset:0;z-index:60;background:rgba(20,18,22,.62);display:flex;align-items:center;justify-content:center;padding:20px}
+.shmask[hidden]{display:none}
+.shbox{width:100%;max-width:420px;background:var(--panel);border:1.5px solid var(--ink);border-radius:4px;box-shadow:6px 6px 0 #141216;padding:18px}
+.shbox>b{display:block;font-size:var(--fs-m);font-weight:900;color:var(--ink);margin-bottom:8px;line-height:1.5}
+.shhint{margin:0 0 14px;font-size:var(--fs-xs);font-weight:600;color:var(--muted);line-height:1.7}
+.shgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.shgrid button{min-height:46px;font-family:var(--sans);font-size:16px;font-weight:900;padding:10px 12px;border-radius:4px;border:1.5px solid var(--ink);background:var(--bg);color:var(--ink);cursor:pointer;box-shadow:3px 3px 0 #141216}
+.shgrid button:active{transform:translateY(2px);box-shadow:1px 1px 0 #141216}
+.shclose{margin-top:12px;width:100%;min-height:46px;font-family:var(--sans);font-size:var(--fs-xs);font-weight:800;border:1.5px solid rgba(20,18,22,.45);border-radius:2px;background:transparent;color:var(--muted);cursor:pointer}
+
 /* 比價器 */
 .cmpbody{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:stretch}
 .cmpside{border-radius:3px;padding:12px 12px 10px;background:var(--bg);border:1.5px solid var(--ink);box-shadow:3px 3px 0 #141216;text-align:center}
@@ -519,6 +530,21 @@ footer{position:relative;z-index:10;background:var(--bg);padding:0 16px 46px}
         <button id="tkShare">把我的車票傳出去</button>
       </div>
       <canvas id="tkCanvas" width="1080" height="1350" hidden></canvas>
+        <div class="shmask" id="shMask" hidden>
+          <div class="shbox" role="dialog" aria-modal="true" aria-labelledby="shTtl">
+            <b id="shTtl">把車票傳到哪裡？</b>
+            <p class="shhint">這台裝置沒辦法直接把圖檔丟進 App。要貼圖卡的話，先按「順便存下圖卡」把圖存起來，再到下面任一個地方貼上。</p>
+            <div class="shgrid">
+              <button type="button" data-ch="line">LINE</button>
+              <button type="button" data-ch="fb">Facebook</button>
+              <button type="button" data-ch="threads">Threads</button>
+              <button type="button" data-ch="x">X</button>
+              <button type="button" data-ch="copy">複製連結與文字</button>
+              <button type="button" data-ch="save">順便存下圖卡</button>
+            </div>
+            <button type="button" class="shclose" data-ch="close">關閉</button>
+          </div>
+        </div>
       <details class="srcfold"><summary>出處與口徑</summary><p class="src">兩案到宜蘭各鄉鎮的行車時間，出自監察院 115 交調 0004 調查報告圖 7「北宜『高鐵』案及『直鐵』案行車時間比較圖」（PDF 第 36 頁）：高鐵案（已加計轉乘臺鐵時間 10 分鐘）頭城 59、礁溪 51、宜蘭 41、羅東 46、蘇澳新 59 分鐘；直鐵案（自強直達／半直達）頭城 32、礁溪 39、宜蘭 41、羅東 49、蘇澳新 64 分鐘。該圖資料來源標示為「陳訴人提供」；陳訴人為 2025 年 5 月向監察院遞交「高鐵延伸宜蘭計畫陳情書」的四個團體：公民幫推、守護宜蘭工作坊、高鐵延伸宜蘭監督聯盟、臺灣鐵路產業工會（自由時報 2026.05.12、公視新聞網）。<br><br>逐段分鐘的組成：鐵道局表 3（監察院報告第 35 頁，資料來源標示為鐵道局）以路線示意圖列出「臺北 8 分 南港 20 分 宜蘭」，總計 28 分；直鐵側為「臺北 10 分 南港 46~54 分 宜蘭」，總計 56~64 分，但表 3 註 1 載明直鐵採「南港至大溪之新方案二」路線，與圖 7 所用方案不同，兩者不可直接相加。本頁高鐵各段為：台北至南港 8 分、南港至高鐵宜蘭站 20 分（皆為表 3 所載）、轉乘 10 分（圖 7 加計），末段臺鐵時間以「圖 7 總計 − 38」推算；直鐵為台北至南港 10 分（表 3），南港以東以「圖 7 總計 − 10」推算。推算部分為本站算式，非文件直接載明。惟此反推可被檢驗：以五個目的地分別計算，臺鐵宜蘭新站至各站的直線距離與反推分鐘數幾乎成正比，隱含平均速度落在 43.6 至 54.7 公里／小時之間（宜蘭車站 2.73 公里／3 分、羅東 5.85 公里／8 分、礁溪 10.65 公里／13 分、頭城 15.25 公里／21 分、蘇澳新 15.48 公里／21 分），符合臺鐵停站運轉的合理區間。其中宜蘭車站那一段是五者中最緊的，實際可能接近 4 分鐘。<b>南港以東的各段分鐘，計算起點一律是台北。</b>從西部各站到南港那一段，是現行高鐵、兩案完全相同，因此照實列出但不進入比較。該段數字為本站逐班次讀自台灣高鐵官方時刻表（「高鐵時刻表與票價 2026/2/2 起適用」北上表，自 thsrc.com.tw 時刻表與票價查詢頁下載）之最快班次：新竹至南港 42 分（車次 802）、台中至南港 54 分（車次 1202）、台南至南港 95 分（車次 1985）、左營至南港 105 分（車次 108）。交叉驗證：同表車次 1985 台南 22:10 發、台北 23:33 到，計 83 分，與台灣高鐵 2025.12.29 新聞稿所載「台北至台南間行車時間縮短至83分鐘」完全一致。台北至南港 8 分鐘採監察院報告表 3 之鐵道局數字（官方時刻表最快班次為 7 分）。轉乘時間採鐵道局自己的數字 11 分鐘：該局環評第 2 次專審簡報的「臺中至花蓮旅行時間」情境圖，在「高鐵方案」列標示高鐵宜蘭站至臺鐵宜蘭新站「轉乘 11 分鐘」，同圖「現行方案」與「直鐵方案」列亦以高鐵臺北站至臺鐵臺北站「轉乘 11 分鐘」計算。監察院報告圖 7 用的是 10 分鐘，本站改採官方數字，因此各站總計比圖 7 多 1 分鐘；臺鐵段的分鐘數不變，因為它是由總計扣除轉乘後反推，轉乘基準與總計同步調整。南港由高鐵換乘臺鐵所需時間，官方文件查無數字；本站比照前述官方在臺北站與宜蘭站採計的同一個轉乘時間，一樣採 11 分鐘，此為本站採用之假設，非官方直接載明。又表 3 註 1 載明其直鐵側採「新方案二」，與圖 7 所用方案不同，惟台北至南港為兩案共用之既有臺鐵路段，故仍以表 3 之 10 分計。鐵道局自身估算為高鐵 28 分鐘、直鐵 56 至 64 分鐘，監察院載明該估算「未加計轉乘時間，是以該局應予加計轉乘時間進行比較分析」（同報告表 3、第 35 頁）。另交通部運研所模式情境分析：若宜蘭站兩鐵間轉乘時間大於 25 分鐘，預估約 50% 北部往返花東旅次將選擇全程搭乘台鐵（同報告表 7）。高鐵宜蘭站站址為「縣政中心以南」方案，與台鐵宜蘭新站平行共站、經地面層轉乘（交通部 2022.01.27 審查會議結論；鐵道局計畫資訊專區）；全線約 60.6 公里，宜蘭端僅此一站。西部至台北為現行高鐵既有路網，台灣高鐵公告台北至台南約 83 分、台北至左營約 95 分（直達車），其餘各站以高鐵官網時刻表查詢為準，本頁不列推估值。<br><br>轉乘的計算方式：本頁只計入「確定會發生」的換乘。宜蘭端，高鐵在宜蘭只設一站，要到頭城、礁溪、羅東、蘇澳新都必須換乘臺鐵，圖 7 已加計 10 分鐘；直鐵行駛臺鐵路線、直接停靠既有五站，監察院調查意見稱之為「到站即到家的優勢」，故不加計。西部端，走直鐵必須在南港由高鐵換乘臺鐵，因兩者軌距與系統不同、無法直通，本頁據實標示但不估分鐘數；走高鐵是否由西部直通宜蘭，監察院調查報告載明「本件『高鐵延伸宜蘭計畫』之興建與營運模式，亦迄未依前瞻基礎建設特別條例確認營運模式」，尚未確定，故同樣不估。所有轉乘與接駁的分鐘數，凡查無可引用出處者一律不列推估值。</p></details>
     </div>
   </section>
@@ -1912,6 +1938,7 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
     if(curD.warn){elWarn.textContent=curD.warn;elWarn.hidden=false;}else{elWarn.hidden=true;}
     mark(ow,curO.id);mark(dw,curD.id);
     blow();
+    refreshBlob();
   }
   /* 列車高速滑過，車票被吹起。重播要先移除 class 再強制 reflow，否則同一個動畫不會重跑。 */
   var tkEl=document.getElementById("ticket"),blowT=null;
@@ -2096,44 +2123,85 @@ document.querySelectorAll(".card").forEach(function(c){io.observe(c)});
     g.fillText("guanwei-cmd.github.io/hsr-yilan",L,y+266);
     return cv;
   }
-  document.getElementById("tkCard").addEventListener("click",function(){
-    var btn=this,cv=drawCard(),dn=curD.dispName||curD.name;
-    cv.toBlob(function(blob){
-      if(!blob)return;
-      var file=new File([blob],"北宜高鐵車票-"+dn+".png",{type:"image/png"});
-      /* 這顆一律直接存檔。系統分享留給「把我的車票傳出去」，兩個行為不混用。 */
+  /* 圖卡的 blob 先備好。分享必須在使用者手勢裡呼叫，若等到 toBlob 回來才呼叫，
+     Safari 會判定失去手勢而丟 NotAllowedError。 */
+  var tkBlob=null,tkBlobKey="",blobT=null;
+  function tkKey(){return curO.id+"|"+curD.id+"|"+DIR;}
+  function refreshBlob(){
+    if(blobT)clearTimeout(blobT);
+    blobT=setTimeout(function(){
+      var key=tkKey();
+      try{
+        drawCard().toBlob(function(b){tkBlob=b;tkBlobKey=key;},"image/png");
+      }catch(e){tkBlob=null;tkBlobKey="";}
+    },180);
+  }
+  function tkFile(){
+    if(!tkBlob||tkBlobKey!==tkKey())return null;
+    return new File([tkBlob],"北宜高鐵車票-"+(curD.dispName||curD.name)+".png",{type:"image/png"});
+  }
+  function saveCard(btn){
+    var dn=curD.dispName||curD.name;
+    function dl(blob){
       var a=document.createElement("a");
-      a.href=URL.createObjectURL(blob);a.download=file.name;a.click();
+      a.href=URL.createObjectURL(blob);a.download="北宜高鐵車票-"+dn+".png";a.click();
       setTimeout(function(){URL.revokeObjectURL(a.href)},4000);
-      var o=btn.textContent;btn.textContent="已存成圖卡！";setTimeout(function(){btn.textContent=o},2000);
-    },"image/png");
-  });
-
-  /* 傳出去的是「圖卡本身」，不是網址。帶著檔案叫系統分享，才會跳出 LINE／IG 那排 App。
-     不支援檔案分享的環境（多數桌機瀏覽器）才退回分享文字＋網址。 */
-  document.getElementById("tkShare").addEventListener("click",function(){
-    var btn=this,dn=curD.dispName||curD.name,url=location.href;
-    var txt=curO.name+"到"+dn+"：北宜高鐵 "+curD._ht+" 分（含轉乘台鐵 11 分）、北宜直鐵 "+curD._tt+" 分。"+
-            "花了 3,521.75 億，"+curD._dv+"。"+curD._say+
-            "（監察院 115交調0004 調查報告圖7）";
-    function fallback(){
-      if(navigator.share){navigator.share({title:"北宜高鐵，值得嗎？",text:txt,url:url}).catch(function(){});return;}
-      if(navigator.clipboard){navigator.clipboard.writeText(txt+"\n"+url).then(function(){
-        var o=btn.textContent;btn.textContent="已複製車票！";setTimeout(function(){btn.textContent=o},2000);
-      });}
+      if(btn){var o=btn.textContent;btn.textContent="已存成圖卡！";setTimeout(function(){btn.textContent=o},2000);}
     }
-    var cv;
-    try{cv=drawCard();}catch(e){fallback();return;}
-    if(!cv||!cv.toBlob){fallback();return;}
-    cv.toBlob(function(blob){
-      if(!blob){fallback();return;}
-      var file=new File([blob],"北宜高鐵車票-"+dn+".png",{type:"image/png"});
-      /* 附檔案時不帶 url：部分平台看到 url 就會改用純連結分享，圖卡反而不見 */
-      if(navigator.canShare&&navigator.canShare({files:[file]})){
-        navigator.share({files:[file],title:"北宜高鐵，值得嗎？",text:txt+"\n"+url}).catch(function(){});
-      }else{fallback();}
-    },"image/png");
+    if(tkBlob&&tkBlobKey===tkKey()){dl(tkBlob);return;}
+    drawCard().toBlob(function(b){if(b)dl(b);},"image/png");
+  }
+  function shareText(){
+    var dn=curD.dispName||curD.name;
+    /* _dv 與 _say 開頭都是「快 N 分鐘」，兩個一起放會重複，只取 _say */
+    return curO.name+"到"+dn+"：北宜高鐵 "+curD._ht+" 分（含轉乘台鐵 11 分）、北宜直鐵 "+curD._tt+" 分。"+
+           "花了 3,521.75 億，"+curD._say+
+           "（監察院 115交調0004 調查報告圖7）";
+  }
+
+  document.getElementById("tkCard").addEventListener("click",function(){saveCard(this);});
+
+  /* 桌機沒有檔案分享能力。以前在 canShare 失敗後直接下載再跳提示，
+     使用者按的是「分享」卻拿到一張圖，行為對不上。
+     改成：能傳檔就走原生分享（取消就什麼都不做）；不能傳檔就開管道清單，點了真的跳過去。 */
+  var shMask=document.getElementById("shMask"),shTxt="",shUrl="";
+  function openSheet(t,u){shTxt=t;shUrl=u;if(shMask)shMask.hidden=false;}
+  function closeSheet(){if(shMask)shMask.hidden=true;}
+  document.getElementById("tkShare").addEventListener("click",function(){
+    var url=location.href,txt=shareText(),f=tkFile();
+    if(f&&navigator.canShare&&navigator.canShare({files:[f]})&&navigator.share){
+      /* 附檔案時不帶 url：部分平台看到 url 就改用純連結分享，圖卡反而不見 */
+      navigator.share({files:[f],title:"北宜高鐵，值得嗎？",text:txt+"\n"+url}).catch(function(){});
+      return;
+    }
+    openSheet(txt,url);
   });
+  if(shMask){
+    shMask.addEventListener("click",function(e){
+      if(e.target===shMask){closeSheet();return;}
+      var b=e.target.closest&&e.target.closest("button[data-ch]");
+      if(!b)return;
+      var ch=b.getAttribute("data-ch"),
+          U=encodeURIComponent(shUrl),T=encodeURIComponent(shTxt),
+          TU=encodeURIComponent(shTxt+"\n"+shUrl);
+      if(ch==="close"){closeSheet();return;}
+      if(ch==="save"){saveCard(b);return;}
+      if(ch==="copy"){
+        if(navigator.clipboard){navigator.clipboard.writeText(shTxt+"\n"+shUrl).then(function(){
+          var o=b.textContent;b.textContent="已複製！";setTimeout(function(){b.textContent=o;closeSheet();},1200);
+        });}
+        return;
+      }
+      var MAP={
+        line:"https://social-plugins.line.me/lineit/share?url="+U+"&text="+T,
+        fb:"https://www.facebook.com/sharer/sharer.php?u="+U,
+        threads:"https://www.threads.net/intent/post?text="+TU,
+        x:"https://twitter.com/intent/tweet?text="+T+"&url="+U
+      };
+      if(MAP[ch]){window.open(MAP[ch],"_blank","noopener");closeSheet();}
+    });
+    document.addEventListener("keydown",function(e){if(e.key==="Escape")closeSheet();});
+  }
 })();
 
 var SHARE_TXT="從你家到宜蘭，北宜高鐵與北宜直鐵各要怎麼搭、換幾次車？建造成本 3,521.75 億對 1,321.12 億，到宜蘭市兩案一樣快，到頭城高鐵反而慢 27 分鐘。";
