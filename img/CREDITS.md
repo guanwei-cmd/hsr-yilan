@@ -3,6 +3,8 @@
 `*_s.jpg` 為網站點名牆／引言卡使用的縮圖（長邊 240px），同名不含 `_s` 者為長邊 480px 版本。
 所有檔案皆已裁為方形，僅做裁切與縮放，未修改人物形貌。
 
+> 2026-09-01：吳澤成、李鴻源兩則引言依編輯決定移除，對應肖像檔案（wutsecheng、leehungyuan）亦已刪除，本檔僅保留刪除紀錄。
+
 ## 一、公有領域
 
 | 檔案 | 人物 | 授權 | 出處 |
@@ -15,8 +17,6 @@
 | 檔案 | 人物 | 授權 | 出處 |
 |---|---|---|---|
 | changchingsen | 張景森 | GWOIA／Commons {{Attribution}}。作者：行政院，2016-06-02 | https://commons.wikimedia.org/wiki/File:%E6%94%BF%E5%8B%99%E5%A7%94%E5%93%A1%E5%BC%B5%E6%99%AF%E6%A3%AE_(cropped).jpg |
-| wutsecheng | 吳澤成 | GWOIA／Commons {{Attribution}}。作者：行政院 | https://commons.wikimedia.org/wiki/File:%E5%90%B3%E6%BE%A4%E6%88%90%E4%B8%BB%E4%BB%BB%E5%A7%94%E5%93%A1%E8%82%96%E5%83%8F.jpg |
-| leehungyuan | 李鴻源 | GWOIA／Commons {{Attribution}}。作者：內政部 | https://commons.wikimedia.org/wiki/File:%E6%9D%8E%E9%B4%BB%E6%BA%90%E9%83%A8%E9%95%B7.jpg |
 
 ## 三、機構官方公開簡介照（引用之合理使用）
 
