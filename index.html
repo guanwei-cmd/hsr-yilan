@@ -285,12 +285,18 @@ details.srcfold .src{margin-top:8px}
      兩張卡的文字量差很多，用同一個數字會把文字少的那張壓扁，所以分開給。 */
   .hzart svg{width:100%;height:auto;display:block;max-height:calc(100dvh - var(--hud-h,62px) - 320px)}
   .hzcard.hasadd .hzart svg{max-height:calc(100dvh - var(--hud-h,62px) - 504px)}
-  /* 極矮視窗（舊款手機、橫置）：補充區塊縮排縮字，讓卡片還放得進釘選視窗 */
+  /* 極矮視窗（舊款手機、橫置）。這種高度下卡片放不進釘選視窗，會被上下裁掉。
+     取捨：縮小上下讓位、縮排縮字，仍不夠的話捨圖保字。
+     被捨掉的是時間卡那張五站長條圖，它在這種高度只剩約 78px、五根長條各約 10px，
+     本來就看不出東西；同一組數字在上方車票與下方「一次看完」都還在。
+     補充區塊（國道五號那段）是這張卡獨有的文字，優先保留。 */
   @media (max-height:680px){
+    .hzpin{padding-top:calc(var(--hud-h,62px) + 20px);padding-bottom:30px}
     .card .hzadd b{font-size:var(--fs-base)}
     .card .hzadd p{font-size:var(--fs-xs);line-height:1.6}
     .hzadd{margin-top:10px;padding-top:10px}
     .hzsay{padding-bottom:8px}
+    .hzcard.hasadd .hzart{display:none}
   }
 .hzsay{margin:0;padding:0 16px 12px;font-size:var(--fs-base);font-weight:800;color:var(--ink);line-height:1.6}
 .hznote{margin:0;padding:10px 16px 16px;font-size:var(--fs-xs);font-weight:500;color:var(--faint);line-height:1.7}
